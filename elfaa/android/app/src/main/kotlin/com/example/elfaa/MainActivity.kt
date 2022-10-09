@@ -1,4 +1,4 @@
-package com.example.elfaa
+package com.elfaa.elfaa
 
 import io.flutter.embedding.android.FlutterActivity
 

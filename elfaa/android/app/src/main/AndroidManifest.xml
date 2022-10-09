@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.elfaa">
+    package="com.elfaa.elfaa">
    <application
         android:label="elfaa"
         android:name="${applicationName}"
