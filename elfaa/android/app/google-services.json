@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "842724578520",
+    "project_id": "elfaa-2023",
+    "storage_bucket": "elfaa-2023.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:842724578520:android:03906fa7427f74526ff3ad",
+        "android_client_info": {
+          "package_name": "com.elfaa.elfaa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "842724578520-0coa3v5n0uor1803np78otahpmqruh0t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0gdiL3MAGraFsgHwrzPxkQkmQIbcUldI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "842724578520-0coa3v5n0uor1803np78otahpmqruh0t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
