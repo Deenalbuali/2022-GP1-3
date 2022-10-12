@@ -29,6 +29,13 @@
             {
               "client_id": "842724578520-0coa3v5n0uor1803np78otahpmqruh0t.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "842724578520-0kbs78pbmqb04keov1d6n1oodttkvujc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.elfaa.elfaa"
+              }
             }
           ]
         }
