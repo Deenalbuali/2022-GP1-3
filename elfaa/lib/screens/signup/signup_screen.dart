@@ -28,13 +28,14 @@ class _SignupPageState extends State<SignupPage> {
           ), //container1
           Container(
             child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
                   "اهلًا بك",
                   style: TextStyle(fontSize: 70, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  "سجّل كمستخدم جديد في إلفاء!",
+                  "!سجّل كمستخدم جديد في إلفاء",
                   style: TextStyle(fontSize: 20, color: Colors.grey[500]),
                 )
               ],
