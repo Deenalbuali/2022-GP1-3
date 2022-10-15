@@ -1,3 +1,4 @@
+import 'package:elfaa/screens/Homepage/childrenList.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -45,20 +46,14 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.all(25.0),
             child: Column(
               children: [
-                Row(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(color: Colors.white),
-                      height: 80,
-                      padding: EdgeInsets.all(12),
-                      child: Image.asset('assets/images/ahmad.png'),
-                    ),
-                    Column(
-                      children: [Text('أحمد'), Text('منطقة الألعاب')],
-                    ),
-                    Icon(Icons.arrow_forward_ios)
-                  ],
-                )
+                childrenList(
+                    childImagePath: 'assets/images/ahmad.png',
+                    childName: 'أحمد',
+                    zoneName: 'منطقة الألعاب'),
+                childrenList(
+                    childImagePath: 'assets/images/sarah.png',
+                    childName: 'سارة',
+                    zoneName: 'منطقة المطاعم'),
               ],
             ),
           )
