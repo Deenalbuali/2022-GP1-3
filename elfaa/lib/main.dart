@@ -1,4 +1,5 @@
 //import 'package:firebase_core/firebase_core.dart';
+import 'package:elfaa/screens/Homepage/Home_page.dart';
 import 'package:flutter/material.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:elfaa/Screens/Welcome/welcome.dart';
@@ -6,7 +7,7 @@ import 'constants.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
- // await Firebase.initializeApp();
+  // await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
               borderSide: BorderSide.none,
             ),
           )),
-      home: const WelcomeScreen(), 
+      home: const HomePage(),
     );
   }
 }
