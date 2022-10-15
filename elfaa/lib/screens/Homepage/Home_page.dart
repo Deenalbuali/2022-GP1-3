@@ -50,7 +50,8 @@ class _HomePageState extends State<HomePage> {
                     Container(
                       decoration: BoxDecoration(color: Colors.white),
                       height: 80,
-                      child: Image.asset('assets/images/Homepage/sarah.png'),
+                      padding: EdgeInsets.all(12),
+                      child: Image.asset('assets/images/ahmad.png'),
                     ),
                     Column(
                       children: [Text('أحمد'), Text('منطقة الألعاب')],
