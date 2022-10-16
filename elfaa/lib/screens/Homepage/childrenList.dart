@@ -13,40 +13,50 @@ class childrenList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 25.0),
+      child: Container(
+        decoration: BoxDecoration(boxShadow: [
+          BoxShadow(
+            color: Colors.grey,
+            blurRadius: 10,
+            spreadRadius: 1,
+          )
+        ], color: Colors.white, borderRadius: BorderRadius.circular(12)),
+        height: 80,
+        padding: EdgeInsets.all(5),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(12)),
-              height: 80,
-              padding: EdgeInsets.all(12),
-              child: Image.asset(childImagePath),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            Row(
               children: [
-                Text(
-                  childName,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                Container(
+                  padding: EdgeInsets.all(11),
+                  child: Image.asset(childImagePath),
                 ),
-                SizedBox(
-                  height: 10,
+                Column(
+                  //crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+                  children: [
+                    Text(
+                      childName,
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Text(zoneName,
+                        style: TextStyle(fontSize: 16, color: Colors.orange))
+                  ],
                 ),
-                Text(zoneName,
-                    style: TextStyle(fontSize: 16, color: Colors.blue))
               ],
             ),
+            Icon(Icons.arrow_forward_ios),
           ],
         ),
-        Icon(Icons.arrow_forward_ios),
-      ],
+      ),
     );
   }
 }

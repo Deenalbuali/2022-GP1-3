@@ -1,3 +1,4 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:elfaa/screens/Homepage/childrenList.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,21 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Color.fromARGB(255, 235, 234, 234),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: CurvedNavigationBar(
+          backgroundColor: Color.fromARGB(255, 235, 234, 234),
+          animationDuration: Duration(milliseconds: 300),
+          onTap: (index) {},
+          items: [
+            Icon(Icons.person, color: Colors.orange, size: 30),
+            Icon(Icons.home, color: Colors.orange, size: 30),
+            Icon(
+              Icons.settings,
+              color: Colors.orange,
+              size: 30,
+            )
+          ]),
       body: SafeArea(
         child: Column(children: [
           Padding(
@@ -25,7 +40,10 @@ class _HomePageState extends State<HomePage> {
                     padding: EdgeInsets.all(4),
                     decoration: BoxDecoration(
                         color: Colors.orange, shape: BoxShape.circle),
-                    child: Icon(Icons.add)),
+                    child: Icon(
+                      Icons.add,
+                      color: Colors.white,
+                    )),
                 Row(
                   children: [
                     Text(
