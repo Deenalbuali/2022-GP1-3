@@ -1,7 +1,10 @@
+import 'package:elfaa/screens/login/login_screen.dart';
 import 'package:elfaa/screens/mngChildInfo/addChild.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:elfaa/screens/Homepage/childrenList.dart';
 import 'package:flutter/material.dart';
+
+int _page = 0;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,15 +14,23 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int index = 1;
+  final screen = [HomePage(), NotePage(), LoginScreen()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 235, 234, 234),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: CurvedNavigationBar(
+          buttonBackgroundColor: Colors.blue,
+          index: index,
           backgroundColor: Color.fromARGB(255, 235, 234, 234),
           animationDuration: Duration(milliseconds: 300),
-          onTap: (index) {},
+          onTap: (index) {
+            setState(() {
+              _page = index;
+            });
+          },
           items: [
             Icon(Icons.notifications, color: Colors.orange, size: 30),
             Icon(Icons.home, color: Colors.orange, size: 30),
@@ -44,8 +55,7 @@ class _HomePageState extends State<HomePage> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) =>  addChild()),
+                          MaterialPageRoute(builder: (context) => addChild()),
                         );
                       },
                       icon: Icon(Icons.add),
