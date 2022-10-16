@@ -2,7 +2,7 @@
 import 'package:elfaa/screens/Homepage/Home_page.dart';
 import 'package:flutter/material.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:elfaa/Screens/Welcome/welcome.dart';
+import 'package:elfaa/screens/Welcome/welcome.dart';
 import 'constants.dart';
 
 Future main() async {
