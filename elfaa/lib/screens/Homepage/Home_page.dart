@@ -37,11 +37,17 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                    padding: EdgeInsets.all(4),
                     decoration: BoxDecoration(
                         color: Colors.orange, shape: BoxShape.circle),
-                    child: Icon(
-                      Icons.add,
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const addChild()),
+                        );
+                      },
+                      icon: Icon(Icons.add),
                       color: Colors.white,
                     )),
                 Row(
