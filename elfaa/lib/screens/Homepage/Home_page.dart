@@ -1,3 +1,4 @@
+import 'package:elfaa/screens/mngChildInfo/addChild.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:elfaa/screens/Homepage/childrenList.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +45,7 @@ class _HomePageState extends State<HomePage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const addChild()),
+                              builder: (context) =>  addChild()),
                         );
                       },
                       icon: Icon(Icons.add),
