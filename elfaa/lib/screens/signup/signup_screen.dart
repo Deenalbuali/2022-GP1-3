@@ -12,6 +12,7 @@ class _SignupPageState extends State<SignupPage> {
   TextEditingController email = TextEditingController();
   TextEditingController pass = TextEditingController();
   TextEditingController phoneNo = TextEditingController();
+   TextEditingController fname = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -69,7 +70,7 @@ class _SignupPageState extends State<SignupPage> {
                           labelText: "رقم الجوال",
                         ),
                         validator: (value) {
-                          if (value!.isEmpty || email.text.trim() == "") {
+                          if (value!.isEmpty || phoneNo.text.trim() == "") {
                             return "الحقل مطلوب";
                           }
                         },
