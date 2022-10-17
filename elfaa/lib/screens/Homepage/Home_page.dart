@@ -2,80 +2,51 @@ import 'package:elfaa/screens/login/login_screen.dart';
 import 'package:elfaa/screens/mngChildInfo/addChild.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:elfaa/screens/Homepage/childrenList.dart';
+import 'package:elfaa/screens/notificationPage/Notepage.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-int _page = 0;
+int index = 1;
+final Color color1 = Color.fromARGB(215, 231, 97, 8);
+final Color color2 = Color.fromARGB(255, 252, 229, 223);
+final Color color3 = Color.fromARGB(255, 251, 108, 60);
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  int index = 1;
-  final screen = [HomePage(), NotePage(), LoginScreen()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 235, 234, 234),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: CurvedNavigationBar(
-          buttonBackgroundColor: Colors.blue,
-          index: index,
-          backgroundColor: Color.fromARGB(255, 235, 234, 234),
-          animationDuration: Duration(milliseconds: 300),
-          onTap: (index) {
-            setState(() {
-              _page = index;
-            });
-          },
-          items: [
-            Icon(Icons.notifications, color: Colors.orange, size: 30),
-            Icon(Icons.home, color: Colors.orange, size: 30),
-            Icon(
-              Icons.person,
-              color: Colors.orange,
-              size: 30,
-            )
-          ]),
-      body: SafeArea(
-        child: Column(children: [
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 25.0, vertical: 25.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                    decoration: BoxDecoration(
-                        color: Colors.orange, shape: BoxShape.circle),
-                    child: IconButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => addChild()),
-                        );
-                      },
-                      icon: Icon(Icons.add),
-                      color: Colors.white,
-                    )),
-                Row(
-                  children: [
-                    Text(
-                      "! " ' محمد ',
-                      style: TextStyle(fontSize: 26),
-                    ),
-                    Text(
-                      'مرحبا ',
-                      style:
-                          TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                )
-              ],
-            ),
+      body: SingleChildScrollView(
+        child: Column(children: <Widget>[
+          _buildHeader(),
+          Row(
+            children: [
+              SizedBox(
+                width: 20,
+              ),
+              Container(
+                  decoration: BoxDecoration(
+                      color: Colors.orange,
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                            color: color3,
+                            offset: Offset(1.0, 1.0),
+                            blurRadius: 4.0)
+                      ]),
+                  child: IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => addChild()),
+                      );
+                    },
+                    icon: Icon(Icons.add),
+                    color: Colors.white,
+                  )),
+            ],
           ),
           Padding(
             padding: const EdgeInsets.all(25.0),
@@ -93,6 +64,88 @@ class _HomePageState extends State<HomePage> {
             ),
           )
         ]),
+      ),
+    );
+  }
+
+  Container _buildHeader() {
+    return Container(
+      height: 250,
+      width: double.infinity,
+      child: Stack(
+        children: <Widget>[
+          Positioned(
+            bottom: 0,
+            right: -100,
+            top: -150,
+            child: Container(
+              width: 350,
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: LinearGradient(colors: [color1, color2]),
+                  boxShadow: [
+                    BoxShadow(
+                        color: color2,
+                        offset: Offset(4.0, 4.0),
+                        blurRadius: 10.0)
+                  ]),
+            ),
+          ),
+          Positioned(
+            top: 10,
+            left: 200,
+            child: Container(
+              width: 100,
+              height: 100,
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: LinearGradient(colors: [color3, color2]),
+                  boxShadow: [
+                    BoxShadow(
+                        color: color3,
+                        offset: Offset(1.0, 1.0),
+                        blurRadius: 4.0)
+                  ]),
+            ),
+          ),
+          Positioned(
+            top: 100,
+            left: 300,
+            child: Container(
+              width: 50,
+              height: 50,
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: LinearGradient(colors: [color3, color2]),
+                  boxShadow: [
+                    BoxShadow(
+                        color: color3,
+                        offset: Offset(1.0, 1.0),
+                        blurRadius: 4.0)
+                  ]),
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 60, left: 200),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  "! " "مرحبا محمد",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 28.0,
+                      fontWeight: FontWeight.w700),
+                ),
+                SizedBox(height: 10.0),
+                Text(
+                  " إلفاء",
+                  style: TextStyle(color: Colors.white, fontSize: 18.0),
+                )
+              ],
+            ),
+          )
+        ],
       ),
     );
   }

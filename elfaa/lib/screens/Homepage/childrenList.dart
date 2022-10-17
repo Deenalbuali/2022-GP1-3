@@ -28,15 +28,12 @@ class childrenList extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            Icon(Icons.arrow_back_ios),
             Row(
               children: [
-                Container(
-                  padding: EdgeInsets.all(11),
-                  child: Image.asset(childImagePath),
-                ),
                 Column(
                   //crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 
                   children: [
                     Text(
@@ -51,9 +48,12 @@ class childrenList extends StatelessWidget {
                         style: TextStyle(fontSize: 16, color: Colors.orange))
                   ],
                 ),
+                Container(
+                  padding: EdgeInsets.all(12),
+                  child: Image.asset(childImagePath),
+                ),
               ],
             ),
-            Icon(Icons.arrow_forward_ios),
           ],
         ),
       ),

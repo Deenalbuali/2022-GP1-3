@@ -1,5 +1,6 @@
 //import 'package:firebase_core/firebase_core.dart';
 import 'package:elfaa/screens/Homepage/Home_page.dart';
+import 'package:elfaa/screens/Homepage/navPage.dart';
 import 'package:flutter/material.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:elfaa/screens/Welcome/welcome.dart';
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
               borderSide: BorderSide.none,
             ),
           )),
-      home: const HomePage(),
+      home: NavPage(),
     );
   }
 }
