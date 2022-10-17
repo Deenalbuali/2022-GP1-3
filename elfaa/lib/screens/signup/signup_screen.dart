@@ -21,7 +21,7 @@ class _SignupPageState extends State<SignupPage> {
         backgroundColor: Colors.white,
         elevation: 0,
         title: const Text(
-          "تسجيل جديد",
+          "                                          تسجيل جديد",
           style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
