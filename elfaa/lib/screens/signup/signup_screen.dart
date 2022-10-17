@@ -54,6 +54,7 @@ class _SignupPageState extends State<SignupPage> {
                           }
                         },
                       )),
+                  const SizedBox(height: 20),
                   Directionality(
                       textDirection: TextDirection.rtl,
                       child: TextFormField(
