@@ -85,6 +85,7 @@ class _SignupPageState extends State<SignupPage> {
                           suffixIcon: Icon(Icons.phone_callback,
                               color: Color(0xFFFD8601)),
                           labelText: "رقم الجوال",
+                          hintText: "05xxxxxxxx",
                         ),
                         validator: (value) {
                           if (value!.isEmpty || phoneNo.text.trim() == "") {
