@@ -38,7 +38,7 @@ class _NavPageState extends State<NavPage> {
           ),
           child: CurvedNavigationBar(
             color: Colors.white,
-            buttonBackgroundColor: Colors.grey[300],
+            buttonBackgroundColor: Color.fromRGBO(0, 122, 151, 1),
             animationDuration: Duration(milliseconds: 300),
             backgroundColor: Colors.transparent,
             height: 60,

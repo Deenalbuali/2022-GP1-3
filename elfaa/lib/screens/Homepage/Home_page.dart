@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 int index = 1;
-final Color color1 = Color.fromARGB(215, 231, 97, 8);
-final Color color2 = Color.fromARGB(255, 252, 229, 223);
-final Color color3 = Color.fromARGB(255, 251, 108, 60);
+final Color color1 = Color.fromARGB(255, 253, 112, 59);
+final Color color2 = Color.fromARGB(255, 249, 113, 83);
+final Color color3 = Color.fromARGB(255, 248, 116, 72);
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -28,11 +28,11 @@ class HomePage extends StatelessWidget {
               ),
               Container(
                   decoration: BoxDecoration(
-                      color: Colors.orange,
+                      color: Color.fromRGBO(0, 122, 151, 1),
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
-                            color: color3,
+                            color: Color.fromRGBO(0, 122, 151, 1),
                             offset: Offset(1.0, 1.0),
                             blurRadius: 4.0)
                       ]),
@@ -76,7 +76,7 @@ class HomePage extends StatelessWidget {
         children: <Widget>[
           Positioned(
             bottom: 0,
-            right: -100,
+            right: -80,
             top: -150,
             child: Container(
               width: 350,
@@ -128,10 +128,10 @@ class HomePage extends StatelessWidget {
           Container(
             margin: const EdgeInsets.only(top: 60, left: 200),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              //crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  "! " "مرحبا محمد",
+                  "! محمد" " مرحبا ",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 28.0,
