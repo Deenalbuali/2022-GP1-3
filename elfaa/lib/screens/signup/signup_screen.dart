@@ -12,7 +12,7 @@ class _SignupPageState extends State<SignupPage> {
   TextEditingController email = TextEditingController();
   TextEditingController pass = TextEditingController();
   TextEditingController phoneNo = TextEditingController();
-   TextEditingController fname = TextEditingController();
+  TextEditingController fname = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -38,6 +38,22 @@ class _SignupPageState extends State<SignupPage> {
                   20, MediaQuery.of(context).size.height * 0.2, 20, 0),
               child: Column(
                 children: <Widget>[
+                  Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: TextFormField(
+                        textAlign: TextAlign.right,
+                        controller: fname,
+                        decoration: const InputDecoration(
+                          suffixIcon:
+                              Icon(Icons.person, color: Color(0xFFFD8601)),
+                          labelText: "الاسم الأول",
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty || fname.text.trim() == "") {
+                            return "الحقل مطلوب";
+                          }
+                        },
+                      )),
                   Directionality(
                       textDirection: TextDirection.rtl,
                       child: TextFormField(
