@@ -1,7 +1,9 @@
+import 'dart:ffi';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+
 //import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:firebase_core/firebase_core.dart';
 class addChild extends StatefulWidget {
@@ -10,17 +12,16 @@ class addChild extends StatefulWidget {
 }
 
 class _addChildState extends State<addChild> {
-
-//profile image variables 
+//profile image variables
   PickedFile? _imgFile;
   final ImagePicker _picker = ImagePicker();
 //information form controllers
   final controllerName = TextEditingController();
-   final controllerBirthday = TextEditingController();
+  final controllerBirthday = TextEditingController();
   final controllerHeight = TextEditingController();
- 
+
   TextEditingController email = TextEditingController();
-  
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -33,83 +34,97 @@ class _addChildState extends State<addChild> {
           backgroundColor: Colors.orange,
           centerTitle: true,
         ),
-        body: ListView(
-          padding: const EdgeInsets.all(16),
-          children: <Widget>[
-            const SizedBox(height: 30),
-            childImg(),
-            const SizedBox(height: 70),
-            Directionality(
-                textDirection: TextDirection.rtl,
-                child: TextFormField(
-                  textAlign: TextAlign.right,
-                  controller: controllerName,
-                  decoration: const InputDecoration(
-                    suffixIcon:
-                        Icon(Icons.child_care, color: Color(0xFFFD8601)),
-                    labelText: "اسم الطفل",
-                  ),
-                  validator: (value) {
-                    if (value!.isEmpty || controllerName.text.trim() == "") {
-                      return "الحقل مطلوب";
-                    }
-                  },
-                )),
-                const SizedBox(height: 20),
-                Directionality(
-                textDirection: TextDirection.rtl,
-                child: TextFormField(
-                  textAlign: TextAlign.right,
-                  controller: controllerBirthday,
-                  decoration: const InputDecoration(
-                    suffixIcon:
-                        Icon(Icons.event, color: Color(0xFFFD8601)),
-                    labelText: "تاريخ الميلاد",
-                  ),
-                  validator: (value) {
-                    if (value!.isEmpty || controllerBirthday.text.trim() == "") {
-                      return "الحقل مطلوب";
-                    }
-                  },
-                )),
-            const SizedBox(height: 20),
-            Directionality(
-                textDirection: TextDirection.rtl,
-                child: TextFormField(
-                  textAlign: TextAlign.right,
-                  controller: controllerHeight,
-                  decoration: const InputDecoration(
-                    suffixIcon:
-                        Icon(Icons.accessibility_new, color: Color(0xFFFD8601)),
-                    labelText: "الطول",
-                  ),
-                  keyboardType: TextInputType.number,
-                  validator: (value) {
-                    if (value!.isEmpty || controllerHeight.text.trim() == "") {
-                      return "الحقل مطلوب";
-                    }
-                  },
-                )),
-            const SizedBox(
-              height: 32,
+        body: Container(
+          child: SingleChildScrollView(
+            child: Form(
+              key: _formKey,
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(
+                    20, MediaQuery.of(context).size.height * 0.04, 20, 0),
+                child: Column(
+                  children: <Widget>[
+                    childImg(),
+                    const SizedBox(height: 40),
+                    Directionality(
+                        textDirection: TextDirection.rtl,
+                        child: TextFormField(
+                          textAlign: TextAlign.right,
+                          controller: controllerName,
+                          decoration: const InputDecoration(
+                            suffixIcon: Icon(Icons.child_care,
+                                color: Color(0xFFFD8601)),
+                            labelText: "اسم الطفل",
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty ||
+                                controllerName.text.trim() == "") {
+                              return "الحقل مطلوب";
+                            }
+                          },
+                        )),
+                    const SizedBox(height: 20),
+                    Directionality(
+                        textDirection: TextDirection.rtl,
+                        child: TextFormField(
+                          textAlign: TextAlign.right,
+                          controller: email,
+                          decoration: const InputDecoration(
+                            suffixIcon:
+                                Icon(Icons.event, color: Color(0xFFFD8601)),
+                            labelText: "تاريخ الميلاد",
+                            hintText: "00-00-0000",
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty || email.text.trim() == "") {
+                              return "الحقل مطلوب";
+                            } else if (value.length != 10) {
+                              return "يجب ادخال 10 خانات ";
+                            }
+                          },
+                        )),
+                    const SizedBox(height: 20),
+                    Directionality(
+                        textDirection: TextDirection.rtl,
+                        child: TextFormField(
+                          textAlign: TextAlign.right,
+                          controller: controllerHeight,
+                          keyboardType: TextInputType.number,
+                          decoration: const InputDecoration(
+                            suffixIcon: Icon(Icons.accessibility_new,
+                                color: Color(0xFFFD8601)),
+                            labelText: "الطول",
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty ||
+                                controllerHeight.text.trim() == "") {
+                              return "الحقل مطلوب";
+                            }
+                          },
+                        )),
+                    const SizedBox(height: 40),
+                    ElevatedButton(
+                      child: const Text('إضافة'),
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                        final child = Child(
+                            name: controllerName.text,
+                            height: int.parse(controllerHeight.text),
+                            birthday: DateTime.parse('2022-01-01'));
+
+                        addChild(child);
+
+                        Navigator.pop(context);
+                        }
+                      },
+                    ),
+                  ],
+                ),
+              ),
             ),
-            ElevatedButton(
-              child: const Text('إضافة'),
-              onPressed: () {
-                final child = Child(
-                    name: controllerName.text,
-                    age: int.parse(controllerHeight.text),
-                    birthday: DateTime.parse('2022-01-01'));
-
-                addChild(child);
-
-                Navigator.pop(context);
-              },
-            )
-          ],
+          ),
         ),
       );
-  //-----------------Rero's Helping Methods--------------------------------// 
+  //-----------------Rero's Helping Methods--------------------------------//
 
   //Adding child's profile picture
   childImg() {
@@ -119,7 +134,7 @@ class _addChildState extends State<addChild> {
           CircleAvatar(
               radius: 80,
               backgroundImage: _imgFile == null
-                  ? const AssetImage("assets/images/elfaa.png")
+                  ? const AssetImage("assets/images/child-img.jpg")
                   : FileImage(File(_imgFile!.path)) as ImageProvider),
           Positioned(
               bottom: 15,
@@ -127,7 +142,8 @@ class _addChildState extends State<addChild> {
               child: InkWell(
                   onTap: () {
                     showModalBottomSheet(
-                        context: context, builder: ((builder) => bottomImgPicker()));
+                        context: context,
+                        builder: ((builder) => bottomImgPicker()));
                   },
                   child: Icon(Icons.camera_alt,
                       color: Color.fromARGB(255, 22, 147, 193), size: 28)))
@@ -189,7 +205,7 @@ class _addChildState extends State<addChild> {
         .collection('parent')
         .doc('Renad')
         .collection('children')
-        .doc(child.name);
+        .doc();
 
     final json = child.toJson();
     //Create doc and write data
@@ -197,14 +213,14 @@ class _addChildState extends State<addChild> {
   }
 }
 
-//child object
+//child class
 class Child {
   final String name;
-  final int age;
+  final int height;
   final DateTime birthday;
 
-  Child({required this.name, required this.age, required this.birthday});
+  Child({required this.name, required this.height, required this.birthday});
 
   Map<String, dynamic> toJson() =>
-      {'name': name, 'age': age, 'birthday': birthday};
+      {'name': name, 'height': height, 'birthday': birthday};
 }
