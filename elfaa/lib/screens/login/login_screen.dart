@@ -25,7 +25,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   20, MediaQuery.of(context).size.height * 0.2, 20, 0),
               child: Column(
                 children: <Widget>[
-                  logoWidget("assets/img/logo1.png"),
+                  logoWidget("assets/images/logo1.png"),
                   const SizedBox(height: 80),
                   Directionality(
                       textDirection: TextDirection.rtl,
