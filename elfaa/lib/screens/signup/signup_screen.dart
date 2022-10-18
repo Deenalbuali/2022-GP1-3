@@ -21,19 +21,15 @@ class _SignupPageState extends State<SignupPage> {
       backgroundColor: Color(0xFFf5f5f5),
       appBar: AppBar(
         iconTheme: IconThemeData(
-        color: kPrimaryColor,
+          color: kPrimaryColor,
         ),
-
         backgroundColor: Color(0xFFFFFFFF),
         elevation: 0,
         title: const Text(
           "            تسجيل جديد",
           style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: kPrimaryColor),
+              fontSize: 24, fontWeight: FontWeight.bold, color: kPrimaryColor),
         ),
-        
       ),
       body: Container(
         child: SingleChildScrollView(
@@ -41,11 +37,11 @@ class _SignupPageState extends State<SignupPage> {
             key: _formKey,
             child: Padding(
               padding: EdgeInsets.fromLTRB(
-                  20, MediaQuery.of(context).size.height * 0.2, 20, 0),
+                  20, MediaQuery.of(context).size.height * 0.04, 20, 0),
               child: Column(
                 children: <Widget>[
-                   logoWidget("assets/images/logo1.png"),
-                  const SizedBox(height: 50),
+                  logoWidget("assets/images/logo1.png"),
+                  const SizedBox(height: 40),
                   Directionality(
                       textDirection: TextDirection.rtl,
                       child: TextFormField(
@@ -120,7 +116,7 @@ class _SignupPageState extends State<SignupPage> {
                           }
                         },
                       )),
-                  const SizedBox(height: 50),
+                  const SizedBox(height: 40),
                   ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
@@ -128,7 +124,8 @@ class _SignupPageState extends State<SignupPage> {
                         //add to DB
                       }
                     },
-                    child: Text("تسجيل", style: TextStyle(color: Colors.white, fontSize: 22)),
+                    child: Text("تسجيل",
+                        style: TextStyle(color: Colors.white, fontSize: 22)),
                   ),
                 ],
               ),
@@ -138,7 +135,7 @@ class _SignupPageState extends State<SignupPage> {
       ),
     );
   }
-  
+
   Widget logoWidget(String imageName) {
     return Center(
         child: Image.asset(

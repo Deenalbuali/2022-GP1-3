@@ -3,7 +3,6 @@ import 'package:elfaa/screens/signup/signup_screen.dart';
 import 'package:elfaa/constants.dart';
 import 'package:elfaa/screens/Homepage/navPage.dart';
 
-
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
 
@@ -19,21 +18,17 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFf5f5f5),
-       appBar: AppBar(
+      appBar: AppBar(
         iconTheme: IconThemeData(
-        color: kPrimaryColor,
+          color: kPrimaryColor,
         ),
-
         backgroundColor: Color(0xFFFFFFFF),
         elevation: 0,
         title: const Text(
           "          تسجيل الدخول",
           style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: kPrimaryColor),
+              fontSize: 24, fontWeight: FontWeight.bold, color: kPrimaryColor),
         ),
-        
       ),
       body: Container(
         child: SingleChildScrollView(
@@ -41,11 +36,11 @@ class _SignInScreenState extends State<SignInScreen> {
             key: _formKey,
             child: Padding(
               padding: EdgeInsets.fromLTRB(
-                  20, MediaQuery.of(context).size.height * 0.2, 20, 0),
+                  20, MediaQuery.of(context).size.height * 0.1, 20, 0),
               child: Column(
                 children: <Widget>[
                   logoWidget("assets/images/logo1.png"),
-                  const SizedBox(height: 80),
+                  const SizedBox(height: 50),
                   Directionality(
                       textDirection: TextDirection.rtl,
                       child: TextFormField(
@@ -83,17 +78,17 @@ class _SignInScreenState extends State<SignInScreen> {
                   ElevatedButton(
                     onPressed: () {
                       Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return NavPage();
-                  },
-                ),
-              );
-                    //  if (_formKey.currentState!.validate()) {
-                        //if all fields are valid
-                        //add to DB
-                 //     }
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return NavPage();
+                          },
+                        ),
+                      );
+                      //  if (_formKey.currentState!.validate()) {
+                      //if all fields are valid
+                      //add to DB
+                      //     }
                     },
                     child: Text("تسجيل الدخول",
                         style: TextStyle(color: Colors.white)),
