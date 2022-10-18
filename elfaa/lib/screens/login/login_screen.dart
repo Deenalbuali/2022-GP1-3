@@ -40,8 +40,6 @@ class _SignInScreenState extends State<SignInScreen> {
                         validator: (value) {
                           if (value!.isEmpty || email.text.trim() == "") {
                             return "الحقل مطلوب";
-                          } else if (value.length != 10) {
-                            return "الرقم ليس مكوّن من 10 خانات";
                           }
                         },
                       )),
