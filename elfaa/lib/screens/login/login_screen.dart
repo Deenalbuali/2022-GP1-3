@@ -57,7 +57,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           labelText: "كلمة السر",
                         ),
                         validator: (value) {
-                          if (value!.isEmpty && pass.text.trim() != "") {
+                          if (value!.isEmpty || pass.text.trim() != "") {
                             return "الحقل مطلوب";
                           }
                         },

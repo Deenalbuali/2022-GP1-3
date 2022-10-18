@@ -105,7 +105,7 @@ class _SignupPageState extends State<SignupPage> {
                           labelText: "كلمة السر",
                         ),
                         validator: (value) {
-                          if (value!.isEmpty && pass.text.trim() != "") {
+                          if (value!.isEmpty || pass.text.trim() != "") {
                             return "الحقل مطلوب";
                           }
                         },
