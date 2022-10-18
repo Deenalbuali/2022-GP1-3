@@ -23,28 +23,34 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'FirstPage',
       theme: ThemeData(
-          primaryColor: kPrimaryColor,
-          elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
-              elevation: 0,
-              primary: kPrimaryColor,
-              shape: const StadiumBorder(),
-              maximumSize: const Size(double.infinity, 56),
-              minimumSize: const Size(double.infinity, 56),
-            ),
+        primaryColor: kPrimaryColor,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            elevation: 0,
+            primary: kPrimaryColor,
+            shape: const StadiumBorder(),
+            maximumSize: const Size(double.infinity, 56),
+            minimumSize: const Size(double.infinity, 56),
           ),
-          inputDecorationTheme: const InputDecorationTheme(
-            filled: true,
-            fillColor: kLightColor,
-            iconColor: kPrimaryColor,
-            prefixIconColor: kPrimaryColor,
-            contentPadding: EdgeInsets.symmetric(
-                horizontal: defaultPadding, vertical: defaultPadding),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(30)),
-              borderSide: BorderSide.none,
-            ),
-          )),
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(100.0),
+              borderSide: BorderSide(color: Colors.grey.shade300)),
+          contentPadding: const EdgeInsets.fromLTRB(20, 12, 20, 12),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(100.0),
+              borderSide: BorderSide(color: Colors.grey.shade500, width: 1.5)),
+          errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(100.0),
+              borderSide: const BorderSide(color: Colors.red, width: 2.0)),
+          focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(100.0),
+              borderSide: const BorderSide(color: Colors.red, width: 2.0)),
+          floatingLabelStyle: const TextStyle(fontSize: 22, color: Colors.blue),
+          helperStyle: const TextStyle(fontSize: 14),
+        ),
+      ),
       home: SignInScreen(),
     );
   }
