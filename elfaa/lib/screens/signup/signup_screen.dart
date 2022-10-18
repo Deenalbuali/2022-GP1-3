@@ -17,12 +17,12 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFF7EE),
+      backgroundColor: Color(0xFFf5f5f5),
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         title: const Text(
-          "                                          تسجيل جديد",
+          "                                            تسجيل جديد",
           style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
@@ -90,6 +90,8 @@ class _SignupPageState extends State<SignupPage> {
                         validator: (value) {
                           if (value!.isEmpty || phoneNo.text.trim() == "") {
                             return "الحقل مطلوب";
+                          } else if (value.length != 10) {
+                            return "الرقم ليس مكوّن من 10 خانات";
                           }
                         },
                       )),
