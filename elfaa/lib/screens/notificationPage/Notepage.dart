@@ -10,7 +10,7 @@ class NotePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 235, 234, 234),
+      backgroundColor: Color(0xFFf5f5f5),
       body: SafeArea(
         child: Column(children: [
           Padding(

@@ -1,3 +1,4 @@
+import 'package:elfaa/screens/login/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:elfaa/screens/Homepage/Home_page.dart';
 import 'package:elfaa/screens/Homepage/navPage.dart';
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
               borderSide: BorderSide.none,
             ),
           )),
-      home: NavPage(),
+      home: SignInScreen(),
     );
   }
 }

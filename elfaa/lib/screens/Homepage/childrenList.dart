@@ -38,8 +38,10 @@ class childrenList extends StatelessWidget {
                   children: [
                     Text(
                       childName,
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Color.fromARGB(255, 41, 41, 32)),
                     ),
                     SizedBox(
                       height: 5,
