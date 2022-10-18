@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 int index = 1;
-final Color color1 = Color.fromARGB(255, 253, 112, 59);
-final Color color2 = Color.fromARGB(255, 249, 113, 83);
-final Color color3 = Color.fromARGB(255, 248, 116, 72);
+final Color color1 = Color.fromARGB(255, 255, 247, 238);
+final Color color2 = Color.fromARGB(255, 255, 247, 238);
+final Color color3 = Color.fromARGB(255, 255, 247, 238);
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -17,7 +17,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 235, 234, 234),
+      backgroundColor: Color(0xFFf5f5f5),
       body: SingleChildScrollView(
         child: Column(children: <Widget>[
           _buildHeader(),
