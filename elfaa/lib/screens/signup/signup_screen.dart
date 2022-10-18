@@ -1,3 +1,4 @@
+import 'package:elfaa/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -19,15 +20,20 @@ class _SignupPageState extends State<SignupPage> {
     return Scaffold(
       backgroundColor: Color(0xFFf5f5f5),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(
+        color: kPrimaryColor,
+        ),
+
+        backgroundColor: Color(0xFFFFFFFF),
         elevation: 0,
         title: const Text(
-          "                                            تسجيل جديد",
+          "            تسجيل جديد",
           style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: Color(0xFFFD8601)),
+              color: kPrimaryColor),
         ),
+        
       ),
       body: Container(
         child: SingleChildScrollView(
@@ -38,6 +44,8 @@ class _SignupPageState extends State<SignupPage> {
                   20, MediaQuery.of(context).size.height * 0.2, 20, 0),
               child: Column(
                 children: <Widget>[
+                   logoWidget("assets/images/logo1.png"),
+                  const SizedBox(height: 50),
                   Directionality(
                       textDirection: TextDirection.rtl,
                       child: TextFormField(
@@ -120,7 +128,7 @@ class _SignupPageState extends State<SignupPage> {
                         //add to DB
                       }
                     },
-                    child: Text("تسجيل", style: TextStyle(color: Colors.white)),
+                    child: Text("تسجيل", style: TextStyle(color: Colors.white, fontSize: 22)),
                   ),
                 ],
               ),
@@ -129,5 +137,15 @@ class _SignupPageState extends State<SignupPage> {
         ),
       ),
     );
+  }
+  
+  Widget logoWidget(String imageName) {
+    return Center(
+        child: Image.asset(
+      imageName,
+      fit: BoxFit.fill,
+      width: 150,
+      height: 150,
+    ));
   }
 }

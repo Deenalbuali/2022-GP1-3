@@ -1,11 +1,13 @@
-import 'package:elfaa/screens/login/login_screen.dart';
-import 'package:elfaa/screens/notificationPage/Notepage.dart';
+//import 'package:elfaa/screens/login/login_screen.dart';
+//import 'package:elfaa/screens/notificationPage/Notepage.dart';
+import 'package:elfaa/screens/profile/profile_page.dart';
+import 'package:elfaa/screens/welcome/welcome.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:elfaa/screens/Homepage/Home_page.dart';
-import 'package:elfaa/screens/Homepage/navPage.dart';
+//import 'package:elfaa/screens/Homepage/Home_page.dart';
+//import 'package:elfaa/screens/Homepage/navPage.dart';
 import 'package:flutter/material.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:elfaa/screens/Welcome/welcome.dart';
+//import 'package:elfaa/screens/profile/profile_page.dart';
 import 'constants.dart';
 
 Future main() async {
@@ -17,7 +19,6 @@ Future main() async {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,12 +28,13 @@ class MyApp extends StatelessWidget {
         primaryColor: kPrimaryColor,
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
+            textStyle: TextStyle(fontSize: 22),
             shadowColor: Colors.black,
-            elevation: 0,
+            elevation: 1,
             primary: kPrimaryColor,
             shape: const StadiumBorder(),
-            maximumSize: const Size(double.infinity, 56),
-            minimumSize: const Size(double.infinity, 56),
+            maximumSize: const Size(250, 56),
+            minimumSize: const Size(250, 56),
           ),
         ),
         inputDecorationTheme: InputDecorationTheme(
@@ -49,11 +51,11 @@ class MyApp extends StatelessWidget {
           focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(100.0),
               borderSide: const BorderSide(color: Colors.red, width: 2.0)),
-          floatingLabelStyle: const TextStyle(fontSize: 22, color: Colors.blue),
+          floatingLabelStyle: const TextStyle(fontSize: 22, color: kPrimaryColor),
           helperStyle: const TextStyle(fontSize: 14),
         ),
       ),
-      home: NavPage(),
+      home: WelcomeScreen(),
     );
   }
 }

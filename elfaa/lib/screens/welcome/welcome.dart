@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../components/background.dart';
 import 'components/login_signup_btn.dart';
-import 'components/welcome_image.dart';
 
 
 class WelcomeScreen extends StatelessWidget {
@@ -10,22 +8,43 @@ class WelcomeScreen extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        const WelcomeImage(),
-        Row(
-          children: const [
-            Spacer(),
-            Expanded(
-              flex: 8,
-              child: LoginAndSignupBtn(),
-            ),
-            Spacer(),
-          ],
-        ),
-      ],
+  Widget build(
+    
+     context) {
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/bg1.png"),
+            fit: BoxFit.cover,
+          ),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          new Container(
+        width: 300,
+        height: 300,
+        decoration: new BoxDecoration(
+        shape: BoxShape.circle,
+        image: new DecorationImage(
+          fit: BoxFit.fill,
+          image: new AssetImage('assets/images/elfaa.png')
+          )
+       )),
+          Row(
+            children: const [
+              Spacer(),
+              Expanded(
+                flex: 8,
+                child: LoginAndSignupBtn(),
+              ),
+              Spacer(),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

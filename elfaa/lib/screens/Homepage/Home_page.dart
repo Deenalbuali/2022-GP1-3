@@ -131,17 +131,13 @@ class HomePage extends StatelessWidget {
               //crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  "! محمد" " مرحبا ",
+                  "! مرحبًا" " محمد ",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 28.0,
                       fontWeight: FontWeight.w700),
                 ),
                 SizedBox(height: 10.0),
-                Text(
-                  " إلفاء",
-                  style: TextStyle(color: Colors.white, fontSize: 18.0),
-                )
               ],
             ),
           )

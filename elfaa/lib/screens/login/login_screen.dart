@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:elfaa/screens/signup/signup_screen.dart';
+import 'package:elfaa/constants.dart';
+import 'package:elfaa/screens/Homepage/navPage.dart';
+
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -16,6 +19,22 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFf5f5f5),
+       appBar: AppBar(
+        iconTheme: IconThemeData(
+        color: kPrimaryColor,
+        ),
+
+        backgroundColor: Color(0xFFFFFFFF),
+        elevation: 0,
+        title: const Text(
+          "          تسجيل الدخول",
+          style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: kPrimaryColor),
+        ),
+        
+      ),
       body: Container(
         child: SingleChildScrollView(
           child: Form(
@@ -55,7 +74,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           labelText: "كلمة السر",
                         ),
                         validator: (value) {
-                          if (value!.isEmpty || pass.text.trim() != "") {
+                          if (value!.isEmpty || pass.text.trim() != " ") {
                             return "الحقل مطلوب";
                           }
                         },
@@ -63,10 +82,18 @@ class _SignInScreenState extends State<SignInScreen> {
                   const SizedBox(height: 50),
                   ElevatedButton(
                     onPressed: () {
-                      if (_formKey.currentState!.validate()) {
+                      Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return NavPage();
+                  },
+                ),
+              );
+                    //  if (_formKey.currentState!.validate()) {
                         //if all fields are valid
                         //add to DB
-                      }
+                 //     }
                     },
                     child: Text("تسجيل الدخول",
                         style: TextStyle(color: Colors.white)),
