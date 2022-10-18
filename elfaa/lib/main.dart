@@ -1,4 +1,5 @@
 import 'package:elfaa/screens/login/login_screen.dart';
+import 'package:elfaa/screens/notificationPage/Notepage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:elfaa/screens/Homepage/Home_page.dart';
 import 'package:elfaa/screens/Homepage/navPage.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         primaryColor: kPrimaryColor,
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
+            shadowColor: Colors.black,
             elevation: 0,
             primary: kPrimaryColor,
             shape: const StadiumBorder(),
@@ -51,7 +53,7 @@ class MyApp extends StatelessWidget {
           helperStyle: const TextStyle(fontSize: 14),
         ),
       ),
-      home: SignInScreen(),
+      home: NavPage(),
     );
   }
 }
