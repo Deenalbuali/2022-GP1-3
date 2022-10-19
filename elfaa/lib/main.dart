@@ -1,7 +1,13 @@
+//import 'package:elfaa/screens/login/login_screen.dart';
+//import 'package:elfaa/screens/notificationPage/Notepage.dart';
+import 'package:elfaa/screens/profile/profile_page.dart';
 import 'package:elfaa/screens/welcome/welcome.dart';
 import 'package:firebase_core/firebase_core.dart';
+//import 'package:elfaa/screens/Homepage/Home_page.dart';
+//import 'package:elfaa/screens/Homepage/navPage.dart';
 import 'package:flutter/material.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
+//import 'package:elfaa/screens/profile/profile_page.dart';
 import 'constants.dart';
 
 Future main() async {
@@ -16,20 +22,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Directionality( 
-        textDirection: TextDirection.rtl,  
-        child: WelcomeScreen(),
-      ),
-        debugShowCheckedModeBanner: false,
-        title: 'FirstPage',
-        theme: ThemeData(
+      debugShowCheckedModeBanner: false,
+      title: 'FirstPage',
+      theme: ThemeData(
         primaryColor: kPrimaryColor,
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             textStyle: TextStyle(fontSize: 22),
-            shadowColor: Colors.black,
-            elevation: 1,
-            backgroundColor: kPrimaryColor,
+            shadowColor: Color.fromARGB(255, 0, 0, 0),
+            elevation: 3,
+            onPrimary: Colors.white,
             shape: const StadiumBorder(),
             maximumSize: const Size(250, 56),
             minimumSize: const Size(250, 56),
@@ -49,11 +51,12 @@ class MyApp extends StatelessWidget {
           focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(100.0),
               borderSide: const BorderSide(color: Colors.red, width: 2.0)),
-          floatingLabelStyle: const TextStyle(fontSize: 22, color: kPrimaryColor),
+          floatingLabelStyle:
+              const TextStyle(fontSize: 22, color: kPrimaryColor),
           helperStyle: const TextStyle(fontSize: 14),
         ),
       ),
-     // home: WelcomeScreen(),
+      home: WelcomeScreen(),
     );
   }
 }

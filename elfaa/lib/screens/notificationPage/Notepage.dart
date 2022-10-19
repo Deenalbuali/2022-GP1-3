@@ -1,6 +1,7 @@
 import 'package:elfaa/screens/mngChildInfo/addChild.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:elfaa/screens/Homepage/childrenList.dart';
+import 'package:elfaa/screens/notificationPage/NoteList.dart';
 import 'package:flutter/material.dart';
 import 'package:elfaa/constants.dart';
 
@@ -20,21 +21,21 @@ class NotePage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         toolbarHeight: 90,
-        title:  Text(
-                "التنبيهات",
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
-              ),
+        title: Text(
+          "التنبيهات",
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+        ),
         centerTitle: true,
         flexibleSpace: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(28), bottomRight: Radius.circular(28)),
-            gradient: LinearGradient(
-              colors: [Color(0xFFADCED6), kPrimaryColor],
-              begin: Alignment.bottomCenter,
-              end: Alignment.topCenter,
-            )
-          )
-        ),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(28),
+                    bottomRight: Radius.circular(28)),
+                gradient: LinearGradient(
+                  colors: [Color(0xFFADCED6), kPrimaryColor],
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                ))),
       ),
       body: SingleChildScrollView(
         child: Column(children: <Widget>[
@@ -59,11 +60,11 @@ class NotePage extends StatelessWidget {
             padding: const EdgeInsets.all(25.0),
             child: Column(
               children: [
-                childrenList(
+                noteList(
                     childImagePath: 'assets/images/ahmad.png',
                     childName: 'أحمد',
                     zoneName: "!" 'تم إيجاد طفلك '),
-                childrenList(
+                noteList(
                     childImagePath: 'assets/images/sarah.png',
                     childName: 'سارة',
                     zoneName: "!" 'تم إيجاد طفلك '),
@@ -74,5 +75,4 @@ class NotePage extends StatelessWidget {
       ),
     );
   }
-
 }
