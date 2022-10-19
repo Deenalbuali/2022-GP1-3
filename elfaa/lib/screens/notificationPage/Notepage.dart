@@ -4,7 +4,7 @@ import 'package:elfaa/screens/Homepage/childrenList.dart';
 import 'package:flutter/material.dart';
 
 class NotePage extends StatelessWidget {
-  int index = 0;
+  int index = 1;
   //const NotePage({super.key});
   final Color color1 = Color(0xFF429EB2);
   final Color color2 = Color(0xFF429EB2);
