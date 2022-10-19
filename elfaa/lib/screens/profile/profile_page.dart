@@ -17,25 +17,29 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  Widget _buildName() {
-    return TextFormField(
+Widget _buildName() {
+return  Directionality(
+      textDirection: TextDirection.rtl,
+      child: TextFormField(
       textAlign: TextAlign.right,
-      decoration: InputDecoration(labelText: 'الاسم', hintText: 'أدخل اسمك', border: UnderlineInputBorder()),
+      decoration: InputDecoration(labelText: 'الاسم', hintText: 'أدخل اسمك'),
       maxLength: 10,
       validator: (String? value) {
         if (value!.isEmpty) {
           return 'يجب أن لا يكون الحقل فارغًا';
         }
-        return 'null';
+        return null;
       },
       onSaved: (String? value) {
         _name = value;
       },
-    );
+    ));
   }
 
   Widget _buildEmail() {
-    return TextFormField(
+   return  Directionality(
+      textDirection: TextDirection.rtl,
+      child: TextFormField(
       textAlign: TextAlign.right,
       decoration: InputDecoration(
           labelText: 'البريد الإلكتروني', hintText: 'أدخل بريدك الإلكتروني'),
@@ -43,23 +47,23 @@ class _EditProfilePageState extends State<EditProfilePage> {
         if (value!.isEmpty) {
           return 'يجب أن لا يكون الحقل فارغًا';
         }
-
         if (!RegExp(
                 r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
             .hasMatch(value)) {
           return 'أدخل بريد إلكتروني صالح';
         }
-
         return null;
       },
       onSaved: (String? value) {
         _email = value!;
       },
-    );
+    ));
   }
 
   Widget _buildPhoneNumber() {
-    return TextFormField(
+    return  Directionality(
+      textDirection: TextDirection.rtl,
+      child:  TextFormField(
       textAlign: TextAlign.right,
       decoration:
           InputDecoration(labelText: 'رقم الجوال', hintText: '05xxxxxxxx'),
@@ -74,7 +78,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
       onSaved: (String? value) {
         _phoneNumber = value!;
       },
-    );
+    ));
   }
 
   @override
