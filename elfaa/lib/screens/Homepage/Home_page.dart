@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 int index = 1;
-final Color color1 = Color.fromRGBO(0, 122, 151, 1);
-final Color color2 = Color.fromRGBO(0, 122, 151, 1);
-final Color color3 = Color.fromRGBO(0, 122, 151, 1);
+final Color color1 = Color(0xFF429EB2);
+final Color color2 = Color(0xFF429EB2);
+final Color color3 = Color(0xFF429EB2);
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
