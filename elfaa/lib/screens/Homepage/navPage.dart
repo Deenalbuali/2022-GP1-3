@@ -16,7 +16,7 @@ class NavPage extends StatefulWidget {
 
 class _NavPageState extends State<NavPage> {
   final navigationKey = GlobalKey<CurvedNavigationBarState>();
-  final screens = [NotePage(), HomePage()];
+  final screens = [NotePage(), HomePage(), EditProfilePage()];
   int index = 1;
   @override
   Widget build(BuildContext context) {

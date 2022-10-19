@@ -25,10 +25,11 @@ class _SignInScreenState extends State<SignInScreen> {
         backgroundColor: Color(0xFFFFFFFF),
         elevation: 0,
         title: const Text(
-          "          تسجيل الدخول",
+          "تسجيل الدخول",
           style: TextStyle(
               fontSize: 24, fontWeight: FontWeight.bold, color: kPrimaryColor),
         ),
+         centerTitle: true,
       ),
       body: Container(
         child: SingleChildScrollView(
