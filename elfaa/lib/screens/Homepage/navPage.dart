@@ -21,13 +21,26 @@ class _NavPageState extends State<NavPage> {
   @override
   Widget build(BuildContext context) {
     final items = <Widget>[
-      Icon(Icons.notifications, color: Colors.orange, size: 30),
-      Icon(Icons.home, color: Colors.orange, size: 30),
+      Icon(
+        Icons.campaign,
+        color: Colors.orange,
+        size: 30,
+      ),
+      Icon(
+        Icons.notifications,
+        color: Colors.orange,
+        size: 30,
+      ),
       Icon(
         Icons.person,
         color: Colors.orange,
         size: 30,
-      )
+      ),
+      Icon(
+        Icons.home,
+        color: Colors.orange,
+        size: 30,
+      ),
     ];
     return Scaffold(
       extendBody: true,

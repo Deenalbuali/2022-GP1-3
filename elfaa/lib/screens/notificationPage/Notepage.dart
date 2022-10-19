@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:elfaa/constants.dart';
 
 class NotePage extends StatelessWidget {
-  int index = 0;
+  int index = 1;
   //const NotePage({super.key});
-  final Color color1 = Color.fromRGBO(0, 122, 151, 1);
-  final Color color2 = Color.fromRGBO(0, 122, 151, 1);
-  final Color color3 = Color.fromRGBO(0, 122, 151, 1);
+  final Color color1 = Color(0xFF429EB2);
+  final Color color2 = Color(0xFF429EB2);
+  final Color color3 = Color(0xFF429EB2);
 
   @override
   Widget build(BuildContext context) {
