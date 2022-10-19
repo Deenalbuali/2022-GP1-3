@@ -1,3 +1,4 @@
+import 'package:elfaa/screens/Reportpage/reportList.dart';
 import 'package:elfaa/screens/mngChildInfo/addChild.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:elfaa/screens/Homepage/childrenList.dart';
@@ -21,7 +22,7 @@ class ReportPage extends StatelessWidget {
         elevation: 0,
         toolbarHeight: 90,
         title: Text(
-          "التنبيهات",
+          "البلاغات",
           style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
         ),
         centerTitle: true,
@@ -31,7 +32,7 @@ class ReportPage extends StatelessWidget {
                     bottomLeft: Radius.circular(28),
                     bottomRight: Radius.circular(28)),
                 gradient: LinearGradient(
-                  colors: [Color(0xFFADCED6), kPrimaryColor],
+                  colors: [Color(0xFF429EB2), kPrimaryColor],
                   begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,
                 ))),
@@ -59,11 +60,11 @@ class ReportPage extends StatelessWidget {
             padding: const EdgeInsets.all(25.0),
             child: Column(
               children: [
-                childrenList(
+                reportList(
                     childImagePath: 'assets/images/ahmad.png',
                     childName: 'أحمد',
                     zoneName: "!" 'تم إيجاد طفلك '),
-                childrenList(
+                reportList(
                     childImagePath: 'assets/images/sarah.png',
                     childName: 'سارة',
                     zoneName: "!" 'تم إيجاد طفلك '),

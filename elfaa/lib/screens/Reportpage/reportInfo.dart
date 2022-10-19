@@ -6,12 +6,12 @@ import 'package:image_picker/image_picker.dart';
 
 //import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:firebase_core/firebase_core.dart';
-class addChild extends StatefulWidget {
+class reportInfo extends StatefulWidget {
   @override
-  State<addChild> createState() => _addChildState();
+  State<reportInfo> createState() => _reportInfoState();
 }
 
-class _addChildState extends State<addChild> {
+class _reportInfoState extends State<reportInfo> {
 //profile image variables
   PickedFile? _imgFile;
   final ImagePicker _picker = ImagePicker();
@@ -32,7 +32,7 @@ class _addChildState extends State<addChild> {
           elevation: 0,
           toolbarHeight: 90,
           title: Text(
-            "إضافة طفل جديد",
+            "تفاصيل البلاغ",
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
           ),
           centerTitle: true,
@@ -42,7 +42,7 @@ class _addChildState extends State<addChild> {
                       bottomLeft: Radius.circular(28),
                       bottomRight: Radius.circular(28)),
                   gradient: LinearGradient(
-                    colors: [Color(0xFF429EB2)],
+                    colors: [Color(0xFF429EB2), Colors.white],
                     begin: Alignment.bottomCenter,
                     end: Alignment.topCenter,
                   ))),

@@ -1,4 +1,5 @@
 import 'package:elfaa/screens/Homepage/Home_page.dart';
+import 'package:elfaa/screens/Reportpage/ReportPage.dart';
 import 'package:elfaa/screens/login/login_screen.dart';
 import 'package:elfaa/screens/mngChildInfo/addChild.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -16,7 +17,7 @@ class NavPage extends StatefulWidget {
 
 class _NavPageState extends State<NavPage> {
   final navigationKey = GlobalKey<CurvedNavigationBarState>();
-  final screens = [NotePage(), HomePage(), EditProfilePage()];
+  final screens = [ReportPage(), NotePage(), HomePage(), EditProfilePage()];
   int index = 1;
   @override
   Widget build(BuildContext context) {
