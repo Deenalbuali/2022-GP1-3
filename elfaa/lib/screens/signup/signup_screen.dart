@@ -26,10 +26,11 @@ class _SignupPageState extends State<SignupPage> {
         backgroundColor: Color(0xFFFFFFFF),
         elevation: 0,
         title: const Text(
-          "            تسجيل جديد",
+          "تسجيل جديد",
           style: TextStyle(
               fontSize: 24, fontWeight: FontWeight.bold, color: kPrimaryColor),
         ),
+         centerTitle: true,
       ),
       body: Container(
         child: SingleChildScrollView(
@@ -50,7 +51,7 @@ class _SignupPageState extends State<SignupPage> {
                         decoration: const InputDecoration(
                           suffixIcon:
                               Icon(Icons.person, color: Color(0xFFFD8601)),
-                          labelText: "الاسم الأول",
+                          labelText: "الاسم",
                         ),
                         validator: (value) {
                           if (value!.isEmpty || fname.text.trim() == "") {

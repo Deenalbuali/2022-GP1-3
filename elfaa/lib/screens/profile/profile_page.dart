@@ -1,5 +1,8 @@
-import 'package:firebase_core/firebase_core.dart';
+import 'package:elfaa/constants.dart';
+import 'package:elfaa/screens/welcome/welcome.dart';
+//import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:elfaa/alert_dialog.dart';
 
 class EditProfilePage extends StatefulWidget {
   @override
@@ -7,89 +10,174 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
-/*
-Future<bool> exitDialog() {
-  return showDialog(
-    context: context,
-    builder: (context) -> new AlertDialog(
-      title: Text('Are you sure?'),
-      content: Text("Do you want to exit from the app? "),
-      actions: [
-        FlatButton(
-          child: Text('EXIT"),
-          onPressed: () {},
-          ), // FlatButton
-          child: Text('CANCEL"),
-          onPressed: () {},
-          ),
-        ],
-        ),
-  );
-}
-*/
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        toolbarHeight: 90,
-        title:  Text(
-                "حسابي الشخصي",
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
-              ),
-        centerTitle: true,
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(28), bottomRight: Radius.circular(28)),
-            gradient: LinearGradient(
-              colors: [Color(0xFFF44336), Colors.pink],
-              begin: Alignment.bottomCenter,
-              end: Alignment.topCenter,
-            )
-          )
-        ),
-      ),
-      body: Container(
-        padding: EdgeInsets.only(left: 16, top: 25, right: 16),
-         child: GestureDetector(
-          onTap: () {
-            FocusScope.of(context).unfocus();
-          },
-          child: Column(
-            children: [
-              SizedBox(
-                height: 50,
-              ),
-              buildTextField("الاسم", "مها"),
-              buildTextField("البريد الإلكتروني", "Mahax01@gmail.com"),
-              buildTextField("رقم الجوال", "0505058882"),
-              SizedBox(
-                height: 35,
-              ),
-            ],
-          ),
-        ),
-      ),
+  String? _name;
+  String? _email;
+  String? _phoneNumber;
+  bool tappedYes = false;
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  Widget _buildName() {
+    return TextFormField(
+      textAlign: TextAlign.right,
+      decoration: InputDecoration(labelText: 'الاسم', hintText: 'أدخل اسمك', border: UnderlineInputBorder()),
+      maxLength: 10,
+      validator: (String? value) {
+        if (value!.isEmpty) {
+          return 'يجب أن لا يكون الحقل فارغًا';
+        }
+        return 'null';
+      },
+      onSaved: (String? value) {
+        _name = value;
+      },
     );
   }
 
-  Widget buildTextField(
-      String labelText, String placeholder) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 35.0),
-      child: TextField(
-        decoration: InputDecoration(
-            contentPadding: EdgeInsets.only(bottom: 3),
-            labelText: labelText,
-            floatingLabelBehavior: FloatingLabelBehavior.always,
-            hintText: placeholder,
-            hintStyle: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            )),
+  Widget _buildEmail() {
+    return TextFormField(
+      textAlign: TextAlign.right,
+      decoration: InputDecoration(
+          labelText: 'البريد الإلكتروني', hintText: 'أدخل بريدك الإلكتروني'),
+      validator: (String? value) {
+        if (value!.isEmpty) {
+          return 'يجب أن لا يكون الحقل فارغًا';
+        }
+
+        if (!RegExp(
+                r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+            .hasMatch(value)) {
+          return 'أدخل بريد إلكتروني صالح';
+        }
+
+        return null;
+      },
+      onSaved: (String? value) {
+        _email = value!;
+      },
+    );
+  }
+
+  Widget _buildPhoneNumber() {
+    return TextFormField(
+      textAlign: TextAlign.right,
+      decoration:
+          InputDecoration(labelText: 'رقم الجوال', hintText: '05xxxxxxxx'),
+      keyboardType: TextInputType.phone,
+      validator: (String? value) {
+        if (value!.isEmpty) {
+          return 'يجب أن لا يكون الحقل فارغًا';
+        }
+
+        return null;
+      },
+      onSaved: (String? value) {
+        _phoneNumber = value!;
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Color(0xFFf5f5f5),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        toolbarHeight: 90,
+        title: Text(
+          "حسابي الشخصي",
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+        ),
+        centerTitle: true,
+        flexibleSpace: Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(28),
+                    bottomRight: Radius.circular(28)),
+                gradient: LinearGradient(
+                  colors: [Color(0xFFADCED6), kPrimaryColor],
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                ))),
       ),
+      body: SingleChildScrollView(
+        child: Container(
+          margin: EdgeInsets.all(24),
+          child: Form(
+            key: _formKey,
+              child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(height: 50),
+                _buildName(),
+                SizedBox(height: 10),
+                _buildEmail(),
+                SizedBox(height: 30),
+                _buildPhoneNumber(),
+                SizedBox(height: 100),
+                ElevatedButton(
+                  child: Text(
+                    'حفظ التعديلات',
+                    style: TextStyle(color: Colors.white, fontSize: 22),
+                  ),
+                  onPressed: () {
+                    if (!_formKey.currentState!.validate()) {
+                      return;
+                    }
+                    _formKey.currentState!.save();
+
+                    print(_name);
+                    print(_email);
+                    print(_phoneNumber);
+                  },
+                ),
+                SizedBox(height: 70),
+                Directionality(
+                  textDirection: TextDirection.rtl,
+                  child: ElevatedButton.icon(
+                    icon: Icon(
+                      Icons.logout,
+                      color: Color(0xFF9C0000),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      textStyle: TextStyle(fontSize: 22),
+                      shadowColor: Colors.black,
+                      elevation: 1,
+                      backgroundColor: Colors.white,
+                      shape: const StadiumBorder(),
+                      maximumSize: const Size(200, 56),
+                      minimumSize: const Size(200, 56),
+                    ),
+                    label: Text(
+                      '  تسجيل الخروج    ',
+                      style: TextStyle(color: Color(0xFF9C0000), fontSize: 22),
+                    ),
+                    onPressed: () async {
+                      final action = await AlertDialogs.yesCancelDialog(
+                          context, 'تسجيل الخروج', 'هل أنت متأكد من تسجيل الخروج؟');
+                      if (action == DialogsAction.yes) {
+                        setState(() => tappedYes = true);
+                         Navigator.push(
+                         context,
+                         MaterialPageRoute(
+                         builder: (context) {
+                         return WelcomeScreen(); 
+                        },
+                         ),
+                         );
+                      } else {
+                        setState(() => tappedYes = false);
+                      }
+                    },
+                  ),
+                ),
+              ],
+            ),
+            ),
+          ),
+        ),
     );
   }
 }

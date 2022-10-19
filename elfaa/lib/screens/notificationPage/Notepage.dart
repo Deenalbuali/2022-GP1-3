@@ -2,6 +2,7 @@ import 'package:elfaa/screens/mngChildInfo/addChild.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:elfaa/screens/Homepage/childrenList.dart';
 import 'package:flutter/material.dart';
+import 'package:elfaa/constants.dart';
 
 class NotePage extends StatelessWidget {
   int index = 0;
@@ -14,9 +15,29 @@ class NotePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFf5f5f5),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        toolbarHeight: 90,
+        title:  Text(
+                "التنبيهات",
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+              ),
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(28), bottomRight: Radius.circular(28)),
+            gradient: LinearGradient(
+              colors: [Color(0xFFADCED6), kPrimaryColor],
+              begin: Alignment.bottomCenter,
+              end: Alignment.topCenter,
+            )
+          )
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(children: <Widget>[
-          _buildHeader(),
           Row(
             children: [
               Padding(
@@ -54,46 +75,4 @@ class NotePage extends StatelessWidget {
     );
   }
 
-  Container _buildHeader() {
-    return Container(
-      height: 100,
-      width: double.infinity,
-      child: Stack(
-        children: <Widget>[
-          Positioned(
-            bottom: 0,
-            right: 10,
-            top: -280,
-            child: Container(
-              width: 350,
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  gradient: LinearGradient(colors: [color1, color2]),
-                  boxShadow: [
-                    BoxShadow(
-                        color: color2,
-                        offset: Offset(4.0, 4.0),
-                        blurRadius: 10.0)
-                  ]),
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 30, left: 150),
-            child: Column(
-              //crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  "التنبيهات",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 28.0,
-                      fontWeight: FontWeight.w700),
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }
 }
