@@ -29,7 +29,7 @@ class _SignInScreenState extends State<SignInScreen> {
           style: TextStyle(
               fontSize: 24, fontWeight: FontWeight.bold, color: kPrimaryColor),
         ),
-         centerTitle: true,
+        centerTitle: true,
       ),
       body: Container(
         child: SingleChildScrollView(
@@ -55,6 +55,10 @@ class _SignInScreenState extends State<SignInScreen> {
                         validator: (value) {
                           if (value!.isEmpty || email.text.trim() == "") {
                             return "الحقل مطلوب";
+                          } else if (!RegExp(
+                                  r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+                              .hasMatch(value)) {
+                            return 'أدخل بريد إلكتروني صالح';
                           }
                         },
                       )),
@@ -70,9 +74,16 @@ class _SignInScreenState extends State<SignInScreen> {
                           labelText: "كلمة السر",
                         ),
                         validator: (value) {
-                          if (value!.isEmpty || pass.text.trim() != " ") {
+                          // RegExp regex = RegExp(
+                          //   r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])');
+                          if (value!.isEmpty || pass.text.trim() == "") {
                             return "الحقل مطلوب";
-                          }
+                          } //else if (!regex.hasMatch(value)) {
+                          //return "الحقل يجب أن يحتوي على الأقل حرف واحد كبير وصغير ورقم";
+                          //}
+                          //else if (value.length < 8) {
+                          //return "ادخل كلمة سر مكوّنة من 8 خانات على الأقل";
+                          //}
                         },
                       )),
                   const SizedBox(height: 50),

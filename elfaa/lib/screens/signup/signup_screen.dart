@@ -30,7 +30,7 @@ class _SignupPageState extends State<SignupPage> {
           style: TextStyle(
               fontSize: 24, fontWeight: FontWeight.bold, color: kPrimaryColor),
         ),
-         centerTitle: true,
+        centerTitle: true,
       ),
       body: Container(
         child: SingleChildScrollView(
@@ -73,6 +73,10 @@ class _SignupPageState extends State<SignupPage> {
                         validator: (value) {
                           if (value!.isEmpty || email.text.trim() == "") {
                             return "الحقل مطلوب";
+                          } else if (!RegExp(
+                                  r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+                              .hasMatch(value)) {
+                            return 'أدخل بريد إلكتروني صالح';
                           }
                         },
                       )),
@@ -97,7 +101,8 @@ class _SignupPageState extends State<SignupPage> {
                             return "الحقل مطلوب";
                           } else if (value.length != 10) {
                             return "الرقم ليس مكوّن من 10 خانات";
-                          }
+                          } else if (!value.startsWith('05', 0))
+                            return "ادخل رقم جوال يبدأ ب05";
                         },
                       )),
                   const SizedBox(height: 20),
@@ -112,8 +117,14 @@ class _SignupPageState extends State<SignupPage> {
                           labelText: "كلمة السر",
                         ),
                         validator: (value) {
-                          if (value!.isEmpty || pass.text.trim() != "") {
+                          RegExp regex = RegExp(
+                              r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])'); //Min 1 uppercase, 1 lowercase and 1 numeric number
+                          if (value!.isEmpty || pass.text.trim() == "") {
                             return "الحقل مطلوب";
+                          } else if (!regex.hasMatch(value)) {
+                            return "الحقل يجب أن يحتوي على الأقل حرف واحد كبير وصغير ورقم";
+                          } else if (value.length < 8) {
+                            return "ادخل كلمة سر مكوّنة من 8 خانات على الأقل";
                           }
                         },
                       )),
