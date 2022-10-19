@@ -1,6 +1,10 @@
 import 'package:elfaa/constants.dart';
+import 'package:elfaa/screens/Homepage/navPage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -132,8 +136,15 @@ class _SignupPageState extends State<SignupPage> {
                   ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        //if all fields are valid
-                        //add to DB
+                        //if all fields are valid , add to DB
+                        FirebaseAuth.instance.createUserWithEmailAndPassword(
+                            email: email.text, password: pass.text);
+                        /*  .then((value) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => NavPage()));
+                        });*/
                       }
                     },
                     child: Text("تسجيل",
