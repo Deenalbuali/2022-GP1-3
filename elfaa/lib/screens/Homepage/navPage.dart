@@ -18,7 +18,7 @@ class NavPage extends StatefulWidget {
 class _NavPageState extends State<NavPage> {
   final navigationKey = GlobalKey<CurvedNavigationBarState>();
   final screens = [ReportPage(), NotePage(), HomePage(), EditProfilePage()];
-  int index = 1;
+  int index = 3;
   @override
   Widget build(BuildContext context) {
     final items = <Widget>[
@@ -33,12 +33,12 @@ class _NavPageState extends State<NavPage> {
         size: 30,
       ),
       Icon(
-        Icons.person,
+        Icons.home,
         color: Colors.orange,
         size: 30,
       ),
       Icon(
-        Icons.home,
+        Icons.person,
         color: Colors.orange,
         size: 30,
       ),
