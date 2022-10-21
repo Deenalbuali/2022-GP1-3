@@ -63,7 +63,7 @@ class ReportPage extends StatelessWidget {
                 reportList(
                     childImagePath: 'assets/images/ahmad.png',
                     childName: 'أحمد',
-                    zoneName: "!" 'تم إيجاد طفلك '),
+                    zoneName: "..." ' يتم البحث '),
                 reportList(
                     childImagePath: 'assets/images/sarah.png',
                     childName: 'سارة',

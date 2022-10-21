@@ -10,12 +10,12 @@ import 'package:intl/intl.dart';
 
 //import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:firebase_core/firebase_core.dart';
-class reportInfo extends StatefulWidget {
+class reportInfo2 extends StatefulWidget {
   @override
-  State<reportInfo> createState() => _reportInfoState();
+  State<reportInfo2> createState() => _reportInfo2State();
 }
 
-class _reportInfoState extends State<reportInfo> {
+class _reportInfo2State extends State<reportInfo2> {
 //profile image variables
   PickedFile? _imgFile;
   final ImagePicker _picker = ImagePicker();

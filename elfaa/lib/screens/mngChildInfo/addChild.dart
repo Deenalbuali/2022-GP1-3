@@ -31,6 +31,7 @@ class _addChildState extends State<addChild> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           toolbarHeight: 90,
+          leading: BackButton(color: Colors.white),
           title: Text(
             "إضافة طفل جديد",
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
@@ -42,7 +43,10 @@ class _addChildState extends State<addChild> {
                       bottomLeft: Radius.circular(28),
                       bottomRight: Radius.circular(28)),
                   gradient: LinearGradient(
-                    colors: [Color(0xFF429EB2)],
+                    colors: [
+                      Color(0xFF429EB2),
+                      Color.fromARGB(255, 131, 165, 173)
+                    ],
                     begin: Alignment.bottomCenter,
                     end: Alignment.topCenter,
                   ))),

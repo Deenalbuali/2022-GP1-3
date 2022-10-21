@@ -32,7 +32,10 @@ class NotePage extends StatelessWidget {
                     bottomLeft: Radius.circular(28),
                     bottomRight: Radius.circular(28)),
                 gradient: LinearGradient(
-                  colors: [Color(0xFFADCED6), kPrimaryColor],
+                  colors: [
+                    Color(0xFF429EB2),
+                    Color(0xFF429EB2),
+                  ],
                   begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,
                 ))),
@@ -63,11 +66,11 @@ class NotePage extends StatelessWidget {
                 noteList(
                     childImagePath: 'assets/images/ahmad.png',
                     childName: 'أحمد',
-                    zoneName: "!" 'تم إيجاد طفلك '),
+                    zoneName: "! " 'مر من بوابة رقم ٧ '),
                 noteList(
                     childImagePath: 'assets/images/sarah.png',
                     childName: 'سارة',
-                    zoneName: "!" 'تم إيجاد طفلك '),
+                    zoneName: 'تم تحديث الحالة  '),
               ],
             ),
           )
