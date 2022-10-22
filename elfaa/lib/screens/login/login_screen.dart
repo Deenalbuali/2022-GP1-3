@@ -74,33 +74,24 @@ class _SignInScreenState extends State<SignInScreen> {
                           labelText: "كلمة السر",
                         ),
                         validator: (value) {
-                          // RegExp regex = RegExp(
-                          //   r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])');
                           if (value!.isEmpty || pass.text.trim() == "") {
                             return "الحقل مطلوب";
-                          } //else if (!regex.hasMatch(value)) {
-                          //return "الحقل يجب أن يحتوي على الأقل حرف واحد كبير وصغير ورقم";
-                          //}
-                          //else if (value.length < 8) {
-                          //return "ادخل كلمة سر مكوّنة من 8 خانات على الأقل";
-                          //}
+                          }
                         },
                       )),
                   const SizedBox(height: 50),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return NavPage();
-                          },
-                        ),
-                      );
-                      //  if (_formKey.currentState!.validate()) {
-                      //if all fields are valid
-                      //add to DB
-                      //     }
+                      if (_formKey.currentState!.validate()) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return NavPage();
+                            },
+                          ),
+                        );
+                      }
                     },
                     child: Text("تسجيل الدخول",
                         style: TextStyle(color: Colors.white)),

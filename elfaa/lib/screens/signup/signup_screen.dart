@@ -1,5 +1,6 @@
 import 'package:elfaa/constants.dart';
 import 'package:elfaa/screens/Homepage/navPage.dart';
+import 'package:elfaa/screens/login/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -105,8 +106,9 @@ class _SignupPageState extends State<SignupPage> {
                             return "الحقل مطلوب";
                           } else if (value.length != 10) {
                             return "الرقم ليس مكوّن من 10 خانات";
-                          } else if (!value.startsWith('05', 0))
+                          } else if (!value.startsWith('05', 0)) {
                             return "ادخل رقم جوال يبدأ ب05";
+                          }
                         },
                       )),
                   const SizedBox(height: 20),
@@ -136,14 +138,28 @@ class _SignupPageState extends State<SignupPage> {
                   ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        //if all fields are valid , add to DB
+                        //if all fields are valid , create user
                         FirebaseAuth.instance.createUserWithEmailAndPassword(
                             email: email.text, password: pass.text);
-                        /*  .then((value) {
+                        //add user details
+                        addUserDetails(
+                          fname.text.trim(),
+                          email.text.trim(),
+                          int.parse(phoneNo.text.trim()),
+                        );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return SignInScreen();
+                            },
+                          ),
+                        );
+                        /* .then((value) {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => NavPage()));
+                                  builder: (context) => SignInScreen()));
                         });*/
                       }
                     },
@@ -167,5 +183,11 @@ class _SignupPageState extends State<SignupPage> {
       width: 150,
       height: 150,
     ));
+  }
+
+  Future addUserDetails(String firstname, String email, int phoneno) async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .add({'fname': firstname, 'email': email, 'phoneNo': phoneno});
   }
 }
