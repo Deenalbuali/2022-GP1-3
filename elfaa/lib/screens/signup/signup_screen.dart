@@ -203,9 +203,11 @@ class _SignupPageState extends State<SignupPage> {
 
   Future addUserDetails(
       String firstname, String email, int phoneno, String id) async {
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(id)
-        .set(({'fname': firstname, 'email': email, 'phoneNo': phoneno}));
+    await FirebaseFirestore.instance.collection('users').doc(id).set(({
+          'fname': firstname,
+          'email': email,
+          'phoneNo': phoneno,
+          'userID': id,
+        }));
   }
 }
