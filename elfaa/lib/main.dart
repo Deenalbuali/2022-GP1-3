@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
         primaryColor: kPrimaryColor,
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
+            backgroundColor: kPrimaryColor,
             textStyle: TextStyle(fontSize: 22),
             shadowColor: Color.fromARGB(255, 0, 0, 0),
             elevation: 3,
