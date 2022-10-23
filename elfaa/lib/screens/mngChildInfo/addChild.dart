@@ -1,8 +1,8 @@
-import 'dart:ffi';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart' hide TextDirection;
 
 //import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:firebase_core/firebase_core.dart';
@@ -15,13 +15,20 @@ class _addChildState extends State<addChild> {
 //profile image variables
   PickedFile? _imgFile;
   final ImagePicker _picker = ImagePicker();
+
 //information form controllers
   final controllerName = TextEditingController();
   final controllerBirthday = TextEditingController();
   final controllerHeight = TextEditingController();
 
-  TextEditingController email = TextEditingController();
+//globalKey
   final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    controllerBirthday.text = ""; //set the initial value of text field
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -31,14 +38,14 @@ class _addChildState extends State<addChild> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           toolbarHeight: 90,
-          leading: BackButton(color: Colors.white),
-          title: Text(
+          leading: const BackButton(color: Colors.white),
+          title: const Text(
             "إضافة طفل جديد",
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
           ),
           centerTitle: true,
           flexibleSpace: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(28),
                       bottomRight: Radius.circular(28)),
@@ -83,22 +90,52 @@ class _addChildState extends State<addChild> {
                     Directionality(
                         textDirection: TextDirection.rtl,
                         child: TextFormField(
-                          textAlign: TextAlign.right,
-                          controller: email,
-                          decoration: const InputDecoration(
-                            suffixIcon:
-                                Icon(Icons.event, color: Color(0xFFFD8601)),
-                            labelText: "تاريخ الميلاد",
-                            hintText: "00-00-0000",
-                          ),
-                          validator: (value) {
-                            if (value!.isEmpty || email.text.trim() == "") {
-                              return "الحقل مطلوب";
-                            } else if (value.length != 10) {
-                              return "يجب ادخال 10 خانات ";
-                            }
-                          },
-                        )),
+                            textAlign: TextAlign.right,
+                            controller: controllerBirthday,
+                            decoration: const InputDecoration(
+                              suffixIcon: Icon(Icons.calendar_today,
+                                  color: Color(0xFFFD8601)),
+                              labelText: "تاريخ الميلاد",
+                              hintText: "DD-MM-YYYY",
+                            ),
+                            validator: (value) {
+                              if (value!.isEmpty ||
+                                  controllerBirthday.text.trim() == "") {
+                                return "الحقل مطلوب";
+                              }
+                            },
+                            readOnly: true,
+                            onTap: () async {
+                              DateTime? pickedDate = await showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime(2010), //DateTime.now() - not to allow to choose before today.
+                                  lastDate: DateTime(2101),
+                                  builder: (context, child) {
+                                    return Theme(
+                                      data: ThemeData.light().copyWith(
+                                        primaryColor: const Color(0xFF429EB2),
+                                        colorScheme: const ColorScheme.light(primary: Color(0xFF429EB2)),
+                                        buttonTheme: const ButtonThemeData(
+                                          textTheme: ButtonTextTheme.primary
+                                        ),
+                                      ),
+                                       child: child!,
+                                    );
+                                  },
+                                  );
+
+                              if (pickedDate != null) {
+                                print(pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+                                String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                                print(formattedDate); //formatted date output using intl package =>  2021-03-16
+                                //you can implement different kind of Date Format here according to your requirement
+
+                                setState(() {
+                                  controllerBirthday.text = formattedDate; //set output date to TextField value.
+                                });
+                              }
+                            })),
                     const SizedBox(height: 20),
                     Directionality(
                         textDirection: TextDirection.rtl,
@@ -120,20 +157,23 @@ class _addChildState extends State<addChild> {
                         )),
                     const SizedBox(height: 40),
                     ElevatedButton(
-                      child: const Text('إضافة'),
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          final child = Child(
-                              name: controllerName.text,
-                              height: int.parse(controllerHeight.text),
-                              birthday: DateTime.parse('2022-01-01'));
+                        child: const Text('إضافة'),
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            final child = Child(
+                                name: controllerName.text,
+                                height: int.parse(controllerHeight.text),
+                                birthday: DateTime.parse(controllerBirthday.text));
 
-                          addChild(child);
+                            addChild(child);
 
-                          Navigator.pop(context);
-                        }
-                      },
-                    ),
+                            Navigator.pop(context);
+                          }
+                        },
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(const Color(0xFF429EB2)),
+                        )),
                   ],
                 ),
               ),
@@ -151,7 +191,7 @@ class _addChildState extends State<addChild> {
           CircleAvatar(
               radius: 80,
               backgroundImage: _imgFile == null
-                  ? const AssetImage("assets/images/child-img.jpg")
+                  ? const AssetImage("assets/images/empty.png")
                   : FileImage(File(_imgFile!.path)) as ImageProvider),
           Positioned(
               bottom: 15,
@@ -162,7 +202,7 @@ class _addChildState extends State<addChild> {
                         context: context,
                         builder: ((builder) => bottomImgPicker()));
                   },
-                  child: Icon(Icons.camera_alt,
+                  child: const Icon(Icons.camera_alt,
                       color: Color.fromARGB(255, 22, 147, 193), size: 28)))
         ],
       ),
