@@ -1,8 +1,10 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+//import 'package:elfaa/screens/mngChildInfo/imgStorage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart' hide TextDirection;
+import 'package:path/path.dart' hide context;
 
 //import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:firebase_core/firebase_core.dart';
@@ -13,6 +15,7 @@ class addChild extends StatefulWidget {
 
 class _addChildState extends State<addChild> {
 //profile image variables
+  File? _img;
   PickedFile? _imgFile;
   final ImagePicker _picker = ImagePicker();
 
@@ -155,6 +158,14 @@ class _addChildState extends State<addChild> {
                             }
                           },
                         )),
+                        const SizedBox(height: 20),
+                    Container(
+                      width: 400,
+                      child: ElevatedButton(
+                          child: const Text('ربط جهاز التتبع'),
+                          onPressed: null,
+                          style: ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 22))),
+                    ),
                     const SizedBox(height: 40),
                     ElevatedButton(
                         child: const Text('إضافة'),
@@ -247,9 +258,21 @@ class _addChildState extends State<addChild> {
 //Getting the picture from the mobile camera
   void takePhoto(ImageSource source) async {
     final pickedFile = await _picker.getImage(source: source);
+
+    if (pickedFile == null){
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("wth?")
+          )
+      );
+      return null;
+    }
+  
     setState(() {
       _imgFile = pickedFile;
+      _img = File(_imgFile!.path);
     });
+    String name = basename(_imgFile!.path);
   }
 
   InputDecoration decoration(String label) =>
