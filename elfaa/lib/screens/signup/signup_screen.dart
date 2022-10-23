@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -128,7 +129,7 @@ class _SignupPageState extends State<SignupPage> {
                           if (value!.isEmpty || pass.text.trim() == "") {
                             return "الحقل مطلوب";
                           } else if (!regex.hasMatch(value)) {
-                            return "الحقل يجب أن يحتوي على الأقل حرف واحد كبير وصغير ورقم";
+                            return "الحقل يجب أن يحتوي على الأقل حرف واحد باللغةالانجليزية كبير وصغير ورقم";
                           } else if (value.length < 8) {
                             return "ادخل كلمة سر مكوّنة من 8 خانات على الأقل";
                           }
@@ -136,17 +137,28 @@ class _SignupPageState extends State<SignupPage> {
                       )),
                   const SizedBox(height: 40),
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                         //if all fields are valid , create user
-                        FirebaseAuth.instance.createUserWithEmailAndPassword(
-                            email: email.text, password: pass.text);
+                        await FirebaseAuth.instance
+                            .createUserWithEmailAndPassword(
+                                email: email.text, password: pass.text);
+                        /*  .then((value) {
+                        });*/
                         //add user details
                         addUserDetails(
                           fname.text.trim(),
                           email.text.trim(),
                           int.parse(phoneNo.text.trim()),
                         );
+                        Fluttertoast.showToast(
+                            msg: "تم تسجيل حسابك بنجاح",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 3,
+                            backgroundColor: Colors.lightGreen,
+                            fontSize: 16.0,
+                            textColor: Colors.black);
                         Navigator.push(
                           context,
                           MaterialPageRoute(

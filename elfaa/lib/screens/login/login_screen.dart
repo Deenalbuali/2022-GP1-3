@@ -1,7 +1,10 @@
+import 'package:elfaa/components/background.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:elfaa/screens/signup/signup_screen.dart';
 import 'package:elfaa/constants.dart';
 import 'package:elfaa/screens/Homepage/navPage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -81,16 +84,29 @@ class _SignInScreenState extends State<SignInScreen> {
                       )),
                   const SizedBox(height: 50),
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return NavPage();
-                            },
-                          ),
-                        );
+                        try {
+                          UserCredential userCredential = await FirebaseAuth
+                              .instance
+                              .signInWithEmailAndPassword(
+                                  email: email.text, password: pass.text);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return NavPage();
+                              },
+                            ),
+                          );
+                        } catch (e, stack) {
+                          Fluttertoast.showToast(
+                              msg: "البريد الإلكتروني أو كلمة السر غير صحيحة",
+                              toastLength: Toast.LENGTH_SHORT,
+                              backgroundColor: Colors.red,
+                              fontSize: 16.0,
+                              textColor: Colors.black);
+                        }
                       }
                     },
                     child: Text("تسجيل الدخول",
