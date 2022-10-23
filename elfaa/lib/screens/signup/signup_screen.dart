@@ -129,7 +129,7 @@ class _SignupPageState extends State<SignupPage> {
                           if (value!.isEmpty || pass.text.trim() == "") {
                             return "الحقل مطلوب";
                           } else if (!regex.hasMatch(value)) {
-                            return "الحقل يجب أن يحتوي على الأقل حرف واحد باللغةالانجليزية كبير وصغير ورقم";
+                            return "كلمة السر يجب أن تحتوي على حرف صغير، كبير باللغةالانجليزية، رقم";
                           } else if (value.length < 8) {
                             return "ادخل كلمة سر مكوّنة من 8 خانات على الأقل";
                           }
@@ -139,41 +139,44 @@ class _SignupPageState extends State<SignupPage> {
                   ElevatedButton(
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        //if all fields are valid , create user
-                        await FirebaseAuth.instance
-                            .createUserWithEmailAndPassword(
-                                email: email.text, password: pass.text);
-                        /*  .then((value) {
+                        try {
+                          //if all fields are valid , create user
+                          await FirebaseAuth.instance
+                              .createUserWithEmailAndPassword(
+                                  email: email.text, password: pass.text);
+                          /*  .then((value) {
                         });*/
-                        final user = FirebaseAuth.instance.currentUser!.uid;
-                        final userRef = FirebaseFirestore.instance
-                            .collection("users")
-                            .doc(user);
-                        //add user details
-                        addUserDetails(fname.text.trim(), email.text.trim(),
-                            int.parse(phoneNo.text.trim()), user);
-                        Fluttertoast.showToast(
-                            msg: "تم تسجيل حسابك بنجاح",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.CENTER,
-                            timeInSecForIosWeb: 3,
-                            backgroundColor: Colors.lightGreen,
-                            fontSize: 16.0,
-                            textColor: Colors.black);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return SignInScreen();
-                            },
-                          ),
-                        );
-                        /* .then((value) {
+                          final user = FirebaseAuth.instance.currentUser!.uid;
+                          final userRef = FirebaseFirestore.instance
+                              .collection("users")
+                              .doc(user);
+                          //add user details
+                          addUserDetails(fname.text.trim(), email.text.trim(),
+                              int.parse(phoneNo.text.trim()), user);
+                          Fluttertoast.showToast(
+                              msg: "تم تسجيل حسابك بنجاح",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.CENTER,
+                              timeInSecForIosWeb: 3,
+                              backgroundColor: Colors.lightGreen,
+                              fontSize: 16.0,
+                              textColor: Colors.black);
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SignInScreen()));
-                        });*/
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return SignInScreen();
+                              },
+                            ),
+                          );
+                        } catch (e, stack) {
+                          Fluttertoast.showToast(
+                              msg: "البريد الإلكتروني مستخدم بالفعل",
+                              toastLength: Toast.LENGTH_SHORT,
+                              backgroundColor: Colors.red,
+                              fontSize: 16.0,
+                              textColor: Colors.black);
+                        }
                       }
                     },
                     child: Text("تسجيل",
