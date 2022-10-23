@@ -145,12 +145,13 @@ class _SignupPageState extends State<SignupPage> {
                                 email: email.text, password: pass.text);
                         /*  .then((value) {
                         });*/
+                        final user = FirebaseAuth.instance.currentUser!.uid;
+                        final userRef = FirebaseFirestore.instance
+                            .collection("users")
+                            .doc(user);
                         //add user details
-                        addUserDetails(
-                          fname.text.trim(),
-                          email.text.trim(),
-                          int.parse(phoneNo.text.trim()),
-                        );
+                        addUserDetails(fname.text.trim(), email.text.trim(),
+                            int.parse(phoneNo.text.trim()), user);
                         Fluttertoast.showToast(
                             msg: "تم تسجيل حسابك بنجاح",
                             toastLength: Toast.LENGTH_SHORT,
@@ -197,9 +198,11 @@ class _SignupPageState extends State<SignupPage> {
     ));
   }
 
-  Future addUserDetails(String firstname, String email, int phoneno) async {
+  Future addUserDetails(
+      String firstname, String email, int phoneno, String id) async {
     await FirebaseFirestore.instance
         .collection('users')
-        .add({'fname': firstname, 'email': email, 'phoneNo': phoneno});
+        .doc(id)
+        .set(({'fname': firstname, 'email': email, 'phoneNo': phoneno}));
   }
 }
