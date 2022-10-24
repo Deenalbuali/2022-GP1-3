@@ -1,23 +1,27 @@
+// ignore_for_file: file_names, camel_case_types
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-//import 'package:elfaa/screens/mngChildInfo/imgStorage.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+// ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart' hide TextDirection;
-import 'package:path/path.dart' hide context;
 import 'package:elfaa/constants.dart';
 
 //import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:firebase_core/firebase_core.dart';
+//import 'package:path/path.dart' hide context;
+//import 'package:elfaa/screens/mngChildInfo/imgStorage.dart';
 class addChild extends StatefulWidget {
+  const addChild({super.key});
+
   @override
   State<addChild> createState() => _addChildState();
 }
 
 class _addChildState extends State<addChild> {
 //profile image variables
-  File? _img;
-  PickedFile? _imgFile;
+  XFile? _img;
   final ImagePicker _picker = ImagePicker();
 
 //information form controllers
@@ -50,138 +54,140 @@ class _addChildState extends State<addChild> {
           centerTitle: true,
           flexibleSpace: Container(
               decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(28),
-                      bottomRight: Radius.circular(28)),
-                      color: kPrimaryColor,
-                 )),
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(28),
+                bottomRight: Radius.circular(28)),
+            color: kPrimaryColor,
+          )),
         ),
-        body: Container(
-          child: SingleChildScrollView(
-            child: Form(
-              key: _formKey,
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(
-                    20, MediaQuery.of(context).size.height * 0.04, 20, 0),
-                child: Column(
-                  children: <Widget>[
-                    childImg(),
-                    const SizedBox(height: 40),
-                    Directionality(
-                        textDirection: TextDirection.rtl,
-                        child: TextFormField(
-                          textAlign: TextAlign.right,
-                          controller: controllerName,
-                          decoration: const InputDecoration(
-                            suffixIcon: Icon(Icons.child_care,
-                                color: Color(0xFFFD8601)),
-                            labelText: "اسم الطفل",
-                          ),
-                          validator: (value) {
-                            if (value!.isEmpty ||
-                                controllerName.text.trim() == "") {
-                              return "الحقل مطلوب";
-                            }
-                          },
-                        )),
-                    const SizedBox(height: 20),
-                    Directionality(
-                        textDirection: TextDirection.rtl,
-                        child: TextFormField(
-                            textAlign: TextAlign.right,
-                            controller: controllerBirthday,
-                            decoration: const InputDecoration(
-                              suffixIcon: Icon(Icons.calendar_today,
-                                  color: Color(0xFFFD8601)),
-                              labelText: "تاريخ الميلاد",
-                              hintText: "DD-MM-YYYY",
-                            ),
-                            validator: (value) {
-                              if (value!.isEmpty ||
-                                  controllerBirthday.text.trim() == "") {
-                                return "الحقل مطلوب";
-                              }
-                            },
-                            readOnly: true,
-                            onTap: () async {
-                              DateTime? pickedDate = await showDatePicker(
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime(2010), //DateTime.now() - not to allow to choose before today.
-                                  lastDate: DateTime(2101),
-                                  builder: (context, child) {
-                                    return Theme(
-                                      data: ThemeData.light().copyWith(
-                                        primaryColor: const Color(0xFF429EB2),
-                                        colorScheme: const ColorScheme.light(primary: Color(0xFF429EB2)),
-                                        buttonTheme: const ButtonThemeData(
-                                          textTheme: ButtonTextTheme.primary
-                                        ),
-                                      ),
-                                       child: child!,
-                                    );
-                                  },
-                                  );
-
-                              if (pickedDate != null) {
-                                print(pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
-                        //        String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
-                          //      print(formattedDate); //formatted date output using intl package =>  2021-03-16
-                                //you can implement different kind of Date Format here according to your requirement
-
-                                setState(() {
-                               //   controllerBirthday.text = formattedDate; //set output date to TextField value.
-                                });
-                              }
-                            })),
-                    const SizedBox(height: 20),
-                    Directionality(
-                        textDirection: TextDirection.rtl,
-                        child: TextFormField(
-                          textAlign: TextAlign.right,
-                          controller: controllerHeight,
-                          keyboardType: TextInputType.number,
-                          decoration: const InputDecoration(
-                            suffixIcon: Icon(Icons.accessibility_new,
-                                color: Color(0xFFFD8601)),
-                            labelText: "الطول",
-                          ),
-                          validator: (value) {
-                            if (value!.isEmpty ||
-                                controllerHeight.text.trim() == "") {
-                              return "الحقل مطلوب";
-                            }
-                          },
-                        )),
-                        const SizedBox(height: 20),
-                    Container(
-                      width: 400,
-                      child: ElevatedButton(
-                          child: const Text('ربط جهاز التتبع'),
-                          onPressed: null,
-                          style: ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 22))),
-                    ),
-                    const SizedBox(height: 40),
-                    ElevatedButton(
-                        child: const Text('إضافة'),
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            final child = Child(
-                                name: controllerName.text,
-                                height: int.parse(controllerHeight.text),
-                                birthday: DateTime.parse(controllerBirthday.text));
-
-                            addChild(child);
-
-                            Navigator.pop(context);
+        body: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(
+                  20, MediaQuery.of(context).size.height * 0.04, 20, 0),
+              child: Column(
+                children: <Widget>[
+                  childImg(),
+                  const SizedBox(height: 40),
+                  Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: TextFormField(
+                        textAlign: TextAlign.right,
+                        controller: controllerName,
+                        decoration: const InputDecoration(
+                          suffixIcon: Icon(Icons.child_care,
+                              color: Color(0xFFFD8601)),
+                          labelText: "اسم الطفل",
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty ||
+                              controllerName.text.trim() == "") {
+                            return "الحقل مطلوب";
                           }
+                          return null;
                         },
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(const Color(0xFF429EB2)),
-                        )),
-                  ],
-                ),
+                      )),
+                  const SizedBox(height: 20),
+                  Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: TextFormField(
+                          textAlign: TextAlign.right,
+                          controller: controllerBirthday,
+                          decoration: const InputDecoration(
+                            suffixIcon: Icon(Icons.calendar_today,
+                                color: Color(0xFFFD8601)),
+                            labelText: "تاريخ الميلاد",
+                            hintText: "DD-MM-YYYY",
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty ||
+                                controllerBirthday.text.trim() == "") {
+                              return "الحقل مطلوب";
+                            }
+                            return null;
+                          },
+                          readOnly: true,
+                          onTap: () async {
+                            DateTime? pickedDate = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime(
+                                  2010), //DateTime.now() - not to allow to choose before today.
+                              lastDate: DateTime(2101),
+                              builder: (context, child) {
+                                return Theme(
+                                  data: ThemeData.light().copyWith(
+                                    primaryColor: const Color(0xFF429EB2),
+                                    colorScheme: const ColorScheme.light(
+                                        primary: Color(0xFF429EB2)),
+                                    buttonTheme: const ButtonThemeData(
+                                        textTheme: ButtonTextTheme.primary),
+                                  ),
+                                  child: child!,
+                                );
+                              },
+                            );
+
+                            if (pickedDate != null) {
+                              String formattedDate =
+                                  DateFormat('yyyy-MM-dd').format(pickedDate);
+                              setState(() {
+                                controllerBirthday.text =
+                                    formattedDate; //set output date to TextField value.
+                              });
+                            }
+                          })),
+                  const SizedBox(height: 20),
+                  Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: TextFormField(
+                        textAlign: TextAlign.right,
+                        controller: controllerHeight,
+                        keyboardType: TextInputType.number,
+                        decoration: const InputDecoration(
+                          suffixIcon: Icon(Icons.accessibility_new,
+                              color: Color(0xFFFD8601)),
+                          labelText: "الطول",
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty ||
+                              controllerHeight.text.trim() == "") {
+                            return "الحقل مطلوب";
+                          }
+                          return null;
+                        },
+                      )),
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    width: 400,
+                    child: ElevatedButton(
+                        onPressed: null,
+                        style: ElevatedButton.styleFrom(
+                            textStyle: const TextStyle(fontSize: 22)),
+                        child: const Text('ربط جهاز التتبع')),
+                  ),
+                  const SizedBox(height: 40),
+                  ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          final child = Child(
+                              name: controllerName.text,
+                              height: int.parse(controllerHeight.text),
+                              birthday:
+                                  DateTime.parse(controllerBirthday.text));
+
+                          addChild(child);
+
+                          Navigator.pop(context);
+                        }
+                      },
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                            const Color(0xFF429EB2)),
+                      ),
+                      child: const Text('إضافة')),
+                ],
               ),
             ),
           ),
@@ -196,9 +202,9 @@ class _addChildState extends State<addChild> {
         children: <Widget>[
           CircleAvatar(
               radius: 80,
-              backgroundImage: _imgFile == null
+              backgroundImage: _img == null
                   ? const AssetImage("assets/images/empty.png")
-                  : FileImage(File(_imgFile!.path)) as ImageProvider),
+                  : FileImage(File(_img!.path)) as ImageProvider),
           Positioned(
               bottom: 15,
               right: 15,
@@ -252,22 +258,23 @@ class _addChildState extends State<addChild> {
 
 //Getting the picture from the mobile camera
   void takePhoto(ImageSource source) async {
-    final pickedFile = await _picker.getImage(source: source);
+    final image = await _picker.pickImage(source: source);
+    if (image == null) return;
+    String uniqueFileName = DateTime.now().millisecond.toString();
 
-    if (pickedFile == null){
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("wth?")
-          )
-      );
-      return null;
-    }
-  
     setState(() {
-      _imgFile = pickedFile;
-      _img = File(_imgFile!.path);
+      _img = image;
     });
-    String name = basename(_imgFile!.path);
+
+    Reference refRoot = FirebaseStorage.instance.ref();
+    Reference refDir = refRoot.child('children-images');
+
+    Reference refImg = refDir.child(uniqueFileName);
+    try {
+      refImg.putFile(File(_img!.path));
+    } catch (e) {
+      //error report
+    }
   }
 
   InputDecoration decoration(String label) =>
