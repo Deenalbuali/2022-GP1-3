@@ -31,11 +31,8 @@ class ReportPage extends StatelessWidget {
                 borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(28),
                     bottomRight: Radius.circular(28)),
-                gradient: LinearGradient(
-                  colors: [Color(0xFF429EB2), kPrimaryColor],
-                  begin: Alignment.bottomCenter,
-                  end: Alignment.topCenter,
-                ))),
+                    color: kPrimaryColor,
+               )),
       ),
       body: SingleChildScrollView(
         child: Column(children: <Widget>[

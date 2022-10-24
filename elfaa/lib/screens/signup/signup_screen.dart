@@ -19,7 +19,7 @@ class _SignupPageState extends State<SignupPage> {
   TextEditingController email = TextEditingController();
   TextEditingController pass = TextEditingController();
   TextEditingController phoneNo = TextEditingController();
-  TextEditingController fname = TextEditingController();
+  TextEditingController name = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -53,14 +53,14 @@ class _SignupPageState extends State<SignupPage> {
                       textDirection: TextDirection.rtl,
                       child: TextFormField(
                         textAlign: TextAlign.right,
-                        controller: fname,
+                        controller: name,
                         decoration: const InputDecoration(
                           suffixIcon:
                               Icon(Icons.person, color: Color(0xFFFD8601)),
                           labelText: "الاسم",
                         ),
                         validator: (value) {
-                          if (value!.isEmpty || fname.text.trim() == "") {
+                          if (value!.isEmpty || name.text.trim() == "") {
                             return "الحقل مطلوب";
                           }
                         },
@@ -129,7 +129,7 @@ class _SignupPageState extends State<SignupPage> {
                           if (value!.isEmpty || pass.text.trim() == "") {
                             return "الحقل مطلوب";
                           } else if (!regex.hasMatch(value)) {
-                            return "كلمة السر يجب أن تحتوي على حرف صغير، كبير باللغةالانجليزية، رقم";
+                            return "كلمة السر يجب أن تحتوي على حرف كبير، حرف صغير، ورقم";
                           } else if (value.length < 8) {
                             return "ادخل كلمة سر مكوّنة من 8 خانات على الأقل";
                           }
@@ -151,7 +151,7 @@ class _SignupPageState extends State<SignupPage> {
                               .collection("users")
                               .doc(user);
                           //add user details
-                          addUserDetails(fname.text.trim(), email.text.trim(),
+                          addUserDetails(name.text.trim(), email.text.trim(),
                               int.parse(phoneNo.text.trim()), user);
                           Fluttertoast.showToast(
                               msg: "تم تسجيل حسابك بنجاح",
@@ -204,7 +204,7 @@ class _SignupPageState extends State<SignupPage> {
   Future addUserDetails(
       String firstname, String email, int phoneno, String id) async {
     await FirebaseFirestore.instance.collection('users').doc(id).set(({
-          'fname': firstname,
+          'name': firstname,
           'email': email,
           'phoneNo': phoneno,
           'userID': id,

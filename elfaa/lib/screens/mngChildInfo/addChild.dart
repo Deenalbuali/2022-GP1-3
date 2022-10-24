@@ -3,8 +3,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'package:elfaa/screens/mngChildInfo/imgStorage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+<<<<<<< Updated upstream
 import 'package:intl/intl.dart' hide TextDirection;
 import 'package:path/path.dart' hide context;
+=======
+import 'package:elfaa/constants.dart';
+>>>>>>> Stashed changes
 
 //import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:firebase_core/firebase_core.dart';
@@ -52,14 +56,8 @@ class _addChildState extends State<addChild> {
                   borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(28),
                       bottomRight: Radius.circular(28)),
-                  gradient: LinearGradient(
-                    colors: [
-                      Color(0xFF429EB2),
-                      Color.fromARGB(255, 131, 165, 173)
-                    ],
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter,
-                  ))),
+                      color: kPrimaryColor,
+                 )),
         ),
         body: Container(
           child: SingleChildScrollView(
@@ -130,12 +128,12 @@ class _addChildState extends State<addChild> {
 
                               if (pickedDate != null) {
                                 print(pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
-                                String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
-                                print(formattedDate); //formatted date output using intl package =>  2021-03-16
+                        //        String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                          //      print(formattedDate); //formatted date output using intl package =>  2021-03-16
                                 //you can implement different kind of Date Format here according to your requirement
 
                                 setState(() {
-                                  controllerBirthday.text = formattedDate; //set output date to TextField value.
+                               //   controllerBirthday.text = formattedDate; //set output date to TextField value.
                                 });
                               }
                             })),

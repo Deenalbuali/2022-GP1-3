@@ -3,6 +3,8 @@ import 'package:elfaa/screens/welcome/welcome.dart';
 //import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:elfaa/alert_dialog.dart';
+import 'package:elfaa/screens/profile/changpass_page.dart';
+import 'package:flutter/services.dart';
 
 class EditProfilePage extends StatefulWidget {
   @override
@@ -16,69 +18,91 @@ class _EditProfilePageState extends State<EditProfilePage> {
   bool tappedYes = false;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  TextEditingController name = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController phoneNo = TextEditingController();
 
-Widget _buildName() {
-return  Directionality(
-      textDirection: TextDirection.rtl,
-      child: TextFormField(
-      textAlign: TextAlign.right,
-      decoration: InputDecoration(labelText: 'الاسم', hintText: 'أدخل اسمك'),
-      maxLength: 10,
-      validator: (String? value) {
-        if (value!.isEmpty) {
-          return 'يجب أن لا يكون الحقل فارغًا';
-        }
-        return null;
-      },
-      onSaved: (String? value) {
-        _name = value;
-      },
-    ));
+  Widget _buildName() {
+    return Directionality(
+        textDirection: TextDirection.rtl,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
+          child: TextFormField(
+            textAlign: TextAlign.right,
+            controller: name,
+            decoration: InputDecoration(
+                labelText: 'الاسم', hintText: 'أدخل اسمك', helperText: ""),
+            validator: (String? value) {
+              if (value!.isEmpty) {
+                return 'الحقل مطلوب';
+              }
+              return null;
+            },
+            onSaved: (String? value) {
+              _name = value;
+            },
+          ),
+        ));
   }
 
   Widget _buildEmail() {
-   return  Directionality(
-      textDirection: TextDirection.rtl,
-      child: TextFormField(
-      textAlign: TextAlign.right,
-      decoration: InputDecoration(
-          labelText: 'البريد الإلكتروني', hintText: 'أدخل بريدك الإلكتروني'),
-      validator: (String? value) {
-        if (value!.isEmpty) {
-          return 'يجب أن لا يكون الحقل فارغًا';
-        }
-        if (!RegExp(
-                r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
-            .hasMatch(value)) {
-          return 'أدخل بريد إلكتروني صالح';
-        }
-        return null;
-      },
-      onSaved: (String? value) {
-        _email = value!;
-      },
-    ));
+    return Directionality(
+        textDirection: TextDirection.rtl,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
+          child: TextFormField(
+            textAlign: TextAlign.right,
+            controller: email,
+            decoration: InputDecoration(
+                labelText: 'البريد الإلكتروني',
+                hintText: 'أدخل بريدك الإلكتروني',
+                helperText: ""),
+            validator: (String? value) {
+              if (value!.isEmpty) {
+                return 'الحقل مطلوب';
+              }
+              if (!RegExp(
+                      r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+                  .hasMatch(value)) {
+                return 'أدخل بريد إلكتروني صالح';
+              }
+              return null;
+            },
+            onSaved: (String? value) {
+              _email = value!;
+            },
+          ),
+        ));
   }
 
   Widget _buildPhoneNumber() {
-    return  Directionality(
-      textDirection: TextDirection.rtl,
-      child:  TextFormField(
-      textAlign: TextAlign.right,
-      decoration:
-          InputDecoration(labelText: 'رقم الجوال', hintText: '05xxxxxxxx'),
-      keyboardType: TextInputType.phone,
-      validator: (String? value) {
-        if (value!.isEmpty) {
-          return 'يجب أن لا يكون الحقل فارغًا';
-        }
+    return Directionality(
+        textDirection: TextDirection.rtl,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
+          child: TextFormField(
+            textAlign: TextAlign.right,
+            controller: phoneNo,
+            keyboardType: TextInputType.number,
+            inputFormatters: <TextInputFormatter>[
+              FilteringTextInputFormatter.digitsOnly
+            ],
+            decoration: InputDecoration(
+                labelText: 'رقم الجوال',
+                hintText: '05xxxxxxxx',
+                helperText: ""),
+            validator: (String? value) {
+              if (value!.isEmpty) {
+                return 'الحقل مطلوب';
+              }
 
-        return null;
-      },
-      onSaved: (String? value) {
-        _phoneNumber = value!;
-      },
-    ));
+              return null;
+            },
+            onSaved: (String? value) {
+              _phoneNumber = value!;
+            },
+          ),
+        ));
   }
 
   @override
@@ -97,45 +121,132 @@ return  Directionality(
         centerTitle: true,
         flexibleSpace: Container(
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(28),
-                    bottomRight: Radius.circular(28)),
-                gradient: LinearGradient(
-                  colors: [Color(0xFFADCED6), kPrimaryColor],
-                  begin: Alignment.bottomCenter,
-                  end: Alignment.topCenter,
-                ))),
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(28),
+              bottomRight: Radius.circular(28)),
+          color: kPrimaryColor,
+        )),
       ),
       body: SingleChildScrollView(
         child: Container(
-          margin: EdgeInsets.all(24),
+          margin: EdgeInsets.fromLTRB(24, 24, 24, 100),
           child: Form(
             key: _formKey,
-              child: Column(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                SizedBox(height: 50),
-                _buildName(),
-                SizedBox(height: 10),
-                _buildEmail(),
                 SizedBox(height: 30),
+                _buildName(),
+                _buildEmail(),
                 _buildPhoneNumber(),
-                SizedBox(height: 100),
-                ElevatedButton(
-                  child: Text(
-                    'حفظ التعديلات',
-                    style: TextStyle(color: Colors.white, fontSize: 22),
-                  ),
-                  onPressed: () {
-                    if (!_formKey.currentState!.validate()) {
-                      return;
-                    }
-                    _formKey.currentState!.save();
+                Directionality(
+                  textDirection: TextDirection.rtl,
+                  child: ElevatedButton.icon(
+                    icon: Icon(
+                      Icons.edit,
+                      color: kPrimaryColor,
+                    ),
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStatePropertyAll<Color>(Color(0xFFf5f5f5)),
+                      maximumSize: MaterialStateProperty.all(Size(200, 56)),
+                      minimumSize: MaterialStateProperty.all(Size(200, 56)),
+                      side: MaterialStateProperty.all(
+                        BorderSide.lerp(
+                            BorderSide(
+                              style: BorderStyle.solid,
+                              color: kPrimaryColor,
+                              width: 1.0,
+                            ),
+                            BorderSide(
+                              style: BorderStyle.solid,
+                              color: kPrimaryColor,
+                              width: 1.0,
+                            ),
+                            1.0),
+                      ),
+                      overlayColor: MaterialStateProperty.resolveWith<Color>(
+                        (Set<MaterialState> states) {
+                          if (states.contains(MaterialState.hovered))
+                            return Color(0xFFBED7DC);
+                          return Color(0xFFBED7DC);
+                        },
+                      ),
+                    ),
+                    label: Text(
+                      '  عدل معلوماتي   ',
+                      style: TextStyle(color: kPrimaryColor, fontSize: 20),
+                    ),
+                    onPressed: () {
+                      if (!_formKey.currentState!.validate()) {
+                        return;
+                      }
+                      _formKey.currentState!.save();
 
-                    print(_name);
-                    print(_email);
-                    print(_phoneNumber);
-                  },
+                      print(_name);
+                      print(_email);
+                      print(_phoneNumber);
+                    },
+                  ),
+                ),
+                SizedBox(height: 30),
+                Directionality(
+                  textDirection: TextDirection.ltr,
+                  child: ElevatedButton.icon(
+                    icon: Icon(
+                      Icons.lock_reset,
+                      color: kPrimaryColor,
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      textStyle: TextStyle(fontSize: 22),
+                      elevation: 0.9,
+                      shadowColor: Color.fromARGB(255, 0, 0, 0),
+                      backgroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0)),
+                      maximumSize: Size(320, 56),
+                      minimumSize: Size(320, 56),
+                    ),
+                    label: Text(
+                      '                            تغيير كلمة السر',
+                      style: TextStyle(color: kPrimaryColor, fontSize: 20),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return changePasswordPage();
+                          },
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                SizedBox(height: 10),
+                Directionality(
+                  textDirection: TextDirection.ltr,
+                  child: ElevatedButton.icon(
+                    icon: Icon(
+                      Icons.qr_code,
+                      color: kPrimaryColor,
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      textStyle: TextStyle(fontSize: 22),
+                      elevation: 0.9,
+                      shadowColor: Color.fromARGB(255, 0, 0, 0),
+                      backgroundColor: Color.fromARGB(255, 208, 207, 207),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0)),
+                      maximumSize: Size(320, 56),
+                      minimumSize: Size(320, 56),
+                    ),
+                    label: Text(
+                      ' QR إنشاء رمز الاستجابة السريعة',
+                      style: TextStyle(color: kPrimaryColor, fontSize: 20),
+                    ),
+                    onPressed: () {},
+                  ),
                 ),
                 SizedBox(height: 70),
                 Directionality(
@@ -147,7 +258,7 @@ return  Directionality(
                     ),
                     style: ElevatedButton.styleFrom(
                       textStyle: TextStyle(fontSize: 22),
-                      shadowColor: Colors.black,
+                      shadowColor: Color.fromARGB(255, 0, 0, 0),
                       elevation: 1,
                       backgroundColor: Colors.white,
                       shape: const StadiumBorder(),
@@ -156,21 +267,21 @@ return  Directionality(
                     ),
                     label: Text(
                       '  تسجيل الخروج    ',
-                      style: TextStyle(color: Color(0xFF9C0000), fontSize: 22),
+                      style: TextStyle(color: Color(0xFF9C0000), fontSize: 20),
                     ),
                     onPressed: () async {
-                      final action = await AlertDialogs.yesCancelDialog(
-                          context, 'تسجيل الخروج', 'هل أنت متأكد من تسجيل الخروج؟');
+                      final action = await AlertDialogs.yesCancelDialog(context,
+                          'تسجيل الخروج', 'هل أنت متأكد من تسجيل الخروج؟');
                       if (action == DialogsAction.yes) {
                         setState(() => tappedYes = true);
-                         Navigator.push(
-                         context,
-                         MaterialPageRoute(
-                         builder: (context) {
-                         return WelcomeScreen(); 
-                        },
-                         ),
-                         );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return WelcomeScreen();
+                            },
+                          ),
+                        );
                       } else {
                         setState(() => tappedYes = false);
                       }
@@ -179,9 +290,9 @@ return  Directionality(
                 ),
               ],
             ),
-            ),
           ),
         ),
+      ),
     );
   }
 }

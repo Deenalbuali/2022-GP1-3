@@ -43,7 +43,7 @@ class LoginAndSignupBtn extends StatelessWidget {
               ),
             );
           },
-         style: ElevatedButton.styleFrom(primary: kLightColor, elevation: 1),
+         style: ElevatedButton.styleFrom(backgroundColor: kLightColor, elevation: 1),
           child: Text(
             "تسجيل",
            style: TextStyle(color: Colors.black, fontSize: 22),
