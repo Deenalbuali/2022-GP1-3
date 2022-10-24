@@ -1,4 +1,3 @@
-// ignore_for_file: avoid_print
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
