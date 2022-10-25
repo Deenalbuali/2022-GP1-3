@@ -135,7 +135,7 @@ class _SignupPageState extends State<SignupPage> {
                           if (value!.isEmpty || pass.text.trim() == "") {
                             return "الحقل مطلوب";
                           } else if (!regex.hasMatch(value)) {
-                            return "كلمة السر يجب أن تحتوي على حرف كبير، حرف صغير، ورقم";
+                            return "كلمة السر يجب أن تحتوي على حرف كبير باللغة الانجليزية، حرف صغير، ورقم";
                           } else if (value.length < 8) {
                             return "ادخل كلمة سر مكوّنة من 8 خانات على الأقل";
                           }
