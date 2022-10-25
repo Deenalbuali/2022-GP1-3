@@ -1,11 +1,14 @@
-import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
-import 'package:intl/intl.dart';
-import 'package:elfaa/screens/welcome/welcome.dart';
 import 'package:elfaa/alert_dialog.dart';
+import 'package:elfaa/screens/Homepage/Home_page.dart';
+import 'package:elfaa/screens/Homepage/navPage.dart';
+import 'package:elfaa/screens/welcome/welcome.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
+import 'dart:ui' as ui;
 
 //import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:firebase_core/firebase_core.dart';
@@ -204,43 +207,42 @@ class _reportInfo2State extends State<reportInfo2> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SizedBox(
-                            height: 50,
+                            height: 40,
                             width: 150,
                             child: Directionality(
-                              textDirection: TextDirection.rtl,
+                              textDirection: ui.TextDirection.rtl,
                               child: ElevatedButton.icon(
                                 icon: Icon(
-                                  Icons.logout,
-                                  color: Color(0xFF9C0000),
+                                  Icons.cancel_outlined,
+                                  color: Colors.white,
                                 ),
                                 style: ElevatedButton.styleFrom(
                                   textStyle: TextStyle(fontSize: 22),
                                   shadowColor: Color.fromARGB(255, 0, 0, 0),
                                   elevation: 1,
-                                  backgroundColor: Colors.white,
+                                  backgroundColor: Color(0xFF9C0000),
                                   shape: const StadiumBorder(),
                                   maximumSize: const Size(200, 56),
                                   minimumSize: const Size(200, 56),
                                 ),
                                 label: Text(
-                                  '  تسجيل الخروج    ',
+                                  '  إلغاء البلاغ  ',
                                   style: TextStyle(
-                                      color: Color(0xFF9C0000), fontSize: 20),
+                                      color: Colors.white, fontSize: 15),
                                 ),
                                 onPressed: () async {
                                   final action =
                                       await AlertDialogs.yesCancelDialog(
                                           context,
-                                          'تسجيل الخروج',
-                                          'هل أنت متأكد من تسجيل الخروج؟');
+                                          ' إلغاء البلاغ ',
+                                          'هل أنت متأكد من إلغاء البلاغ ؟');
                                   if (action == DialogsAction.yes) {
                                     setState(() => tappedYes = true);
-                                    FirebaseAuth.instance.signOut();
+                                    //FirebaseAuth.instance.signOut();
                                     Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) =>
-                                                WelcomeScreen()));
+                                            builder: (context) => NavPage()));
                                   } else {
                                     setState(() => tappedYes = false);
                                   }

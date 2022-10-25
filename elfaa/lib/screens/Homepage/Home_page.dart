@@ -17,7 +17,22 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   //const HomePage({super.key});
   String _name = "";
+  // List<Object> _historyList = [];
+  Future getUsersQuestionsList() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final User? user = await _auth.currentUser;
+    final uid = user!.uid;
+    await FirebaseFirestore.instance
+        .collection('parent')
+        .doc(uid)
+        .collection('children')
+        .get();
+    setState(() {
+//_historyList = List.from(dat.docs.)
+    });
+  }
 
+  @override
   Future<void> getCurrentUser() async {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     final User? user = await _auth.currentUser;
@@ -29,13 +44,6 @@ class _HomePageState extends State<HomePage> {
         .then((DocumentSnapshot<Map<String, dynamic>> snapshot) {
       _name = snapshot['name'];
     });
-  }
-
-  @override
-  void initState() {
-    // get current user
-    getCurrentUser();
-    super.initState();
   }
 
   @override
@@ -176,4 +184,25 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+  //void initState() {
+  //  getCurrentUser();
+
+  // final user = FirebaseAuth.instance.currentUser!.uid;
+  // final userRef = FirebaseFirestore.instance
+  //   .collection('parent')
+  //   .doc(user)
+  //   .collection('children')
+  //  .doc();
+  // _buildHeader();
+  // super.initState();
+  // }
+
+  void updateUI() {
+    setState(() {
+      //You can also make changes to your state here.
+    });
+  }
 }
+
+//class ListPageState extends State<ListPage> {}

@@ -50,11 +50,11 @@ class _addChildState extends State<addChild> {
           centerTitle: true,
           flexibleSpace: Container(
               decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(28),
-                      bottomRight: Radius.circular(28)),
-                      color: kPrimaryColor,
-                 )),
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(28),
+                bottomRight: Radius.circular(28)),
+            color: kPrimaryColor,
+          )),
         ),
         body: Container(
           child: SingleChildScrollView(
@@ -105,32 +105,37 @@ class _addChildState extends State<addChild> {
                             readOnly: true,
                             onTap: () async {
                               DateTime? pickedDate = await showDatePicker(
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime(2010), //DateTime.now() - not to allow to choose before today.
-                                  lastDate: DateTime(2101),
-                                  builder: (context, child) {
-                                    return Theme(
-                                      data: ThemeData.light().copyWith(
-                                        primaryColor: const Color(0xFF429EB2),
-                                        colorScheme: const ColorScheme.light(primary: Color(0xFF429EB2)),
-                                        buttonTheme: const ButtonThemeData(
-                                          textTheme: ButtonTextTheme.primary
-                                        ),
-                                      ),
-                                       child: child!,
-                                    );
-                                  },
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime(
+                                    2000), //DateTime.now() - not to allow to choose before today.
+                                lastDate: DateTime(2101),
+                                builder: (context, child) {
+                                  return Theme(
+                                    data: ThemeData.light().copyWith(
+                                      primaryColor: const Color(0xFF429EB2),
+                                      colorScheme: const ColorScheme.light(
+                                          primary: Color(0xFF429EB2)),
+                                      buttonTheme: const ButtonThemeData(
+                                          textTheme: ButtonTextTheme.primary),
+                                    ),
+                                    child: child!,
                                   );
+                                },
+                              );
 
                               if (pickedDate != null) {
-                                print(pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
-                               String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
-                                print(formattedDate); //formatted date output using intl package =>  2021-03-16
+                                print(
+                                    pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+                                String formattedDate =
+                                    DateFormat('yyyy-MM-dd').format(pickedDate);
+                                print(
+                                    formattedDate); //formatted date output using intl package =>  2021-03-16
                                 //you can implement different kind of Date Format here according to your requirement
 
                                 setState(() {
-                               //   controllerBirthday.text = formattedDate; //set output date to TextField value.
+                                  controllerBirthday.text =
+                                      formattedDate; //set output date to TextField value.
                                 });
                               }
                             })),
@@ -153,13 +158,14 @@ class _addChildState extends State<addChild> {
                             }
                           },
                         )),
-                        const SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Container(
                       width: 400,
                       child: ElevatedButton(
                           child: const Text('ربط جهاز التتبع'),
                           onPressed: null,
-                          style: ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 22))),
+                          style: ElevatedButton.styleFrom(
+                              textStyle: const TextStyle(fontSize: 22))),
                     ),
                     const SizedBox(height: 40),
                     ElevatedButton(
@@ -169,7 +175,8 @@ class _addChildState extends State<addChild> {
                             final child = Child(
                                 name: controllerName.text,
                                 height: int.parse(controllerHeight.text),
-                                birthday: DateTime.parse(controllerBirthday.text));
+                                birthday:
+                                    DateTime.parse(controllerBirthday.text));
 
                             addChild(child);
 
@@ -177,8 +184,8 @@ class _addChildState extends State<addChild> {
                           }
                         },
                         style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(const Color(0xFF429EB2)),
+                          backgroundColor: MaterialStateProperty.all(
+                              const Color(0xFF429EB2)),
                         )),
                   ],
                 ),
@@ -254,15 +261,12 @@ class _addChildState extends State<addChild> {
   void takePhoto(ImageSource source) async {
     final pickedFile = await _picker.getImage(source: source);
 
-    if (pickedFile == null){
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("wth?")
-          )
-      );
+    if (pickedFile == null) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("wth?")));
       return null;
     }
-  
+
     setState(() {
       _imgFile = pickedFile;
       _img = File(_imgFile!.path);
