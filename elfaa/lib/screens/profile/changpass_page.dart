@@ -1,7 +1,8 @@
 import 'package:elfaa/constants.dart';
-import 'package:elfaa/screens/profile/profile_page.dart';
-//import 'package:firebase_core/firebase_core.dart';
+import 'package:elfaa/screens/login/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class changePasswordPage extends StatefulWidget {
   @override
@@ -17,6 +18,57 @@ class _changePasswordPageState extends State<changePasswordPage> {
   TextEditingController old = TextEditingController();
   TextEditingController nnew = TextEditingController();
   TextEditingController confirmed = TextEditingController();
+
+  Future<void> updatePassword() async {
+    final user = await FirebaseAuth.instance.currentUser;
+    final credential = EmailAuthProvider.credential(
+        email: user!.email.toString(), password: _old.toString());
+    user.reauthenticateWithCredential(credential).then((value) {
+      if (_new == _confirmed) {
+        user.updatePassword(_new.toString()).then((value) {
+          Fluttertoast.showToast(
+              msg: "تم تغيير كلمة السر بنجاح",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.green,
+              textColor: Colors.white,
+              fontSize: 16.0);
+
+          FirebaseAuth.instance.signOut();
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => SignInScreen()));
+        }).catchError((error) {
+          Fluttertoast.showToast(
+              msg: "حدث خطأ ما",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        });
+      } else {
+        Fluttertoast.showToast(
+            msg: "كلمة السر غير متطابقة",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
+    }).catchError((error) {
+      Fluttertoast.showToast(
+          msg: "كلمة السر القديمة غير صحيحة",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    });
+  }
 
   Widget _buildOld() {
     return Directionality(
@@ -173,11 +225,8 @@ class _changePasswordPageState extends State<changePasswordPage> {
                         if (!_formKey.currentState!.validate()) {
                           return;
                         }
+                        updatePassword();
                         _formKey.currentState!.save();
-
-                        print(_old);
-                        print(_new);
-                        print(_confirmed);
                       },
                     ),
                   ),

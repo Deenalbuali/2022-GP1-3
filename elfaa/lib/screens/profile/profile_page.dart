@@ -1,10 +1,12 @@
 import 'package:elfaa/constants.dart';
 import 'package:elfaa/screens/welcome/welcome.dart';
-//import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:elfaa/alert_dialog.dart';
 import 'package:elfaa/screens/profile/changpass_page.dart';
 import 'package:flutter/services.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class EditProfilePage extends StatefulWidget {
   @override
@@ -22,6 +24,21 @@ class _EditProfilePageState extends State<EditProfilePage> {
   TextEditingController email = TextEditingController();
   TextEditingController phoneNo = TextEditingController();
 
+  Future<void> getCurrentUser() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final User? user = await _auth.currentUser;
+    final uid = user!.uid;
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .get()
+        .then((DocumentSnapshot<Map<String, dynamic>> snapshot) {
+      name.text = snapshot['name'];
+      email.text = snapshot['email'];
+      phoneNo.text = snapshot['phoneNo'].toString();
+    });
+  } 
+
   Widget _buildName() {
     return Directionality(
         textDirection: TextDirection.rtl,
@@ -31,7 +48,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
             textAlign: TextAlign.right,
             controller: name,
             decoration: InputDecoration(
-                labelText: 'الاسم', hintText: 'أدخل اسمك', helperText: ""),
+                labelText: 'الاسم', hintText: 'أدخل الاسم', helperText: ""),
             validator: (String? value) {
               if (value!.isEmpty) {
                 return 'الحقل مطلوب';
@@ -94,8 +111,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
             validator: (String? value) {
               if (value!.isEmpty) {
                 return 'الحقل مطلوب';
+              } else if (value.length != 10) {
+                return "الرقم ليس مكوّن من 10 خانات";
+              } else if (!value.startsWith('05', 0)) {
+                return "ادخل رقم جوال يبدأ ب05";
               }
-
               return null;
             },
             onSaved: (String? value) {
@@ -106,6 +126,23 @@ class _EditProfilePageState extends State<EditProfilePage> {
   }
 
   @override
+
+  // initState()
+  void initState() {
+    // get current user
+    getCurrentUser();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is removed from the widget tree.
+    name.dispose();
+    email.dispose();
+    phoneNo.dispose();
+    super.dispose();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFf5f5f5),
@@ -177,15 +214,45 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       '  عدل معلوماتي   ',
                       style: TextStyle(color: kPrimaryColor, fontSize: 20),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       if (!_formKey.currentState!.validate()) {
                         return;
                       }
+                      // get the current user
+                      final FirebaseAuth _auth = await FirebaseAuth.instance;
+                      final User? user = await _auth.currentUser;
+                      final uid = user!.uid;
+                      // update the user details
+                      try {
+                        await FirebaseFirestore.instance
+                            .collection('users')
+                            .doc(uid)
+                            .update({
+                          'name': name.text,
+                          'email': email.text,
+                          'phoneNo': phoneNo.text,
+                        });
+                        // show a toast message
+                        Fluttertoast.showToast(
+                            msg: "تم تعديل البيانات بنجاح",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.green,
+                            textColor: Colors.white,
+                            fontSize: 16.0);
+                      } catch (e) {
+                        // show a toast message
+                        Fluttertoast.showToast(
+                            msg: "حدث خطأ ما",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                            fontSize: 16.0);
+                      }
                       _formKey.currentState!.save();
-
-                      print(_name);
-                      print(_email);
-                      print(_phoneNumber);
                     },
                   ),
                 ),

@@ -66,7 +66,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '842724578520',
     projectId: 'elfaa-2023',
     storageBucket: 'elfaa-2023.appspot.com',
-    iosClientId: '842724578520-0kbs78pbmqb04keov1d6n1oodttkvujc.apps.googleusercontent.com',
+    iosClientId:
+        '842724578520-0kbs78pbmqb04keov1d6n1oodttkvujc.apps.googleusercontent.com',
     iosBundleId: 'com.elfaa.elfaa',
   );
 
@@ -76,7 +77,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '842724578520',
     projectId: 'elfaa-2023',
     storageBucket: 'elfaa-2023.appspot.com',
-    iosClientId: '842724578520-0kbs78pbmqb04keov1d6n1oodttkvujc.apps.googleusercontent.com',
+    iosClientId:
+        '842724578520-0kbs78pbmqb04keov1d6n1oodttkvujc.apps.googleusercontent.com',
     iosBundleId: 'com.elfaa.elfaa',
   );
 }
