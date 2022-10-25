@@ -56,6 +56,11 @@ flutter_icons:
   android: true
   ios: true
   image_path: "assets/images/logo1.png"
+<<<<<<< Updated upstream
+=======
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "assets/images/logo1.png"
+>>>>>>> Stashed changes
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
