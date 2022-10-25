@@ -1,12 +1,11 @@
-import 'dart:ffi';
-import 'dart:io';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
-import 'package:blurrycontainer/blurrycontainer.dart';
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:elfaa/screens/welcome/welcome.dart';
+import 'package:elfaa/alert_dialog.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 //import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:firebase_core/firebase_core.dart';
@@ -26,7 +25,7 @@ class _reportInfo2State extends State<reportInfo2> {
   final now = DateTime.now();
   final df = new DateFormat('dd-MM-yyyy hh:mm a');
   int myvalue = 1558432747;
-
+  bool tappedYes = false;
   @override
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: const Color(0xFFf5f5f5),
@@ -207,21 +206,46 @@ class _reportInfo2State extends State<reportInfo2> {
                           SizedBox(
                             height: 50,
                             width: 150,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.red, // background
-                                // foreground
-                              ),
-                              child: Text(
-                                'إلغاء البلاغ',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15,
+                            child: Directionality(
+                              textDirection: TextDirection.rtl,
+                              child: ElevatedButton.icon(
+                                icon: Icon(
+                                  Icons.logout,
+                                  color: Color(0xFF9C0000),
                                 ),
+                                style: ElevatedButton.styleFrom(
+                                  textStyle: TextStyle(fontSize: 22),
+                                  shadowColor: Color.fromARGB(255, 0, 0, 0),
+                                  elevation: 1,
+                                  backgroundColor: Colors.white,
+                                  shape: const StadiumBorder(),
+                                  maximumSize: const Size(200, 56),
+                                  minimumSize: const Size(200, 56),
+                                ),
+                                label: Text(
+                                  '  تسجيل الخروج    ',
+                                  style: TextStyle(
+                                      color: Color(0xFF9C0000), fontSize: 20),
+                                ),
+                                onPressed: () async {
+                                  final action =
+                                      await AlertDialogs.yesCancelDialog(
+                                          context,
+                                          'تسجيل الخروج',
+                                          'هل أنت متأكد من تسجيل الخروج؟');
+                                  if (action == DialogsAction.yes) {
+                                    setState(() => tappedYes = true);
+                                    FirebaseAuth.instance.signOut();
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                WelcomeScreen()));
+                                  } else {
+                                    setState(() => tappedYes = false);
+                                  }
+                                },
                               ),
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
                             ),
                           ),
                         ],

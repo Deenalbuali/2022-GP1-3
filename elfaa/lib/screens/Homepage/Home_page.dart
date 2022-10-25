@@ -1,18 +1,42 @@
-import 'package:elfaa/screens/login/login_screen.dart';
 import 'package:elfaa/screens/mngChildInfo/addChild.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:elfaa/screens/Homepage/childrenList.dart';
-import 'package:elfaa/screens/notificationPage/Notepage.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 int index = 2;
 final Color color1 = Color(0xFF429EB2);
 final Color color2 = Color(0xFF429EB2);
 final Color color3 = Color(0xFF429EB2);
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class HomePage extends StatefulWidget {
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  //const HomePage({super.key});
+  String _name = "";
+
+  Future<void> getCurrentUser() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final User? user = await _auth.currentUser;
+    final uid = user!.uid;
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .get()
+        .then((DocumentSnapshot<Map<String, dynamic>> snapshot) {
+      _name = snapshot['name'];
+    });
+  }
+
+  @override
+  void initState() {
+    // get current user
+    getCurrentUser();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -126,12 +150,19 @@ class HomePage extends StatelessWidget {
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(top: 60, left: 200),
+            margin: const EdgeInsets.only(top: 60, left: 220),
             child: Column(
               //crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  "! مرحبًا" " محمد ",
+                  "! مرحبًا" " ",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 28.0,
+                      fontWeight: FontWeight.w700),
+                ),
+                Text(
+                  _name,
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 28.0,
