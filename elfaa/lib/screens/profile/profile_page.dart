@@ -37,7 +37,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
       email.text = snapshot['email'];
       phoneNo.text = snapshot['phoneNo'].toString();
     });
-  } 
+  }
 
   Widget _buildName() {
     return Directionality(
@@ -52,6 +52,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
             validator: (String? value) {
               if (value!.isEmpty) {
                 return 'الحقل مطلوب';
+              } else if (value.length == 1) {
+                return " يجب أن يحتوي الاسم أكثر من حرف على الأقل";
+              } else if (!RegExp(r"^[a-zA-Z]+$").hasMatch(value)) {
+                return 'أدخل اسم يحتوي على أحرف فقط';
               }
               return null;
             },
@@ -341,14 +345,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           'تسجيل الخروج', 'هل أنت متأكد من تسجيل الخروج؟');
                       if (action == DialogsAction.yes) {
                         setState(() => tappedYes = true);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return WelcomeScreen();
-                            },
-                          ),
-                        );
+                        FirebaseAuth.instance.signOut();
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => WelcomeScreen()));
                       } else {
                         setState(() => tappedYes = false);
                       }

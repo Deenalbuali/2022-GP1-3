@@ -62,6 +62,10 @@ class _SignupPageState extends State<SignupPage> {
                         validator: (value) {
                           if (value!.isEmpty || name.text.trim() == "") {
                             return "الحقل مطلوب";
+                          } else if (value.length == 1) {
+                            return " يجب أن يحتوي الاسم أكثر من حرف على الأقل";
+                          } else if (!RegExp(r"^[a-zA-Z]+$").hasMatch(value)) {
+                            return 'أدخل اسم يحتوي على أحرف فقط';
                           }
                         },
                       )),
@@ -156,7 +160,7 @@ class _SignupPageState extends State<SignupPage> {
                           Fluttertoast.showToast(
                               msg: "تم تسجيل حسابك بنجاح",
                               toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.CENTER,
+                              gravity: ToastGravity.BOTTOM,
                               timeInSecForIosWeb: 3,
                               backgroundColor: Colors.lightGreen,
                               fontSize: 16.0,
