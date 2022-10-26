@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
           hintStyle: TextStyle(color: Colors.grey),
         ),
       ),
-      home: WelcomeScreen(),
+      home: Welcopoghjlk,nmnjkmeScreen(),
     );
   }
 }
