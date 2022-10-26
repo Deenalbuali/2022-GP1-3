@@ -1,8 +1,6 @@
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:elfaa/alert_dialog.dart';
-import 'package:elfaa/screens/Homepage/Home_page.dart';
 import 'package:elfaa/screens/Homepage/navPage.dart';
-import 'package:elfaa/screens/welcome/welcome.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -238,8 +236,7 @@ class _reportInfo2State extends State<reportInfo2> {
                                           'هل أنت متأكد من إلغاء البلاغ ؟');
                                   if (action == DialogsAction.yes) {
                                     setState(() => tappedYes = true);
-                                    //FirebaseAuth.instance.signOut();
-                                    Navigator.pushReplacement(
+                                    Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) => NavPage()));

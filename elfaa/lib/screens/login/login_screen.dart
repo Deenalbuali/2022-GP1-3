@@ -53,6 +53,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           suffixIcon: Icon(Icons.email_outlined,
                               color: Color(0xFFFD8601)),
                           labelText: "البريد الإلكتروني",
+                          hintText: "أدخل بريدك الإلكتروني",
                         ),
                         validator: (value) {
                           if (value!.isEmpty || email.text.trim() == "") {
@@ -74,6 +75,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           suffixIcon: Icon(Icons.lock_outline,
                               color: Color(0xFFFD8601)),
                           labelText: "كلمة المرور",
+                          hintText: "أدخل كلمة المرور",
                         ),
                         validator: (value) {
                           if (value!.isEmpty || pass.text.trim() == "") {

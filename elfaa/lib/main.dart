@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'FirstPage',
       theme: ThemeData(
+        backgroundColor: Color(0xFFfafafa),
         primaryColor: kPrimaryColor,
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
             textStyle: TextStyle(fontSize: 22),
             shadowColor: Color.fromARGB(255, 0, 0, 0),
             elevation: 3,
-            foregroundColor: Colors.white,
+            foregroundColor: Color(0xFFfafafa),
             shape: const StadiumBorder(),
             maximumSize: const Size(250, 56),
             minimumSize: const Size(250, 56),

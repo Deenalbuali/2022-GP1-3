@@ -57,6 +57,7 @@ class _SignupPageState extends State<SignupPage> {
                           suffixIcon:
                               Icon(Icons.person, color: Color(0xFFFD8601)),
                           labelText: "الاسم",
+                          hintText: "مثال: نورة محمد",
                         ),
                         validator: (value) {
                           if (value!.isEmpty || name.text.trim() == "") {
@@ -80,6 +81,7 @@ class _SignupPageState extends State<SignupPage> {
                           suffixIcon: Icon(Icons.email_outlined,
                               color: Color(0xFFFD8601)),
                           labelText: "البريد الإلكتروني",
+                          hintText: "example@example.com"
                         ),
                         validator: (value) {
                           if (value!.isEmpty || email.text.trim() == "") {
@@ -127,6 +129,7 @@ class _SignupPageState extends State<SignupPage> {
                           suffixIcon: Icon(Icons.lock_outline,
                               color: Color(0xFFFD8601)),
                           labelText: "كلمة المرور",
+                          hintText: "أدخل كلمة المرور",
                           helperText: " كلمة المرور يجب أن تحتوي على الأقل:"
                                 "\n"
                                 "*حرف كبير باللغة الإنجليزية"

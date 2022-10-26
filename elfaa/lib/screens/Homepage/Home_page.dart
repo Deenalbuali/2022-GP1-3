@@ -3,6 +3,7 @@ import 'package:elfaa/screens/Homepage/childrenList.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:elfaa/constants.dart';
 
 int index = 2;
 final Color color1 = Color(0xFF429EB2);
@@ -49,7 +50,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFf5f5f5),
+      backgroundColor: Color(0xFFfafafa),
       body: SingleChildScrollView(
         child: Column(children: <Widget>[
           _buildHeader(),
@@ -79,6 +80,31 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.white,
                   )),
             ],
+          ),
+          SizedBox(height: 15),
+          Directionality(
+            textDirection: TextDirection.ltr,
+            child: ElevatedButton.icon(
+              icon: Icon(
+                Icons.qr_code,
+                color: kPrimaryColor,
+              ),
+              style: ElevatedButton.styleFrom(
+                textStyle: TextStyle(fontSize: 22),
+                elevation: 0.9,
+                shadowColor: Color.fromARGB(255, 0, 0, 0),
+                backgroundColor: Color(0xFFE5E5E5),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0)),
+                maximumSize: Size(335, 56),
+                minimumSize: Size(335, 56),
+              ),
+              label: Text(
+                '          QR رمز الاستجابة السريعة',
+                style: TextStyle(color: kPrimaryColor, fontSize: 20),
+              ),
+              onPressed: () {},
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(25.0),
@@ -176,7 +202,7 @@ class _HomePageState extends State<HomePage> {
                       fontSize: 28.0,
                       fontWeight: FontWeight.w700),
                 ),
-                SizedBox(height: 10.0),
+                SizedBox(height: 1),
               ],
             ),
           )

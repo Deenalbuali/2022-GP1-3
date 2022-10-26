@@ -151,7 +151,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFf5f5f5),
+      backgroundColor: Color(0xFFfafafa),
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
@@ -192,8 +192,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     style: ButtonStyle(
                       backgroundColor:
                           MaterialStatePropertyAll<Color>(Color(0xFFf5f5f5)),
-                      maximumSize: MaterialStateProperty.all(Size(200, 56)),
-                      minimumSize: MaterialStateProperty.all(Size(200, 56)),
+                      maximumSize: MaterialStateProperty.all(Size(180, 56)),
+                      minimumSize: MaterialStateProperty.all(Size(180, 56)),
                       side: MaterialStateProperty.all(
                         BorderSide.lerp(
                             BorderSide(
@@ -224,64 +224,84 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       if (!_formKey.currentState!.validate()) {
                         return;
                       }
-                      // get the current user
-                      final FirebaseAuth _auth = await FirebaseAuth.instance;
-                      final User? user = await _auth.currentUser;
-                      final uid = user!.uid;
-                      // update the user details
-                      try {
-                        await FirebaseFirestore.instance
-                            .collection('users')
-                            .doc(uid)
-                            .update({
-                          'name': name.text,
-                          'email': email.text,
-                          'phoneNo': phoneNo.text,
-                        });
-                        // show a toast message
-                        Fluttertoast.showToast(
-                            msg: "تم تعديل البيانات بنجاح",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.BOTTOM,
-                            timeInSecForIosWeb: 1,
-                            backgroundColor: Colors.green,
-                            textColor: Colors.white,
-                            fontSize: 16.0);
-                      } catch (e) {
-                        // show a toast message
-                        Fluttertoast.showToast(
-                            msg: "حدث خطأ ما",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.BOTTOM,
-                            timeInSecForIosWeb: 1,
-                            backgroundColor: Colors.red,
-                            textColor: Colors.white,
-                            fontSize: 16.0);
+                      final action2 = await AlertDialogs.yesCancelDialog(
+                          context,
+                          'تعديل معلومات الحساب الشخصي',
+                          'هل أنت متأكد من حفظ التعديل؟');
+                      if (action2 == DialogsAction.yes) {
+                        setState(() => tappedYes = true);
+                        final FirebaseAuth _auth = await FirebaseAuth.instance;
+                        final User? user = await _auth.currentUser;
+                        final uid = user!.uid;
+                        try {
+                          await FirebaseFirestore.instance
+                              .collection('users')
+                              .doc(uid)
+                              .update({
+                            'name': name.text,
+                            'email': email.text,
+                            'phoneNo': phoneNo.text,
+                          });
+                          Fluttertoast.showToast(
+                              msg: "تم تعديل البيانات بنجاح",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.green,
+                              textColor: Colors.white,
+                              fontSize: 16.0);
+                        } catch (e) {
+                          Fluttertoast.showToast(
+                              msg: "حدث خطأ ما",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.red,
+                              textColor: Colors.white,
+                              fontSize: 16.0);
+                        }
+                        _formKey.currentState!.save();
                       }
-                      _formKey.currentState!.save();
                     },
                   ),
                 ),
-                SizedBox(height: 30),
+                SizedBox(height: 20),
                 Directionality(
-                  textDirection: TextDirection.ltr,
+                  textDirection: TextDirection.rtl,
                   child: ElevatedButton.icon(
                     icon: Icon(
                       Icons.lock_reset,
                       color: kPrimaryColor,
                     ),
-                    style: ElevatedButton.styleFrom(
-                      textStyle: TextStyle(fontSize: 22),
-                      elevation: 0.9,
-                      shadowColor: Color.fromARGB(255, 0, 0, 0),
-                      backgroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0)),
-                      maximumSize: Size(320, 56),
-                      minimumSize: Size(320, 56),
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStatePropertyAll<Color>(Color(0xFFf5f5f5)),
+                      maximumSize: MaterialStateProperty.all(Size(180, 56)),
+                      minimumSize: MaterialStateProperty.all(Size(180, 56)),
+                      side: MaterialStateProperty.all(
+                        BorderSide.lerp(
+                            BorderSide(
+                              style: BorderStyle.solid,
+                              color: kPrimaryColor,
+                              width: 1.0,
+                            ),
+                            BorderSide(
+                              style: BorderStyle.solid,
+                              color: kPrimaryColor,
+                              width: 1.0,
+                            ),
+                            1.0),
+                      ),
+                      overlayColor: MaterialStateProperty.resolveWith<Color>(
+                        (Set<MaterialState> states) {
+                          if (states.contains(MaterialState.hovered))
+                            return Color(0xFFBED7DC);
+                          return Color(0xFFBED7DC);
+                        },
+                      ),
                     ),
                     label: Text(
-                      '                            تغيير كلمة المرور',
+                      'تغيير كلمة المرور',
                       style: TextStyle(color: kPrimaryColor, fontSize: 20),
                     ),
                     onPressed: () {
@@ -296,32 +316,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     },
                   ),
                 ),
-                SizedBox(height: 10),
-                Directionality(
-                  textDirection: TextDirection.ltr,
-                  child: ElevatedButton.icon(
-                    icon: Icon(
-                      Icons.qr_code,
-                      color: kPrimaryColor,
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      textStyle: TextStyle(fontSize: 22),
-                      elevation: 0.9,
-                      shadowColor: Color.fromARGB(255, 0, 0, 0),
-                      backgroundColor: Color.fromARGB(255, 208, 207, 207),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0)),
-                      maximumSize: Size(320, 56),
-                      minimumSize: Size(320, 56),
-                    ),
-                    label: Text(
-                      ' QR إنشاء رمز الاستجابة السريعة',
-                      style: TextStyle(color: kPrimaryColor, fontSize: 20),
-                    ),
-                    onPressed: () {},
-                  ),
-                ),
-                SizedBox(height: 70),
+                SizedBox(height: 40),
                 Directionality(
                   textDirection: TextDirection.rtl,
                   child: ElevatedButton.icon(
@@ -335,8 +330,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       elevation: 1,
                       backgroundColor: Colors.white,
                       shape: const StadiumBorder(),
-                      maximumSize: const Size(200, 56),
-                      minimumSize: const Size(200, 56),
+                      maximumSize: const Size(180, 56),
+                      minimumSize: const Size(180, 56),
                     ),
                     label: Text(
                       '  تسجيل الخروج    ',

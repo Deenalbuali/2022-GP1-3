@@ -3,6 +3,7 @@ import 'package:elfaa/screens/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:elfaa/alert_dialog.dart';
 
 class changePasswordPage extends StatefulWidget {
   @override
@@ -13,6 +14,7 @@ class _changePasswordPageState extends State<changePasswordPage> {
   String? _old;
   String? _new;
   String? _confirmed;
+  bool tappedYes = false;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController old = TextEditingController();
@@ -27,7 +29,7 @@ class _changePasswordPageState extends State<changePasswordPage> {
       if (_new == _confirmed) {
         user.updatePassword(_new.toString()).then((value) {
           Fluttertoast.showToast(
-              msg: "تم تغيير كلمة السر بنجاح",
+              msg: "تم تغيير كلمة المرور بنجاح",
               toastLength: Toast.LENGTH_SHORT,
               gravity: ToastGravity.BOTTOM,
               timeInSecForIosWeb: 1,
@@ -50,7 +52,7 @@ class _changePasswordPageState extends State<changePasswordPage> {
         });
       } else {
         Fluttertoast.showToast(
-            msg: "كلمة السر غير متطابقة",
+            msg: "كلمة المرور غير متطابقة",
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
@@ -60,7 +62,7 @@ class _changePasswordPageState extends State<changePasswordPage> {
       }
     }).catchError((error) {
       Fluttertoast.showToast(
-          msg: "كلمة السر القديمة غير صحيحة",
+          msg: "كلمة المرور القديمة غير صحيحة",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
@@ -79,8 +81,8 @@ class _changePasswordPageState extends State<changePasswordPage> {
               textAlign: TextAlign.right,
               controller: old,
               decoration: InputDecoration(
-                  labelText: 'كلمة السر القديمة',
-                  hintText: 'أدخل كلمة السر الحالية',
+                  labelText: 'كلمة المرور القديمة',
+                  hintText: 'أدخل كلمة المرور الحالية',
                   helperText: ""),
               validator: (String? value) {
                 if (value!.isEmpty) {
@@ -103,8 +105,8 @@ class _changePasswordPageState extends State<changePasswordPage> {
               textAlign: TextAlign.right,
               controller: nnew,
               decoration: InputDecoration(
-                  labelText: 'كلمة السر الجديدة',
-                  hintText: 'أدخل كلمة سر جديدة',
+                  labelText: 'كلمة المرور الجديدة',
+                  hintText: 'أدخل كلمة مرور جديدة',
                   helperText: ""),
               validator: (String? value) {
                 RegExp regex = RegExp(
@@ -112,9 +114,9 @@ class _changePasswordPageState extends State<changePasswordPage> {
                 if (value!.isEmpty || nnew.text.trim() == "") {
                   return "الحقل مطلوب";
                 } else if (!regex.hasMatch(value)) {
-                  return "كلمة السر يجب أن تحتوي على حرف كبير، حرف صغير، ورقم";
+                  return "كلمة المرور يجب أن تحتوي على حرف كبير، حرف صغير، ورقم";
                 } else if (value.length < 8) {
-                  return "ادخل كلمة سر مكوّنة من 8 خانات على الأقل";
+                  return "ادخل كلمة مرور مكوّنة من 8 خانات على الأقل";
                 }
                 return null;
               },
@@ -133,8 +135,8 @@ class _changePasswordPageState extends State<changePasswordPage> {
               textAlign: TextAlign.right,
               controller: confirmed,
               decoration: InputDecoration(
-                  labelText: 'تأكيد كلمة السر الجديدة',
-                  hintText: 'أعد إدخال كلمة السر الجديدة',
+                  labelText: 'تأكيد كلمة المرور الجديدة',
+                  hintText: 'أعد إدخال كلمة المرور الجديدة',
                   helperText: ""),
               validator: (String? value) {
                 if (value!.isEmpty) {
@@ -158,7 +160,7 @@ class _changePasswordPageState extends State<changePasswordPage> {
           elevation: 0,
           toolbarHeight: 90,
           title: Text(
-            "تغيير كلمة السر",
+            "تغيير كلمة المرور",
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
           ),
           centerTitle: true,
@@ -221,12 +223,21 @@ class _changePasswordPageState extends State<changePasswordPage> {
                         '  حفظ   ',
                         style: TextStyle(color: kPrimaryColor, fontSize: 20),
                       ),
-                      onPressed: () {
+                      onPressed: () async {
                         if (!_formKey.currentState!.validate()) {
                           return;
                         }
-                        updatePassword();
-                        _formKey.currentState!.save();
+                        final action = await AlertDialogs.yesCancelDialog(
+                            context,
+                            'تغيير كلمة المرور',
+                            'هل أنت متأكد من تغيير كلمة المرور؟');
+                        if (action == DialogsAction.yes) {
+                          setState(() => tappedYes = true);
+                          updatePassword();
+                          _formKey.currentState!.save();
+                        } else {
+                          setState(() => tappedYes = false);
+                        }
                       },
                     ),
                   ),

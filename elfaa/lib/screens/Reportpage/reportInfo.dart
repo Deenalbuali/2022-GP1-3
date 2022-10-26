@@ -94,7 +94,7 @@ class _reportInfoState extends State<reportInfo> {
                                   width: 120,
                                   child: Center(
                                       child: Text(
-                                    "..." "يتم البحث",
+                                    "..." "جاري البحث",
                                     style: TextStyle(
                                         color: Color(0xff919296),
                                         fontSize: 15,
@@ -209,7 +209,7 @@ class _reportInfoState extends State<reportInfo> {
                             width: 150,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                primary: Colors.red, // background
+                                backgroundColor: Colors.red, // background
                                 // foreground
                               ),
                               child: Text(
