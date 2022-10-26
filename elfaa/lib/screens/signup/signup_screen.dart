@@ -78,11 +78,10 @@ class _SignupPageState extends State<SignupPage> {
                         textAlign: TextAlign.right,
                         controller: email,
                         decoration: const InputDecoration(
-                          suffixIcon: Icon(Icons.email_outlined,
-                              color: Color(0xFFFD8601)),
-                          labelText: "البريد الإلكتروني",
-                          hintText: "example@example.com"
-                        ),
+                            suffixIcon: Icon(Icons.email_outlined,
+                                color: Color(0xFFFD8601)),
+                            labelText: "البريد الإلكتروني",
+                            hintText: "example@example.com"),
                         validator: (value) {
                           if (value!.isEmpty || email.text.trim() == "") {
                             return "الحقل مطلوب";
@@ -126,18 +125,17 @@ class _SignupPageState extends State<SignupPage> {
                         obscureText: true,
                         controller: pass,
                         decoration: const InputDecoration(
-                          suffixIcon: Icon(Icons.lock_outline,
-                              color: Color(0xFFFD8601)),
-                          labelText: "كلمة المرور",
-                          hintText: "أدخل كلمة المرور",
-                          helperText: " كلمة المرور يجب أن تحتوي على الأقل:"
+                            suffixIcon: Icon(Icons.lock_outline,
+                                color: Color(0xFFFD8601)),
+                            labelText: "كلمة المرور",
+                            hintText: "أدخل كلمة المرور",
+                            helperText: " كلمة المرور يجب أن تحتوي على الأقل:"
                                 "\n"
                                 "*حرف كبير باللغة الإنجليزية"
                                 "\n"
                                 "*حرف صغير باللغة الإنجليزية"
                                 "\n"
-                                "*رقم "
-                        ),
+                                "*رقم "),
                         validator: (value) {
                           RegExp regex = RegExp(
                               r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])'); //Min 1 uppercase, 1 lowercase and 1 numeric number
@@ -167,7 +165,7 @@ class _SignupPageState extends State<SignupPage> {
                               .doc(user);
                           //add user details
                           addUserDetails(name.text.trim(), email.text.trim(),
-                              int.parse(phoneNo.text.trim()), user);
+                              phoneNo.text.trim(), user);
                           Fluttertoast.showToast(
                               msg: "تم تسجيل حسابك بنجاح",
                               toastLength: Toast.LENGTH_SHORT,
@@ -217,7 +215,7 @@ class _SignupPageState extends State<SignupPage> {
   }
 
   Future addUserDetails(
-      String firstname, String email, int phoneno, String id) async {
+      String firstname, String email, String phoneno, String id) async {
     await FirebaseFirestore.instance.collection('users').doc(id).set(({
           'name': firstname,
           'email': email,
