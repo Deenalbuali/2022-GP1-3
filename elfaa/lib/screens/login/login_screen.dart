@@ -1,4 +1,3 @@
-import 'package:elfaa/components/background.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:elfaa/screens/signup/signup_screen.dart';
