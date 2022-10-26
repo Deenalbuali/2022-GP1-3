@@ -1,6 +1,6 @@
 # 2022-GP1-3
-Project title:
+Project title: Elfaa 
 Introduction (showing the goal)
-Technology (e.g., programming language)
+Technology: This application programmed using Dart | Flutter framework.
 Launching instructions (briefly).
 Adding Sprint-1 files
