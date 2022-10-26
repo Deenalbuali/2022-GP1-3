@@ -73,7 +73,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         decoration: const InputDecoration(
                           suffixIcon: Icon(Icons.lock_outline,
                               color: Color(0xFFFD8601)),
-                          labelText: "كلمة السر",
+                          labelText: "كلمة المرور",
                         ),
                         validator: (value) {
                           if (value!.isEmpty || pass.text.trim() == "") {
@@ -100,7 +100,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           );
                         } catch (e, stack) {
                           Fluttertoast.showToast(
-                              msg: "البريد الإلكتروني أو كلمة السر غير صحيحة",
+                              msg: "البريد الإلكتروني أو كلمة المرور غير صحيحة",
                               toastLength: Toast.LENGTH_SHORT,
                               backgroundColor: Colors.red,
                               fontSize: 16.0,

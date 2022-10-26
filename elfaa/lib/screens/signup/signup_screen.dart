@@ -126,7 +126,14 @@ class _SignupPageState extends State<SignupPage> {
                         decoration: const InputDecoration(
                           suffixIcon: Icon(Icons.lock_outline,
                               color: Color(0xFFFD8601)),
-                          labelText: "كلمة السر",
+                          labelText: "كلمة المرور",
+                          helperText: " كلمة المرور يجب أن تحتوي على الأقل:"
+                                "\n"
+                                "*حرف كبير باللغة الإنجليزية"
+                                "\n"
+                                "*حرف صغير باللغة الإنجليزية"
+                                "\n"
+                                "*رقم "
                         ),
                         validator: (value) {
                           RegExp regex = RegExp(
@@ -134,19 +141,13 @@ class _SignupPageState extends State<SignupPage> {
                           if (value!.isEmpty || pass.text.trim() == "") {
                             return "الحقل مطلوب";
                           } else if (!regex.hasMatch(value)) {
-                            return ":كلمة السر يجب أن تحتوي على "
-                                "\n"
-                                "*حرف كبير باللغة الإنجليزية"
-                                "\n"
-                                "*حرف صغير"
-                                "\n"
-                                "*رقم واحد على الأقل";
+                            return "أدخل كلمة مرور صالحة";
                           } else if (value.length < 8) {
-                            return "ادخل كلمة سر مكوّنة من 8 خانات على الأقل";
+                            return "أدخل كلمة مرور مكوّنة من 8 خانات على الأقل";
                           }
                         },
                       )),
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 10),
                   ElevatedButton(
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {

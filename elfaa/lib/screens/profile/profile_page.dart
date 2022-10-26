@@ -217,7 +217,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       ),
                     ),
                     label: Text(
-                      '  عدل معلوماتي   ',
+                      '  عدّل معلوماتي   ',
                       style: TextStyle(color: kPrimaryColor, fontSize: 20),
                     ),
                     onPressed: () async {
@@ -281,7 +281,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       minimumSize: Size(320, 56),
                     ),
                     label: Text(
-                      '                            تغيير كلمة السر',
+                      '                            تغيير كلمة المرور',
                       style: TextStyle(color: kPrimaryColor, fontSize: 20),
                     ),
                     onPressed: () {
