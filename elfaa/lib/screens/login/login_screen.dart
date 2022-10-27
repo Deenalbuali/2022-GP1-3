@@ -4,6 +4,7 @@ import 'package:elfaa/screens/signup/signup_screen.dart';
 import 'package:elfaa/constants.dart';
 import 'package:elfaa/screens/Homepage/navPage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:elfaa/screens/login/ForgotPasswordPage.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -19,7 +20,7 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFf5f5f5),
+      backgroundColor: Color(0xFFfafafa),
       appBar: AppBar(
         iconTheme: IconThemeData(
           color: kPrimaryColor,
@@ -83,7 +84,18 @@ class _SignInScreenState extends State<SignInScreen> {
                           }
                         },
                       )),
-                  const SizedBox(height: 50),
+                  const SizedBox(height: 20),
+                  GestureDetector(
+                    child: Text('نسيت كلمة المرور؟',
+                        style: TextStyle(
+                          fontSize: 17,
+                          color: Color.fromARGB(255, 129, 129, 129),
+                        )),
+                    onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => ForgotPasswordPage(),
+                    )),
+                  ),
+                  const SizedBox(height: 10),
                   ElevatedButton(
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
