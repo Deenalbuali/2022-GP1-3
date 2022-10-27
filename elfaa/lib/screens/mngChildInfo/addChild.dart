@@ -60,133 +60,6 @@ class _addChildState extends State<addChild> {
             color: kPrimaryColor,
           )),
         ),
-<<<<<<< HEAD
-        body: Container(
-          child: SingleChildScrollView(
-            child: Form(
-              key: _formKey,
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(
-                    20, MediaQuery.of(context).size.height * 0.04, 20, 0),
-                child: Column(
-                  children: <Widget>[
-                    childImg(),
-                    const SizedBox(height: 40),
-                    Directionality(
-                        textDirection: TextDirection.rtl,
-                        child: TextFormField(
-                          textAlign: TextAlign.right,
-                          controller: controllerName,
-                          decoration: const InputDecoration(
-                            suffixIcon: Icon(Icons.child_care,
-                                color: Color(0xFFFD8601)),
-                            labelText: "اسم الطفل",
-                          ),
-                          validator: (value) {
-                            if (value!.isEmpty ||
-                                controllerName.text.trim() == "") {
-                              return "الحقل مطلوب";
-                            }
-                          },
-                        )),
-                    const SizedBox(height: 20),
-                    Directionality(
-                        textDirection: TextDirection.rtl,
-                        child: TextFormField(
-                            textAlign: TextAlign.right,
-                            controller: controllerBirthday,
-                            decoration: const InputDecoration(
-                              suffixIcon: Icon(Icons.calendar_today,
-                                  color: Color(0xFFFD8601)),
-                              labelText: "تاريخ الميلاد",
-                              hintText: "DD-MM-YYYY",
-                            ),
-                            validator: (value) {
-                              if (value!.isEmpty ||
-                                  controllerBirthday.text.trim() == "") {
-                                return "الحقل مطلوب";
-                              }
-                            },
-                            readOnly: true,
-                            onTap: () async {
-                              DateTime? pickedDate = await showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime(
-                                    2000), //DateTime.now() - not to allow to choose before today.
-                                lastDate: DateTime(2101),
-                                builder: (context, child) {
-                                  return Theme(
-                                    data: ThemeData.light().copyWith(
-                                      primaryColor: const Color(0xFF429EB2),
-                                      colorScheme: const ColorScheme.light(
-                                          primary: Color(0xFF429EB2)),
-                                      buttonTheme: const ButtonThemeData(
-                                          textTheme: ButtonTextTheme.primary),
-                                    ),
-                                    child: child!,
-                                  );
-                                },
-                              );
-
-                              if (pickedDate != null) {
-                                print(
-                                    pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
-                                String formattedDate =
-                                    DateFormat('yyyy-MM-dd').format(pickedDate);
-                                print(
-                                    formattedDate); //formatted date output using intl package =>  2021-03-16
-                                //you can implement different kind of Date Format here according to your requirement
-
-                                setState(() {
-                                  controllerBirthday.text =
-                                      formattedDate; //set output date to TextField value.
-                                });
-                              }
-                            })),
-                    const SizedBox(height: 20),
-                    Directionality(
-                        textDirection: TextDirection.rtl,
-                        child: TextFormField(
-                          textAlign: TextAlign.right,
-                          controller: controllerHeight,
-                          keyboardType: TextInputType.number,
-                          decoration: const InputDecoration(
-                            suffixIcon: Icon(Icons.accessibility_new,
-                                color: Color(0xFFFD8601)),
-                            labelText: "الطول",
-                          ),
-                          validator: (value) {
-                            if (value!.isEmpty ||
-                                controllerHeight.text.trim() == "") {
-                              return "الحقل مطلوب";
-                            }
-                          },
-                        )),
-                    const SizedBox(height: 20),
-                    Container(
-                      width: 400,
-                      child: ElevatedButton(
-                          child: const Text('ربط جهاز التتبع'),
-                          onPressed: null,
-                          style: ElevatedButton.styleFrom(
-                              textStyle: const TextStyle(fontSize: 22))),
-                    ),
-                    const SizedBox(height: 40),
-                    ElevatedButton(
-                        child: const Text('إضافة'),
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            final child = Child(
-                                name: controllerName.text,
-                                height: int.parse(controllerHeight.text),
-                                birthday:
-                                    DateTime.parse(controllerBirthday.text));
-
-                            addChild(child);
-
-                            Navigator.pop(context);
-=======
         body: SingleChildScrollView(
           child: Form(
             key: _formKey,
@@ -211,18 +84,9 @@ class _addChildState extends State<addChild> {
                           if (value!.isEmpty ||
                               controllerName.text.trim() == "") {
                             return "الحقل مطلوب";
->>>>>>> parent of 1f6acfd (EditProfileWorks)
                           }
                           return null;
                         },
-<<<<<<< HEAD
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              const Color(0xFF429EB2)),
-                        )),
-                  ],
-                ),
-=======
                       )),
                   const SizedBox(height: 20),
                   Directionality(
@@ -324,7 +188,6 @@ class _addChildState extends State<addChild> {
                       ),
                       child: const Text('إضافة')),
                 ],
->>>>>>> parent of 1f6acfd (EditProfileWorks)
               ),
             ),
           ),
@@ -399,15 +262,6 @@ class _addChildState extends State<addChild> {
     if (image == null) return;
     String uniqueFileName = DateTime.now().millisecond.toString();
 
-<<<<<<< HEAD
-    if (pickedFile == null) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text("wth?")));
-      return null;
-    }
-
-=======
->>>>>>> parent of 1f6acfd (EditProfileWorks)
     setState(() {
       _img = image;
     });
