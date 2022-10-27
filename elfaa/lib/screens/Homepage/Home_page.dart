@@ -3,12 +3,10 @@ import 'package:elfaa/screens/Homepage/childrenList.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-<<<<<<< Updated upstream
-import 'package:elfaa/constants.dart';
-=======
-import 'package:elfaa/screens/profile/profile_page.dart';
 
->>>>>>> Stashed changes
+import 'package:elfaa/constants.dart';
+
+import 'package:elfaa/screens/profile/profile_page.dart';
 
 int index = 2;
 final Color color1 = Color(0xFF429EB2);
@@ -24,7 +22,6 @@ class _HomePageState extends State<HomePage> {
   //const HomePage({super.key});
   String _name = "";
   // List<Object> _historyList = [];
- 
 
   @override
   Future<void> getCurrentUser() async {
@@ -188,12 +185,8 @@ class _HomePageState extends State<HomePage> {
                       fontSize: 28.0,
                       fontWeight: FontWeight.w700),
                 ),
-<<<<<<< Updated upstream
                 SizedBox(height: 1),
-=======
-                
                 SizedBox(height: 10.0),
->>>>>>> Stashed changes
               ],
             ),
           )
