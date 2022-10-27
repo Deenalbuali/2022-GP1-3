@@ -242,6 +242,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             'email': email.text,
                             'phoneNo': phoneNo.text,
                           });
+                          await user.updateEmail(email.text); 
                           Fluttertoast.showToast(
                               msg: "تم تعديل البيانات بنجاح",
                               toastLength: Toast.LENGTH_SHORT,
