@@ -79,6 +79,7 @@ class _changePasswordPageState extends State<changePasswordPage> {
             padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
             child: TextFormField(
               textAlign: TextAlign.right,
+              obscureText: true,
               controller: old,
               decoration: InputDecoration(
                   labelText: 'كلمة المرور القديمة',
@@ -103,6 +104,7 @@ class _changePasswordPageState extends State<changePasswordPage> {
             padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
             child: TextFormField(
               textAlign: TextAlign.right,
+              obscureText: true,
               controller: nnew,
               decoration: InputDecoration(
                   labelText: 'كلمة المرور الجديدة',
@@ -133,6 +135,7 @@ class _changePasswordPageState extends State<changePasswordPage> {
             padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
             child: TextFormField(
               textAlign: TextAlign.right,
+              obscureText: true,
               controller: confirmed,
               decoration: InputDecoration(
                   labelText: 'تأكيد كلمة المرور الجديدة',

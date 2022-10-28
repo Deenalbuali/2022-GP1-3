@@ -25,7 +25,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           backgroundColor: Color(0xFFFFFFFF),
           elevation: 0,
           title: const Text(
-            "اعادة تعيين كلمة المرور",
+            "إعادة تعيين كلمة المرور",
             style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -85,7 +85,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                   resetPassword();
                                 }
                               },
-                              child: Text("ارسال",
+                              child: Text("إرسال",
                                   style: TextStyle(color: Colors.white)),
                             ),
                           ],
@@ -95,7 +95,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   Future resetPassword() async {
     await FirebaseAuth.instance.sendPasswordResetEmail(email: email.text);
     Fluttertoast.showToast(
-        msg: "تم ارسال البريد الإلكتروني الخاص باعادة تعيين كلمة المرور بنجاح",
+        msg: "تم إرسال البريد الإلكتروني الخاص بإعادة تعيين كلمة المرور بنجاح",
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 7,

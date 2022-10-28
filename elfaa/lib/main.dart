@@ -1,13 +1,7 @@
-//import 'package:elfaa/screens/login/login_screen.dart';
-//import 'package:elfaa/screens/notificationPage/Notepage.dart';
-import 'package:elfaa/screens/profile/profile_page.dart';
 import 'package:elfaa/screens/welcome/welcome.dart';
+import 'package:elfaa/screens/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
-//import 'package:elfaa/screens/Homepage/Home_page.dart';
-//import 'package:elfaa/screens/Homepage/navPage.dart';
 import 'package:flutter/material.dart';
-//import 'package:cloud_firestore/cloud_firestore.dart';
-//import 'package:elfaa/screens/profile/profile_page.dart';
 import 'constants.dart';
 
 Future main() async {
@@ -62,7 +56,7 @@ class MyApp extends StatelessWidget {
           hintStyle: TextStyle(color: Colors.grey),
         ),
       ),
-      home: WelcomeScreen(),
+      home: SplashScreen(),
     );
   }
 }

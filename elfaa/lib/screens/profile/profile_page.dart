@@ -228,6 +228,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           context,
                           'تعديل معلومات الحساب الشخصي',
                           'هل أنت متأكد من حفظ التعديل؟');
+                        FocusManager.instance.primaryFocus?.unfocus();
                       if (action2 == DialogsAction.yes) {
                         setState(() => tappedYes = true);
                         final FirebaseAuth _auth = await FirebaseAuth.instance;
