@@ -23,7 +23,7 @@ class _addChildState extends State<addChild> {
 //profile image variables
   XFile? _img;
   final ImagePicker _picker = ImagePicker();
-
+  String imgURL ='';
 //information form controllers
   final controllerName = TextEditingController();
   final controllerBirthday = TextEditingController();
@@ -169,9 +169,14 @@ class _addChildState extends State<addChild> {
                   ),
                   const SizedBox(height: 40),
                   ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async{
+                        if(imgURL.isEmpty){
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(imgURL+'ihih')));
+                          return;
+                        }
                         if (_formKey.currentState!.validate()) {
                           final child = Child(
+                              image: imgURL,
                               name: controllerName.text,
                               height: int.parse(controllerHeight.text),
                               birthday:
@@ -261,7 +266,7 @@ class _addChildState extends State<addChild> {
     final image = await _picker.pickImage(source: source);
     if (image == null) return;
     String uniqueFileName = DateTime.now().millisecond.toString();
-
+    
     setState(() {
       _img = image;
     });
@@ -271,7 +276,10 @@ class _addChildState extends State<addChild> {
 
     Reference refImg = refDir.child(uniqueFileName);
     try {
-      refImg.putFile(File(_img!.path));
+      //store the file
+      await refImg.putFile(File(_img!.path));
+      //succedss: get the url 
+      imgURL = await refImg.getDownloadURL();
     } catch (e) {
       //error report
     }
@@ -297,12 +305,13 @@ class _addChildState extends State<addChild> {
 
 //child class
 class Child {
+  final String image;
   final String name;
   final int height;
   final DateTime birthday;
 
-  Child({required this.name, required this.height, required this.birthday});
+  Child({required this.image, required this.name, required this.height, required this.birthday});
 
   Map<String, dynamic> toJson() =>
-      {'name': name, 'height': height, 'birthday': birthday};
+      {'image' : image, 'name': name, 'height': height, 'birthday': birthday};
 }
