@@ -23,7 +23,7 @@ class _addChildState extends State<addChild> {
 //profile image variables
   XFile? _img;
   final ImagePicker _picker = ImagePicker();
-  String imgURL ='';
+  String imgURL = '';
 //information form controllers
   final controllerName = TextEditingController();
   final controllerBirthday = TextEditingController();
@@ -31,6 +31,9 @@ class _addChildState extends State<addChild> {
 
 //globalKey
   final _formKey = GlobalKey<FormState>();
+
+  //Loading for uploading
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -76,9 +79,10 @@ class _addChildState extends State<addChild> {
                         textAlign: TextAlign.right,
                         controller: controllerName,
                         decoration: const InputDecoration(
-                          suffixIcon: Icon(Icons.child_care,
-                              color: Color(0xFFFD8601)),
+                          suffixIcon:
+                              Icon(Icons.child_care, color: Color(0xFFFD8601)),
                           labelText: "اسم الطفل",
+                          hintText: "مثال: أسماء",
                         ),
                         validator: (value) {
                           if (value!.isEmpty ||
@@ -98,7 +102,7 @@ class _addChildState extends State<addChild> {
                             suffixIcon: Icon(Icons.calendar_today,
                                 color: Color(0xFFFD8601)),
                             labelText: "تاريخ الميلاد",
-                            hintText: "DD-MM-YYYY",
+                            hintText: "اختر من التقويم",
                           ),
                           validator: (value) {
                             if (value!.isEmpty ||
@@ -112,9 +116,8 @@ class _addChildState extends State<addChild> {
                             DateTime? pickedDate = await showDatePicker(
                               context: context,
                               initialDate: DateTime.now(),
-                              firstDate: DateTime(
-                                  2010), //DateTime.now() - not to allow to choose before today.
-                              lastDate: DateTime(2101),
+                              firstDate: DateTime(1920),
+                              lastDate: DateTime.now(),
                               builder: (context, child) {
                                 return Theme(
                                   data: ThemeData.light().copyWith(
@@ -149,6 +152,7 @@ class _addChildState extends State<addChild> {
                           suffixIcon: Icon(Icons.accessibility_new,
                               color: Color(0xFFFD8601)),
                           labelText: "الطول",
+                          hintText: "بالسنتيمترات",
                         ),
                         validator: (value) {
                           if (value!.isEmpty ||
@@ -169,29 +173,43 @@ class _addChildState extends State<addChild> {
                   ),
                   const SizedBox(height: 40),
                   ElevatedButton(
-                      onPressed: () async{
-                        if(imgURL.isEmpty){
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(imgURL+'ihih')));
+                      onPressed: () async {
+                        if (_img == null) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('يرجى اختيار صورة')));
                           return;
                         }
+
                         if (_formKey.currentState!.validate()) {
-                          final child = Child(
-                              image: imgURL,
-                              name: controllerName.text,
-                              height: int.parse(controllerHeight.text),
-                              birthday:
-                                  DateTime.parse(controllerBirthday.text));
-
-                          addChild(child);
-
-                          Navigator.pop(context);
+                          if (imgURL.isEmpty) {
+                            setState(() {
+                              isLoading = true;
+                            });
+                          }
+                          Future.delayed(Duration(seconds: 8), () {
+                            final child = Child(
+                                image: imgURL,
+                                name: controllerName.text,
+                                height: int.parse(controllerHeight.text),
+                                birthday:
+                                    DateTime.parse(controllerBirthday.text));
+                            addChild(child);
+                            Navigator.pop(context);
+                            setState(() {
+                              isLoading = false;
+                            });
+                          });
                         }
                       },
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                            const Color(0xFF429EB2)),
+                        backgroundColor:
+                            MaterialStateProperty.all(const Color(0xFF429EB2)),
                       ),
-                      child: const Text('إضافة')),
+                      child: isLoading
+                          ? CircularProgressIndicator(
+                              color: Colors.white,
+                            )
+                          : const Text('إضافة')),
                 ],
               ),
             ),
@@ -266,7 +284,7 @@ class _addChildState extends State<addChild> {
     final image = await _picker.pickImage(source: source);
     if (image == null) return;
     String uniqueFileName = DateTime.now().millisecond.toString();
-    
+
     setState(() {
       _img = image;
     });
@@ -278,7 +296,7 @@ class _addChildState extends State<addChild> {
     try {
       //store the file
       await refImg.putFile(File(_img!.path));
-      //succedss: get the url 
+      //succedss: get the url
       imgURL = await refImg.getDownloadURL();
     } catch (e) {
       //error report
@@ -310,8 +328,12 @@ class Child {
   final int height;
   final DateTime birthday;
 
-  Child({required this.image, required this.name, required this.height, required this.birthday});
+  Child(
+      {required this.image,
+      required this.name,
+      required this.height,
+      required this.birthday});
 
   Map<String, dynamic> toJson() =>
-      {'image' : image, 'name': name, 'height': height, 'birthday': birthday};
+      {'image': image, 'name': name, 'height': height, 'birthday': birthday};
 }
