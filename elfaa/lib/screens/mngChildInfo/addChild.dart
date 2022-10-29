@@ -7,8 +7,7 @@ import 'package:image_picker/image_picker.dart';
 // ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart' hide TextDirection;
 import 'package:elfaa/constants.dart';
-
-//import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:firebase_core/firebase_core.dart';
 //import 'package:path/path.dart' hide context;
 //import 'package:elfaa/screens/mngChildInfo/imgStorage.dart';
@@ -32,12 +31,24 @@ class _addChildState extends State<addChild> {
 //globalKey
   final _formKey = GlobalKey<FormState>();
 
+//Parent info
+String pID ='';
+Future<void> getCurrentP() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final User? user = await _auth.currentUser;
+    final uid = user!.uid;
+    setState(() {
+      pID=uid;
+    });
+  }
+
   //Loading for uploading
   bool isLoading = false;
 
   @override
   void initState() {
     controllerBirthday.text = ""; //set the initial value of text field
+    getCurrentP();
     super.initState();
   }
 
@@ -186,7 +197,7 @@ class _addChildState extends State<addChild> {
                               isLoading = true;
                             });
                           }
-                          Future.delayed(Duration(seconds: 8), () {
+                          Future.delayed(Duration(seconds: 12), () {
                             final child = Child(
                                 image: imgURL,
                                 name: controllerName.text,
@@ -310,8 +321,8 @@ class _addChildState extends State<addChild> {
   Future addChild(Child child) async {
     //Reference to document
     final docChild = FirebaseFirestore.instance
-        .collection('parent')
-        .doc('Renad')
+        .collection('users')
+        .doc(pID)
         .collection('children')
         .doc();
 
