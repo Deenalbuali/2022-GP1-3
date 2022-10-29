@@ -3,10 +3,7 @@ import 'package:elfaa/screens/Homepage/childrenList.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:elfaa/constants.dart';
-
-import 'package:elfaa/screens/profile/profile_page.dart';
 
 int index = 2;
 final Color color1 = Color(0xFF429EB2);
@@ -20,11 +17,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   //const HomePage({super.key});
-  String _name = "";
+  String name = "";
   // List<Object> _historyList = [];
 
-  @override
-  Future<void> getCurrentUser() async {
+  Future<void> getCurrentUserr() async {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     final User? user = await _auth.currentUser;
     final uid = user!.uid;
@@ -33,11 +29,19 @@ class _HomePageState extends State<HomePage> {
         .doc(uid)
         .get()
         .then((DocumentSnapshot<Map<String, dynamic>> snapshot) {
-      _name = snapshot['name'];
+      name = snapshot['name'];
     });
   }
 
   @override
+
+  // initState()
+  void initState() {
+    // get current user
+    getCurrentUserr();
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFfafafa),
@@ -69,33 +73,32 @@ class _HomePageState extends State<HomePage> {
                     icon: Icon(Icons.add),
                     color: Colors.white,
                   )),
+              SizedBox(
+                width: 250,
+              ),
+              Container(
+                  decoration: BoxDecoration(
+                      color: Colors.grey,
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey,
+                            offset: Offset(1.0, 1.0),
+                            blurRadius: 4.0)
+                      ]),
+                  child: IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => addChild()),
+                      );
+                    },
+                    icon: Icon(Icons.qr_code),
+                    color: Colors.white,
+                  )),
             ],
           ),
           SizedBox(height: 15),
-          Directionality(
-            textDirection: TextDirection.ltr,
-            child: ElevatedButton.icon(
-              icon: Icon(
-                Icons.qr_code,
-                color: kPrimaryColor,
-              ),
-              style: ElevatedButton.styleFrom(
-                textStyle: TextStyle(fontSize: 22),
-                elevation: 0.9,
-                shadowColor: Color.fromARGB(255, 0, 0, 0),
-                backgroundColor: Color(0xFFE5E5E5),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0)),
-                maximumSize: Size(335, 56),
-                minimumSize: Size(335, 56),
-              ),
-              label: Text(
-                '          QR رمز الاستجابة السريعة',
-                style: TextStyle(color: kPrimaryColor, fontSize: 20),
-              ),
-              onPressed: () {},
-            ),
-          ),
           Padding(
             padding: const EdgeInsets.all(25.0),
             child: Column(
@@ -179,13 +182,20 @@ class _HomePageState extends State<HomePage> {
               //crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  "! مرحبًا" " " + _name,
+                  "! مرحبًا" " ",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 28.0,
                       fontWeight: FontWeight.w700),
                 ),
                 SizedBox(height: 1),
+                Text(
+                  name,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 28.0,
+                      fontWeight: FontWeight.w700),
+                ),
                 SizedBox(height: 10.0),
               ],
             ),
@@ -196,7 +206,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   //void initState() {
-  //  getCurrentUser();
+  // getCurrentUser();
 
   // final user = FirebaseAuth.instance.currentUser!.uid;
   // final userRef = FirebaseFirestore.instance
@@ -205,7 +215,7 @@ class _HomePageState extends State<HomePage> {
   //   .collection('children')
   //  .doc();
   // _buildHeader();
-  // super.initState();
+  //   super.initState();
   // }
 
   void updateUI() {
