@@ -50,7 +50,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                     fontWeight: FontWeight.w600,
                                     fontSize: 25)),
                             Text(
-                                "الرجاء ادخال البريد الإلكتروني المرتبط بحسابك",
+                                "الرجاء إدخال البريد الإلكتروني المرتبط بحسابك",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: Color.fromARGB(255, 129, 129, 129),
