@@ -9,6 +9,7 @@ int index = 2;
 final Color color1 = Color(0xFF429EB2);
 final Color color2 = Color(0xFF429EB2);
 final Color color3 = Color(0xFF429EB2);
+String username = "";
 
 class HomePage extends StatefulWidget {
   @override
@@ -17,8 +18,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   //const HomePage({super.key});
-  String name = "";
-  // List<Object> _historyList = [];
+
+  List<Object> childrenList = [];
 
   Future<void> getCurrentUserr() async {
     final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -29,7 +30,7 @@ class _HomePageState extends State<HomePage> {
         .doc(uid)
         .get()
         .then((DocumentSnapshot<Map<String, dynamic>> snapshot) {
-      name = snapshot['name'];
+      username = snapshot['name'];
     });
   }
 
@@ -190,7 +191,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 SizedBox(height: 1),
                 Text(
-                  name,
+                  username,
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 28.0,
@@ -218,9 +219,17 @@ class _HomePageState extends State<HomePage> {
   //   super.initState();
   // }
 
-  void updateUI() {
+  Future<void> getChildrenList() async {
+    final user = FirebaseAuth.instance.currentUser!.uid;
+    var data = await FirebaseFirestore.instance
+        .collection('parent')
+        .doc(user)
+        .collection('children')
+        .get();
+
     setState(() {
-      //You can also make changes to your state here.
+      childrenList =
+          List.from(data.docs.map((doc) => childrenList.fromSnapshot(doc)));
     });
   }
 }

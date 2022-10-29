@@ -19,11 +19,6 @@ class _NavPageState extends State<NavPage> {
   final navigationKey = GlobalKey<CurvedNavigationBarState>();
   final screens = [EditProfilePage(), ReportPage(), NotePage(), HomePage()];
   int index = 3;
-  void initState() {
-    // get current user
-
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
