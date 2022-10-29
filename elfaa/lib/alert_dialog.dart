@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:elfaa/constants.dart';
 
-enum DialogsAction {yes, cancel}
+enum DialogsAction { yes, cancel }
 
 class AlertDialogs {
   static Future<DialogsAction> yesCancelDialog(
@@ -14,32 +14,48 @@ class AlertDialogs {
         barrierDismissible: false,
         builder: (BuildContext context) {
           return AlertDialog(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-              title: Text(title),
-              content: Text(body),
-              actions: <Widget>[
-                TextButton(
-                  onPressed: () =>
-                      Navigator.of(context).pop(DialogsAction.cancel),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            title: Center(child: Text(title)),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Container(
                   child: Text(
-                    'إلغاء', textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Color(0xFF9C0000),
-                        fontWeight: FontWeight.bold), // TextStyle
+                    body,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(),
                   ),
                 ),
-                 TextButton(
-                  onPressed: () =>
-                      Navigator.of(context).pop(DialogsAction.yes),
-                  child: Text(
-                    'تأكيد', textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: kPrimaryColor,
-                        fontWeight: FontWeight.bold), // TextStyle
-                  ),
-                ),
-              ]);
+                SizedBox(height: 20),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      TextButton(
+                        onPressed: () =>
+                            Navigator.of(context).pop(DialogsAction.cancel),
+                        child: Text(
+                          'إلغاء',
+                          style: TextStyle(
+                              color: Color(0xFF9C0000),
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () =>
+                            Navigator.of(context).pop(DialogsAction.yes),
+                        child: Text(
+                          'تأكيد',
+                          style: TextStyle(
+                              color: kPrimaryColor,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ])
+              ],
+            ),
+          );
         });
-        return (action != null) ? action : DialogsAction.cancel;
+    return (action != null) ? action : DialogsAction.cancel;
   }
 }

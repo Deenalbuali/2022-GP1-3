@@ -24,7 +24,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           backgroundColor: Color(0xFFFFFFFF),
           elevation: 0,
           title: const Text(
-            "اعادة تعيين كلمة المرور",
+            "إعادة تعيين كلمة المرور",
             style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -38,39 +38,53 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                     key: _formKey,
                     child: Padding(
                         padding: EdgeInsets.fromLTRB(20,
-                            MediaQuery.of(context).size.height * 0.04, 20, 0),
+                            MediaQuery.of(context).size.height * 0.1, 20, 0),
                         child: Column(
                           children: <Widget>[
-                            const SizedBox(height: 40),
+                            logoWidget("assets/images/forgot.png"),
+                            Text("نسيت كلمة المرور؟",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: kPrimaryColor,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 25)),
+                            Text(
+                                "الرجاء إدخال البريد الإلكتروني المرتبط بحسابك",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 129, 129, 129),
+                                    fontSize: 17)),
+                            const SizedBox(height: 50),
                             Directionality(
                                 textDirection: TextDirection.rtl,
                                 child: TextFormField(
-                                    textAlign: TextAlign.right,
-                                    controller: email,
-                                    decoration: const InputDecoration(
-                                      suffixIcon: Icon(Icons.email_outlined,
-                                          color: Color(0xFFFD8601)),
-                                      labelText: "البريد الإلكتروني",
-                                      hintText: "example@example.com",
-                                    ),
-                                    validator: (value) {
-                                      if (value!.isEmpty ||
-                                          email.text.trim() == "") {
-                                        return "الحقل مطلوب";
-                                      } else if (!RegExp(
-                                              r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
-                                          .hasMatch(value)) {
-                                        return 'أدخل بريد إلكتروني صالح';
-                                      }
-                                    })),
-                            const SizedBox(height: 30),
+                                  textAlign: TextAlign.right,
+                                  controller: email,
+                                  decoration: const InputDecoration(
+                                    suffixIcon: Icon(Icons.email_outlined,
+                                        color: Color(0xFFFD8601)),
+                                    labelText: "البريد الإلكتروني",
+                                    hintText: "أدخل بريدك الإلكتروني",
+                                  ),
+                                  validator: (value) {
+                                    if (value!.isEmpty ||
+                                        email.text.trim() == "") {
+                                      return "الحقل مطلوب";
+                                    } else if (!RegExp(
+                                            r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+                                        .hasMatch(value)) {
+                                      return 'أدخل بريد إلكتروني صالح';
+                                    }
+                                  },
+                                )),
+                            const SizedBox(height: 40),
                             ElevatedButton(
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
                                   resetPassword();
                                 }
                               },
-                              child: Text("ارسال",
+                              child: Text("إرسال",
                                   style: TextStyle(color: Colors.white)),
                             ),
                           ],
@@ -80,12 +94,22 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   Future resetPassword() async {
     await FirebaseAuth.instance.sendPasswordResetEmail(email: email.text);
     Fluttertoast.showToast(
-        msg: "تم ارسال البريد الإلكتروني الخاص باعادة تعيين كلمة المرور بنجاح",
+        msg: "تم إرسال البريد الإلكتروني الخاص بإعادة تعيين كلمة المرور بنجاح",
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 5,
+        timeInSecForIosWeb: 7,
         backgroundColor: Colors.lightGreen,
         fontSize: 16.0,
         textColor: Colors.white);
+  }
+
+  Widget logoWidget(String imageName) {
+    return Center(
+        child: Image.asset(
+      imageName,
+      fit: BoxFit.fill,
+      width: 150,
+      height: 150,
+    ));
   }
 }

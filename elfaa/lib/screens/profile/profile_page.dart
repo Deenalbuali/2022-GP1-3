@@ -228,6 +228,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           context,
                           'تعديل معلومات الحساب الشخصي',
                           'هل أنت متأكد من حفظ التعديل؟');
+                        FocusManager.instance.primaryFocus?.unfocus();
                       if (action2 == DialogsAction.yes) {
                         setState(() => tappedYes = true);
                         final FirebaseAuth _auth = await FirebaseAuth.instance;
@@ -248,8 +249,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               toastLength: Toast.LENGTH_SHORT,
                               gravity: ToastGravity.BOTTOM,
                               timeInSecForIosWeb: 1,
-                              backgroundColor: Colors.green,
-                              textColor: Colors.white,
+                              backgroundColor: Colors.lightGreen,
+                              textColor: Colors.black,
                               fontSize: 16.0);
                         } catch (e) {
                           Fluttertoast.showToast(
@@ -258,7 +259,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               gravity: ToastGravity.BOTTOM,
                               timeInSecForIosWeb: 1,
                               backgroundColor: Colors.red,
-                              textColor: Colors.white,
+                              textColor: Colors.black,
                               fontSize: 16.0);
                         }
                         _formKey.currentState!.save();

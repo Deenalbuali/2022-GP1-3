@@ -7,8 +7,7 @@ import 'package:image_picker/image_picker.dart';
 // ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart' hide TextDirection;
 import 'package:elfaa/constants.dart';
-
-//import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:firebase_core/firebase_core.dart';
 //import 'package:path/path.dart' hide context;
 //import 'package:elfaa/screens/mngChildInfo/imgStorage.dart';
@@ -23,7 +22,7 @@ class _addChildState extends State<addChild> {
 //profile image variables
   XFile? _img;
   final ImagePicker _picker = ImagePicker();
-
+  String imgURL = '';
 //information form controllers
   final controllerName = TextEditingController();
   final controllerBirthday = TextEditingController();
@@ -32,9 +31,24 @@ class _addChildState extends State<addChild> {
 //globalKey
   final _formKey = GlobalKey<FormState>();
 
+//Parent info
+String pID ='';
+Future<void> getCurrentP() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final User? user = await _auth.currentUser;
+    final uid = user!.uid;
+    setState(() {
+      pID=uid;
+    });
+  }
+
+  //Loading for uploading
+  bool isLoading = false;
+
   @override
   void initState() {
     controllerBirthday.text = ""; //set the initial value of text field
+    getCurrentP();
     super.initState();
   }
 
@@ -76,9 +90,10 @@ class _addChildState extends State<addChild> {
                         textAlign: TextAlign.right,
                         controller: controllerName,
                         decoration: const InputDecoration(
-                          suffixIcon: Icon(Icons.child_care,
-                              color: Color(0xFFFD8601)),
+                          suffixIcon:
+                              Icon(Icons.child_care, color: Color(0xFFFD8601)),
                           labelText: "اسم الطفل",
+                          hintText: "مثال: أسماء",
                         ),
                         validator: (value) {
                           if (value!.isEmpty ||
@@ -98,7 +113,7 @@ class _addChildState extends State<addChild> {
                             suffixIcon: Icon(Icons.calendar_today,
                                 color: Color(0xFFFD8601)),
                             labelText: "تاريخ الميلاد",
-                            hintText: "DD-MM-YYYY",
+                            hintText: "اختر من التقويم",
                           ),
                           validator: (value) {
                             if (value!.isEmpty ||
@@ -112,9 +127,8 @@ class _addChildState extends State<addChild> {
                             DateTime? pickedDate = await showDatePicker(
                               context: context,
                               initialDate: DateTime.now(),
-                              firstDate: DateTime(
-                                  2010), //DateTime.now() - not to allow to choose before today.
-                              lastDate: DateTime(2101),
+                              firstDate: DateTime(1920),
+                              lastDate: DateTime.now(),
                               builder: (context, child) {
                                 return Theme(
                                   data: ThemeData.light().copyWith(
@@ -149,6 +163,7 @@ class _addChildState extends State<addChild> {
                           suffixIcon: Icon(Icons.accessibility_new,
                               color: Color(0xFFFD8601)),
                           labelText: "الطول",
+                          hintText: "بالسنتيمترات",
                         ),
                         validator: (value) {
                           if (value!.isEmpty ||
@@ -169,24 +184,43 @@ class _addChildState extends State<addChild> {
                   ),
                   const SizedBox(height: 40),
                   ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
+                        if (_img == null) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('يرجى اختيار صورة')));
+                          return;
+                        }
+
                         if (_formKey.currentState!.validate()) {
-                          final child = Child(
-                              name: controllerName.text,
-                              height: int.parse(controllerHeight.text),
-                              birthday:
-                                  DateTime.parse(controllerBirthday.text));
-
-                          addChild(child);
-
-                          Navigator.pop(context);
+                          if (imgURL.isEmpty) {
+                            setState(() {
+                              isLoading = true;
+                            });
+                          }
+                          Future.delayed(Duration(seconds: 12), () {
+                            final child = Child(
+                                image: imgURL,
+                                name: controllerName.text,
+                                height: int.parse(controllerHeight.text),
+                                birthday:
+                                    DateTime.parse(controllerBirthday.text));
+                            addChild(child);
+                            Navigator.pop(context);
+                            setState(() {
+                              isLoading = false;
+                            });
+                          });
                         }
                       },
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                            const Color(0xFF429EB2)),
+                        backgroundColor:
+                            MaterialStateProperty.all(const Color(0xFF429EB2)),
                       ),
-                      child: const Text('إضافة')),
+                      child: isLoading
+                          ? CircularProgressIndicator(
+                              color: Colors.white,
+                            )
+                          : const Text('إضافة')),
                 ],
               ),
             ),
@@ -271,7 +305,10 @@ class _addChildState extends State<addChild> {
 
     Reference refImg = refDir.child(uniqueFileName);
     try {
-      refImg.putFile(File(_img!.path));
+      //store the file
+      await refImg.putFile(File(_img!.path));
+      //succedss: get the url
+      imgURL = await refImg.getDownloadURL();
     } catch (e) {
       //error report
     }
@@ -284,8 +321,8 @@ class _addChildState extends State<addChild> {
   Future addChild(Child child) async {
     //Reference to document
     final docChild = FirebaseFirestore.instance
-        .collection('parent')
-        .doc('Renad')
+        .collection('users')
+        .doc(pID)
         .collection('children')
         .doc();
 
@@ -297,12 +334,17 @@ class _addChildState extends State<addChild> {
 
 //child class
 class Child {
+  final String image;
   final String name;
   final int height;
   final DateTime birthday;
 
-  Child({required this.name, required this.height, required this.birthday});
+  Child(
+      {required this.image,
+      required this.name,
+      required this.height,
+      required this.birthday});
 
   Map<String, dynamic> toJson() =>
-      {'name': name, 'height': height, 'birthday': birthday};
+      {'image': image, 'name': name, 'height': height, 'birthday': birthday};
 }
