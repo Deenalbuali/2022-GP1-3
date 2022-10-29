@@ -15,6 +15,13 @@ class _changePasswordPageState extends State<changePasswordPage> {
   String? _new;
   String? _confirmed;
   bool tappedYes = false;
+  bool pass = true;
+  bool pass2 = true;
+  bool pass3 = true;
+  Icon icon = Icon(Icons.visibility, color: Colors.grey);
+  Icon icon2 = Icon(Icons.visibility, color: Colors.grey);
+  Icon icon3 = Icon(Icons.visibility, color: Colors.grey);
+
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController old = TextEditingController();
@@ -79,12 +86,25 @@ class _changePasswordPageState extends State<changePasswordPage> {
             padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
             child: TextFormField(
               textAlign: TextAlign.right,
-              obscureText: true,
+              obscureText: pass,
               controller: old,
               decoration: InputDecoration(
                   labelText: 'كلمة المرور القديمة',
                   hintText: 'أدخل كلمة المرور الحالية',
-                  helperText: ""),
+                  helperText: "",
+                  suffixIcon: IconButton(
+                    icon: icon,
+                    onPressed: () {
+                      setState(() {
+                        pass = !pass;
+                        if (pass == true) {
+                          icon = Icon(Icons.visibility, color: Colors.grey);
+                        } else {
+                          icon = Icon(Icons.visibility_off, color: Colors.grey);
+                        }
+                      });
+                    },
+                  )),
               validator: (String? value) {
                 if (value!.isEmpty) {
                   return 'الحقل مطلوب';
@@ -104,12 +124,26 @@ class _changePasswordPageState extends State<changePasswordPage> {
             padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
             child: TextFormField(
               textAlign: TextAlign.right,
-              obscureText: true,
+              obscureText: pass2,
               controller: nnew,
               decoration: InputDecoration(
                   labelText: 'كلمة المرور الجديدة',
                   hintText: 'أدخل كلمة مرور جديدة',
-                  helperText: ""),
+                  helperText: "",
+                  suffixIcon: IconButton(
+                    icon: icon2,
+                    onPressed: () {
+                      setState(() {
+                        pass2 = !pass2;
+                        if (pass2 == true) {
+                          icon2 = Icon(Icons.visibility, color: Colors.grey);
+                        } else {
+                          icon2 = Icon(Icons.visibility_off, color: Colors.grey);
+                        }
+                      });
+                    },
+                  )
+                  ),
               validator: (String? value) {
                 RegExp regex = RegExp(
                     r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])'); //Min 1 uppercase, 1 lowercase and 1 numeric number
@@ -135,12 +169,26 @@ class _changePasswordPageState extends State<changePasswordPage> {
             padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
             child: TextFormField(
               textAlign: TextAlign.right,
-              obscureText: true,
+              obscureText: pass3,
               controller: confirmed,
               decoration: InputDecoration(
                   labelText: 'تأكيد كلمة المرور الجديدة',
                   hintText: 'أعد إدخال كلمة المرور الجديدة',
-                  helperText: ""),
+                  helperText: "",
+                  suffixIcon: IconButton(
+                    icon: icon3,
+                    onPressed: () {
+                      setState(() {
+                        pass3 = !pass3;
+                        if (pass3 == true) {
+                          icon3 = Icon(Icons.visibility, color: Colors.grey);
+                        } else {
+                          icon3 = Icon(Icons.visibility_off, color: Colors.grey);
+                        }
+                      });
+                    },
+                  )
+                  ),
               validator: (String? value) {
                 if (value!.isEmpty) {
                   return 'الحقل مطلوب';
