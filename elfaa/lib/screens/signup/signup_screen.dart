@@ -131,11 +131,11 @@ class _SignupPageState extends State<SignupPage> {
                             hintText: "أدخل كلمة المرور",
                             helperText: " كلمة المرور يجب أن تحتوي على الأقل:"
                                 "\n"
-                                "*حرف كبير باللغة الإنجليزية"
+                                "* حرف كبير باللغة الإنجليزية"
                                 "\n"
-                                "*حرف صغير باللغة الإنجليزية"
+                                "* حرف صغير باللغة الإنجليزية"
                                 "\n"
-                                "*رقم "),
+                                "* رقم "),
                         validator: (value) {
                           RegExp regex = RegExp(
                               r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])'); //Min 1 uppercase, 1 lowercase and 1 numeric number
@@ -148,7 +148,7 @@ class _SignupPageState extends State<SignupPage> {
                           }
                         },
                       )),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 30),
                   ElevatedButton(
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
