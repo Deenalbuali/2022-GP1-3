@@ -46,7 +46,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
           child: TextFormField(
-          //  enabled: editable,
+            //  enabled: editable,
             textAlign: TextAlign.right,
             controller: name,
             decoration: InputDecoration(
@@ -134,7 +134,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
   }
 
   @override
-
   void initState() {
     getCurrentUser();
     super.initState();
@@ -227,7 +226,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           context,
                           'تعديل معلومات الحساب الشخصي',
                           'هل أنت متأكد من حفظ التعديل؟');
-                        FocusManager.instance.primaryFocus?.unfocus();
+                      FocusManager.instance.primaryFocus?.unfocus();
                       if (action2 == DialogsAction.yes) {
                         setState(() => tappedYes = true);
                         final FirebaseAuth _auth = await FirebaseAuth.instance;
@@ -242,7 +241,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             'email': email.text,
                             'phoneNo': phoneNo.text,
                           });
-                          await user.updateEmail(email.text); 
+                          await user.updateEmail(email.text);
                           Fluttertoast.showToast(
                               msg: "تم تعديل البيانات بنجاح",
                               toastLength: Toast.LENGTH_SHORT,

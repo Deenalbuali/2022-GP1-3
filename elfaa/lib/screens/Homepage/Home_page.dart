@@ -115,6 +115,9 @@ class _HomePageState extends State<HomePage> {
                   itemCount: _childrenList.length,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
+                    //if (index == 0)
+                    //return Null;
+                    // else
                     return listBox(_childrenList[index] as childrenList);
                   }))
 
@@ -235,6 +238,10 @@ class _HomePageState extends State<HomePage> {
   // }
 
   Future<void> getChildrenList() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final User? user = await _auth.currentUser;
+    final userid = user!.uid;
+
     var data = await FirebaseFirestore.instance
         .collection('users')
         .doc(userid)

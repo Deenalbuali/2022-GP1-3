@@ -1,11 +1,13 @@
 class childrenList {
-  //String? childImagePath;
+  String? childImagePath;
   String? childName;
   int? zoneName;
   childrenList();
-  Map<String, dynamic> toJson() => {'height': zoneName, 'name': childName};
+  Map<String, dynamic> toJson() =>
+      {'height': zoneName, 'image': childImagePath, 'name': childName};
 
   childrenList.fromSnapshot(snapshot)
-      : childName = snapshot.data()['name'],
-        zoneName = snapshot.data()['height'];
+      : zoneName = snapshot.data()['height'],
+        childName = snapshot.data()['name'],
+        childImagePath = snapshot.data()['image'];
 }
