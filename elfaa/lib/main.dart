@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'FirstPage',
       theme: ThemeData(
+        scaffoldBackgroundColor: Color(0xFFfafafa),
         backgroundColor: Color(0xFFfafafa),
         primaryColor: kPrimaryColor,
         elevatedButtonTheme: ElevatedButtonThemeData(

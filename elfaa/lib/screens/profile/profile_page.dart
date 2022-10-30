@@ -18,6 +18,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   String? _email;
   String? _phoneNumber;
   bool tappedYes = false;
+  bool editable = false;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController name = TextEditingController();
@@ -45,6 +46,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
           child: TextFormField(
+          //  enabled: editable,
             textAlign: TextAlign.right,
             controller: name,
             decoration: InputDecoration(
@@ -133,16 +135,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   @override
 
-  // initState()
   void initState() {
-    // get current user
     getCurrentUser();
     super.initState();
   }
 
   @override
   void dispose() {
-    // Clean up the controller when the widget is removed from the widget tree.
     name.dispose();
     email.dispose();
     phoneNo.dispose();
@@ -217,7 +216,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       ),
                     ),
                     label: Text(
-                      '  عدّل معلوماتي   ',
+                      '  تعديل بياناتي   ',
                       style: TextStyle(color: kPrimaryColor, fontSize: 20),
                     ),
                     onPressed: () async {
@@ -318,7 +317,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     },
                   ),
                 ),
-                SizedBox(height: 40),
+                SizedBox(height: 110),
                 Directionality(
                   textDirection: TextDirection.rtl,
                   child: ElevatedButton.icon(
