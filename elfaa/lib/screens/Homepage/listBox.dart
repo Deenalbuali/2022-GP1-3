@@ -1,18 +1,9 @@
+import 'package:elfaa/screens/Homepage/childrenList.dart';
 import 'package:flutter/material.dart';
 
-class childrenList extends StatelessWidget {
-  String? childImagePath;
-  String? childName;
-  String? zoneName;
-  childrenList();
-  Map<String, dynamic> toJson() =>
-      {'height': zoneName, 'image': childImagePath, 'name': childName};
-
-  childrenList.fromSnapshot(snapshot)
-      : childImagePath = snapshot.data()['image'],
-        childName = snapshot.data()['name'],
-        zoneName = snapshot.data()['height'];
-
+class listBox extends StatelessWidget {
+  final childrenList _childlist;
+  listBox(this._childlist);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -39,7 +30,7 @@ class childrenList extends StatelessWidget {
 
                   children: [
                     Text(
-                      "childName",
+                      "${_childlist.childName}",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
@@ -48,13 +39,13 @@ class childrenList extends StatelessWidget {
                     SizedBox(
                       height: 5,
                     ),
-                    Text("zoneName",
+                    Text("${_childlist.zoneName}",
                         style: TextStyle(fontSize: 16, color: Colors.orange))
                   ],
                 ),
                 Container(
                   padding: EdgeInsets.all(12),
-                  child: Image.asset("childImagePath"),
+                  //child: Image.asset(""),
                 ),
               ],
             ),

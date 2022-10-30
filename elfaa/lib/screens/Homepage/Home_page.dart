@@ -1,13 +1,18 @@
+import 'package:elfaa/screens/Homepage/listBox.dart';
+import 'package:elfaa/screens/Homepage/qr.dart';
 import 'package:elfaa/screens/mngChildInfo/addChild.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:elfaa/constants.dart';
+import 'childrenList.dart';
 
 int index = 2;
 final Color color1 = Color(0xFF429EB2);
 final Color color2 = Color(0xFF429EB2);
 final Color color3 = Color(0xFF429EB2);
+String username = "";
+List<Object> _childrenList = [];
 
 class HomePage extends StatefulWidget {
   @override
@@ -16,20 +21,24 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   //const HomePage({super.key});
-  String name = "";
-  // List<Object> _historyList = [];
-
+  String userid = "";
   Future<void> getCurrentUserr() async {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     final User? user = await _auth.currentUser;
-    final uid = user!.uid;
+    final userid = user!.uid;
     await FirebaseFirestore.instance
         .collection('users')
-        .doc(uid)
+        .doc(userid)
         .get()
         .then((DocumentSnapshot<Map<String, dynamic>> snapshot) {
-      name = snapshot['name'];
+      username = snapshot['name'];
     });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    getChildrenList();
   }
 
   @override
@@ -89,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => addChild()),
+                        MaterialPageRoute(builder: (context) => QRPage()),
                       );
                     },
                     icon: Icon(Icons.qr_code),
@@ -98,21 +107,29 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
           SizedBox(height: 15),
-          Padding(
-            padding: const EdgeInsets.all(25.0),
-            child: Column(
-              children: [
-                childrenList(
-                    childImagePath: 'assets/images/ahmad.png',
-                    childName: 'أحمد',
-                    zoneName: 'منطقة الألعاب'),
-                childrenList(
-                    childImagePath: 'assets/images/sarah.png',
-                    childName: 'سارة',
-                    zoneName: 'منطقة المطاعم'),
-              ],
-            ),
-          )
+          Container(
+              height: 50,
+              width: 50,
+              padding: const EdgeInsets.all(25.0),
+              child: ListView.builder(
+                  itemCount: _childrenList.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return listBox(_childrenList[index] as childrenList);
+                  }))
+
+          //Column(
+          //   children: [
+          //     // childrenList(
+          //     //     childImagePath: 'assets/images/ahmad.png',
+          //     //     childName: 'أحمد',
+          //     //     zoneName: 'منطقة الألعاب'),
+          //     // childrenList(
+          //     //     childImagePath: 'assets/images/sarah.png',
+          //     //     childName: 'سارة',
+          //     //     zoneName: 'منطقة المطاعم'),
+          // ],
+          // ),
         ]),
       ),
     );
@@ -189,7 +206,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 SizedBox(height: 1),
                 Text(
-                  name,
+                  username,
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 28.0,
@@ -217,9 +234,16 @@ class _HomePageState extends State<HomePage> {
   //   super.initState();
   // }
 
-  void updateUI() {
+  Future<void> getChildrenList() async {
+    var data = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userid)
+        .collection('children')
+        .get();
+
     setState(() {
-      //You can also make changes to your state here.
+      _childrenList =
+          List.from(data.docs.map((doc) => childrenList.fromSnapshot(doc)));
     });
   }
 }
