@@ -8,7 +8,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 import 'package:elfaa/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 //import 'package:firebase_core/firebase_core.dart';
 //import 'package:path/path.dart' hide context;
 //import 'package:elfaa/screens/mngChildInfo/imgStorage.dart';
@@ -33,13 +32,13 @@ class _addChildState extends State<addChild> {
   final _formKey = GlobalKey<FormState>();
 
 //Parent info
-  String pID = '';
-  Future<void> getCurrentP() async {
+String pID ='';
+Future<void> getCurrentP() async {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     final User? user = await _auth.currentUser;
     final uid = user!.uid;
     setState(() {
-      pID = uid;
+      pID=uid;
     });
   }
 
@@ -55,7 +54,6 @@ class _addChildState extends State<addChild> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        backgroundColor: const Color(0xFFf5f5f5),
         appBar: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,

@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
           return Scaffold(
               backgroundColor: Colors.white,
               body: Container(
-                  margin: const EdgeInsets.only(top: 300, bottom: 0, left: 0),
+                  margin: const EdgeInsets.only(top: 350, bottom: 0, left: 0),
                   child: Image.asset("assets/images/elfaa.gif",
                       gaplessPlayback: true, fit: BoxFit.fill)));
         

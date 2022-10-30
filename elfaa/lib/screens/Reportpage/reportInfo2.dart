@@ -94,7 +94,7 @@ class _reportInfo2State extends State<reportInfo2> {
                                   width: 120,
                                   child: Center(
                                       child: Text(
-                                    "..." "يتم البحث",
+                                    "..." "جاري البحث",
                                     style: TextStyle(
                                         color: Color(0xff919296),
                                         fontSize: 15,

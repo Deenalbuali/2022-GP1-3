@@ -85,17 +85,23 @@ class _SignInScreenState extends State<SignInScreen> {
                         },
                       )),
                   const SizedBox(height: 20),
-                  GestureDetector(
-                    child: Text('نسيت كلمة المرور؟',
-                        style: TextStyle(
-                          fontSize: 17,
-                          color: Color.fromARGB(255, 129, 129, 129),
+                  Align(
+                    alignment: Alignment(-0.9,0),
+                    child: Container(
+                      child: GestureDetector(
+                        child: Text('نسيت كلمة المرور؟',
+                            style: TextStyle(
+                              fontSize: 17,
+                              color: Color.fromARGB(255, 129, 129, 129),
+                            )),
+                        onTap: () =>
+                            Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => ForgotPasswordPage(),
                         )),
-                    onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => ForgotPasswordPage(),
-                    )),
+                      ),
+                    ),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 40),
                   ElevatedButton(
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
