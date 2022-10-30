@@ -58,7 +58,7 @@ class _viewChildState extends State<viewChild> {
               child: const DecoratedBox(
                   decoration: const BoxDecoration(color: Colors.red)),
                   height: 3,
-                  width: context.size,
+                  width:  MediaQuery.of(context).size.width,
             ),
             Padding(
               padding: const EdgeInsets.only(top: 40),
