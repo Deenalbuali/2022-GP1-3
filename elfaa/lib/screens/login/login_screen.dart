@@ -86,7 +86,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       )),
                   const SizedBox(height: 20),
                   Align(
-                    alignment: Alignment(-0.9,0),
+                    alignment: Alignment(-0.9, 0),
                     child: Container(
                       child: GestureDetector(
                         child: Text('نسيت كلمة المرور؟',

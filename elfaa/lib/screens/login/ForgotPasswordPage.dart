@@ -92,15 +92,25 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   }
 
   Future resetPassword() async {
-    await FirebaseAuth.instance.sendPasswordResetEmail(email: email.text);
-    Fluttertoast.showToast(
-        msg: "تم إرسال البريد الإلكتروني الخاص بإعادة تعيين كلمة المرور بنجاح",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 7,
-        backgroundColor: Colors.lightGreen,
-        fontSize: 16.0,
-        textColor: Colors.white);
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email.text);
+      Fluttertoast.showToast(
+          msg:
+              "تم إرسال البريد الإلكتروني الخاص بإعادة تعيين كلمة المرور بنجاح",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 7,
+          backgroundColor: Colors.lightGreen,
+          fontSize: 16.0,
+          textColor: Colors.white);
+    } catch (e, stack) {
+      Fluttertoast.showToast(
+          msg: " البريد الإلكتروني غير موجود ",
+          toastLength: Toast.LENGTH_SHORT,
+          backgroundColor: Colors.red,
+          fontSize: 16.0,
+          textColor: Colors.black);
+    }
   }
 
   Widget logoWidget(String imageName) {
