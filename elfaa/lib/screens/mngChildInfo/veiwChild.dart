@@ -1,25 +1,51 @@
-import 'dart:io';
+import 'package:age_calculator/age_calculator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-// ignore: depend_on_referenced_packages
-import 'package:intl/intl.dart' hide TextDirection;
 import 'package:elfaa/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:blurrycontainer/blurrycontainer.dart';
 
 class viewChild extends StatefulWidget {
   const viewChild({super.key});
-
   @override
   State<viewChild> createState() => _viewChildState();
 }
 
 class _viewChildState extends State<viewChild> {
-  final now = DateTime.now();
-  final df = new DateFormat('dd-MM-yyyy hh:mm a');
-  int myvalue = 1558432747;
+  //Child Info to be retreived from database
+  late String childName;
+  late String childAge;
+  late int childHeight;
+  String zoneName = 'منطقة الألعاب';
+
+  Future<void> getCurrentChild() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final User? user = await _auth.currentUser;
+    final uid = user!.uid;
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .collection('children')
+        .doc('CiQbU3gkuwde5vcBjPKf')
+        .get()
+        .then((DocumentSnapshot<Map<String, dynamic>> snapshot) {
+      //Convert timestamp type of data to DateTime 
+      DateTime childBirthday =
+          DateTime.parse(snapshot['birthday'].toDate().toString());
+      //Calculate Age As years: 0, Months: 0, Days: 0
+      DateDuration calcAge = AgeCalculator.age(childBirthday);
+      setState(() {
+        childName = snapshot['name'];
+        //Age numbers extraction as three digits String "000" for later presentation
+        childAge = calcAge.toString().replaceAll(new RegExp(r'[^0-9]'), '');
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    getCurrentChild();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -30,7 +56,7 @@ class _viewChildState extends State<viewChild> {
           toolbarHeight: 90,
           leading: const BackButton(color: Colors.white),
           title: const Text(
-            "معلومات الطفل",
+            "صفحة الطفل",
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
           ),
           actions: [IconButton(icon: Icon(Icons.edit), onPressed: (() {}))],
@@ -46,7 +72,7 @@ class _viewChildState extends State<viewChild> {
         body: Column(
           children: [
             Container(
-              height: 400,
+              height: 530,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(25),
@@ -54,60 +80,63 @@ class _viewChildState extends State<viewChild> {
                       image: AssetImage("assets/images/location.jpeg"),
                       fit: BoxFit.cover)),
             ),
-            SizedBox(
-              child: const DecoratedBox(
-                  decoration: const BoxDecoration(color: Colors.red)),
-                  height: 3,
-                  width:  MediaQuery.of(context).size.width,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 40),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Column(
-                    children: [
-                      Text(
-                        "الاسم",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        "العمر",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        "الطول",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        "المكان الحالي",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Container(
-                        child: Image.asset(
-                          "assets/images/empty.png",
-                          height: 99,
+            Container(
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(28),
+                    topRight: Radius.circular(28)),
+                color: kPrimaryColor,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 10, bottom: 5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(
+                      children: [
+                        Container(
+                          child: Image.asset(
+                            "assets/images/empty.png",
+                            height: 100,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          "الاسم",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          "العمر",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          "الطول",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          "المكان الحالي",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
