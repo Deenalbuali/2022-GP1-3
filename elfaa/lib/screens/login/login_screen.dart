@@ -130,6 +130,18 @@ class _SignInScreenState extends State<SignInScreen> {
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                         try {
+                          if (pass.text.length < 8) {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: new Text("تنبية"),
+                                  content:
+                                      new Text("كلمة المرور المدخلة ضعيفة "),
+                                );
+                              },
+                            );
+                          }
                           UserCredential userCredential = await FirebaseAuth
                               .instance
                               .signInWithEmailAndPassword(
