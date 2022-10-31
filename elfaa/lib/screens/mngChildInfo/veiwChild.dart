@@ -13,9 +13,11 @@ class viewChild extends StatefulWidget {
 class _viewChildState extends State<viewChild> {
   //Child Info to be retreived from database
   late String childName;
-  late String childAge;
+  late String childAgeYears;
+  late String childAgeMonths;
   late int childHeight;
-  String zoneName = 'منطقة الألعاب';
+  late String childImage;
+  String zoneName = 'في منطقة الألعاب';
 
   Future<void> getCurrentChild() async {
     final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -36,7 +38,14 @@ class _viewChildState extends State<viewChild> {
       setState(() {
         childName = snapshot['name'];
         //Age numbers extraction as three digits String "000" for later presentation
-        childAge = calcAge.toString().replaceAll(new RegExp(r'[^0-9]'), '');
+        String childAge = calcAge.toString().replaceAll(new RegExp(r'[^0-9]'), '');
+        //Extract each of years and months 
+        childAgeYears = (calcAge.toString().replaceAll(new RegExp(r'[^0-9]'), ''))[0];
+        childAgeMonths = (calcAge.toString().replaceAll(new RegExp(r'[^0-9]'), ''))[1];
+
+
+        childHeight = snapshot['height'];
+        childImage = snapshot['image'];
       });
     });
   }
@@ -72,7 +81,7 @@ class _viewChildState extends State<viewChild> {
         body: Column(
           children: [
             Container(
-              height: 530,
+              height: 450,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(25),
@@ -88,16 +97,34 @@ class _viewChildState extends State<viewChild> {
                 color: kPrimaryColor,
               ),
               child: Padding(
-                padding: const EdgeInsets.only(top: 10, bottom: 5),
+                padding: const EdgeInsets.only(top: 40, bottom: 25),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Column(
                       children: [
-                        Container(
-                          child: Image.asset(
-                            "assets/images/empty.png",
-                            height: 100,
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(20.0),
+                          child: Image.network(
+                            childImage,
+                            width: 140,
+                            height: 140,
+                            fit:BoxFit.cover,
+                            frameBuilder: (BuildContext context, Widget child, int? frame, bool isAsyncLoaded){
+                              return Padding(padding: EdgeInsets.all(1),
+                              child: child,);
+                            },
+                             loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                             if (loadingProgress == null) return child;
+                             return Center(
+                              child: Text("جاري التحميل"),
+                             );
+                             },
+                             errorBuilder: (BuildContext context, Object error, StackTrace? st){
+                              return Center(
+                                child: Text("error"),
+                              );
+                             },
                           ),
                         ),
                       ],
@@ -106,28 +133,41 @@ class _viewChildState extends State<viewChild> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                          "الاسم",
+                          "$childName",
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 20,
                               fontWeight: FontWeight.bold),
                         ),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Text(
-                          "العمر",
+                        (int.parse(childAgeYears)>10)?
+                          "$childAgeYears سنة":
+                          "$childAgeYears سنوات",
+                          textDirection: TextDirection.rtl,
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 20,
                               fontWeight: FontWeight.bold),
                         ),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Text(
-                          "الطول",
+                          "$childHeight سم",
+                          textDirection: TextDirection.rtl,
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 20,
                               fontWeight: FontWeight.bold),
                         ),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Text(
-                          "المكان الحالي",
+                          "$zoneName",
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 20,
