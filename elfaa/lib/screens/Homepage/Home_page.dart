@@ -8,9 +8,9 @@ import 'package:elfaa/constants.dart';
 import 'childrenList.dart';
 
 int index = 2;
-final Color color1 = Color(0xFF429EB2);
-final Color color2 = Color(0xFF429EB2);
-final Color color3 = Color(0xFF429EB2);
+final Color color1 = kPrimaryColor;
+final Color color2 = kPrimaryColor;
+final Color color3 = kPrimaryColor;
 String username = "";
 List<Object> _childrenList = [];
 
@@ -42,17 +42,13 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
-
-  // initState()
   void initState() {
-    // get current user
     getCurrentUserr();
     super.initState();
   }
 
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFfafafa),
       body: SingleChildScrollView(
         child: Column(children: <Widget>[
           _buildHeader(),
@@ -61,26 +57,29 @@ class _HomePageState extends State<HomePage> {
               SizedBox(
                 width: 20,
               ),
-              Container(
-                  decoration: BoxDecoration(
-                      color: Colors.orange,
-                      shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.orange,
-                            offset: Offset(1.0, 1.0),
-                            blurRadius: 4.0)
-                      ]),
-                  child: IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => addChild()),
-                      );
-                    },
-                    icon: Icon(Icons.add),
-                    color: Colors.white,
-                  )),
+              Align(
+                alignment: Alignment(-0.1, -1),
+                child: Container(
+                    decoration: BoxDecoration(
+                        color: kOrangeColor,
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                              color: kOrangeColor,
+                              offset: Offset(1.0, 1.0),
+                              blurRadius: 4.0)
+                        ]),
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => addChild()),
+                        );
+                      },
+                      icon: Icon(Icons.add),
+                      color: Colors.white,
+                    )),
+              ),
               SizedBox(
                 width: 250,
               ),
@@ -196,7 +195,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(top: 60, left: 220),
+            margin: const EdgeInsets.only(top: 60, left: 260),
             child: Column(
               //crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[

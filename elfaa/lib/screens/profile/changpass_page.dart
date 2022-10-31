@@ -22,7 +22,6 @@ class _changePasswordPageState extends State<changePasswordPage> {
   Icon icon2 = Icon(Icons.visibility, color: Colors.grey);
   Icon icon3 = Icon(Icons.visibility, color: Colors.grey);
 
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController old = TextEditingController();
   TextEditingController nnew = TextEditingController();
@@ -138,12 +137,12 @@ class _changePasswordPageState extends State<changePasswordPage> {
                         if (pass2 == true) {
                           icon2 = Icon(Icons.visibility, color: Colors.grey);
                         } else {
-                          icon2 = Icon(Icons.visibility_off, color: Colors.grey);
+                          icon2 =
+                              Icon(Icons.visibility_off, color: Colors.grey);
                         }
                       });
                     },
-                  )
-                  ),
+                  )),
               validator: (String? value) {
                 RegExp regex = RegExp(
                     r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])'); //Min 1 uppercase, 1 lowercase and 1 numeric number
@@ -183,12 +182,12 @@ class _changePasswordPageState extends State<changePasswordPage> {
                         if (pass3 == true) {
                           icon3 = Icon(Icons.visibility, color: Colors.grey);
                         } else {
-                          icon3 = Icon(Icons.visibility_off, color: Colors.grey);
+                          icon3 =
+                              Icon(Icons.visibility_off, color: Colors.grey);
                         }
                       });
                     },
-                  )
-                  ),
+                  )),
               validator: (String? value) {
                 if (value!.isEmpty) {
                   return 'الحقل مطلوب';
@@ -204,7 +203,6 @@ class _changePasswordPageState extends State<changePasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xFFf5f5f5),
         appBar: AppBar(
           automaticallyImplyLeading: true,
           backgroundColor: Colors.transparent,

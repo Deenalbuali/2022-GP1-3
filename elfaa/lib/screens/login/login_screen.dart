@@ -16,6 +16,10 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   TextEditingController email = TextEditingController();
   TextEditingController pass = TextEditingController();
+  bool obscured = true;
+  Icon icon = Icon(Icons.visibility, color: Colors.grey);
+  FocusNode focus = FocusNode();
+
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -70,11 +74,31 @@ class _SignInScreenState extends State<SignInScreen> {
                   Directionality(
                       textDirection: TextDirection.rtl,
                       child: TextFormField(
-                        obscureText: true,
+                        focusNode: focus,
+                        onTap: () {
+                          FocusScope.of(context).requestFocus(focus);
+                        },
                         controller: pass,
-                        decoration: const InputDecoration(
-                          suffixIcon: Icon(Icons.lock_outline,
-                              color: Color(0xFFFD8601)),
+                        obscureText: obscured,
+                        decoration: InputDecoration(
+                          suffixIcon: focus.hasFocus
+                              ? IconButton(
+                                  icon: icon,
+                                  onPressed: () {
+                                    setState(() {
+                                      obscured = !obscured;
+                                      if (obscured == true) {
+                                        icon = Icon(Icons.visibility,
+                                            color: Colors.grey);
+                                      } else {
+                                        icon = Icon(Icons.visibility_off,
+                                            color: Colors.grey);
+                                      }
+                                    });
+                                  },
+                                )
+                              : Icon(Icons.lock_outline,
+                                  color: Color(0xFFFD8601)),
                           labelText: "كلمة المرور",
                           hintText: "أدخل كلمة المرور",
                         ),
