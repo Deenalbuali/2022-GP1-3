@@ -2,6 +2,7 @@ import 'package:age_calculator/age_calculator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:elfaa/constants.dart';
+import 'package:elfaa/screens/mngChildInfo/editChild.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class viewChild extends StatefulWidget {
@@ -38,7 +39,6 @@ class _viewChildState extends State<viewChild> {
       setState(() {
         childName = snapshot['name'];
         //Age numbers extraction as three digits String "000" for later presentation
-        String childAge = calcAge.toString().replaceAll(new RegExp(r'[^0-9]'), '');
         //Extract each of years and months 
         childAgeYears = (calcAge.toString().replaceAll(new RegExp(r'[^0-9]'), ''))[0];
         childAgeMonths = (calcAge.toString().replaceAll(new RegExp(r'[^0-9]'), ''))[1];
@@ -68,7 +68,14 @@ class _viewChildState extends State<viewChild> {
             "صفحة الطفل",
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
           ),
-          actions: [IconButton(icon: Icon(Icons.edit), onPressed: (() {}))],
+          actions: [IconButton(icon: Icon(Icons.edit), onPressed: (() 
+          {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => editChild()),
+                        );
+                      }
+          ))],
           centerTitle: true,
           flexibleSpace: Container(
               decoration: const BoxDecoration(
