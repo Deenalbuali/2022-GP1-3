@@ -12,6 +12,29 @@ class ForgotPasswordPage extends StatefulWidget {
 }
 
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
+  void sendOTP() async {
+    var emailauth = EmailAuth(sessionName: "إلفاء");
+    if (await emailauth.sendOtp(recipientMail: email.text)) {
+      Fluttertoast.showToast(
+          msg: "تم إرسال رمز التحقق",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 7,
+          backgroundColor: Colors.lightGreen,
+          fontSize: 16.0,
+          textColor: Colors.white);
+    } else {
+      Fluttertoast.showToast(
+          msg: "حدث خطأ ما",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 7,
+          backgroundColor: Colors.red,
+          fontSize: 16.0,
+          textColor: Colors.white);
+    }
+  }
+
   final _formKey = GlobalKey<FormState>();
   TextEditingController email = TextEditingController();
   @override
@@ -82,7 +105,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                             ElevatedButton(
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
-                                  resetPassword();
+                                  // resetPassword();
+                                  sendOTP();
                                 }
                               },
                               child: Text("إرسال",
@@ -92,7 +116,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                         ))))));
   }
 
-  Future resetPassword() async {
+  /* Future resetPassword() async {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email.text);
       Fluttertoast.showToast(
@@ -112,7 +136,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           fontSize: 16.0,
           textColor: Colors.black);
     }
-  }
+  }*/
 
   Widget logoWidget(String imageName) {
     return Center(
