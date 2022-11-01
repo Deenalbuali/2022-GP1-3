@@ -10,9 +10,9 @@ import 'package:intl/intl.dart' hide TextDirection;
 import 'package:elfaa/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class listBox extends StatelessWidget {
-  final childrenList _childlist;
-  listBox(this._childlist);
+class NotlistBox extends StatelessWidget {
+  final childrenList _childlist2;
+  NotlistBox(this._childlist2);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -30,9 +30,18 @@ class listBox extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-                padding: EdgeInsets.only(left: 10),
-                child: Icon(Icons.arrow_back_ios)),
+            Column(children: [
+              Container(
+                padding: EdgeInsets.only(left: 15, top: 12),
+                child: Text(":" "تم تحديث الحالة إلى",
+                    style: TextStyle(fontSize: 10, color: Colors.grey)),
+              ),
+              Container(
+                padding: EdgeInsets.only(left: 20, top: 10),
+                child: Text(".." "جاري البحث عنه",
+                    style: TextStyle(fontSize: 12, color: Colors.grey)),
+              ),
+            ]),
             Row(
               children: [
                 Column(
@@ -41,29 +50,21 @@ class listBox extends StatelessWidget {
 
                   children: [
                     Container(
-                      padding: EdgeInsets.only(right: 25, top: 10),
+                      padding: EdgeInsets.only(right: 25, top: 18),
                       child: Text(
-                        "${_childlist.childName}",
+                        "${_childlist2.childName}",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
                             color: Color.fromARGB(255, 41, 41, 32)),
                       ),
                     ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(right: 25),
-                      child: Text("${_childlist.zoneName}",
-                          style: TextStyle(fontSize: 16, color: Colors.orange)),
-                    )
                   ],
                 ),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
                   child: Image.network(
-                    "${_childlist.childImagePath}",
+                    "${_childlist2.childImagePath}",
                     fit: BoxFit.scaleDown,
                   ),
                 ),

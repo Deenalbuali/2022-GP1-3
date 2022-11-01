@@ -1,4 +1,4 @@
-import 'package:elfaa/screens/Homepage/listBox.dart';
+import 'package:elfaa/screens/Homepage/HomelistBox.dart';
 import 'package:elfaa/screens/Homepage/qr.dart';
 import 'package:elfaa/screens/mngChildInfo/addChild.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +22,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   //const HomePage({super.key});
   String userid = "";
+
   Future<void> getCurrentUserr() async {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     final User? user = await _auth.currentUser;
@@ -135,7 +136,8 @@ class _HomePageState extends State<HomePage> {
                           //if (index == 0)
                           //return Null;
                           // else
-                          return listBox(_childrenList[index] as childrenList);
+                          return HomelistBox(
+                              _childrenList[index] as childrenList);
                         })),
               ],
             ),
@@ -216,7 +218,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(top: 60, left: 260),
+            margin: const EdgeInsets.only(top: 40, left: 215),
             child: Column(
               //crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -260,6 +262,7 @@ class _HomePageState extends State<HomePage> {
   Future<void> getChildrenList() async {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     final User? user = await _auth.currentUser;
+    if (!mounted) return;
     final userid = user!.uid;
 
     var data = await FirebaseFirestore.instance
@@ -268,11 +271,16 @@ class _HomePageState extends State<HomePage> {
         .collection('children')
         .orderBy('birthday', descending: true)
         .get();
-
+    if (!mounted) return;
     setState(() {
+      if (!mounted) return;
       _childrenList =
           List.from(data.docs.map((doc) => childrenList.fromSnapshot(doc)));
     });
+  }
+
+  void dispose() {
+    super.dispose();
   }
 }
 

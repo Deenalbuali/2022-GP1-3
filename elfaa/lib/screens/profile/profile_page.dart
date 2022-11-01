@@ -28,15 +28,18 @@ class _EditProfilePageState extends State<EditProfilePage> {
   Future<void> getCurrentUser() async {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     final User? user = await _auth.currentUser;
+    if (!mounted) return;
     final uid = user!.uid;
     await FirebaseFirestore.instance
         .collection('users')
         .doc(uid)
         .get()
         .then((DocumentSnapshot<Map<String, dynamic>> snapshot) {
+      if (!mounted) return;
       name.text = snapshot['name'];
       email.text = snapshot['email'];
       phoneNo.text = snapshot['phoneNo'].toString();
+      if (!mounted) return;
     });
   }
 
@@ -226,11 +229,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           context,
                           'تعديل معلومات الحساب الشخصي',
                           'هل أنت متأكد من حفظ التعديل؟');
+                      if (!mounted) return;
                       FocusManager.instance.primaryFocus?.unfocus();
                       if (action2 == DialogsAction.yes) {
                         setState(() => tappedYes = true);
+                        if (!mounted) return;
                         final FirebaseAuth _auth = await FirebaseAuth.instance;
+                        if (!mounted) return;
                         final User? user = await _auth.currentUser;
+                        if (!mounted) return;
                         final uid = user!.uid;
                         try {
                           await FirebaseFirestore.instance
@@ -241,7 +248,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             'email': email.text,
                             'phoneNo': phoneNo.text,
                           });
+                          if (!mounted) return;
                           await user.updateEmail(email.text);
+                          if (!mounted) return;
                           Fluttertoast.showToast(
                               msg: "تم تعديل البيانات بنجاح",
                               toastLength: Toast.LENGTH_SHORT,
@@ -340,8 +349,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     onPressed: () async {
                       final action = await AlertDialogs.yesCancelDialog(context,
                           'تسجيل الخروج', 'هل أنت متأكد من تسجيل الخروج؟');
+                      if (!mounted) return;
                       if (action == DialogsAction.yes) {
                         setState(() => tappedYes = true);
+                        if (!mounted) return;
                         FirebaseAuth.instance.signOut();
                         Navigator.pushReplacement(
                             context,
@@ -349,6 +360,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 builder: (context) => WelcomeScreen()));
                       } else {
                         setState(() => tappedYes = false);
+                        if (!mounted) return;
                       }
                     },
                   ),
