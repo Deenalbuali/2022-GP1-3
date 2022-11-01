@@ -79,10 +79,63 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                               ],
                             )))))),
         Step(
-          isActive: currentStep >= 1,
-          title: Text("الخطوة 2"),
-          content: Container(),
-        ),
+            isActive: currentStep >= 1,
+            title: Text("الخطوة 2"),
+            content: Container(
+              child: SingleChildScrollView(
+                  child: Form(
+                      key: _formKey2,
+                      child: Padding(
+                          padding: EdgeInsets.fromLTRB(20,
+                              MediaQuery.of(context).size.height * 0.01, 20, 0),
+                          child: Column(
+                            children: <Widget>[
+                              logoWidget("assets/images/forgot.png"),
+                              Text("نسيت كلمة المرور؟",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: kPrimaryColor,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 25)),
+                              Text(
+                                  "الرجاء إدخال رمز التحقق المرسل عبر بريدك الإلكتروني",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: Color.fromARGB(255, 129, 129, 129),
+                                      fontSize: 17)),
+                              const SizedBox(height: 50),
+                              Directionality(
+                                  textDirection: TextDirection.rtl,
+                                  child: TextFormField(
+                                    textAlign: TextAlign.right,
+                                    controller: otp,
+                                    decoration: const InputDecoration(
+                                      suffixIcon: Icon(Icons.security_outlined,
+                                          color: Color(0xFFFD8601)),
+                                      labelText: " رمز التحقق",
+                                      hintText: "أدخل رمز التحقق ",
+                                    ),
+                                    validator: (value) {
+                                      if (value!.isEmpty ||
+                                          email.text.trim() == "") {
+                                        return "الحقل مطلوب";
+                                      }
+                                    },
+                                  )),
+                              const SizedBox(height: 40),
+                              ElevatedButton(
+                                onPressed: () async {
+                                  if (_formKey.currentState!.validate()) {
+                                    // resetPassword();
+                                    verifyOTP();
+                                  }
+                                },
+                                child: Text(" التحقق من رمز التحقق",
+                                    style: TextStyle(color: Colors.white)),
+                              ),
+                            ],
+                          )))),
+            )),
         Step(
           isActive: currentStep >= 2,
           title: Text("اعادة تعيين كلمة المرور"),
@@ -113,8 +166,33 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     }
   }
 
+  void verifyOTP() {
+    var emailauth = EmailAuth(sessionName: "إلفاء");
+    if (emailauth.validateOtp(recipientMail: email.text, userOtp: otp.text)) {
+      Fluttertoast.showToast(
+          msg: "تم التحقق بنجاح",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 7,
+          backgroundColor: Colors.lightGreen,
+          fontSize: 16.0,
+          textColor: Colors.white);
+    } else {
+      Fluttertoast.showToast(
+          msg: "رمز التحقق المدخل خاطئ",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 7,
+          backgroundColor: Colors.red,
+          fontSize: 16.0,
+          textColor: Colors.white);
+    }
+  }
+
   final _formKey = GlobalKey<FormState>();
+  final _formKey2 = GlobalKey<FormState>();
   TextEditingController email = TextEditingController();
+  TextEditingController otp = TextEditingController();
   int currentStep = 0;
 
   @override
