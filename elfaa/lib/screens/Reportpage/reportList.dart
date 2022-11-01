@@ -1,5 +1,5 @@
 import 'package:elfaa/screens/Reportpage/reportInfo.dart';
-import 'package:elfaa/screens/Reportpage/reportInfo2.dart';
+
 import 'package:flutter/material.dart';
 
 class reportList extends StatelessWidget {
@@ -44,7 +44,7 @@ class reportList extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => reportInfo2()),
+                      MaterialPageRoute(builder: (context) => reportInfo()),
                     );
                   },
                   icon: Icon(Icons.content_paste),

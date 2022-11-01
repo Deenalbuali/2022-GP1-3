@@ -1,4 +1,5 @@
 import 'package:elfaa/screens/Homepage/childrenList.dart';
+import 'package:elfaa/screens/Reportpage/reportInfo.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
@@ -9,17 +10,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 import 'package:elfaa/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:intl/intl.dart';
 
-DateTime now = DateTime.now();
-String formattedTime = DateFormat.jm().format(now);
-final DateTime now2 = DateTime.now();
-final DateFormat formatter = DateFormat('yyyy-MM-dd');
-final String formatted = formatter.format(now2);
-
-class NotlistBox extends StatelessWidget {
-  final childrenList _childlist2;
-  NotlistBox(this._childlist2);
+class ReportlistBox extends StatelessWidget {
+  final childrenList _childlist3;
+  ReportlistBox(this._childlist3);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -37,37 +31,26 @@ class NotlistBox extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 0),
-              child: Column(children: [
-                Container(
-                  padding: EdgeInsets.only(left: 20, top: 10, bottom: 15),
-                  child: Text(".." "تم تحديث الحالة إلى" " :" "جاري البحث عنه",
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey,
-                      )),
-                ),
-                Row(
-                  children: [
-                    Text(DateFormat.jm().format(now),
-                        style: TextStyle(
-                          color: Color(0xff919296),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12,
-                        ),
-                        textAlign: TextAlign.left),
-                    Text(" | " + formatted,
-                        style: TextStyle(
-                          color: Color(0xff919296),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12,
-                        ),
-                        textAlign: TextAlign.left),
-                  ],
-                ),
-              ]),
-            ),
+            Container(
+                decoration: BoxDecoration(
+                    color: Colors.orange,
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.orange,
+                          offset: Offset(1.0, 1.0),
+                          blurRadius: 4.0)
+                    ]),
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => reportInfo()),
+                    );
+                  },
+                  icon: Icon(Icons.content_paste),
+                  color: Colors.white,
+                )),
             Row(
               children: [
                 Column(
@@ -78,7 +61,7 @@ class NotlistBox extends StatelessWidget {
                     Container(
                       padding: EdgeInsets.only(right: 25, top: 18),
                       child: Text(
-                        "${_childlist2.childName}",
+                        "${_childlist3.childName}",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
@@ -90,7 +73,7 @@ class NotlistBox extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
                   child: Image.network(
-                    "${_childlist2.childImagePath}",
+                    "${_childlist3.childImagePath}",
                     fit: BoxFit.scaleDown,
                   ),
                 ),

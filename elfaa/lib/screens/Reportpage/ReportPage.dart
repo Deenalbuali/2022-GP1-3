@@ -1,15 +1,38 @@
+import 'package:elfaa/screens/Reportpage/ReportlistBox.dart';
 import 'package:elfaa/screens/Reportpage/reportList.dart';
 import 'package:elfaa/screens/mngChildInfo/addChild.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:elfaa/screens/Homepage/childrenList.dart';
 import 'package:flutter/material.dart';
 import 'package:elfaa/constants.dart';
+import 'package:elfaa/screens/mngChildInfo/addChild.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:elfaa/screens/Homepage/childrenList.dart';
+import 'package:elfaa/screens/notificationPage/NotlistBox.dart';
+import 'package:flutter/material.dart';
+import 'package:elfaa/constants.dart';
+import 'package:elfaa/screens/Homepage/HomelistBox.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ReportPage extends StatelessWidget {
+List<Object> _childrenList2 = [];
+
+class ReportPage extends StatefulWidget {
+  @override
+  State<ReportPage> createState() => _ReportPageState();
+}
+
+class _ReportPageState extends State<ReportPage> {
   int index = 0;
+  void dispose() {
+    super.dispose();
+  }
+
   //const NotePage({super.key});
   final Color color1 = Color(0xFF429EB2);
+
   final Color color2 = Color(0xFF429EB2);
+
   final Color color3 = Color(0xFF429EB2);
 
   @override
@@ -27,11 +50,11 @@ class ReportPage extends StatelessWidget {
         centerTitle: true,
         flexibleSpace: Container(
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(28),
-                    bottomRight: Radius.circular(28)),
-                    color: kPrimaryColor,
-               )),
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(28),
+              bottomRight: Radius.circular(28)),
+          color: kPrimaryColor,
+        )),
       ),
       body: SingleChildScrollView(
         child: Column(children: <Widget>[
@@ -52,23 +75,56 @@ class ReportPage extends StatelessWidget {
               ),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.all(25.0),
+          SizedBox(
             child: Column(
               children: [
-                reportList(
-                    childImagePath: 'assets/images/ahmad.png',
-                    childName: 'أحمد',
-                    zoneName: "..." ' جاري البحث '),
-                reportList(
-                    childImagePath: 'assets/images/sarah.png',
-                    childName: 'سارة',
-                    zoneName: "!" 'تم إيجاد طفلك '),
+                Container(
+                    padding: const EdgeInsets.all(25.0),
+                    child: ListView.builder(
+                        itemCount: _childrenList2.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          //if (index == 0)
+                          //return Null;
+                          // else
+                          return ReportlistBox(
+                              _childrenList2[index] as childrenList);
+                        })),
               ],
             ),
           )
         ]),
       ),
     );
+  }
+
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    getChildrenList();
+  }
+
+  void initState() {
+    super.initState();
+  }
+
+  Future<void> getChildrenList() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final User? user = await _auth.currentUser;
+    if (!mounted) return;
+    final userid = user!.uid;
+
+    var data = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userid)
+        .collection('children')
+        .orderBy('birthday', descending: true)
+        .get();
+    if (!mounted) return;
+
+    setState(() {
+      if (!mounted) return;
+      _childrenList2 =
+          List.from(data.docs.map((doc) => childrenList.fromSnapshot(doc)));
+    });
   }
 }

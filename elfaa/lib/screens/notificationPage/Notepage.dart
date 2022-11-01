@@ -7,7 +7,11 @@ import 'package:elfaa/constants.dart';
 import 'package:elfaa/screens/Homepage/HomelistBox.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
+final DateTime now = DateTime.now();
+final DateFormat formatter = DateFormat('yyyy-MM-dd');
+final String formatted = formatter.format(now);
 List<Object> _childrenList2 = [];
 
 class NotePage extends StatefulWidget {
@@ -20,17 +24,6 @@ class _NotePageState extends State<NotePage> {
 
   void dispose() {
     super.dispose();
-  }
-
-  Future<void> getCurrentUserr() async {
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    final User? user = await _auth.currentUser;
-    final userid = user!.uid;
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(userid)
-        .get()
-        .then((DocumentSnapshot<Map<String, dynamic>> snapshot) {});
   }
 
   int index = 1;
@@ -66,7 +59,19 @@ class _NotePageState extends State<NotePage> {
       body: SingleChildScrollView(
         child: Column(children: <Widget>[
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Container(
+                padding: EdgeInsets.only(top: 12, left: 50),
+                child: Text(
+                  formatted,
+                  style: TextStyle(
+                    color: Color(0xff919296),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(
                     horizontal: 25.0, vertical: 25.0),
@@ -111,7 +116,6 @@ class _NotePageState extends State<NotePage> {
   }
 
   void initState() {
-    getCurrentUserr();
     super.initState();
   }
 

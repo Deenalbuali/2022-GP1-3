@@ -39,7 +39,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
       name.text = snapshot['name'];
       email.text = snapshot['email'];
       phoneNo.text = snapshot['phoneNo'].toString();
-      if (!mounted) return;
     });
   }
 
