@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:elfaa/constants.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -69,13 +68,13 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                 ElevatedButton(
                                   onPressed: () async {
                                     if (_formKey.currentState!.validate()) {
-                                      // resetPassword();
                                       sendOTP();
                                     }
                                   },
                                   child: Text(" إرسال رمز التحقق",
                                       style: TextStyle(color: Colors.white)),
                                 ),
+                                const SizedBox(height: 20)
                               ],
                             )))))),
         Step(
@@ -125,14 +124,14 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                               const SizedBox(height: 40),
                               ElevatedButton(
                                 onPressed: () async {
-                                  if (_formKey.currentState!.validate()) {
-                                    // resetPassword();
+                                  if (_formKey2.currentState!.validate()) {
                                     verifyOTP();
                                   }
                                 },
                                 child: Text(" التحقق من رمز التحقق",
                                     style: TextStyle(color: Colors.white)),
                               ),
+                              const SizedBox(height: 20)
                             ],
                           )))),
             )),
@@ -219,6 +218,28 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 colorScheme: ColorScheme.light(primary: kOrangeColor)),
             child: Stepper(
               type: StepperType.horizontal,
+              controlsBuilder:
+                  (BuildContext context, ControlsDetails controls) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    TextButton(
+                      onPressed: controls.onStepCancel,
+                      child: const Text(
+                        'السابق',
+                        style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.w800),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: controls.onStepContinue,
+                      child: const Text('التالي',
+                          style: TextStyle(
+                              fontSize: 17, fontWeight: FontWeight.w800)),
+                    ),
+                  ],
+                );
+              },
               steps: getSteps(),
               currentStep: currentStep,
               onStepContinue: () {
@@ -231,31 +252,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               onStepCancel: currentStep == 0
                   ? null
                   : () => setState(() => currentStep -= 1),
-              //      controlsBuilder: (context , {onStepContinue,onStepCancel}),
+              //  controlsBuilder:
             )));
   }
-
-  /* Future resetPassword() async {
-    try {
-      await FirebaseAuth.instance.sendPasswordResetEmail(email: email.text);
-      Fluttertoast.showToast(
-          msg:
-              "تم إرسال البريد الإلكتروني الخاص بإعادة تعيين كلمة المرور بنجاح",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 7,
-          backgroundColor: Colors.lightGreen,
-          fontSize: 16.0,
-          textColor: Colors.white);
-    } catch (e, stack) {
-      Fluttertoast.showToast(
-          msg: " البريد الإلكتروني غير موجود ",
-          toastLength: Toast.LENGTH_SHORT,
-          backgroundColor: Colors.red,
-          fontSize: 16.0,
-          textColor: Colors.black);
-    }
-  }*/
 
   Widget logoWidget(String imageName) {
     return Center(
