@@ -60,6 +60,7 @@ class _HomePageState extends State<HomePage> {
               Align(
                 alignment: Alignment(-0.1, -1),
                 child: Container(
+                    padding: EdgeInsets.only(left: 4),
                     decoration: BoxDecoration(
                         color: kOrangeColor,
                         shape: BoxShape.circle,
@@ -84,6 +85,7 @@ class _HomePageState extends State<HomePage> {
                 width: 250,
               ),
               Container(
+                  padding: EdgeInsets.only(right: 5.0),
                   decoration: BoxDecoration(
                       color: Colors.grey,
                       shape: BoxShape.circle,
