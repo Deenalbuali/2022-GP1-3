@@ -138,9 +138,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         Step(
           isActive: currentStep >= 2,
           title: Text("إعادة تعيين كلمة المرور"),
-          content: Container(
-
-          ),
+          content: Container(),
         ),
       ];
 
@@ -167,9 +165,11 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     }
   }
 
-  void verifyOTP() {
+  bool verifyOTP() {
+    bool succ = false;
     var emailauth = EmailAuth(sessionName: "إلفاء");
     if (emailauth.validateOtp(recipientMail: email.text, userOtp: otp.text)) {
+      succ = true;
       Fluttertoast.showToast(
           msg: "تم التحقق بنجاح",
           toastLength: Toast.LENGTH_SHORT,
@@ -188,6 +188,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           fontSize: 16.0,
           textColor: Colors.white);
     }
+    return succ;
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -249,12 +250,14 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 if (isLastStep) {
                   print("Completed");
                 }
-                setState(() => currentStep += 1);
+                if (currentStep == 0 || email.value.text.isNotEmpty)
+                  setState(() => currentStep += 1);
+                else if (currentStep == 1 || verifyOTP())
+                  setState(() => currentStep += 1);
               },
               onStepCancel: currentStep == 0
                   ? null
                   : () => setState(() => currentStep -= 1),
-              //  controlsBuilder:
             )));
   }
 
