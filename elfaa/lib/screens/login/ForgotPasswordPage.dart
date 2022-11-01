@@ -137,8 +137,10 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             )),
         Step(
           isActive: currentStep >= 2,
-          title: Text("اعادة تعيين كلمة المرور"),
-          content: Container(),
+          title: Text("إعادة تعيين كلمة المرور"),
+          content: Container(
+
+          ),
         ),
       ];
 

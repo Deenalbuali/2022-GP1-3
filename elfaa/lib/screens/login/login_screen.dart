@@ -60,6 +60,9 @@ class _SignInScreenState extends State<SignInScreen> {
                           labelText: "البريد الإلكتروني",
                           hintText: "أدخل بريدك الإلكتروني",
                         ),
+                        textInputAction: TextInputAction.next,
+                        onEditingComplete: () =>
+                            FocusScope.of(context).nextFocus(),
                         validator: (value) {
                           if (value!.isEmpty || email.text.trim() == "") {
                             return "الحقل مطلوب";
@@ -102,6 +105,9 @@ class _SignInScreenState extends State<SignInScreen> {
                           labelText: "كلمة المرور",
                           hintText: "أدخل كلمة المرور",
                         ),
+                        textInputAction: TextInputAction.done,
+                        onFieldSubmitted: (_) =>
+                            FocusScope.of(context).unfocus(),
                         validator: (value) {
                           if (value!.isEmpty || pass.text.trim() == "") {
                             return "الحقل مطلوب";
@@ -116,7 +122,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         child: Text('نسيت كلمة المرور؟',
                             style: TextStyle(
                               fontSize: 17,
-                              color: Color.fromARGB(255, 129, 129, 129),
+                              color: Color(0xFF818181),
                             )),
                         onTap: () =>
                             Navigator.of(context).push(MaterialPageRoute(
@@ -185,17 +191,16 @@ class _SignInScreenState extends State<SignInScreen> {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => SignupPage()));
           },
-          child: const Text(
+          child: Text(
             "تسجيل جديد ",
             style: TextStyle(
                 fontSize: 17,
-                color: Color.fromARGB(255, 129, 129, 129),
+                color: Color(0xFF818181),
                 fontWeight: FontWeight.w800),
           ),
         ),
-        const Text("ليس لديك حساب؟",
-            style: TextStyle(
-                fontSize: 17, color: Color.fromARGB(255, 129, 129, 129))),
+        Text("ليس لديك حساب؟",
+            style: TextStyle(fontSize: 17, color: Color(0xFF818181))),
       ],
     );
   }
