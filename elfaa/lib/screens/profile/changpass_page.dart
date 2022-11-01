@@ -104,6 +104,8 @@ class _changePasswordPageState extends State<changePasswordPage> {
                       });
                     },
                   )),
+              textInputAction: TextInputAction.next,
+              onEditingComplete: () => FocusScope.of(context).nextFocus(),
               validator: (String? value) {
                 if (value!.isEmpty) {
                   return 'الحقل مطلوب';
@@ -143,6 +145,8 @@ class _changePasswordPageState extends State<changePasswordPage> {
                       });
                     },
                   )),
+              textInputAction: TextInputAction.next,
+              onEditingComplete: () => FocusScope.of(context).nextFocus(),
               validator: (String? value) {
                 RegExp regex = RegExp(
                     r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])'); //Min 1 uppercase, 1 lowercase and 1 numeric number
@@ -188,6 +192,8 @@ class _changePasswordPageState extends State<changePasswordPage> {
                       });
                     },
                   )),
+              textInputAction: TextInputAction.done,
+              onFieldSubmitted: (_) => FocusScope.of(context).unfocus(),
               validator: (String? value) {
                 if (value!.isEmpty) {
                   return 'الحقل مطلوب';
