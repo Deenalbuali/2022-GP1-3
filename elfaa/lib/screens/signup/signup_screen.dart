@@ -58,6 +58,9 @@ class _SignupPageState extends State<SignupPage> {
                           labelText: "الاسم",
                           hintText: "مثال: نورة محمد",
                         ),
+                        textInputAction: TextInputAction.next,
+                        onEditingComplete: () =>
+                            FocusScope.of(context).nextFocus(),
                         validator: (value) {
                           if (value!.isEmpty || name.text.trim() == "") {
                             return "الحقل مطلوب";
@@ -81,6 +84,9 @@ class _SignupPageState extends State<SignupPage> {
                                 color: Color(0xFFFD8601)),
                             labelText: "البريد الإلكتروني",
                             hintText: "example@example.com"),
+                        textInputAction: TextInputAction.next,
+                        onEditingComplete: () =>
+                            FocusScope.of(context).nextFocus(),
                         validator: (value) {
                           if (value!.isEmpty || email.text.trim() == "") {
                             return "الحقل مطلوب";
@@ -107,6 +113,9 @@ class _SignupPageState extends State<SignupPage> {
                           labelText: "رقم الجوال",
                           hintText: "05xxxxxxxx",
                         ),
+                        textInputAction: TextInputAction.next,
+                        onEditingComplete: () =>
+                            FocusScope.of(context).nextFocus(),
                         validator: (value) {
                           if (value!.isEmpty || phoneNo.text.trim() == "") {
                             return "الحقل مطلوب";
@@ -135,6 +144,8 @@ class _SignupPageState extends State<SignupPage> {
                                 "* حرف صغير باللغة الإنجليزية"
                                 "\n"
                                 "* رقم "),
+                        onFieldSubmitted: (_) =>
+                            FocusScope.of(context).unfocus(),
                         validator: (value) {
                           RegExp regex = RegExp(
                               r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])'); //Min 1 uppercase, 1 lowercase and 1 numeric number
