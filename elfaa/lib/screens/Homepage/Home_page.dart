@@ -105,20 +105,39 @@ class _HomePageState extends State<HomePage> {
                   )),
             ],
           ),
+          // SizedBox(
+          //   height: 10,
+          //   width: 10,
+          //   child: Column(
+          //     children: [
+          //       Container(
+          //           child: ListView.builder(
+          //               itemCount: 10,
+          //               shrinkWrap: true,
+          //               itemBuilder: (context, index) {
+          //                 return ListTile(title: Text('index: $index'));
+          //               })),
+          //     ],
+          //   ),
+          // ),
           SizedBox(height: 15),
-          Container(
-              height: 50,
-              width: 50,
-              padding: const EdgeInsets.all(25.0),
-              child: ListView.builder(
-                  itemCount: _childrenList.length,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    //if (index == 0)
-                    //return Null;
-                    // else
-                    return listBox(_childrenList[index] as childrenList);
-                  }))
+          SizedBox(
+            child: Column(
+              children: [
+                Container(
+                    padding: const EdgeInsets.all(25.0),
+                    child: ListView.builder(
+                        itemCount: _childrenList.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          //if (index == 0)
+                          //return Null;
+                          // else
+                          return listBox(_childrenList[index] as childrenList);
+                        })),
+              ],
+            ),
+          )
 
           //Column(
           //   children: [
@@ -245,6 +264,7 @@ class _HomePageState extends State<HomePage> {
         .collection('users')
         .doc(userid)
         .collection('children')
+        .orderBy('birthday', descending: true)
         .get();
 
     setState(() {

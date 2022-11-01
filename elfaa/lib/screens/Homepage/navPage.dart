@@ -61,7 +61,7 @@ class _NavPageState extends State<NavPage> {
             color: Colors.white,
             buttonBackgroundColor: Colors.white,
             animationDuration: Duration(milliseconds: 300),
-            backgroundColor: Colors.transparent,
+            backgroundColor: Color(0xFFfafafa),
             height: 60,
             index: index,
             items: items,

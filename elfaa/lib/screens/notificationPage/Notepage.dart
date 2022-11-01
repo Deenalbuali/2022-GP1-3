@@ -27,11 +27,11 @@ class NotePage extends StatelessWidget {
         centerTitle: true,
         flexibleSpace: Container(
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(28),
-                    bottomRight: Radius.circular(28)),
-                    color: kPrimaryColor,
-               )),
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(28),
+              bottomRight: Radius.circular(28)),
+          color: kPrimaryColor,
+        )),
       ),
       body: SingleChildScrollView(
         child: Column(children: <Widget>[

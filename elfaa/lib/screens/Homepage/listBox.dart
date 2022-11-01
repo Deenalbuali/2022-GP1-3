@@ -30,7 +30,9 @@ class listBox extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Icon(Icons.arrow_back_ios),
+            Container(
+                padding: EdgeInsets.only(left: 10),
+                child: Icon(Icons.arrow_back_ios)),
             Row(
               children: [
                 Column(
@@ -38,22 +40,28 @@ class listBox extends StatelessWidget {
                   //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 
                   children: [
-                    Text(
-                      "${_childlist.childName}",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Color.fromARGB(255, 41, 41, 32)),
+                    Container(
+                      padding: EdgeInsets.only(right: 25, top: 10),
+                      child: Text(
+                        "${_childlist.childName}",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Color.fromARGB(255, 41, 41, 32)),
+                      ),
                     ),
                     SizedBox(
                       height: 5,
                     ),
-                    Text("${_childlist.zoneName}",
-                        style: TextStyle(fontSize: 16, color: Colors.orange))
+                    Container(
+                      padding: EdgeInsets.only(right: 25),
+                      child: Text("${_childlist.zoneName}",
+                          style: TextStyle(fontSize: 16, color: Colors.orange)),
+                    )
                   ],
                 ),
-                Container(
-                  padding: EdgeInsets.all(12),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10.0),
                   child: Image.network(
                     "${_childlist.childImagePath}",
                     fit: BoxFit.scaleDown,
