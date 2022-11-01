@@ -20,10 +20,6 @@ class _editChildState extends State<editChild> {
   XFile? _img;
   final ImagePicker _picker = ImagePicker();
   String imgURL = '';
-//information form controllers
-  final controllerName = TextEditingController();
-  final controllerBirthday = TextEditingController();
-  final controllerHeight = TextEditingController();
 
 //globalKey
   final _formKey = GlobalKey<FormState>();
@@ -34,7 +30,7 @@ class _editChildState extends State<editChild> {
   //Child Info to be retreived from database
   TextEditingController childName = TextEditingController();
   TextEditingController birthday = TextEditingController();
-  TextEditingController childAgeMonths = TextEditingController();
+  late DateTime childBirthday;
   TextEditingController childHeight = TextEditingController();
   String childImage='';
 
@@ -50,10 +46,13 @@ class _editChildState extends State<editChild> {
         .get()
         .then((DocumentSnapshot<Map<String, dynamic>> snapshot) {
       //Convert timestamp type of data to DateTime
+       childBirthday =
+         DateTime.parse(snapshot['birthday'].toDate().toString());
+         int year =childBirthday.year;
+         int month =childBirthday.month;
+         int day = childBirthday.day;
       //birthday.text =(snapshot['birthday']).toString();
-      // print(birthday);
-      //Calculate Age As years: 0, Months: 0, Days: 0
-      //DateDuration calcAge = AgeCalculator.age(childBirthday);
+     
       childName.text = snapshot['name'];
       //Age numbers extraction as three digits String "000" for later presentation
       //Extract each of years and months
@@ -62,12 +61,12 @@ class _editChildState extends State<editChild> {
 
       childHeight.text = (snapshot['height']).toString();
       childImage = snapshot['image'];
+      birthday.text = '$year-$month-$day';
     });
   }
 
   @override
   void initState() {
-    controllerBirthday.text = ""; //set the initial value of text field
     getEDITABLEChild();
     super.initState();
   }
@@ -116,7 +115,7 @@ class _editChildState extends State<editChild> {
                         ),
                         validator: (value) {
                           if (value!.isEmpty ||
-                              controllerName.text.trim() == "") {
+                              childName.text.trim() == "") {
                             return "الحقل مطلوب";
                           }
                           return null;
@@ -127,7 +126,7 @@ class _editChildState extends State<editChild> {
                       textDirection: TextDirection.rtl,
                       child: TextFormField(
                           textAlign: TextAlign.right,
-                          controller: controllerBirthday,
+                          controller: birthday,
                           decoration: const InputDecoration(
                             suffixIcon: Icon(Icons.calendar_today,
                                 color: Color(0xFFFD8601)),
@@ -136,7 +135,7 @@ class _editChildState extends State<editChild> {
                           ),
                           validator: (value) {
                             if (value!.isEmpty ||
-                                controllerBirthday.text.trim() == "") {
+                                birthday.text.trim() == "") {
                               return "الحقل مطلوب";
                             }
                             return null;
@@ -145,7 +144,7 @@ class _editChildState extends State<editChild> {
                           onTap: () async {
                             DateTime? pickedDate = await showDatePicker(
                               context: context,
-                              initialDate: DateTime.now(),
+                              initialDate: DateTime(childBirthday.year, childBirthday.month, childBirthday.day),
                               firstDate: DateTime(1920),
                               lastDate: DateTime.now(),
                               builder: (context, child) {
@@ -166,7 +165,7 @@ class _editChildState extends State<editChild> {
                               String formattedDate =
                                   DateFormat('yyyy-MM-dd').format(pickedDate);
                               setState(() {
-                                controllerBirthday.text =
+                                birthday.text =
                                     formattedDate; //set output date to TextField value.
                               });
                             }
@@ -218,10 +217,10 @@ class _editChildState extends State<editChild> {
                           Future.delayed(Duration(seconds: 12), () {
                             final child = Child(
                                 image: imgURL,
-                                name: controllerName.text,
-                                height: int.parse(controllerHeight.text),
+                                name: childName.text,
+                                height: int.parse(childHeight.text),
                                 birthday:
-                                    DateTime.parse(controllerBirthday.text));
+                                    DateTime.parse(birthday.text));
                             addChild(child);
                             Navigator.pop(context);
                             setState(() {
@@ -248,27 +247,6 @@ class _editChildState extends State<editChild> {
                           ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text('يرجى اختيار صورة')));
                           return;
-                        }
-
-                        if (_formKey.currentState!.validate()) {
-                          if (imgURL.isEmpty) {
-                            setState(() {
-                              isLoading = true;
-                            });
-                          }
-                          Future.delayed(Duration(seconds: 12), () {
-                            final child = Child(
-                                image: imgURL,
-                                name: controllerName.text,
-                                height: int.parse(controllerHeight.text),
-                                birthday:
-                                    DateTime.parse(controllerBirthday.text));
-                            addChild(child);
-                            Navigator.pop(context);
-                            setState(() {
-                              isLoading = false;
-                            });
-                          });
                         }
                       },
                       style: ButtonStyle(
