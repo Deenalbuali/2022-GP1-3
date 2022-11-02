@@ -73,34 +73,32 @@ class _viewChildState extends State<viewChild> {
     final double ScreenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        //  actions: <Widget>[
-        //   IconButton(
-        //     icon: Icon(
-        //       Icons.arrow_forward_ios,
-        //       color: kPrimaryColor,
-        //     ),
-        //     onPressed: () => Navigator.of(context).pop(),
-        //   )
-        // ],
+        automaticallyImplyLeading: false,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.arrow_forward_ios,
+              color: Colors.white,
+            ),
+            onPressed: () => Navigator.of(context).pop(),
+          )
+        ],
         backgroundColor: Colors.transparent,
         elevation: 0,
         toolbarHeight: 90,
-
         title: const Text(
           "صفحة الطفل",
           style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
         ),
-        actions: [
-          IconButton(
-              icon: Icon(Icons.edit),
-              onPressed: (() {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => editChild(childID: widget.childID)),
-                );
-              }))
-        ],
+        leading: IconButton(
+            icon: Icon(Icons.edit),
+            onPressed: (() {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => editChild(childID: widget.childID)),
+              );
+            })),
         centerTitle: true,
         flexibleSpace: Container(
             decoration: const BoxDecoration(
