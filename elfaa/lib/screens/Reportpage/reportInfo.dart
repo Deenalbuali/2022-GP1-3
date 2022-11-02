@@ -1,10 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:ffi';
 import 'dart:io';
-
+import 'package:elfaa/alert_dialog.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:elfaa/screens/Reportpage/ReportPage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -12,17 +14,39 @@ import 'package:intl/intl.dart';
 
 //import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:firebase_core/firebase_core.dart';
-class reportInfo extends StatelessWidget {
+class reportInfo extends StatefulWidget {
   String childImagePath = "";
-
   String childName = "";
-
-  int zoneName = 0;
 
   reportInfo({
     required this.childName,
     required this.childImagePath,
   });
+
+  @override
+  State<reportInfo> createState() => _reportInfoState();
+}
+
+class _reportInfoState extends State<reportInfo> {
+  bool tappedYes = false;
+
+  bool editable = false;
+
+  int zoneName = 0;
+
+  Future<void> getCurrentUser() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final User? user = await _auth.currentUser;
+    if (!mounted) return;
+    final uid = user!.uid;
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .get()
+        .then((DocumentSnapshot<Map<String, dynamic>> snapshot) {});
+    if (!mounted) return;
+  }
+
   PickedFile? _imgFile;
 
   final ImagePicker _picker = ImagePicker();
@@ -127,7 +151,7 @@ class reportInfo extends StatelessWidget {
                                   child: Row(
                                     children: [
                                       Text(
-                                        childName + "   ",
+                                        widget.childName + "   ",
                                         style: TextStyle(
                                             color: Colors.black,
                                             fontSize: 20,
@@ -145,7 +169,7 @@ class reportInfo extends StatelessWidget {
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
                                                 child: Image.network(
-                                                  childImagePath,
+                                                  widget.childImagePath,
                                                   fit: BoxFit.scaleDown,
                                                 ),
                                               )
@@ -217,7 +241,8 @@ class reportInfo extends StatelessWidget {
                             width: 150,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.red, // background
+                                backgroundColor:
+                                    Color(0xFF9C0000), // background
                                 // foreground
                               ),
                               child: Text(
@@ -227,8 +252,22 @@ class reportInfo extends StatelessWidget {
                                   fontSize: 15,
                                 ),
                               ),
-                              onPressed: () {
-                                Navigator.pop(context);
+                              onPressed: () async {
+                                final action =
+                                    await AlertDialogs.yesCancelDialog(
+                                        context,
+                                        'إلغاء البلاغ',
+                                        'هل أنت متأكد من إلغاء البلاغ؟');
+                                if (!mounted) return;
+                                if (action == DialogsAction.yes) {
+                                  setState(() => tappedYes = true);
+                                  if (!mounted) return;
+
+                                  Navigator.pop(context);
+                                } else {
+                                  setState(() => tappedYes = false);
+                                  if (!mounted) return;
+                                }
                               },
                             ),
                           ),

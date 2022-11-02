@@ -61,17 +61,6 @@ class _NotePageState extends State<NotePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                padding: EdgeInsets.only(top: 12, left: 50),
-                child: Text(
-                  formatted,
-                  style: TextStyle(
-                    color: Color(0xff919296),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                  ),
-                ),
-              ),
               Padding(
                 padding: const EdgeInsets.symmetric(
                     horizontal: 25.0, vertical: 25.0),
@@ -91,7 +80,8 @@ class _NotePageState extends State<NotePage> {
             child: Column(
               children: [
                 Container(
-                    padding: const EdgeInsets.all(25.0),
+                    padding: const EdgeInsets.only(
+                        right: 25.0, left: 25, bottom: 25),
                     child: ListView.builder(
                         itemCount: _childrenList2.length,
                         shrinkWrap: true,
