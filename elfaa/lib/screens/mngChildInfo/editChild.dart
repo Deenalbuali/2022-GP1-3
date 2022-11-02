@@ -32,13 +32,15 @@ class _editChildState extends State<editChild> {
   TextEditingController birthday = TextEditingController();
   late DateTime childBirthday;
   TextEditingController childHeight = TextEditingController();
-  String childImage='';
-    String selectedGender = 'بنت';
-
+  String childImage = '';
+  String selectedGender = 'بنت';
+  String uid = '';
   Future<void> getEDITABLEChild() async {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     final User? user = await _auth.currentUser;
-    final uid = user!.uid;
+    setState(() {
+      uid = user!.uid;
+    });
     await FirebaseFirestore.instance
         .collection('users')
         .doc(uid)
@@ -47,13 +49,12 @@ class _editChildState extends State<editChild> {
         .get()
         .then((DocumentSnapshot<Map<String, dynamic>> snapshot) {
       //Convert timestamp type of data to DateTime
-       childBirthday =
-         DateTime.parse(snapshot['birthday'].toDate().toString());
-         int year =childBirthday.year;
-         int month =childBirthday.month;
-         int day = childBirthday.day;
+      childBirthday = DateTime.parse(snapshot['birthday'].toDate().toString());
+      int year = childBirthday.year;
+      int month = childBirthday.month;
+      int day = childBirthday.day;
       //birthday.text =(snapshot['birthday']).toString();
-     
+
       childName.text = snapshot['name'];
       //Age numbers extraction as three digits String "000" for later presentation
       //Extract each of years and months
@@ -115,8 +116,7 @@ class _editChildState extends State<editChild> {
                           hintText: "مثال: أسماء",
                         ),
                         validator: (value) {
-                          if (value!.isEmpty ||
-                              childName.text.trim() == "") {
+                          if (value!.isEmpty || childName.text.trim() == "") {
                             return "الحقل مطلوب";
                           }
                           return null;
@@ -135,8 +135,7 @@ class _editChildState extends State<editChild> {
                             hintText: "اختر من التقويم",
                           ),
                           validator: (value) {
-                            if (value!.isEmpty ||
-                                birthday.text.trim() == "") {
+                            if (value!.isEmpty || birthday.text.trim() == "") {
                               return "الحقل مطلوب";
                             }
                             return null;
@@ -145,7 +144,8 @@ class _editChildState extends State<editChild> {
                           onTap: () async {
                             DateTime? pickedDate = await showDatePicker(
                               context: context,
-                              initialDate: DateTime(childBirthday.year, childBirthday.month, childBirthday.day),
+                              initialDate: DateTime(childBirthday.year,
+                                  childBirthday.month, childBirthday.day),
                               firstDate: DateTime(1920),
                               lastDate: DateTime.now(),
                               builder: (context, child) {
@@ -171,16 +171,16 @@ class _editChildState extends State<editChild> {
                               });
                             }
                           })),
-                          const SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Directionality(
-                      textDirection: TextDirection.rtl,
+                    textDirection: TextDirection.rtl,
                     child: DropdownButtonFormField(
                       decoration: const InputDecoration(
-                            suffixIcon: Icon(Icons.escalator_warning,
-                                color: Color(0xFFFD8601)),
-                            labelText: "الجنس",
-                          ),
-                      onChanged: (val){
+                        suffixIcon: Icon(Icons.escalator_warning,
+                            color: Color(0xFFFD8601)),
+                        labelText: "الجنس",
+                      ),
+                      onChanged: (val) {
                         setState(() {
                           selectedGender = val.toString();
                         });
@@ -188,8 +188,14 @@ class _editChildState extends State<editChild> {
                       value: selectedGender,
                       hint: Text("بنت أو ولد"),
                       items: const [
-                        DropdownMenuItem(child: Text("ولد"), value: 'ولد',),
-                        DropdownMenuItem(child: Text("بنت"), value: "بنت",)
+                        DropdownMenuItem(
+                          child: Text("ولد"),
+                          value: 'ولد',
+                        ),
+                        DropdownMenuItem(
+                          child: Text("بنت"),
+                          value: "بنت",
+                        )
                       ],
                     ),
                   ),
@@ -238,13 +244,20 @@ class _editChildState extends State<editChild> {
                             });
                           }
                           Future.delayed(Duration(seconds: 12), () {
-                            final child = Child(
-                                image: imgURL,
-                                name: childName.text,
-                                height: int.parse(childHeight.text),
-                                birthday:
-                                    DateTime.parse(birthday.text));
-                            addChild(child);
+                            final docChild =FirebaseFirestore.instance
+                                .collection('users')
+                                .doc(uid)
+                                .collection('children')
+                                .doc('CiQbU3gkuwde5vcBjPKf');
+
+                            //update child info
+                            docChild.update({
+                              'image': imgURL,
+                                'name': childName.text,
+                                'gender': selectedGender,
+                                'height': int.parse(childHeight.text),
+                                'birthday':
+                                    DateTime.parse(controllerBirthday.text)});
                             Navigator.pop(context);
                             setState(() {
                               isLoading = false;
@@ -261,9 +274,7 @@ class _editChildState extends State<editChild> {
                               color: Colors.white,
                             )
                           : const Text('حفظ التعديلات')),
-                          SizedBox(
-                            height: 20
-                          ),
+                  SizedBox(height: 20),
                   ElevatedButton(
                       onPressed: () async {
                         if (_img == null) {
@@ -273,8 +284,8 @@ class _editChildState extends State<editChild> {
                         }
                       },
                       style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(Color.fromARGB(255, 205, 0, 0)),
+                        backgroundColor: MaterialStateProperty.all(
+                            Color.fromARGB(255, 205, 0, 0)),
                       ),
                       child: isLoading
                           ? CircularProgressIndicator(
@@ -309,7 +320,7 @@ class _editChildState extends State<editChild> {
                         builder: ((builder) => bottomImgPicker()));
                   },
                   child: const Icon(Icons.camera_alt,
-                  color: Color.fromARGB(255, 22, 147, 193), size: 28)))
+                      color: Color.fromARGB(255, 22, 147, 193), size: 28)))
         ],
       ),
     );
@@ -376,35 +387,4 @@ class _editChildState extends State<editChild> {
 
   InputDecoration decoration(String label) =>
       InputDecoration(labelText: label, border: const OutlineInputBorder());
-
-  //adding child doc to a parent doc in the firestore database
-  Future addChild(Child child) async {
-    //Reference to document
-    final docChild = FirebaseFirestore.instance
-        .collection('users')
-        .doc()
-        .collection('children')
-        .doc();
-
-    final json = child.toJson();
-    //Create doc and write data
-    await docChild.set(json);
-  }
-}
-
-//child class
-class Child {
-  final String image;
-  final String name;
-  final int height;
-  final DateTime birthday;
-
-  Child(
-      {required this.image,
-      required this.name,
-      required this.height,
-      required this.birthday});
-
-  Map<String, dynamic> toJson() =>
-      {'image': image, 'name': name, 'height': height, 'birthday': birthday};
 }
