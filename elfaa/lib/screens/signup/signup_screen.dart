@@ -24,9 +24,15 @@ class _SignupPageState extends State<SignupPage> {
     return Scaffold(
       backgroundColor: Color(0xFFfafafa),
       appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: kPrimaryColor,
-        ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.arrow_forward_ios,
+              color: kPrimaryColor,
+            ),
+            onPressed: () => Navigator.of(context).pop(),
+          )
+        ],
         backgroundColor: Color(0xFFFFFFFF),
         elevation: 0,
         title: const Text(
