@@ -18,6 +18,7 @@ class _viewChildState extends State<viewChild> {
   late String childAgeMonths;
   late int childHeight;
   late String childImage;
+  late String childGender;
   String zoneName = 'في منطقة الألعاب';
 
   Future<void> getCurrentChild() async {
@@ -28,7 +29,7 @@ class _viewChildState extends State<viewChild> {
         .collection('users')
         .doc(uid)
         .collection('children')
-        .doc('CiQbU3gkuwde5vcBjPKf')
+        .doc('XuulXMzQvkPimuv0NDXR')
         .get()
         .then((DocumentSnapshot<Map<String, dynamic>> snapshot) {
       //Convert timestamp type of data to DateTime 
@@ -46,6 +47,7 @@ class _viewChildState extends State<viewChild> {
 
         childHeight = snapshot['height'];
         childImage = snapshot['image'];
+        childGender = snapshot['gender'];
       });
     });
   }
@@ -104,7 +106,7 @@ class _viewChildState extends State<viewChild> {
                 color: kPrimaryColor,
               ),
               child: Padding(
-                padding: const EdgeInsets.only(top: 40, bottom: 25),
+                padding: const EdgeInsets.only(top: 25, bottom: 16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -139,6 +141,9 @@ class _viewChildState extends State<viewChild> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
+                        SizedBox(
+                          height: 10,
+                        ),
                         Text(
                           "$childName",
                           style: TextStyle(
@@ -147,7 +152,7 @@ class _viewChildState extends State<viewChild> {
                               fontWeight: FontWeight.bold),
                         ),
                         SizedBox(
-                          height: 10,
+                          height: 12,
                         ),
                         Text(
                         (int.parse(childAgeYears)>10)?
@@ -160,7 +165,18 @@ class _viewChildState extends State<viewChild> {
                               fontWeight: FontWeight.bold),
                         ),
                         SizedBox(
-                          height: 10,
+                          height: 2,
+                        ),
+                        Text(
+                          "$childGender",
+                          textDirection: TextDirection.rtl,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          height: 2,
                         ),
                         Text(
                           "$childHeight سم",
@@ -171,7 +187,7 @@ class _viewChildState extends State<viewChild> {
                               fontWeight: FontWeight.bold),
                         ),
                         SizedBox(
-                          height: 10,
+                          height: 5,
                         ),
                         Text(
                           "$zoneName",
