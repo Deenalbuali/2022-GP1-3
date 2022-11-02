@@ -32,7 +32,7 @@ class _viewChildState extends State<viewChild> {
         .doc('XuulXMzQvkPimuv0NDXR')
         .get()
         .then((DocumentSnapshot<Map<String, dynamic>> snapshot) {
-      //Convert timestamp type of data to DateTime 
+      //Convert timestamp type of data to DateTime
       DateTime childBirthday =
           DateTime.parse(snapshot['birthday'].toDate().toString());
       //Calculate Age As years: 0, Months: 0, Days: 0
@@ -40,10 +40,11 @@ class _viewChildState extends State<viewChild> {
       setState(() {
         childName = snapshot['name'];
         //Age numbers extraction as three digits String "000" for later presentation
-        //Extract each of years and months 
-        childAgeYears = (calcAge.toString().replaceAll(new RegExp(r'[^0-9]'), ''))[0];
-        childAgeMonths = (calcAge.toString().replaceAll(new RegExp(r'[^0-9]'), ''))[1];
-
+        //Extract each of years and months
+        childAgeYears =
+            (calcAge.toString().replaceAll(new RegExp(r'[^0-9]'), ''))[0];
+        childAgeMonths =
+            (calcAge.toString().replaceAll(new RegExp(r'[^0-9]'), ''))[1];
 
         childHeight = snapshot['height'];
         childImage = snapshot['image'];
@@ -70,14 +71,16 @@ class _viewChildState extends State<viewChild> {
             "صفحة الطفل",
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
           ),
-          actions: [IconButton(icon: Icon(Icons.edit), onPressed: (() 
-          {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => editChild()),
-                        );
-                      }
-          ))],
+          actions: [
+            IconButton(
+                icon: Icon(Icons.edit),
+                onPressed: (() {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => editChild()),
+                  );
+                }))
+          ],
           centerTitle: true,
           flexibleSpace: Container(
               decoration: const BoxDecoration(
@@ -118,22 +121,27 @@ class _viewChildState extends State<viewChild> {
                             childImage,
                             width: 140,
                             height: 140,
-                            fit:BoxFit.cover,
-                            frameBuilder: (BuildContext context, Widget child, int? frame, bool isAsyncLoaded){
-                              return Padding(padding: EdgeInsets.all(1),
-                              child: child,);
+                            fit: BoxFit.cover,
+                            frameBuilder: (BuildContext context, Widget child,
+                                int? frame, bool isAsyncLoaded) {
+                              return Padding(
+                                padding: EdgeInsets.all(1),
+                                child: child,
+                              );
                             },
-                             loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
-                             if (loadingProgress == null) return child;
-                             return Center(
-                              child: Text("جاري التحميل"),
-                             );
-                             },
-                             errorBuilder: (BuildContext context, Object error, StackTrace? st){
+                            loadingBuilder: (BuildContext context, Widget child,
+                                ImageChunkEvent? loadingProgress) {
+                              if (loadingProgress == null) return child;
+                              return Center(
+                                child: Text("جاري التحميل"),
+                              );
+                            },
+                            errorBuilder: (BuildContext context, Object error,
+                                StackTrace? st) {
                               return Center(
                                 child: Text("error"),
                               );
-                             },
+                            },
                           ),
                         ),
                       ],
@@ -155,9 +163,9 @@ class _viewChildState extends State<viewChild> {
                           height: 12,
                         ),
                         Text(
-                        (int.parse(childAgeYears)>10)?
-                          "$childAgeYears سنة":
-                          "$childAgeYears سنوات",
+                          (int.parse(childAgeYears) > 10)
+                              ? "$childAgeYears سنة"
+                              : "$childAgeYears سنوات",
                           textDirection: TextDirection.rtl,
                           style: TextStyle(
                               color: Colors.white,

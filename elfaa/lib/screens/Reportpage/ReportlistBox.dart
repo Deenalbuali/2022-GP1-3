@@ -45,7 +45,11 @@ class ReportlistBox extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => reportInfo()),
+                      MaterialPageRoute(
+                          builder: (context) => reportInfo(
+                                childName: "${_childlist3.childName}",
+                                childImagePath: "${_childlist3.childImagePath}",
+                              )),
                     );
                   },
                   icon: Icon(Icons.content_paste),

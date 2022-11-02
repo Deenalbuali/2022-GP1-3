@@ -50,9 +50,28 @@ class _HomePageState extends State<HomePage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(children: <Widget>[
           _buildHeader(),
+          Padding(
+            padding: const EdgeInsets.only(left: 25.0, right: 25, bottom: 25),
+            child: Container(
+              height: 200,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey,
+                        offset: Offset(1.0, 1.0),
+                        blurRadius: 4.0)
+                  ],
+                  borderRadius: BorderRadius.circular(30),
+                  image: DecorationImage(
+                      image: AssetImage("assets/images/MainMap.jpg"),
+                      fit: BoxFit.cover)),
+            ),
+          ),
           Row(
             children: [
               SizedBox(
@@ -61,7 +80,6 @@ class _HomePageState extends State<HomePage> {
               Align(
                 alignment: Alignment(-0.1, -1),
                 child: Container(
-                    padding: EdgeInsets.only(left: 4),
                     decoration: BoxDecoration(
                         color: kOrangeColor,
                         shape: BoxShape.circle,
@@ -86,7 +104,6 @@ class _HomePageState extends State<HomePage> {
                 width: 250,
               ),
               Container(
-                  padding: EdgeInsets.only(right: 5.0),
                   decoration: BoxDecoration(
                       color: Colors.grey,
                       shape: BoxShape.circle,
@@ -123,38 +140,41 @@ class _HomePageState extends State<HomePage> {
           //     ],
           //   ),
           // ),
-          SizedBox(height: 15),
-          SizedBox(
-            child: Column(
-              children: [
-                Container(
-                    padding: const EdgeInsets.all(25.0),
-                    child: ListView.builder(
-                        itemCount: _childrenList.length,
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          //if (index == 0)
-                          //return Null;
-                          // else
-                          return HomelistBox(
-                              _childrenList[index] as childrenList);
-                        })),
-              ],
-            ),
-          )
-
-          //Column(
-          //   children: [
-          //     // childrenList(
-          //     //     childImagePath: 'assets/images/ahmad.png',
-          //     //     childName: 'أحمد',
-          //     //     zoneName: 'منطقة الألعاب'),
-          //     // childrenList(
-          //     //     childImagePath: 'assets/images/sarah.png',
-          //     //     childName: 'سارة',
-          //     //     zoneName: 'منطقة المطاعم'),
-          // ],
-          // ),
+          _childrenList.length == 0
+              ? Padding(
+                  padding: const EdgeInsets.only(top: 5.0, left: 30),
+                  child: Container(
+                    height: 450,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        // boxShadow: [
+                        //   BoxShadow(
+                        //       color: Colors.grey,
+                        //       offset: Offset(1.0, 1.0),
+                        //       blurRadius: 4.0)
+                        // ],
+                        //borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                            image: AssetImage("assets/images/noChildren.png"),
+                            fit: BoxFit.cover)),
+                  ),
+                )
+              : SizedBox(
+                  child: Column(
+                    children: [
+                      Container(
+                          padding: const EdgeInsets.only(
+                              right: 25.0, left: 25, bottom: 25),
+                          child: ListView.builder(
+                              itemCount: _childrenList.length,
+                              shrinkWrap: true,
+                              itemBuilder: (context, index) {
+                                return HomelistBox(
+                                    _childrenList[index] as childrenList);
+                              })),
+                    ],
+                  ),
+                )
         ]),
       ),
     );
@@ -162,7 +182,7 @@ class _HomePageState extends State<HomePage> {
 
   Container _buildHeader() {
     return Container(
-      height: 250,
+      height: 180,
       width: double.infinity,
       child: Stack(
         children: <Widget>[
@@ -171,7 +191,7 @@ class _HomePageState extends State<HomePage> {
             right: -80,
             top: -190,
             child: Container(
-              width: 350,
+              width: 310,
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   gradient: LinearGradient(colors: [color1, color2]),
@@ -183,42 +203,8 @@ class _HomePageState extends State<HomePage> {
                   ]),
             ),
           ),
-          Positioned(
-            top: 10,
-            left: 200,
-            child: Container(
-              width: 100,
-              height: 100,
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  gradient: LinearGradient(colors: [color3, color2]),
-                  boxShadow: [
-                    BoxShadow(
-                        color: color3,
-                        offset: Offset(1.0, 1.0),
-                        blurRadius: 4.0)
-                  ]),
-            ),
-          ),
-          Positioned(
-            top: 100,
-            left: 300,
-            child: Container(
-              width: 50,
-              height: 50,
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  gradient: LinearGradient(colors: [color3, color2]),
-                  boxShadow: [
-                    BoxShadow(
-                        color: color3,
-                        offset: Offset(1.0, 1.0),
-                        blurRadius: 4.0)
-                  ]),
-            ),
-          ),
           Container(
-            margin: const EdgeInsets.only(top: 40, left: 215),
+            margin: const EdgeInsets.only(top: 40, left: 250),
             child: Column(
               //crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -226,7 +212,7 @@ class _HomePageState extends State<HomePage> {
                   "! مرحبًا" " ",
                   style: TextStyle(
                       color: Colors.white,
-                      fontSize: 28.0,
+                      fontSize: 20.0,
                       fontWeight: FontWeight.w700),
                 ),
                 SizedBox(height: 1),
@@ -234,7 +220,7 @@ class _HomePageState extends State<HomePage> {
                   username,
                   style: TextStyle(
                       color: Colors.white,
-                      fontSize: 28.0,
+                      fontSize: 25.0,
                       fontWeight: FontWeight.w700),
                 ),
                 SizedBox(height: 10.0),

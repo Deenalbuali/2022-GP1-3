@@ -1,5 +1,5 @@
 import 'package:elfaa/screens/Reportpage/ReportlistBox.dart';
-import 'package:elfaa/screens/Reportpage/reportList.dart';
+
 import 'package:elfaa/screens/mngChildInfo/addChild.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:elfaa/screens/Homepage/childrenList.dart';
@@ -79,7 +79,8 @@ class _ReportPageState extends State<ReportPage> {
             child: Column(
               children: [
                 Container(
-                    padding: const EdgeInsets.all(25.0),
+                    padding: const EdgeInsets.only(
+                        right: 25.0, left: 25, bottom: 25),
                     child: ListView.builder(
                         itemCount: _childrenList2.length,
                         shrinkWrap: true,

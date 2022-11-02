@@ -33,52 +33,66 @@ class HomelistBox extends StatelessWidget {
           children: [
             Container(
                 padding: EdgeInsets.only(left: 10),
-                 child: IconButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => viewChild()),
-                        );
-                      },
-                      icon: Icon(Icons.arrow_back_ios),
-                      color: Colors.black,
-                    )
-            ),
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => viewChild()),
+                    );
+                  },
+                  icon: Icon(Icons.arrow_back_ios),
+                  color: Colors.black,
+                )),
             Row(
               children: [
-                Column(
-                  //crossAxisAlignment: CrossAxisAlignment.start,
-                  //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-
+                Row(
                   children: [
-                    Container(
-                      padding: EdgeInsets.only(top: 1),
-                      child: Text(
-                        "${_childlist.childName}",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: Color.fromARGB(255, 41, 41, 32)),
+                    Column(
+                      //crossAxisAlignment: CrossAxisAlignment.start,
+                      //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+                      children: [
+                        Container(
+                          padding: EdgeInsets.only(top: 1),
+                          child: Text(
+                            "${_childlist.childName}",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Color.fromARGB(255, 41, 41, 32)),
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(right: 25, top: 5),
+                          child: Text("منطقة الألعاب",
+                              style:
+                                  TextStyle(fontSize: 16, color: Colors.grey)),
+                        )
+                      ],
+                    ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10.0),
+                      child: Image.network(
+                        "${_childlist.childImagePath}",
+                        fit: BoxFit.scaleDown,
                       ),
                     ),
-                    Container(
-                      padding: EdgeInsets.only(right: 25, top: 5),
-                      child: Text("منطقة الألعاب",
-                          style: TextStyle(fontSize: 16, color: Colors.grey)),
-                    )
                   ],
-                ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10.0),
-                  child: Image.network(
-                    "${_childlist.childImagePath}",
-                    fit: BoxFit.scaleDown,
-                  ),
                 ),
               ],
             ),
           ],
         ),
+        //onTap: () {
+        // Navigator.push(
+        //           context,
+        //           MaterialPageRoute(
+        //               builder: (context) => viewChild(
+        //                     childName: "${_childlist3.childName}",
+
+        //                   )),
+        //         );
+        // }
       ),
     );
   }

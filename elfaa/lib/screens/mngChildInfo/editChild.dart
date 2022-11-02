@@ -244,7 +244,7 @@ class _editChildState extends State<editChild> {
                             });
                           }
                           Future.delayed(Duration(seconds: 12), () {
-                            final docChild =FirebaseFirestore.instance
+                            final docChild = FirebaseFirestore.instance
                                 .collection('users')
                                 .doc(uid)
                                 .collection('children')
@@ -253,11 +253,11 @@ class _editChildState extends State<editChild> {
                             //update child info
                             docChild.update({
                               'image': imgURL,
-                                'name': childName.text,
-                                'gender': selectedGender,
-                                'height': int.parse(childHeight.text),
-                                'birthday':
-                                    DateTime.parse(controllerBirthday.text)});
+                              'name': childName.text,
+                              'gender': selectedGender,
+                              'height': int.parse(childHeight.text),
+                              //'birthday': DateTime.parse(controllerBirthday.text)
+                            });
                             Navigator.pop(context);
                             setState(() {
                               isLoading = false;

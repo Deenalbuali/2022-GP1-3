@@ -1,30 +1,37 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:ffi';
 import 'dart:io';
+
+import 'package:blurrycontainer/blurrycontainer.dart';
+import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:blurrycontainer/blurrycontainer.dart';
-import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 //import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:firebase_core/firebase_core.dart';
-class reportInfo extends StatefulWidget {
-  @override
-  State<reportInfo> createState() => _reportInfoState();
-}
+class reportInfo extends StatelessWidget {
+  String childImagePath = "";
 
-class _reportInfoState extends State<reportInfo> {
-//profile image variables
+  String childName = "";
+
+  int zoneName = 0;
+
+  reportInfo({
+    required this.childName,
+    required this.childImagePath,
+  });
   PickedFile? _imgFile;
+
   final ImagePicker _picker = ImagePicker();
+
 //information form controllers
-  final controllerName = TextEditingController();
-  final controllerBirthday = TextEditingController();
-  final controllerHeight = TextEditingController();
   final now = DateTime.now();
+
   final df = new DateFormat('dd-MM-yyyy hh:mm a');
+
   int myvalue = 1558432747;
 
   @override
@@ -114,50 +121,38 @@ class _reportInfoState extends State<reportInfo> {
                               ],
                             ),
                             Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      "سارة" "   ",
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Container(
-                                      height: 42,
-                                      width: 42,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Image.asset(
-                                            "assets/images/sarah.png",
-                                            height: 35,
-                                          ),
-                                          SizedBox(
-                                            height: 4,
-                                          ),
-                                        ],
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 0),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        childName + "   ",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold),
                                       ),
-                                      decoration: BoxDecoration(
-                                          color: Color(0xff101419),
-                                          borderRadius:
-                                              BorderRadius.circular(8)),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 10,
+                                      SizedBox(
+                                        height: 1,
+                                      ),
+                                      Container(
+                                          height: 30,
+                                          width: 42,
+                                          child: Column(
+                                            children: [
+                                              ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.0),
+                                                child: Image.network(
+                                                  childImagePath,
+                                                  fit: BoxFit.scaleDown,
+                                                ),
+                                              )
+                                            ],
+                                          )),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
@@ -195,11 +190,24 @@ class _reportInfoState extends State<reportInfo> {
                       SizedBox(
                         height: 15,
                       ),
-                      SizedBox(
-                        height: 15,
+                      Text(
+                        ": " "رقم التواصل ",
+                        style: TextStyle(
+                          color: Color(0xff919296),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                        ),
+                      ),
+                      Text(
+                        "0584736352",
+                        style: TextStyle(
+                          color: Color(0xff919296),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                        ),
                       ),
                       SizedBox(
-                        height: 40,
+                        height: 30,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
