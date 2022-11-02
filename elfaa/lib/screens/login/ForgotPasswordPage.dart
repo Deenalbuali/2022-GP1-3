@@ -28,6 +28,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               onPressed: () => Navigator.of(context).pop(),
             )
           ],
+          automaticallyImplyLeading: false,
           backgroundColor: Color(0xFFFFFFFF),
           elevation: 0,
           title: const Text(

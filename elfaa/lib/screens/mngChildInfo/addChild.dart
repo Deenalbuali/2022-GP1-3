@@ -60,207 +60,221 @@ class _addChildState extends State<addChild> {
     final double ScreenHeight = MediaQuery.of(context).size.height;
     final double ScreenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          toolbarHeight: 90,
-          leading: const BackButton(color: Colors.white),
-          title: const Text(
-            "إضافة طفل جديد",
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
-          ),
-          centerTitle: true,
-          flexibleSpace: Container(
-              decoration: const BoxDecoration(
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(28),
-                bottomRight: Radius.circular(28)),
-            color: kPrimaryColor,
-          )),
+      appBar: AppBar(
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.arrow_forward_ios,
+              color: Colors.white,
+            ),
+            onPressed: () => Navigator.of(context).pop(),
+          )
+        ],
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        toolbarHeight: 90,
+        title: const Text(
+          "إضافة طفل جديد",
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
         ),
-        body: SingleChildScrollView(
-          child: Form(
-            key: _formKey,
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(
-                  20, MediaQuery.of(context).size.height * 0.04, 20, 0),
-              child: Column(
-                children: <Widget>[
-                  childImg(),
-                  SizedBox(height: ScreenHeight*0.04),
-                  Directionality(
-                      textDirection: TextDirection.rtl,
-                      child: TextFormField(
-                        textAlign: TextAlign.right,
-                        controller: controllerName,
-                        decoration: const InputDecoration(
-                          suffixIcon:
-                              Icon(Icons.child_care, color: Color(0xFFFD8601)),
-                          labelText: "اسم الطفل",
-                          hintText: "مثال: أسماء",
-                        ),
-                        validator: (value) {
-                          if (value!.isEmpty ||
-                              controllerName.text.trim() == "") {
-                            return "الحقل مطلوب";
-                          }
-                          return null;
-                        },
-                      )),
-                  SizedBox(height: ScreenHeight*0.025),
-                  Directionality(
-                      textDirection: TextDirection.rtl,
-                      child: TextFormField(
-                          textAlign: TextAlign.right,
-                          controller: controllerBirthday,
-                          decoration: const InputDecoration(
-                            suffixIcon: Icon(Icons.calendar_today,
-                                color: Color(0xFFFD8601)),
-                            labelText: "تاريخ الميلاد",
-                            hintText: "اختر من التقويم",
-                          ),
-                          validator: (value) {
-                            if (value!.isEmpty ||
-                                controllerBirthday.text.trim() == "") {
-                              return "الحقل مطلوب";
-                            }
-                            return null;
-                          },
-                          readOnly: true,
-                          onTap: () async {
-                            DateTime? pickedDate = await showDatePicker(
-                              context: context,
-                              initialDate: DateTime.now(),
-                              firstDate: DateTime(1920),
-                              lastDate: DateTime.now(),
-                              builder: (context, child) {
-                                return Theme(
-                                  data: ThemeData.light().copyWith(
-                                    primaryColor: const Color(0xFF429EB2),
-                                    colorScheme: const ColorScheme.light(
-                                        primary: Color(0xFF429EB2)),
-                                    buttonTheme: const ButtonThemeData(
-                                        textTheme: ButtonTextTheme.primary),
-                                  ),
-                                  child: child!,
-                                );
-                              },
-                            );
-  
-                            if (pickedDate != null) {
-                              String formattedDate =
-                                  DateFormat('yyyy-MM-dd').format(pickedDate);
-                              setState(() {
-                                controllerBirthday.text =
-                                    formattedDate; //set output date to TextField value.
-                              });
-                            }
-                          })),
-                  SizedBox(height: ScreenHeight*0.025),
-                  Directionality(
-                      textDirection: TextDirection.rtl,
-                    child: DropdownButtonFormField(
+        centerTitle: true,
+        flexibleSpace: Container(
+            decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(28),
+              bottomRight: Radius.circular(28)),
+          color: kPrimaryColor,
+        )),
+      ),
+      body: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(
+                20, MediaQuery.of(context).size.height * 0.04, 20, 0),
+            child: Column(
+              children: <Widget>[
+                childImg(),
+                SizedBox(height: ScreenHeight * 0.04),
+                Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: TextFormField(
+                      textAlign: TextAlign.right,
+                      controller: controllerName,
                       decoration: const InputDecoration(
-                            suffixIcon: Icon(Icons.escalator_warning,
-                                color: Color(0xFFFD8601)),
-                            labelText: "الجنس",
-                          ),
-                      onChanged: (val){
-                        setState(() {
-                          selectedGender = val.toString();
-                        });
+                        suffixIcon:
+                            Icon(Icons.child_care, color: Color(0xFFFD8601)),
+                        labelText: "اسم الطفل",
+                        hintText: "مثال: أسماء",
+                      ),
+                      validator: (value) {
+                        if (value!.isEmpty ||
+                            controllerName.text.trim() == "") {
+                          return "الحقل مطلوب";
+                        }
+                        return null;
                       },
-                      value: selectedGender,
-                      items: const [
-                        DropdownMenuItem(child: Text("ذكر"), value: 'ذكر',),
-                        DropdownMenuItem(child: Text("أنثى"), value: "أنثى",)
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: ScreenHeight*0.025),
-                  Directionality(
-                      textDirection: TextDirection.rtl,
-                      child: TextFormField(
+                    )),
+                SizedBox(height: ScreenHeight * 0.025),
+                Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: TextFormField(
                         textAlign: TextAlign.right,
-                        controller: controllerHeight,
-                        keyboardType: TextInputType.number,
+                        controller: controllerBirthday,
                         decoration: const InputDecoration(
-                          suffixIcon: Icon(Icons.accessibility_new,
+                          suffixIcon: Icon(Icons.calendar_today,
                               color: Color(0xFFFD8601)),
-                          labelText: "الطول",
-                          hintText: "بالسنتيمترات",
+                          labelText: "تاريخ الميلاد",
+                          hintText: "اختر من التقويم",
                         ),
                         validator: (value) {
                           if (value!.isEmpty ||
-                              controllerHeight.text.trim() == "") {
+                              controllerBirthday.text.trim() == "") {
                             return "الحقل مطلوب";
                           }
                           return null;
                         },
-                      )),
-                  SizedBox(height: ScreenHeight*0.025),
-                  SizedBox(
-                    width: ScreenWidth,
-                    child: ElevatedButton(
-                        onPressed: null,
-                        style: ElevatedButton.styleFrom(
-                            textStyle: const TextStyle(fontSize: 22)),
-                        child: const Text('ربط جهاز التتبع')),
-                  ),
-                  SizedBox(height: ScreenHeight*0.025),
-                  ElevatedButton(
-                      onPressed: () async {
-                        if (_img == null) {
-                          Fluttertoast.showToast(
-                              msg: "يرجى اختيار صورة",
-                              toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.CENTER,
-                              timeInSecForIosWeb: 7,
-                              backgroundColor: Color.fromARGB(255, 195, 74, 74),
-                              fontSize: 16.0,
-                              textColor: Colors.white);
-  
-                          return;
-                        }
-  
-                        if (_formKey.currentState!.validate()) {
-                          if (imgURL.isEmpty) {
+                        readOnly: true,
+                        onTap: () async {
+                          DateTime? pickedDate = await showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(1920),
+                            lastDate: DateTime.now(),
+                            builder: (context, child) {
+                              return Theme(
+                                data: ThemeData.light().copyWith(
+                                  primaryColor: const Color(0xFF429EB2),
+                                  colorScheme: const ColorScheme.light(
+                                      primary: Color(0xFF429EB2)),
+                                  buttonTheme: const ButtonThemeData(
+                                      textTheme: ButtonTextTheme.primary),
+                                ),
+                                child: child!,
+                              );
+                            },
+                          );
+
+                          if (pickedDate != null) {
+                            String formattedDate =
+                                DateFormat('yyyy-MM-dd').format(pickedDate);
                             setState(() {
-                              isLoading = true;
+                              controllerBirthday.text =
+                                  formattedDate; //set output date to TextField value.
                             });
                           }
-                          Future.delayed(Duration(seconds: 10), () {
-                            final child = Child(
-                                image: imgURL,
-                                name: controllerName.text,
-                                gender: selectedGender,
-                                height: int.parse(controllerHeight.text),
-                                birthday:
-                                    DateTime.parse(controllerBirthday.text));
-                            addChild(child);
-                            Navigator.pop(context);
-                            setState(() {
-                              isLoading = false;
-                            });
+                        })),
+                SizedBox(height: ScreenHeight * 0.025),
+                Directionality(
+                  textDirection: TextDirection.rtl,
+                  child: DropdownButtonFormField(
+                    decoration: const InputDecoration(
+                      suffixIcon: Icon(Icons.escalator_warning,
+                          color: Color(0xFFFD8601)),
+                      labelText: "الجنس",
+                    ),
+                    onChanged: (val) {
+                      setState(() {
+                        selectedGender = val.toString();
+                      });
+                    },
+                    value: selectedGender,
+                    items: const [
+                      DropdownMenuItem(
+                        child: Text("ذكر"),
+                        value: 'ذكر',
+                      ),
+                      DropdownMenuItem(
+                        child: Text("أنثى"),
+                        value: "أنثى",
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(height: ScreenHeight * 0.025),
+                Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: TextFormField(
+                      textAlign: TextAlign.right,
+                      controller: controllerHeight,
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                        suffixIcon: Icon(Icons.accessibility_new,
+                            color: Color(0xFFFD8601)),
+                        labelText: "الطول",
+                        hintText: "بالسنتيمترات",
+                      ),
+                      validator: (value) {
+                        if (value!.isEmpty ||
+                            controllerHeight.text.trim() == "") {
+                          return "الحقل مطلوب";
+                        }
+                        return null;
+                      },
+                    )),
+                SizedBox(height: ScreenHeight * 0.025),
+                SizedBox(
+                  width: ScreenWidth,
+                  child: ElevatedButton(
+                      onPressed: null,
+                      style: ElevatedButton.styleFrom(
+                          textStyle: const TextStyle(fontSize: 22)),
+                      child: const Text('ربط جهاز التتبع')),
+                ),
+                SizedBox(height: ScreenHeight * 0.025),
+                ElevatedButton(
+                    onPressed: () async {
+                      if (_img == null) {
+                        Fluttertoast.showToast(
+                            msg: "يرجى اختيار صورة",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 7,
+                            backgroundColor: Color.fromARGB(255, 195, 74, 74),
+                            fontSize: 16.0,
+                            textColor: Colors.white);
+
+                        return;
+                      }
+
+                      if (_formKey.currentState!.validate()) {
+                        if (imgURL.isEmpty) {
+                          setState(() {
+                            isLoading = true;
                           });
                         }
-                      },
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(const Color(0xFF429EB2)),
-                      ),
-                      child: isLoading
-                          ? CircularProgressIndicator(
-                              color: Colors.white,
-                            )
-                          : const Text('إضافة')),
-                ],
-              ),
+                        Future.delayed(Duration(seconds: 10), () {
+                          final child = Child(
+                              image: imgURL,
+                              name: controllerName.text,
+                              gender: selectedGender,
+                              height: int.parse(controllerHeight.text),
+                              birthday:
+                                  DateTime.parse(controllerBirthday.text));
+                          addChild(child);
+                          Navigator.pop(context);
+                          setState(() {
+                            isLoading = false;
+                          });
+                        });
+                      }
+                    },
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all(const Color(0xFF429EB2)),
+                    ),
+                    child: isLoading
+                        ? CircularProgressIndicator(
+                            color: Colors.white,
+                          )
+                        : const Text('إضافة')),
+              ],
             ),
           ),
         ),
-      );
+      ),
+    );
   }
   //-----------------Rero's Helping Methods--------------------------------//
 
@@ -382,6 +396,11 @@ class Child {
       required this.height,
       required this.birthday});
 
-  Map<String, dynamic> toJson() =>
-      {'image': image, 'name': name, 'height': height,'gender':gender, 'birthday': birthday};
+  Map<String, dynamic> toJson() => {
+        'image': image,
+        'name': name,
+        'height': height,
+        'gender': gender,
+        'birthday': birthday
+      };
 }

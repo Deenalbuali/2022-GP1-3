@@ -66,11 +66,19 @@ class _viewChildState extends State<viewChild> {
     final double ScreenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        //  actions: <Widget>[
+        //   IconButton(
+        //     icon: Icon(
+        //       Icons.arrow_forward_ios,
+        //       color: kPrimaryColor,
+        //     ),
+        //     onPressed: () => Navigator.of(context).pop(),
+        //   )
+        // ],
         backgroundColor: Colors.transparent,
         elevation: 0,
         toolbarHeight: 90,
-        leading: const BackButton(color: Colors.white),
+
         title: const Text(
           "صفحة الطفل",
           style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
@@ -136,22 +144,25 @@ class _viewChildState extends State<viewChild> {
                                 width: ScreenWidth * 0.33,
                                 height: ScreenHeight * 0.15,
                                 fit: BoxFit.cover,
-                                frameBuilder: (BuildContext context, Widget child,
-                                    int? frame, bool isAsyncLoaded) {
+                                frameBuilder: (BuildContext context,
+                                    Widget child,
+                                    int? frame,
+                                    bool isAsyncLoaded) {
                                   return Padding(
                                     padding: EdgeInsets.all(1),
                                     child: child,
                                   );
                                 },
-                                loadingBuilder: (BuildContext context, Widget child,
+                                loadingBuilder: (BuildContext context,
+                                    Widget child,
                                     ImageChunkEvent? loadingProgress) {
                                   if (loadingProgress == null) return child;
                                   return Center(
                                     child: Text("جاري التحميل"),
                                   );
                                 },
-                                errorBuilder: (BuildContext context, Object error,
-                                    StackTrace? st) {
+                                errorBuilder: (BuildContext context,
+                                    Object error, StackTrace? st) {
                                   return Center(
                                     child: Text("error"),
                                   );
@@ -185,63 +196,55 @@ class _viewChildState extends State<viewChild> {
                       ),
                     ],
                   ),
-                  SizedBox(
-                  height: ScreenHeight*0.01
-                ),
+                  SizedBox(height: ScreenHeight * 0.01),
                   Row(
-              children: [
-                SizedBox(
-                  width: ScreenWidth*0.25
-                ),
-                Directionality(
-                  textDirection: TextDirection.rtl,
-                  child: Text(
-                    (int.parse(childAgeYears) > 10)
-                        ? "$childAgeYears سنة"
-                        : (int.parse(childAgeYears) > 1)
-                            ? "$childAgeYears سنوات"
-                            : (int.parse(childAgeMonths) == 1 ||
-                                    int.parse(childAgeMonths) == 11 ||
-                                    int.parse(childAgeMonths) == 12 ||
-                                    int.parse(childAgeMonths) == 0)
-                                ? "$childAgeMonths شهر"
-                                : "$childAgeMonths شهور",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
+                    children: [
+                      SizedBox(width: ScreenWidth * 0.25),
+                      Directionality(
+                        textDirection: TextDirection.rtl,
+                        child: Text(
+                          (int.parse(childAgeYears) > 10)
+                              ? "$childAgeYears سنة"
+                              : (int.parse(childAgeYears) > 1)
+                                  ? "$childAgeYears سنوات"
+                                  : (int.parse(childAgeMonths) == 1 ||
+                                          int.parse(childAgeMonths) == 11 ||
+                                          int.parse(childAgeMonths) == 12 ||
+                                          int.parse(childAgeMonths) == 0)
+                                      ? "$childAgeMonths شهر"
+                                      : "$childAgeMonths شهور",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      SizedBox(width: ScreenWidth * 0.1),
+                      Directionality(
+                        textDirection: TextDirection.rtl,
+                        child: Text(
+                          "$childGender",
+                          textDirection: TextDirection.rtl,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      SizedBox(width: ScreenWidth * 0.1),
+                      Directionality(
+                        textDirection: TextDirection.rtl,
+                        child: Text(
+                          "$childHeight سم",
+                          textDirection: TextDirection.rtl,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                SizedBox(
-                  width: ScreenWidth*0.1
-                ),
-                Directionality(
-                  textDirection: TextDirection.rtl,
-                  child: Text(
-                    "$childGender",
-                    textDirection: TextDirection.rtl,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-                SizedBox(
-                  width: ScreenWidth*0.1
-                ),
-                Directionality(
-                  textDirection: TextDirection.rtl,
-                  child: Text(
-                    "$childHeight سم",
-                    textDirection: TextDirection.rtl,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ],
-            ),
                 ],
               ),
             ),

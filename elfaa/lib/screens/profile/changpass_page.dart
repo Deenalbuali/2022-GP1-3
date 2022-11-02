@@ -210,7 +210,16 @@ class _changePasswordPageState extends State<changePasswordPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          automaticallyImplyLeading: true,
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.arrow_forward_ios,
+                color: Colors.white,
+              ),
+              onPressed: () => Navigator.of(context).pop(),
+            )
+          ],
+          automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
           elevation: 0,
           toolbarHeight: 90,
