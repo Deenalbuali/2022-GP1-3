@@ -29,7 +29,7 @@ class _addChildState extends State<addChild> {
   final controllerName = TextEditingController();
   final controllerBirthday = TextEditingController();
   final controllerHeight = TextEditingController();
-  String selectedGender = 'بنت';
+  String selectedGender = 'أنثى';
 
 //globalKey
   final _formKey = GlobalKey<FormState>();
@@ -172,10 +172,9 @@ class _addChildState extends State<addChild> {
                         });
                       },
                       value: selectedGender,
-                      hint: Text("بنت أو ولد"),
                       items: const [
-                        DropdownMenuItem(child: Text("ولد"), value: 'ولد',),
-                        DropdownMenuItem(child: Text("بنت"), value: "بنت",)
+                        DropdownMenuItem(child: Text("ذكر"), value: 'ذكر',),
+                        DropdownMenuItem(child: Text("أنثى"), value: "أنثى",)
                       ],
                     ),
                   ),
@@ -231,7 +230,7 @@ class _addChildState extends State<addChild> {
                               isLoading = true;
                             });
                           }
-                          Future.delayed(Duration(seconds: 12), () {
+                          Future.delayed(Duration(seconds: 10), () {
                             final child = Child(
                                 image: imgURL,
                                 name: controllerName.text,
