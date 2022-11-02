@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:elfaa/constants.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:email_auth/email_auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:elfaa/screens/login/login_screen.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({super.key});
@@ -95,24 +93,34 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   }
 
   Future resetPassword() async {
-    await FirebaseAuth.instance.sendPasswordResetEmail(email: email.text);
-    Fluttertoast.showToast(
-        msg: "تم إرسال البريد الإلكتروني الخاص بإعادة تعيين كلمة المرور بنجاح",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 7,
-        backgroundColor: Colors.lightGreen,
-        fontSize: 16.0,
-        textColor: Colors.white);
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email.text);
+      Fluttertoast.showToast(
+          msg:
+              "تم إرسال البريد الإلكتروني الخاص بإعادة تعيين كلمة المرور بنجاح",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 7,
+          backgroundColor: Colors.lightGreen,
+          fontSize: 16.0,
+          textColor: Colors.white);
+    } catch (e, stack) {
+      Fluttertoast.showToast(
+          msg: " البريد الإلكتروني غير موجود ",
+          toastLength: Toast.LENGTH_SHORT,
+          backgroundColor: Colors.red,
+          fontSize: 16.0,
+          textColor: Colors.black);
+    }
   }
+}
 
-  Widget logoWidget(String imageName) {
-    return Center(
-        child: Image.asset(
-      imageName,
-      fit: BoxFit.fill,
-      width: 150,
-      height: 150,
-    ));
-  }
+Widget logoWidget(String imageName) {
+  return Center(
+      child: Image.asset(
+    imageName,
+    fit: BoxFit.fill,
+    width: 150,
+    height: 150,
+  ));
 }
