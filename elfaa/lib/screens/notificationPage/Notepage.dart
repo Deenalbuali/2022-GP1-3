@@ -83,6 +83,7 @@ class _NotePageState extends State<NotePage> {
                     padding: const EdgeInsets.only(
                         right: 25.0, left: 25, bottom: 25),
                     child: ListView.builder(
+                        physics: const AlwaysScrollableScrollPhysics(),
                         itemCount: _childrenList2.length,
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
