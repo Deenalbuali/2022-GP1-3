@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:elfaa/alert_dialog.dart';
+import 'package:elfaa/screens/Homepage/Home_page.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:age_calculator/age_calculator.dart';
 import 'package:elfaa/constants.dart';
@@ -78,19 +79,11 @@ class _editChildState extends State<editChild> {
     final double ScreenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.arrow_forward_ios,
-              color: kPrimaryColor,
-            ),
-            onPressed: () => Navigator.of(context).pop(),
-          )
-        ],
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         elevation: 0,
         toolbarHeight: 90,
+        leading: const BackButton(color: Colors.white),
         title: const Text(
           "تعديل بيانات الطفل",
           style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
@@ -257,7 +250,7 @@ class _editChildState extends State<editChild> {
                               .collection('users')
                               .doc(uid)
                               .collection('children')
-                              .doc('CiQbU3gkuwde5vcBjPKf');
+                              .doc(widget.childID);
 
                           //update child info
                           docChild.update({
@@ -316,9 +309,14 @@ class _editChildState extends State<editChild> {
                             .collection('users')
                             .doc(uid)
                             .collection('children')
-                            .doc('CiQbU3gkuwde5vcBjPKf');
+                            .doc(widget.childID);
                         docChild.delete();
-                        Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  HomePage()),
+                        );
                       } else {
                         setState(() => tappedYes = false);
                         if (!mounted) return;
