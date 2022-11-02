@@ -160,6 +160,7 @@ class _HomePageState extends State<HomePage> {
                           padding: const EdgeInsets.only(
                               right: 25.0, left: 25, bottom: 25),
                           child: ListView.builder(
+                              physics: const AlwaysScrollableScrollPhysics(),
                               itemCount: _childrenList.length,
                               shrinkWrap: true,
                               itemBuilder: (context, index) {
