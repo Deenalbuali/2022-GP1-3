@@ -37,7 +37,9 @@ class HomelistBox extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => viewChild()),
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              viewChild("${_childlist.childID}")),
                     );
                   },
                   icon: Icon(Icons.arrow_back_ios),

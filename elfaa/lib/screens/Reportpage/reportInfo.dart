@@ -137,7 +137,7 @@ class reportInfo extends StatelessWidget {
                                         height: 1,
                                       ),
                                       Container(
-                                          height: 30,
+                                          height: 60,
                                           width: 42,
                                           child: Column(
                                             children: [

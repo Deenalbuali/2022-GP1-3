@@ -26,6 +26,7 @@ class _HomePageState extends State<HomePage> {
   Future<void> getCurrentUserr() async {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     final User? user = await _auth.currentUser;
+    if (!mounted) return;
     final userid = user!.uid;
     await FirebaseFirestore.instance
         .collection('users')
@@ -34,6 +35,7 @@ class _HomePageState extends State<HomePage> {
         .then((DocumentSnapshot<Map<String, dynamic>> snapshot) {
       username = snapshot['name'];
     });
+    if (!mounted) return;
   }
 
   @override
@@ -55,6 +57,16 @@ class _HomePageState extends State<HomePage> {
         child: Column(children: <Widget>[
           _buildHeader(),
           Padding(
+            padding: const EdgeInsets.only(left: 230.0),
+            child: Text(
+              ": " "تتبع أطفالك ",
+              style: TextStyle(
+                  color: kOrangeColor,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.w700),
+            ),
+          ),
+          Padding(
             padding: const EdgeInsets.only(left: 25.0, right: 25, bottom: 25),
             child: Container(
               height: 200,
@@ -75,7 +87,7 @@ class _HomePageState extends State<HomePage> {
           Row(
             children: [
               SizedBox(
-                width: 20,
+                width: 5,
               ),
               Align(
                 alignment: Alignment(-0.1, -1),
