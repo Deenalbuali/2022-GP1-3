@@ -10,7 +10,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 
 class editChild extends StatefulWidget {
-  const editChild({super.key,required this.childID});
+  const editChild({super.key, required this.childID});
   final String childID;
   @override
   State<editChild> createState() => _editChildState();
@@ -38,7 +38,6 @@ class _editChildState extends State<editChild> {
   String selectedGender = 'أنثى';
   String uid = '';
   bool tappedYes = false;
-
 
   Future<void> getEDITABLEChild() async {
     final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -78,256 +77,262 @@ class _editChildState extends State<editChild> {
     final double ScreenHeight = MediaQuery.of(context).size.height;
     final double ScreenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          toolbarHeight: 90,
-          leading: const BackButton(color: Colors.white),
-          title: const Text(
-            "تعديل بيانات الطفل",
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
-          ),
-          centerTitle: true,
-          flexibleSpace: Container(
-              decoration: const BoxDecoration(
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(28),
-                bottomRight: Radius.circular(28)),
-            color: kPrimaryColor,
-          )),
+      appBar: AppBar(
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.arrow_forward_ios,
+              color: kPrimaryColor,
+            ),
+            onPressed: () => Navigator.of(context).pop(),
+          )
+        ],
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        toolbarHeight: 90,
+        title: const Text(
+          "تعديل بيانات الطفل",
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
         ),
-        body: SingleChildScrollView(
-          child: Form(
-            key: _formKey,
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(
-                  20, MediaQuery.of(context).size.height * 0.04, 20, 0),
-              child: Column(
-                children: <Widget>[
-                  childImg(),
-                  SizedBox(height: ScreenHeight * 0.03),
-                  Directionality(
-                      textDirection: TextDirection.rtl,
-                      child: TextFormField(
-                        textAlign: TextAlign.right,
-                        controller: childName,
-                        decoration: const InputDecoration(
-                          suffixIcon:
-                              Icon(Icons.child_care, color: Color(0xFFFD8601)),
-                          labelText: "اسم الطفل",
-                          hintText: "مثال: أسماء",
-                        ),
-                        validator: (value) {
-                          if (value!.isEmpty || childName.text.trim() == "") {
-                            return "الحقل مطلوب";
-                          }
-                          return null;
-                        },
-                      )),
-                  SizedBox(height: ScreenHeight*0.02),
-                  Directionality(
-                      textDirection: TextDirection.rtl,
-                      child: TextFormField(
-                          textAlign: TextAlign.right,
-                          controller: birthday,
-                          decoration: const InputDecoration(
-                            suffixIcon: Icon(Icons.calendar_today,
-                                color: Color(0xFFFD8601)),
-                            labelText: "تاريخ الميلاد",
-                            hintText: "اختر من التقويم",
-                          ),
-                          validator: (value) {
-                            if (value!.isEmpty || birthday.text.trim() == "") {
-                              return "الحقل مطلوب";
-                            }
-                            return null;
-                          },
-                          readOnly: true,
-                          onTap: () async {
-                            DateTime? pickedDate = await showDatePicker(
-                              context: context,
-                              initialDate: DateTime(childBirthday.year,
-                                  childBirthday.month, childBirthday.day),
-                              firstDate: DateTime(1920),
-                              lastDate: DateTime.now(),
-                              builder: (context, child) {
-                                return Theme(
-                                  data: ThemeData.light().copyWith(
-                                    primaryColor: const Color(0xFF429EB2),
-                                    colorScheme: const ColorScheme.light(
-                                        primary: Color(0xFF429EB2)),
-                                    buttonTheme: const ButtonThemeData(
-                                        textTheme: ButtonTextTheme.primary),
-                                  ),
-                                  child: child!,
-                                );
-                              },
-                            );
-  
-                            if (pickedDate != null) {
-                              String formattedDate =
-                                  DateFormat('yyyy-MM-dd').format(pickedDate);
-                              setState(() {
-                                birthday.text =
-                                    formattedDate; //set output date to TextField value.
-                              });
-                            }
-                          })),
-                  SizedBox(height: ScreenHeight*0.02),
-                  Directionality(
+        centerTitle: true,
+        flexibleSpace: Container(
+            decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(28),
+              bottomRight: Radius.circular(28)),
+          color: kPrimaryColor,
+        )),
+      ),
+      body: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(
+                20, MediaQuery.of(context).size.height * 0.04, 20, 0),
+            child: Column(
+              children: <Widget>[
+                childImg(),
+                SizedBox(height: ScreenHeight * 0.03),
+                Directionality(
                     textDirection: TextDirection.rtl,
-                    child: DropdownButtonFormField(
+                    child: TextFormField(
+                      textAlign: TextAlign.right,
+                      controller: childName,
                       decoration: const InputDecoration(
-                        suffixIcon: Icon(Icons.escalator_warning,
-                            color: Color(0xFFFD8601)),
-                        labelText: "الجنس",
+                        suffixIcon:
+                            Icon(Icons.child_care, color: Color(0xFFFD8601)),
+                        labelText: "اسم الطفل",
+                        hintText: "مثال: أسماء",
                       ),
-                      onChanged: (val) {
-                        setState(() {
-                          selectedGender = val.toString();
-                        });
-                      },
-                      value: selectedGender,
-                      items: const [
-                        DropdownMenuItem(
-                          child: Text("ذكر"),
-                          value: 'ذكر',
-                        ),
-                        DropdownMenuItem(
-                          child: Text("أنثى"),
-                          value: "أنثى",
-                        )
-                      ],
                       validator: (value) {
-                          if (value!.isEmpty ||
-                              childHeight.text.trim() == "") {
-                            return "الحقل مطلوب";
-                          }
-                          return null;
-                        },
-                    ),
-                  ),
-                  SizedBox(height: ScreenHeight*0.02),
-                  Directionality(
-                      textDirection: TextDirection.rtl,
-                      child: TextFormField(
+                        if (value!.isEmpty || childName.text.trim() == "") {
+                          return "الحقل مطلوب";
+                        }
+                        return null;
+                      },
+                    )),
+                SizedBox(height: ScreenHeight * 0.02),
+                Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: TextFormField(
                         textAlign: TextAlign.right,
-                        controller: childHeight,
-                        keyboardType: TextInputType.number,
+                        controller: birthday,
                         decoration: const InputDecoration(
-                          suffixIcon: Icon(Icons.accessibility_new,
+                          suffixIcon: Icon(Icons.calendar_today,
                               color: Color(0xFFFD8601)),
-                          labelText: "الطول",
-                          hintText: "بالسنتيمترات",
+                          labelText: "تاريخ الميلاد",
+                          hintText: "اختر من التقويم",
                         ),
                         validator: (value) {
-                          if (value!.isEmpty || childHeight.text.trim() == "") {
+                          if (value!.isEmpty || birthday.text.trim() == "") {
                             return "الحقل مطلوب";
                           }
                           return null;
                         },
-                      )),
-                  SizedBox(height: ScreenHeight*0.02),
-                  SizedBox(
-                    width: ScreenWidth,
-                    child: ElevatedButton(
-                        onPressed: null,
-                        style: ElevatedButton.styleFrom(
-                            textStyle: const TextStyle(fontSize: 22)),
-                        child: const Text('تغيير جهاز التتبع')),
-                  ),
-                  SizedBox(height: ScreenHeight*0.02),
-                  ElevatedButton(
-                      onPressed: () async {
-  
-                        if (_formKey.currentState!.validate()) {
-                          if (imgURL.isEmpty) {
+                        readOnly: true,
+                        onTap: () async {
+                          DateTime? pickedDate = await showDatePicker(
+                            context: context,
+                            initialDate: DateTime(childBirthday.year,
+                                childBirthday.month, childBirthday.day),
+                            firstDate: DateTime(1920),
+                            lastDate: DateTime.now(),
+                            builder: (context, child) {
+                              return Theme(
+                                data: ThemeData.light().copyWith(
+                                  primaryColor: const Color(0xFF429EB2),
+                                  colorScheme: const ColorScheme.light(
+                                      primary: Color(0xFF429EB2)),
+                                  buttonTheme: const ButtonThemeData(
+                                      textTheme: ButtonTextTheme.primary),
+                                ),
+                                child: child!,
+                              );
+                            },
+                          );
+
+                          if (pickedDate != null) {
+                            String formattedDate =
+                                DateFormat('yyyy-MM-dd').format(pickedDate);
                             setState(() {
-                              isLoading = true;
+                              birthday.text =
+                                  formattedDate; //set output date to TextField value.
                             });
                           }
-                          Future.delayed(Duration(seconds: 14), () {
-                            final docChild = FirebaseFirestore.instance
-                                .collection('users')
-                                .doc(uid)
-                                .collection('children')
-                                .doc('CiQbU3gkuwde5vcBjPKf');
-  
-                            //update child info
-                            docChild.update({
-                              'image': imgURL.isEmpty? childImage : imgURL,
-                              'name': childName.text,
-                              'gender': selectedGender,
-                              'height': int.parse(childHeight.text),
-                              'birthday': DateTime.parse(birthday.text)
-                            });
-                            Navigator.pop(context);
-                            setState(() {
-                              isLoading = false;
-                            });
+                        })),
+                SizedBox(height: ScreenHeight * 0.02),
+                Directionality(
+                  textDirection: TextDirection.rtl,
+                  child: DropdownButtonFormField(
+                    decoration: const InputDecoration(
+                      suffixIcon: Icon(Icons.escalator_warning,
+                          color: Color(0xFFFD8601)),
+                      labelText: "الجنس",
+                    ),
+                    onChanged: (val) {
+                      setState(() {
+                        selectedGender = val.toString();
+                      });
+                    },
+                    value: selectedGender,
+                    items: const [
+                      DropdownMenuItem(
+                        child: Text("ذكر"),
+                        value: 'ذكر',
+                      ),
+                      DropdownMenuItem(
+                        child: Text("أنثى"),
+                        value: "أنثى",
+                      )
+                    ],
+                    validator: (value) {
+                      if (value!.isEmpty || childHeight.text.trim() == "") {
+                        return "الحقل مطلوب";
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                SizedBox(height: ScreenHeight * 0.02),
+                Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: TextFormField(
+                      textAlign: TextAlign.right,
+                      controller: childHeight,
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                        suffixIcon: Icon(Icons.accessibility_new,
+                            color: Color(0xFFFD8601)),
+                        labelText: "الطول",
+                        hintText: "بالسنتيمترات",
+                      ),
+                      validator: (value) {
+                        if (value!.isEmpty || childHeight.text.trim() == "") {
+                          return "الحقل مطلوب";
+                        }
+                        return null;
+                      },
+                    )),
+                SizedBox(height: ScreenHeight * 0.02),
+                SizedBox(
+                  width: ScreenWidth,
+                  child: ElevatedButton(
+                      onPressed: null,
+                      style: ElevatedButton.styleFrom(
+                          textStyle: const TextStyle(fontSize: 22)),
+                      child: const Text('تغيير جهاز التتبع')),
+                ),
+                SizedBox(height: ScreenHeight * 0.02),
+                ElevatedButton(
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        if (imgURL.isEmpty) {
+                          setState(() {
+                            isLoading = true;
                           });
                         }
-                      },
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(const Color(0xFF429EB2)),
-                      ),
-                      child: isLoading
-                          ? CircularProgressIndicator(
-                              color: Colors.white,
-                            )
-                          : const Text('حفظ التعديلات')),
-                  SizedBox(height: ScreenHeight*0.02),
-                  Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: ElevatedButton.icon(
-                      icon: Icon(
-                        Icons.delete,
-                        color: Colors.white,
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        textStyle: TextStyle(fontSize: 22),
-                        shadowColor: Color.fromARGB(255, 0, 0, 0),
-                        elevation: 1,
-                        backgroundColor: Color(0xFF9C0000),
-                        shape: const StadiumBorder(),
-                        maximumSize: const Size(180, 56),
-                        minimumSize: const Size(180, 56),
-                      ),
-                      label: Text(
-                        '  حذف الطفل  ',
-                        style: TextStyle(color: Colors.white, fontSize: 20),
-                      ),
-                      onPressed: () async {
-                        final action = await AlertDialogs.yesCancelDialog(context,
-                            'حذف الطفل', 'هل أنت متأكد من حذف الطفل؟');
-                        if (!mounted) return;
-                        if (action == DialogsAction.yes) {
-                          setState(() => tappedYes = true);
-                          if (!mounted) return;
-                          //delete child here
-                           final docChild = FirebaseFirestore.instance
-                                .collection('users')
-                                .doc(uid)
-                                .collection('children')
-                                .doc('CiQbU3gkuwde5vcBjPKf');
-                            docChild.delete();
+                        Future.delayed(Duration(seconds: 14), () {
+                          final docChild = FirebaseFirestore.instance
+                              .collection('users')
+                              .doc(uid)
+                              .collection('children')
+                              .doc('CiQbU3gkuwde5vcBjPKf');
+
+                          //update child info
+                          docChild.update({
+                            'image': imgURL.isEmpty ? childImage : imgURL,
+                            'name': childName.text,
+                            'gender': selectedGender,
+                            'height': int.parse(childHeight.text),
+                            'birthday': DateTime.parse(birthday.text)
+                          });
                           Navigator.pop(context);
-                        } else {
-                          setState(() => tappedYes = false);
-                          if (!mounted) return;
-                        }
-                      },
+                          setState(() {
+                            isLoading = false;
+                          });
+                        });
+                      }
+                    },
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all(const Color(0xFF429EB2)),
                     ),
+                    child: isLoading
+                        ? CircularProgressIndicator(
+                            color: Colors.white,
+                          )
+                        : const Text('حفظ التعديلات')),
+                SizedBox(height: ScreenHeight * 0.02),
+                Directionality(
+                  textDirection: TextDirection.rtl,
+                  child: ElevatedButton.icon(
+                    icon: Icon(
+                      Icons.delete,
+                      color: Colors.white,
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      textStyle: TextStyle(fontSize: 22),
+                      shadowColor: Color.fromARGB(255, 0, 0, 0),
+                      elevation: 1,
+                      backgroundColor: Color(0xFF9C0000),
+                      shape: const StadiumBorder(),
+                      maximumSize: const Size(180, 56),
+                      minimumSize: const Size(180, 56),
+                    ),
+                    label: Text(
+                      '  حذف الطفل  ',
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
+                    onPressed: () async {
+                      final action = await AlertDialogs.yesCancelDialog(
+                          context, 'حذف الطفل', 'هل أنت متأكد من حذف الطفل؟');
+                      if (!mounted) return;
+                      if (action == DialogsAction.yes) {
+                        setState(() => tappedYes = true);
+                        if (!mounted) return;
+                        //delete child here
+                        final docChild = FirebaseFirestore.instance
+                            .collection('users')
+                            .doc(uid)
+                            .collection('children')
+                            .doc('CiQbU3gkuwde5vcBjPKf');
+                        docChild.delete();
+                        Navigator.pop(context);
+                      } else {
+                        setState(() => tappedYes = false);
+                        if (!mounted) return;
+                      }
+                    },
                   ),
-                  SizedBox(height: ScreenHeight*0.04),
-                ],
-              ),
+                ),
+                SizedBox(height: ScreenHeight * 0.04),
+              ],
             ),
           ),
         ),
-      );
+      ),
+    );
   }
   //-----------------Rero's Helping Methods--------------------------------//
 
