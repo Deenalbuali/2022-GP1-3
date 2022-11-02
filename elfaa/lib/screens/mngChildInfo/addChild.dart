@@ -1,5 +1,6 @@
 // ignore_for_file: file_names, camel_case_types
 import 'dart:io';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 import 'package:elfaa/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
 //import 'package:firebase_core/firebase_core.dart';
 //import 'package:path/path.dart' hide context;
 //import 'package:elfaa/screens/mngChildInfo/imgStorage.dart';
@@ -27,18 +29,19 @@ class _addChildState extends State<addChild> {
   final controllerName = TextEditingController();
   final controllerBirthday = TextEditingController();
   final controllerHeight = TextEditingController();
+  String selectedGender = 'بنت';
 
 //globalKey
   final _formKey = GlobalKey<FormState>();
 
 //Parent info
-String pID ='';
-Future<void> getCurrentP() async {
+  String pID = '';
+  Future<void> getCurrentP() async {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     final User? user = await _auth.currentUser;
     final uid = user!.uid;
     setState(() {
-      pID=uid;
+      pID = uid;
     });
   }
 
@@ -154,6 +157,28 @@ Future<void> getCurrentP() async {
                   const SizedBox(height: 20),
                   Directionality(
                       textDirection: TextDirection.rtl,
+                    child: DropdownButtonFormField(
+                      decoration: const InputDecoration(
+                            suffixIcon: Icon(Icons.escalator_warning,
+                                color: Color(0xFFFD8601)),
+                            labelText: "الجنس",
+                          ),
+                      onChanged: (val){
+                        setState(() {
+                          selectedGender = val.toString();
+                        });
+                      },
+                      value: selectedGender,
+                      hint: Text("بنت أو ولد"),
+                      items: const [
+                        DropdownMenuItem(child: Text("ولد"), value: 'ولد',),
+                        DropdownMenuItem(child: Text("بنت"), value: "بنت",)
+                      ],
+                    ),
+                  ),
+                      const SizedBox(height: 20),
+                  Directionality(
+                      textDirection: TextDirection.rtl,
                       child: TextFormField(
                         textAlign: TextAlign.right,
                         controller: controllerHeight,
@@ -185,8 +210,15 @@ Future<void> getCurrentP() async {
                   ElevatedButton(
                       onPressed: () async {
                         if (_img == null) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('يرجى اختيار صورة')));
+                          Fluttertoast.showToast(
+                              msg: "يرجى اختيار صورة",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.CENTER,
+                              timeInSecForIosWeb: 7,
+                              backgroundColor: Color.fromARGB(255, 195, 74, 74),
+                              fontSize: 16.0,
+                              textColor: Colors.white);
+
                           return;
                         }
 
@@ -200,6 +232,7 @@ Future<void> getCurrentP() async {
                             final child = Child(
                                 image: imgURL,
                                 name: controllerName.text,
+                                gender: selectedGender,
                                 height: int.parse(controllerHeight.text),
                                 birthday:
                                     DateTime.parse(controllerBirthday.text));
@@ -335,15 +368,17 @@ Future<void> getCurrentP() async {
 class Child {
   final String image;
   final String name;
-  final int height;
   final DateTime birthday;
+  final String gender;
+  final int height;
 
   Child(
       {required this.image,
       required this.name,
+      required this.gender,
       required this.height,
       required this.birthday});
 
   Map<String, dynamic> toJson() =>
-      {'image': image, 'name': name, 'height': height, 'birthday': birthday};
+      {'image': image, 'name': name, 'height': height,'gender':gender, 'birthday': birthday};
 }
