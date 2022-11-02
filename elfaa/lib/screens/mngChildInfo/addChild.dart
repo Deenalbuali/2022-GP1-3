@@ -120,6 +120,24 @@ class _addChildState extends State<addChild> {
                 Directionality(
                     textDirection: TextDirection.rtl,
                     child: TextFormField(
+                      value: selectedGender,
+                      items: const [
+                        DropdownMenuItem(child: Text("ذكر"), value: 'ذكر',),
+                        DropdownMenuItem(child: Text("أنثى"), value: "أنثى",)
+                      ],
+                      validator: (value) {
+                          if (value!.isEmpty ||
+                              controllerHeight.text.trim() == "") {
+                            return "الحقل مطلوب";
+                          }
+                          return null;
+                        },
+                    ),
+                  ),
+                  SizedBox(height: ScreenHeight*0.025),
+                  Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: TextFormField(
                         textAlign: TextAlign.right,
                         controller: controllerBirthday,
                         decoration: const InputDecoration(

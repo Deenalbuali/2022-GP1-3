@@ -14,12 +14,12 @@ class viewChild extends StatefulWidget {
 
 class _viewChildState extends State<viewChild> {
   //Child Info to be retreived from database
-  late String childName;
-  late String childAgeYears;
-  late String childAgeMonths;
-  late int childHeight;
-  late String childImage;
-  late String childGender;
+  String childName ="";
+  String childAgeYears="";
+  String childAgeMonths="";
+  int childHeight=0;
+  String childImage='';
+  String childGender="";
   String zoneName = 'منطقة الألعاب';
 
   Future<void> getCurrentChild() async {
@@ -44,9 +44,11 @@ class _viewChildState extends State<viewChild> {
         //Extract each of years and months
         childAgeYears =
             (calcAge.toString().replaceAll(new RegExp(r'[^0-9]'), ''))[0];
+            
         childAgeMonths =
             (calcAge.toString().replaceAll(new RegExp(r'[^0-9]'), ''))[1];
-
+print(childAgeYears);
+print(childAgeMonths);
         childHeight = snapshot['height'];
         childImage = snapshot['image'];
         childGender = snapshot['gender'];
@@ -89,7 +91,7 @@ class _viewChildState extends State<viewChild> {
               onPressed: (() {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => editChild()),
+                  MaterialPageRoute(builder: (context) => editChild(childID: widget.childID)),
                 );
               }))
         ],
