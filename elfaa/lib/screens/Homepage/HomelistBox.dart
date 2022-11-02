@@ -39,7 +39,7 @@ class HomelistBox extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              viewChild("${_childlist.childID}")),
+                              viewChild( childID: "${_childlist.childID}",)),
                     );
                   },
                   icon: Icon(Icons.arrow_back_ios),
