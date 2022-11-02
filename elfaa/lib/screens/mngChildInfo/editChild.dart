@@ -10,8 +10,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 
 class editChild extends StatefulWidget {
-  const editChild({super.key});
-
+  const editChild({super.key,required this.childID});
+  final String childID;
   @override
   State<editChild> createState() => _editChildState();
 }
@@ -35,7 +35,7 @@ class _editChildState extends State<editChild> {
   late DateTime childBirthday;
   TextEditingController childHeight = TextEditingController();
   String childImage = '';
-  String selectedGender = 'بنت';
+  String selectedGender = 'أنثى';
   String uid = '';
   bool tappedYes = false;
 
@@ -50,7 +50,7 @@ class _editChildState extends State<editChild> {
         .collection('users')
         .doc(uid)
         .collection('children')
-        .doc('CiQbU3gkuwde5vcBjPKf')
+        .doc(widget.childID)
         .get()
         .then((DocumentSnapshot<Map<String, dynamic>> snapshot) {
       //Convert timestamp type of data to DateTime
@@ -189,17 +189,23 @@ class _editChildState extends State<editChild> {
                         });
                       },
                       value: selectedGender,
-                      hint: Text("بنت أو ولد"),
                       items: const [
                         DropdownMenuItem(
-                          child: Text("ولد"),
-                          value: 'ولد',
+                          child: Text("ذكر"),
+                          value: 'ذكر',
                         ),
                         DropdownMenuItem(
-                          child: Text("بنت"),
-                          value: "بنت",
+                          child: Text("أنثى"),
+                          value: "أنثى",
                         )
                       ],
+                      validator: (value) {
+                          if (value!.isEmpty ||
+                              childHeight.text.trim() == "") {
+                            return "الحقل مطلوب";
+                          }
+                          return null;
+                        },
                     ),
                   ),
                   SizedBox(height: ScreenHeight*0.02),

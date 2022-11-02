@@ -176,6 +176,13 @@ class _addChildState extends State<addChild> {
                         DropdownMenuItem(child: Text("ذكر"), value: 'ذكر',),
                         DropdownMenuItem(child: Text("أنثى"), value: "أنثى",)
                       ],
+                      validator: (value) {
+                          if (value!.isEmpty ||
+                              controllerHeight.text.trim() == "") {
+                            return "الحقل مطلوب";
+                          }
+                          return null;
+                        },
                     ),
                   ),
                   SizedBox(height: ScreenHeight*0.025),
