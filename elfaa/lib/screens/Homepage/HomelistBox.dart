@@ -1,4 +1,5 @@
 import 'package:elfaa/screens/Homepage/childrenList.dart';
+import 'package:elfaa/screens/mngChildInfo/veiwChild.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
@@ -32,7 +33,17 @@ class HomelistBox extends StatelessWidget {
           children: [
             Container(
                 padding: EdgeInsets.only(left: 10),
-                child: Icon(Icons.arrow_back_ios)),
+                 child: IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => viewChild()),
+                        );
+                      },
+                      icon: Icon(Icons.arrow_back_ios),
+                      color: Colors.black,
+                    )
+            ),
             Row(
               children: [
                 Column(
