@@ -152,8 +152,24 @@ class _HomePageState extends State<HomePage> {
           //     ],
           //   ),
           // ),
-          _childrenList.length == 0
-              ? Padding(
+          _childrenList.length != 0
+              ? SizedBox(
+                  child: Column(
+                    children: [
+                      Container(
+                          padding: const EdgeInsets.only(
+                              right: 25.0, left: 25, bottom: 25),
+                          child: ListView.builder(
+                              itemCount: _childrenList.length,
+                              shrinkWrap: true,
+                              itemBuilder: (context, index) {
+                                return HomelistBox(
+                                    _childrenList[index] as childrenList);
+                              })),
+                    ],
+                  ),
+                )
+              : Padding(
                   padding: const EdgeInsets.only(top: 5.0, left: 30),
                   child: Container(
                     height: 450,
@@ -169,22 +185,6 @@ class _HomePageState extends State<HomePage> {
                         image: DecorationImage(
                             image: AssetImage("assets/images/noChildren.png"),
                             fit: BoxFit.cover)),
-                  ),
-                )
-              : SizedBox(
-                  child: Column(
-                    children: [
-                      Container(
-                          padding: const EdgeInsets.only(
-                              right: 25.0, left: 25, bottom: 25),
-                          child: ListView.builder(
-                              itemCount: _childrenList.length,
-                              shrinkWrap: true,
-                              itemBuilder: (context, index) {
-                                return HomelistBox(
-                                    _childrenList[index] as childrenList);
-                              })),
-                    ],
                   ),
                 )
         ]),
