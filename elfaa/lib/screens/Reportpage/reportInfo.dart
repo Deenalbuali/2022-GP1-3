@@ -75,7 +75,7 @@ class reportInfo extends StatelessWidget {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(25),
                           image: DecorationImage(
-                              image: AssetImage("assets/images/location.jpeg"),
+                              image: AssetImage("assets/images/MainMap.jpg"),
                               fit: BoxFit.cover)),
                     ),
                     Positioned(
