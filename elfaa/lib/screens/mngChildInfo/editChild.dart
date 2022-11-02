@@ -79,11 +79,19 @@ class _editChildState extends State<editChild> {
     final double ScreenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.arrow_forward_ios,
+              color: Colors.white,
+            ),
+            onPressed: () => Navigator.of(context).pop(),
+          )
+        ],
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         elevation: 0,
         toolbarHeight: 90,
-        leading: const BackButton(color: Colors.white),
         title: const Text(
           "تعديل بيانات الطفل",
           style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
@@ -313,9 +321,7 @@ class _editChildState extends State<editChild> {
                         docChild.delete();
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  HomePage()),
+                          MaterialPageRoute(builder: (context) => HomePage()),
                         );
                       } else {
                         setState(() => tappedYes = false);
