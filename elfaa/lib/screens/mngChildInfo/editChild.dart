@@ -26,6 +26,7 @@ class _editChildState extends State<editChild> {
 
   //Loading for uploading
   bool isLoading = false;
+  bool isLoadingdelet = false;
 
   //Child Info to be retreived from database
   TextEditingController childName = TextEditingController();
@@ -53,14 +54,9 @@ class _editChildState extends State<editChild> {
       int year = childBirthday.year;
       int month = childBirthday.month;
       int day = childBirthday.day;
-      //birthday.text =(snapshot['birthday']).toString();
-
       childName.text = snapshot['name'];
       //Age numbers extraction as three digits String "000" for later presentation
       //Extract each of years and months
-      //childAgeYears.text = (calcAge.toString().replaceAll(new RegExp(r'[^0-9]'), ''))[0];
-      // childAgeMonths.text = (calcAge.toString().replaceAll(new RegExp(r'[^0-9]'), ''))[1];
-
       childHeight.text = (snapshot['height']).toString();
       childImage = snapshot['image'];
       birthday.text = '$year-$month-$day';
@@ -74,7 +70,10 @@ class _editChildState extends State<editChild> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) {
+    final double ScreenHeight = MediaQuery.of(context).size.height;
+    final double ScreenWidth = MediaQuery.of(context).size.width;
+    return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
@@ -103,7 +102,7 @@ class _editChildState extends State<editChild> {
               child: Column(
                 children: <Widget>[
                   childImg(),
-                  const SizedBox(height: 40),
+                  SizedBox(height: ScreenHeight * 0.03),
                   Directionality(
                       textDirection: TextDirection.rtl,
                       child: TextFormField(
@@ -122,7 +121,7 @@ class _editChildState extends State<editChild> {
                           return null;
                         },
                       )),
-                  const SizedBox(height: 20),
+                  SizedBox(height: ScreenHeight*0.02),
                   Directionality(
                       textDirection: TextDirection.rtl,
                       child: TextFormField(
@@ -161,7 +160,7 @@ class _editChildState extends State<editChild> {
                                 );
                               },
                             );
-
+  
                             if (pickedDate != null) {
                               String formattedDate =
                                   DateFormat('yyyy-MM-dd').format(pickedDate);
@@ -171,7 +170,7 @@ class _editChildState extends State<editChild> {
                               });
                             }
                           })),
-                  const SizedBox(height: 20),
+                  SizedBox(height: ScreenHeight*0.02),
                   Directionality(
                     textDirection: TextDirection.rtl,
                     child: DropdownButtonFormField(
@@ -199,7 +198,7 @@ class _editChildState extends State<editChild> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: ScreenHeight*0.02),
                   Directionality(
                       textDirection: TextDirection.rtl,
                       child: TextFormField(
@@ -219,44 +218,39 @@ class _editChildState extends State<editChild> {
                           return null;
                         },
                       )),
-                  const SizedBox(height: 20),
+                  SizedBox(height: ScreenHeight*0.02),
                   SizedBox(
-                    width: 400,
+                    width: ScreenWidth,
                     child: ElevatedButton(
                         onPressed: null,
                         style: ElevatedButton.styleFrom(
                             textStyle: const TextStyle(fontSize: 22)),
                         child: const Text('تغيير جهاز التتبع')),
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: ScreenHeight*0.02),
                   ElevatedButton(
                       onPressed: () async {
-                        if (_img == null) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('يرجى اختيار صورة')));
-                          return;
-                        }
-
+  
                         if (_formKey.currentState!.validate()) {
                           if (imgURL.isEmpty) {
                             setState(() {
                               isLoading = true;
                             });
                           }
-                          Future.delayed(Duration(seconds: 12), () {
+                          Future.delayed(Duration(seconds: 14), () {
                             final docChild = FirebaseFirestore.instance
                                 .collection('users')
                                 .doc(uid)
                                 .collection('children')
                                 .doc('CiQbU3gkuwde5vcBjPKf');
-
+  
                             //update child info
                             docChild.update({
-                              'image': imgURL,
+                              'image': imgURL.isEmpty? childImage : imgURL,
                               'name': childName.text,
                               'gender': selectedGender,
                               'height': int.parse(childHeight.text),
-                              //'birthday': DateTime.parse(controllerBirthday.text)
+                              'birthday': DateTime.parse(birthday.text)
                             });
                             Navigator.pop(context);
                             setState(() {
@@ -274,20 +268,16 @@ class _editChildState extends State<editChild> {
                               color: Colors.white,
                             )
                           : const Text('حفظ التعديلات')),
-                  SizedBox(height: 20),
+                  SizedBox(height: ScreenHeight*0.02),
                   ElevatedButton(
                       onPressed: () async {
-                        if (_img == null) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('يرجى اختيار صورة')));
-                          return;
-                        }
+                       
                       },
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
                             Color.fromARGB(255, 205, 0, 0)),
                       ),
-                      child: isLoading
+                      child: isLoadingdelet
                           ? CircularProgressIndicator(
                               color: Colors.white,
                             )
@@ -298,6 +288,7 @@ class _editChildState extends State<editChild> {
           ),
         ),
       );
+  }
   //-----------------Rero's Helping Methods--------------------------------//
 
   //Adding child's profile picture
@@ -338,7 +329,7 @@ class _editChildState extends State<editChild> {
             "chooose image",
             style: TextStyle(fontSize: 20),
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[

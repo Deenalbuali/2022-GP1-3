@@ -56,7 +56,10 @@ class _addChildState extends State<addChild> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) {
+    final double ScreenHeight = MediaQuery.of(context).size.height;
+    final double ScreenWidth = MediaQuery.of(context).size.width;
+    return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
@@ -85,7 +88,7 @@ class _addChildState extends State<addChild> {
               child: Column(
                 children: <Widget>[
                   childImg(),
-                  const SizedBox(height: 40),
+                  SizedBox(height: ScreenHeight*0.04),
                   Directionality(
                       textDirection: TextDirection.rtl,
                       child: TextFormField(
@@ -105,7 +108,7 @@ class _addChildState extends State<addChild> {
                           return null;
                         },
                       )),
-                  const SizedBox(height: 20),
+                  SizedBox(height: ScreenHeight*0.025),
                   Directionality(
                       textDirection: TextDirection.rtl,
                       child: TextFormField(
@@ -144,7 +147,7 @@ class _addChildState extends State<addChild> {
                                 );
                               },
                             );
-
+  
                             if (pickedDate != null) {
                               String formattedDate =
                                   DateFormat('yyyy-MM-dd').format(pickedDate);
@@ -154,7 +157,7 @@ class _addChildState extends State<addChild> {
                               });
                             }
                           })),
-                  const SizedBox(height: 20),
+                  SizedBox(height: ScreenHeight*0.025),
                   Directionality(
                       textDirection: TextDirection.rtl,
                     child: DropdownButtonFormField(
@@ -176,7 +179,7 @@ class _addChildState extends State<addChild> {
                       ],
                     ),
                   ),
-                      const SizedBox(height: 20),
+                  SizedBox(height: ScreenHeight*0.025),
                   Directionality(
                       textDirection: TextDirection.rtl,
                       child: TextFormField(
@@ -197,16 +200,16 @@ class _addChildState extends State<addChild> {
                           return null;
                         },
                       )),
-                  const SizedBox(height: 20),
+                  SizedBox(height: ScreenHeight*0.025),
                   SizedBox(
-                    width: 400,
+                    width: ScreenWidth,
                     child: ElevatedButton(
                         onPressed: null,
                         style: ElevatedButton.styleFrom(
                             textStyle: const TextStyle(fontSize: 22)),
                         child: const Text('ربط جهاز التتبع')),
                   ),
-                  const SizedBox(height: 40),
+                  SizedBox(height: ScreenHeight*0.025),
                   ElevatedButton(
                       onPressed: () async {
                         if (_img == null) {
@@ -218,10 +221,10 @@ class _addChildState extends State<addChild> {
                               backgroundColor: Color.fromARGB(255, 195, 74, 74),
                               fontSize: 16.0,
                               textColor: Colors.white);
-
+  
                           return;
                         }
-
+  
                         if (_formKey.currentState!.validate()) {
                           if (imgURL.isEmpty) {
                             setState(() {
@@ -259,6 +262,7 @@ class _addChildState extends State<addChild> {
           ),
         ),
       );
+  }
   //-----------------Rero's Helping Methods--------------------------------//
 
   //Adding child's profile picture
