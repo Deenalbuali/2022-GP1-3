@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:elfaa/alert_dialog.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:age_calculator/age_calculator.dart';
 import 'package:elfaa/constants.dart';
@@ -36,6 +37,9 @@ class _editChildState extends State<editChild> {
   String childImage = '';
   String selectedGender = 'بنت';
   String uid = '';
+  bool tappedYes = false;
+
+
   Future<void> getEDITABLEChild() async {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     final User? user = await _auth.currentUser;
@@ -269,19 +273,49 @@ class _editChildState extends State<editChild> {
                             )
                           : const Text('حفظ التعديلات')),
                   SizedBox(height: ScreenHeight*0.02),
-                  ElevatedButton(
-                      onPressed: () async {
-                       
-                      },
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                            Color.fromARGB(255, 205, 0, 0)),
+                  Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: ElevatedButton.icon(
+                      icon: Icon(
+                        Icons.delete,
+                        color: Colors.white,
                       ),
-                      child: isLoadingdelet
-                          ? CircularProgressIndicator(
-                              color: Colors.white,
-                            )
-                          : const Text(' حذف الطفل')),
+                      style: ElevatedButton.styleFrom(
+                        textStyle: TextStyle(fontSize: 22),
+                        shadowColor: Color.fromARGB(255, 0, 0, 0),
+                        elevation: 1,
+                        backgroundColor: Color(0xFF9C0000),
+                        shape: const StadiumBorder(),
+                        maximumSize: const Size(180, 56),
+                        minimumSize: const Size(180, 56),
+                      ),
+                      label: Text(
+                        '  حذف الطفل  ',
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                      onPressed: () async {
+                        final action = await AlertDialogs.yesCancelDialog(context,
+                            'حذف الطفل', 'هل أنت متأكد من حذف الطفل؟');
+                        if (!mounted) return;
+                        if (action == DialogsAction.yes) {
+                          setState(() => tappedYes = true);
+                          if (!mounted) return;
+                          //delete child here
+                           final docChild = FirebaseFirestore.instance
+                                .collection('users')
+                                .doc(uid)
+                                .collection('children')
+                                .doc('CiQbU3gkuwde5vcBjPKf');
+                            docChild.delete();
+                          Navigator.pop(context);
+                        } else {
+                          setState(() => tappedYes = false);
+                          if (!mounted) return;
+                        }
+                      },
+                    ),
+                  ),
+                  SizedBox(height: ScreenHeight*0.04),
                 ],
               ),
             ),
