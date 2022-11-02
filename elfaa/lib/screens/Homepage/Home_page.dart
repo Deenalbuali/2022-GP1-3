@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
+      body: Container(
         child: Column(children: <Widget>[
           _buildHeader(),
           Padding(
@@ -153,23 +153,23 @@ class _HomePageState extends State<HomePage> {
           //   ),
           // ),
           _childrenList.length != 0
-              ? SizedBox(
-                  child: Column(
-                    children: [
-                      Container(
-                          padding: const EdgeInsets.only(
-                              right: 25.0, left: 25, bottom: 25),
-                          child: ListView.builder(
-                              physics: const AlwaysScrollableScrollPhysics(),
-                              itemCount: _childrenList.length,
-                              shrinkWrap: true,
-                              itemBuilder: (context, index) {
-                                return HomelistBox(
-                                    _childrenList[index] as childrenList);
-                              })),
-                    ],
-                  ),
-                )
+              ? _buildHeader2()
+              //     child: Column(
+              //       children: [
+              //         Container(
+              //             padding: const EdgeInsets.only(
+              //                 right: 25.0, left: 25, bottom: 25),
+              //             child: ListView.builder(
+              //                 physics: const AlwaysScrollableScrollPhysics(),
+              //                 itemCount: _childrenList.length,
+              //                 shrinkWrap: true,
+              //                 itemBuilder: (context, index) {
+              //                   return HomelistBox(
+              //                       _childrenList[index] as childrenList);
+              //                 })),
+              //       ],
+              //     ),
+              //   )
               : Padding(
                   padding: const EdgeInsets.only(top: 5.0, left: 30),
                   child: Container(
@@ -189,6 +189,21 @@ class _HomePageState extends State<HomePage> {
                   ),
                 )
         ]),
+      ),
+    );
+  }
+
+  Container _buildHeader2() {
+    return Container(
+      height: 180,
+      width: double.infinity,
+      child: Stack(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(right: 25.0, left: 25),
+            child: list(),
+          )
+        ],
       ),
     );
   }
@@ -239,12 +254,19 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(height: 10.0),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
   }
 
+  Widget list() => ListView.builder(
+      physics: const AlwaysScrollableScrollPhysics(),
+      itemCount: _childrenList.length,
+      shrinkWrap: true,
+      itemBuilder: (context, index) {
+        return HomelistBox(_childrenList[index] as childrenList);
+      });
   //void initState() {
   // getCurrentUser();
 
