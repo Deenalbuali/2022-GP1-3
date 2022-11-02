@@ -369,7 +369,7 @@ class _editChildState extends State<editChild> {
       child: Column(
         children: <Widget>[
           const Text(
-            "chooose image",
+            "choose image",
             style: TextStyle(fontSize: 20),
           ),
           SizedBox(height: 20),

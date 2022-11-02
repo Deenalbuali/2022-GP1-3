@@ -236,6 +236,9 @@ class _addChildState extends State<addChild> {
                         if (value!.isEmpty ||
                             controllerHeight.text.trim() == "") {
                           return "الحقل مطلوب";
+                        }else if(int.parse(controllerHeight.text.trim()) >200 ||
+                        int.parse(controllerHeight.text.trim()) < 30){
+                           return "يرجى إدخال طول صحيح";
                         }
                         return null;
                       },
