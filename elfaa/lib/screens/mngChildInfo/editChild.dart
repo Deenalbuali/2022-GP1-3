@@ -33,6 +33,7 @@ class _editChildState extends State<editChild> {
   late DateTime childBirthday;
   TextEditingController childHeight = TextEditingController();
   String childImage='';
+    String selectedGender = 'بنت';
 
   Future<void> getEDITABLEChild() async {
     final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -170,6 +171,28 @@ class _editChildState extends State<editChild> {
                               });
                             }
                           })),
+                          const SizedBox(height: 20),
+                  Directionality(
+                      textDirection: TextDirection.rtl,
+                    child: DropdownButtonFormField(
+                      decoration: const InputDecoration(
+                            suffixIcon: Icon(Icons.escalator_warning,
+                                color: Color(0xFFFD8601)),
+                            labelText: "الجنس",
+                          ),
+                      onChanged: (val){
+                        setState(() {
+                          selectedGender = val.toString();
+                        });
+                      },
+                      value: selectedGender,
+                      hint: Text("بنت أو ولد"),
+                      items: const [
+                        DropdownMenuItem(child: Text("ولد"), value: 'ولد',),
+                        DropdownMenuItem(child: Text("بنت"), value: "بنت",)
+                      ],
+                    ),
+                  ),
                   const SizedBox(height: 20),
                   Directionality(
                       textDirection: TextDirection.rtl,
