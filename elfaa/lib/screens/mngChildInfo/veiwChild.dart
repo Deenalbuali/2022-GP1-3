@@ -14,12 +14,12 @@ class viewChild extends StatefulWidget {
 
 class _viewChildState extends State<viewChild> {
   //Child Info to be retreived from database
-  String childName ="";
-  String childAgeYears="";
-  String childAgeMonths="";
-  int childHeight=0;
-  String childImage='';
-  String childGender="";
+  String childName = "";
+  String childAgeYears = "";
+  String childAgeMonths = "";
+  int childHeight = 0;
+  String childImage = '';
+  String childGender = "";
   String zoneName = 'منطقة الألعاب';
 
   Future<void> getCurrentChild() async {
@@ -44,11 +44,11 @@ class _viewChildState extends State<viewChild> {
         //Extract each of years and months
         childAgeYears =
             (calcAge.toString().replaceAll(new RegExp(r'[^0-9]'), ''))[0];
-            
+
         childAgeMonths =
             (calcAge.toString().replaceAll(new RegExp(r'[^0-9]'), ''))[1];
-print(childAgeYears);
-print(childAgeMonths);
+        print(childAgeYears);
+        print(childAgeMonths);
         childHeight = snapshot['height'];
         childImage = snapshot['image'];
         childGender = snapshot['gender'];
@@ -91,7 +91,8 @@ print(childAgeMonths);
               onPressed: (() {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => editChild(childID: widget.childID)),
+                  MaterialPageRoute(
+                      builder: (context) => editChild(childID: widget.childID)),
                 );
               }))
         ],
@@ -140,37 +141,9 @@ print(childAgeMonths);
                               )
                             ]),
                             child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20.0),
-                              child: Image.network(
-                                childImage,
-                                width: ScreenWidth * 0.33,
-                                height: ScreenHeight * 0.15,
-                                fit: BoxFit.cover,
-                                frameBuilder: (BuildContext context,
-                                    Widget child,
-                                    int? frame,
-                                    bool isAsyncLoaded) {
-                                  return Padding(
-                                    padding: EdgeInsets.all(1),
-                                    child: child,
-                                  );
-                                },
-                                loadingBuilder: (BuildContext context,
-                                    Widget child,
-                                    ImageChunkEvent? loadingProgress) {
-                                  if (loadingProgress == null) return child;
-                                  return Center(
-                                    child: Text("جاري التحميل"),
-                                  );
-                                },
-                                errorBuilder: (BuildContext context,
-                                    Object error, StackTrace? st) {
-                                  return Center(
-                                    child: Text("error"),
-                                  );
-                                },
-                              ),
-                            ),
+                                borderRadius: BorderRadius.circular(20.0),
+                                child: networkImg(
+                                    childImage, ScreenWidth, ScreenHeight)),
                           ),
                         ],
                       ),
@@ -204,22 +177,7 @@ print(childAgeMonths);
                       SizedBox(width: ScreenWidth * 0.25),
                       Directionality(
                         textDirection: TextDirection.rtl,
-                        child: Text(
-                          (int.parse(childAgeYears) > 10)
-                              ? "$childAgeYears سنة"
-                              : (int.parse(childAgeYears) > 1)
-                                  ? "$childAgeYears سنوات"
-                                  : (int.parse(childAgeMonths) == 1 ||
-                                          int.parse(childAgeMonths) == 11 ||
-                                          int.parse(childAgeMonths) == 12 ||
-                                          int.parse(childAgeMonths) == 0)
-                                      ? "$childAgeMonths شهر"
-                                      : "$childAgeMonths شهور",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
-                        ),
+                        child: getAgeText(),
                       ),
                       SizedBox(width: ScreenWidth * 0.1),
                       Directionality(
@@ -255,4 +213,66 @@ print(childAgeMonths);
       ),
     );
   }
+
+  getAgeText() {
+    String str = '';
+    try {
+      if (int.parse(childAgeYears) > 10 ||
+          int.parse(childAgeYears) == 1 ||
+          int.parse(childAgeYears) == 2) {
+        str = "$childAgeYears سنة";
+      } else if (int.parse(childAgeYears) > 2 &&
+          int.parse(childAgeYears) < 11) {
+        str = "$childAgeYears سنوات";
+      } else if (int.parse(childAgeYears) < 1) {
+        if (int.parse(childAgeMonths) == 1 ||
+            int.parse(childAgeMonths) == 11 ||
+            int.parse(childAgeMonths) == 12 ||
+            int.parse(childAgeMonths) == 0) {
+          str = "$childAgeMonths شهر";
+        } else {
+          str = "$childAgeMonths شهور";
+        }
+      }
+    } catch (error) {
+      Text("error");
+    }
+    return Text(str,
+        style: TextStyle(
+            color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold));
+  }
+}
+
+networkImg(String childImage, double ScreenWidth, double ScreenHeight) {
+  try {
+    return Image.network(
+      childImage,
+      width: ScreenWidth * 0.33,
+      height: ScreenHeight * 0.15,
+      fit: BoxFit.cover,
+      frameBuilder:
+          (BuildContext context, Widget child, int? frame, bool isAsyncLoaded) {
+        return Padding(
+          padding: EdgeInsets.all(1),
+          child: child,
+        );
+      },
+      loadingBuilder: (BuildContext context, Widget child,
+          ImageChunkEvent? loadingProgress) {
+        if (loadingProgress == null) return child;
+        return Center(
+          child: Text("جاري التحميل"),
+        );
+      },
+      errorBuilder: (BuildContext context, Object error, StackTrace? st) {
+        return Center(
+          child: Text(
+            "جاري التحميل",
+            style: TextStyle(
+                color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+        );
+      },
+    );
+  } catch (error) {}
 }
