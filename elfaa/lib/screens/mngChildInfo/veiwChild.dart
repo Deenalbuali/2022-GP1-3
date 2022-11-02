@@ -25,6 +25,7 @@ class _viewChildState extends State<viewChild> {
   Future<void> getCurrentChild() async {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     final User? user = await _auth.currentUser;
+    if (!mounted) return;
     final uid = user!.uid;
     await FirebaseFirestore.instance
         .collection('users')
@@ -33,12 +34,14 @@ class _viewChildState extends State<viewChild> {
         .doc(widget.childID)
         .get()
         .then((DocumentSnapshot<Map<String, dynamic>> snapshot) {
+      if (!mounted) return;
       //Convert timestamp type of data to DateTime
       DateTime childBirthday =
           DateTime.parse(snapshot['birthday'].toDate().toString());
       //Calculate Age As years: 0, Months: 0, Days: 0
       DateDuration calcAge = AgeCalculator.age(childBirthday);
       setState(() {
+        if (!mounted) return;
         childName = snapshot['name'];
         //Age numbers extraction as three digits String "000" for later presentation
         //Extract each of years and months
@@ -53,7 +56,9 @@ class _viewChildState extends State<viewChild> {
         childImage = snapshot['image'];
         childGender = snapshot['gender'];
       });
+      if (!mounted) return;
     });
+    if (!mounted) return;
   }
 
   @override
