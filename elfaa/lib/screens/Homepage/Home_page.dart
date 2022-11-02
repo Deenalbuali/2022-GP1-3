@@ -66,24 +66,46 @@ class _HomePageState extends State<HomePage> {
                   fontWeight: FontWeight.w700),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 25.0, right: 25, bottom: 25),
-            child: Container(
-              height: 200,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.grey,
-                        offset: Offset(1.0, 1.0),
-                        blurRadius: 4.0)
-                  ],
-                  borderRadius: BorderRadius.circular(30),
-                  image: DecorationImage(
-                      image: AssetImage("assets/images/MainMap.jpg"),
-                      fit: BoxFit.cover)),
-            ),
-          ),
+          _childrenList.length != 0
+              ? Padding(
+                  padding:
+                      const EdgeInsets.only(left: 25.0, right: 25, bottom: 25),
+                  child: Container(
+                    height: 200,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.grey,
+                              offset: Offset(1.0, 1.0),
+                              blurRadius: 4.0)
+                        ],
+                        borderRadius: BorderRadius.circular(30),
+                        image: DecorationImage(
+                            image: AssetImage("assets/images/MainMap.jpg"),
+                            fit: BoxFit.cover)),
+                  ),
+                )
+              : Padding(
+                  padding:
+                      const EdgeInsets.only(left: 25.0, right: 25, bottom: 25),
+                  child: Container(
+                    height: 200,
+                    //width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.grey,
+                              offset: Offset(1.0, 1.0),
+                              blurRadius: 4.0)
+                        ],
+                        borderRadius: BorderRadius.circular(30),
+                        image: DecorationImage(
+                            image: AssetImage("assets/images/empty.jpeg"),
+                            fit: BoxFit.cover)),
+                  ),
+                ),
+
           Row(
             children: [
               SizedBox(
@@ -152,8 +174,8 @@ class _HomePageState extends State<HomePage> {
           //     ],
           //   ),
           // ),
-          _childrenList.length != 0
-              ? _buildHeader2()
+          _childrenList.length == 0
+              ?
               //     child: Column(
               //       children: [
               //         Container(
@@ -170,7 +192,7 @@ class _HomePageState extends State<HomePage> {
               //       ],
               //     ),
               //   )
-              : Padding(
+              Padding(
                   padding: const EdgeInsets.only(top: 5.0, left: 30),
                   child: Container(
                     height: 450,
@@ -188,6 +210,7 @@ class _HomePageState extends State<HomePage> {
                             fit: BoxFit.cover)),
                   ),
                 )
+              : _buildHeader2(),
         ]),
       ),
     );
