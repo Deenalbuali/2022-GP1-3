@@ -218,7 +218,7 @@ class _HomePageState extends State<HomePage> {
               Padding(
                   padding: const EdgeInsets.only(top: 5.0, left: 30),
                   child: Container(
-                    height: 450,
+                    height: height * 0.35,
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                         // boxShadow: [
