@@ -327,7 +327,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     },
                   ),
                 ),
-                SizedBox(height: ScreenHeight * 0.150),
+                SizedBox(height: ScreenHeight * 0.09),
                 Directionality(
                   textDirection: TextDirection.rtl,
                   child: ElevatedButton.icon(
