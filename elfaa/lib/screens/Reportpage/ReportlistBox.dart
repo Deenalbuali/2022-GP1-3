@@ -16,8 +16,11 @@ class ReportlistBox extends StatelessWidget {
   ReportlistBox(this._childlist3);
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> _ScaffoldKey = GlobalKey<ScaffoldState>();
+    final double height = MediaQuery.of(context).size.height;
+    final double width = MediaQuery.of(context).size.width;
     return Padding(
-      padding: const EdgeInsets.only(bottom: 25.0),
+      padding: const EdgeInsets.only(bottom: 15, left: 15, right: 15, top: 7),
       child: Container(
         decoration: BoxDecoration(boxShadow: [
           BoxShadow(
@@ -26,7 +29,7 @@ class ReportlistBox extends StatelessWidget {
             spreadRadius: 1,
           )
         ], color: Colors.white, borderRadius: BorderRadius.circular(12)),
-        height: 80,
+        height: height * 0.1,
         padding: EdgeInsets.all(5),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -63,7 +66,11 @@ class ReportlistBox extends StatelessWidget {
 
                   children: [
                     Container(
-                      padding: EdgeInsets.only(right: 25, top: 18),
+                      padding: EdgeInsets.only(
+                          right: width * 0.05,
+                          left: 0.1,
+                          top: width * 0.05,
+                          bottom: 0.1),
                       child: Text(
                         "${_childlist3.childName}",
                         style: TextStyle(

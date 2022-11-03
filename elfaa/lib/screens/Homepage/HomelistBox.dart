@@ -16,8 +16,11 @@ class HomelistBox extends StatelessWidget {
   HomelistBox(this._childlist);
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> _ScaffoldKey = GlobalKey<ScaffoldState>();
+    final double height = MediaQuery.of(context).size.height;
+    final double width = MediaQuery.of(context).size.width;
     return Padding(
-        padding: const EdgeInsets.only(bottom: 25.0),
+        padding: const EdgeInsets.only(bottom: 15, left: 18, right: 18, top: 1),
         child: InkWell(
           child: Container(
             decoration: BoxDecoration(boxShadow: [
@@ -27,41 +30,46 @@ class HomelistBox extends StatelessWidget {
                 spreadRadius: 1,
               )
             ], color: Colors.white, borderRadius: BorderRadius.circular(12)),
-            height: 80,
+            height: height * 0.1,
+            // width: width * 0.00001,
             padding: EdgeInsets.all(5),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                    padding: EdgeInsets.only(left: 10),
+                    //padding: EdgeInsets.only(left: 10),
                     child: IconButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => viewChild(
-                                  childID: "${_childlist.childID}",
-                                  childImage: "${_childlist.childImagePath}",
-                                  childname: "${_childlist.childName}",
-                                  childbirthday: "${_childlist.childName}",
-                                  childHeight: _childlist.childHeight!,
-                                  childGender: "${_childlist.childName}")),
-                        );
-                      },
-                      icon: Icon(Icons.arrow_back_ios),
-                      color: Colors.black,
-                    )),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => viewChild(
+                              childID: "${_childlist.childID}",
+                              childImage: "${_childlist.childImagePath}",
+                              childname: "${_childlist.childName}",
+                              childbirthday: "${_childlist.childName}",
+                              childHeight: _childlist.childHeight!,
+                              childGender: "${_childlist.childName}")),
+                    );
+                  },
+                  icon: Icon(Icons.arrow_back_ios),
+                  color: Colors.black,
+                )),
                 Row(
                   children: [
                     Row(
                       children: [
                         Column(
-                          //crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 
                           children: [
                             Container(
-                              padding: EdgeInsets.only(top: 1),
+                              padding: EdgeInsets.only(
+                                  right: width * 0.05,
+                                  left: 0.1,
+                                  top: 0.1,
+                                  bottom: 0.1),
                               child: Text(
                                 "${_childlist.childName}",
                                 style: TextStyle(
@@ -71,18 +79,25 @@ class HomelistBox extends StatelessWidget {
                               ),
                             ),
                             Container(
-                              padding: EdgeInsets.only(right: 25, top: 5),
+                              padding: EdgeInsets.only(
+                                  right: width * 0.05,
+                                  left: 0.1,
+                                  top: 0.1,
+                                  bottom: 0.1),
                               child: Text("منطقة الألعاب",
                                   style: TextStyle(
                                       fontSize: 16, color: Colors.grey)),
                             )
                           ],
                         ),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(10.0),
-                          child: Image.network(
-                            "${_childlist.childImagePath}",
-                            fit: BoxFit.scaleDown,
+                        Container(
+                          padding: EdgeInsets.all(1),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10.0),
+                            child: Image.network(
+                              "${_childlist.childImagePath}",
+                              fit: BoxFit.scaleDown,
+                            ),
                           ),
                         ),
                       ],

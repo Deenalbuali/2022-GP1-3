@@ -35,7 +35,7 @@ class AlertDialogs {
                         onPressed: () =>
                             Navigator.of(context).pop(DialogsAction.cancel),
                         child: Text(
-                          'إلغاء',
+                          'لا',
                           style: TextStyle(
                               color: Color(0xFF9C0000),
                               fontWeight: FontWeight.bold),
@@ -45,7 +45,7 @@ class AlertDialogs {
                         onPressed: () =>
                             Navigator.of(context).pop(DialogsAction.yes),
                         child: Text(
-                          'تأكيد',
+                          'نعم',
                           style: TextStyle(
                               color: kPrimaryColor,
                               fontWeight: FontWeight.bold),
