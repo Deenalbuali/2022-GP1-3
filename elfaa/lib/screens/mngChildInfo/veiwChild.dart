@@ -6,8 +6,13 @@ import 'package:elfaa/screens/mngChildInfo/editChild.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class viewChild extends StatefulWidget {
-  const viewChild({super.key, required this.childID});
+  const viewChild({super.key, required this.childID, required this.childImage, required this.childname, required this.childbirthday, required this.childHeight, required this.childGender});
   final String childID;
+  final String childImage;
+  final String childname;
+  final String childbirthday;
+  final String childHeight;
+  final String childGender;
   @override
   State<viewChild> createState() => _viewChildState();
 }
