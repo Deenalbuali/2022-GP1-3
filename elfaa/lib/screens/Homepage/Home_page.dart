@@ -268,7 +268,7 @@ class _HomePageState extends State<HomePage> {
         children: <Widget>[
           Positioned(
             bottom: 0,
-            top: height * -0.20,
+            top: height * -0.24,
             right: width * -0.2,
             child: Container(
               width: width * 0.8,
