@@ -88,6 +88,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                             const SizedBox(height: 40),
                             ElevatedButton(
                               onPressed: () async {
+                                FocusManager.instance.primaryFocus?.unfocus();
                                 if (_formKey.currentState!.validate()) {
                                   resetPassword();
                                 }

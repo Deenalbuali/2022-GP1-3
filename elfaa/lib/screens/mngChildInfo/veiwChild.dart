@@ -25,6 +25,7 @@ class _viewChildState extends State<viewChild> {
   Future<void> getCurrentChild() async {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     final User? user = await _auth.currentUser;
+    if (!mounted) return;
     final uid = user!.uid;
     await FirebaseFirestore.instance
         .collection('users')
@@ -33,12 +34,14 @@ class _viewChildState extends State<viewChild> {
         .doc(widget.childID)
         .get()
         .then((DocumentSnapshot<Map<String, dynamic>> snapshot) {
+      if (!mounted) return;
       //Convert timestamp type of data to DateTime
       DateTime childBirthday =
           DateTime.parse(snapshot['birthday'].toDate().toString());
       //Calculate Age As years: 0, Months: 0, Days: 0
       DateDuration calcAge = AgeCalculator.age(childBirthday);
       setState(() {
+        if (!mounted) return;
         childName = snapshot['name'];
         //Age numbers extraction as three digits String "000" for later presentation
         //Extract each of years and months
@@ -53,7 +56,9 @@ class _viewChildState extends State<viewChild> {
         childImage = snapshot['image'];
         childGender = snapshot['gender'];
       });
+      if (!mounted) return;
     });
+    if (!mounted) return;
   }
 
   @override
@@ -68,34 +73,32 @@ class _viewChildState extends State<viewChild> {
     final double ScreenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        //  actions: <Widget>[
-        //   IconButton(
-        //     icon: Icon(
-        //       Icons.arrow_forward_ios,
-        //       color: kPrimaryColor,
-        //     ),
-        //     onPressed: () => Navigator.of(context).pop(),
-        //   )
-        // ],
+        automaticallyImplyLeading: false,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.arrow_forward_ios,
+              color: Colors.white,
+            ),
+            onPressed: () => Navigator.of(context).pop(),
+          )
+        ],
         backgroundColor: Colors.transparent,
         elevation: 0,
         toolbarHeight: 90,
-
         title: const Text(
           "صفحة الطفل",
           style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
         ),
-        actions: [
-          IconButton(
-              icon: Icon(Icons.edit),
-              onPressed: (() {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => editChild(childID: widget.childID)),
-                );
-              }))
-        ],
+        leading: IconButton(
+            icon: Icon(Icons.edit),
+            onPressed: (() {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => editChild(childID: widget.childID)),
+              );
+            })),
         centerTitle: true,
         flexibleSpace: Container(
             decoration: const BoxDecoration(

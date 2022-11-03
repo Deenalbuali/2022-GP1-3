@@ -1,5 +1,5 @@
 import 'package:elfaa/screens/Homepage/HomelistBox.dart';
-import 'package:elfaa/screens/Homepage/qr.dart';
+//import 'package:elfaa/screens/Homepage/qr.dart';
 import 'package:elfaa/screens/mngChildInfo/addChild.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -52,38 +52,59 @@ class _HomePageState extends State<HomePage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: SingleChildScrollView(
+      body: Container(
         child: Column(children: <Widget>[
           _buildHeader(),
           Padding(
             padding: const EdgeInsets.only(left: 230.0),
             child: Text(
-              ": " "تتبع أطفالك ",
+              "تتبع أطفالك ",
               style: TextStyle(
-                  color: kOrangeColor,
+                  color: kPrimaryColor,
                   fontSize: 20.0,
                   fontWeight: FontWeight.w700),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 25.0, right: 25, bottom: 25),
-            child: Container(
-              height: 200,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.grey,
-                        offset: Offset(1.0, 1.0),
-                        blurRadius: 4.0)
-                  ],
-                  borderRadius: BorderRadius.circular(30),
-                  image: DecorationImage(
-                      image: AssetImage("assets/images/MainMap.jpg"),
-                      fit: BoxFit.cover)),
-            ),
-          ),
+          _childrenList.length != 0
+              ? Padding(
+                  padding:
+                      const EdgeInsets.only(left: 25.0, right: 25, bottom: 25),
+                  child: Container(
+                    height: 200,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.grey,
+                              offset: Offset(1.0, 1.0),
+                              blurRadius: 4.0)
+                        ],
+                        borderRadius: BorderRadius.circular(30),
+                        image: DecorationImage(
+                            image: AssetImage("assets/images/MainMap.jpg"),
+                            fit: BoxFit.cover)),
+                  ),
+                )
+              : Padding(
+                  padding:
+                      const EdgeInsets.only(left: 25.0, right: 25, bottom: 25),
+                  child: Container(
+                    height: 200,
+                    //width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.grey,
+                              offset: Offset(1.0, 1.0),
+                              blurRadius: 4.0)
+                        ],
+                        borderRadius: BorderRadius.circular(30),
+                        image: DecorationImage(
+                            image: AssetImage("assets/images/empty.jpeg"),
+                            fit: BoxFit.cover)),
+                  ),
+                ),
+
           Row(
             children: [
               SizedBox(
@@ -127,10 +148,10 @@ class _HomePageState extends State<HomePage> {
                       ]),
                   child: IconButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => QRPage()),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(builder: (context) => QRPage()),
+                      // );
                     },
                     icon: Icon(Icons.qr_code),
                     color: Colors.white,
@@ -153,7 +174,24 @@ class _HomePageState extends State<HomePage> {
           //   ),
           // ),
           _childrenList.length == 0
-              ? Padding(
+              ?
+              //     child: Column(
+              //       children: [
+              //         Container(
+              //             padding: const EdgeInsets.only(
+              //                 right: 25.0, left: 25, bottom: 25),
+              //             child: ListView.builder(
+              //                 physics: const AlwaysScrollableScrollPhysics(),
+              //                 itemCount: _childrenList.length,
+              //                 shrinkWrap: true,
+              //                 itemBuilder: (context, index) {
+              //                   return HomelistBox(
+              //                       _childrenList[index] as childrenList);
+              //                 })),
+              //       ],
+              //     ),
+              //   )
+              Padding(
                   padding: const EdgeInsets.only(top: 5.0, left: 30),
                   child: Container(
                     height: 450,
@@ -171,23 +209,23 @@ class _HomePageState extends State<HomePage> {
                             fit: BoxFit.cover)),
                   ),
                 )
-              : SizedBox(
-                  child: Column(
-                    children: [
-                      Container(
-                          padding: const EdgeInsets.only(
-                              right: 25.0, left: 25, bottom: 25),
-                          child: ListView.builder(
-                              itemCount: _childrenList.length,
-                              shrinkWrap: true,
-                              itemBuilder: (context, index) {
-                                return HomelistBox(
-                                    _childrenList[index] as childrenList);
-                              })),
-                    ],
-                  ),
-                )
+              : _buildHeader2(),
         ]),
+      ),
+    );
+  }
+
+  Container _buildHeader2() {
+    return Container(
+      height: 180,
+      width: double.infinity,
+      child: Stack(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(right: 25.0, left: 25),
+            child: list(),
+          )
+        ],
       ),
     );
   }
@@ -238,12 +276,19 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(height: 10.0),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
   }
 
+  Widget list() => ListView.builder(
+      physics: const AlwaysScrollableScrollPhysics(),
+      itemCount: _childrenList.length,
+      shrinkWrap: true,
+      itemBuilder: (context, index) {
+        return HomelistBox(_childrenList[index] as childrenList);
+      });
   //void initState() {
   // getCurrentUser();
 

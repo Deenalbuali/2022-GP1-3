@@ -19,6 +19,9 @@ class _SignupPageState extends State<SignupPage> {
   TextEditingController phoneNo = TextEditingController();
   TextEditingController name = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  bool obscured = true;
+  Icon icon = Icon(Icons.visibility, color: Colors.grey);
+  FocusNode focus = FocusNode();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -137,14 +140,36 @@ class _SignupPageState extends State<SignupPage> {
                   Directionality(
                       textDirection: TextDirection.rtl,
                       child: TextFormField(
+                        focusNode: focus,
+                        onTap: () {
+                          FocusScope.of(context).requestFocus(focus);
+                        },
                         obscureText: true,
                         controller: pass,
-                        decoration: const InputDecoration(
-                            suffixIcon: Icon(Icons.lock_outline,
-                                color: Color(0xFFFD8601)),
+                        decoration: InputDecoration(
+                            suffixIcon: focus.hasFocus
+                                ? IconButton(
+                                    icon: icon,
+                                    onPressed: () {
+                                      setState(() {
+                                        obscured = !obscured;
+                                        if (obscured == true) {
+                                          icon = Icon(Icons.visibility,
+                                              color: Colors.grey);
+                                        } else {
+                                          icon = Icon(Icons.visibility_off,
+                                              color: Colors.grey);
+                                        }
+                                      });
+                                    },
+                                  )
+                                : Icon(Icons.lock_outline,
+                                    color: Color(0xFFFD8601)),
                             labelText: "كلمة المرور",
                             hintText: "أدخل كلمة المرور",
                             helperText: " كلمة المرور يجب أن تحتوي على الأقل:"
+                                "\n"
+                                "* 8 خانات"
                                 "\n"
                                 "* حرف كبير باللغة الإنجليزية"
                                 "\n"

@@ -38,77 +38,41 @@ class _NotePageState extends State<NotePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        toolbarHeight: 90,
-        title: Text(
-          "التنبيهات",
-          style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
-        ),
-        centerTitle: true,
-        flexibleSpace: Container(
-            decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(28),
-              bottomRight: Radius.circular(28)),
-          color: kPrimaryColor,
-        )),
-      ),
-      body: SingleChildScrollView(
-        child: Column(children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                padding: EdgeInsets.only(top: 12, left: 50),
-                child: Text(
-                  formatted,
-                  style: TextStyle(
-                    color: Color(0xff919296),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 25.0, vertical: 25.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Colors.orange, shape: BoxShape.circle),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          toolbarHeight: 90,
+          title: Text(
+            "التنبيهات",
+            style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
           ),
-          SizedBox(
-            child: Column(
-              children: [
-                Container(
-                    padding: const EdgeInsets.all(25.0),
-                    child: ListView.builder(
-                        itemCount: _childrenList2.length,
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          //if (index == 0)
-                          //return Null;
-                          // else
-                          return NotlistBox(
-                              _childrenList2[index] as childrenList);
-                        })),
-              ],
-            ),
-          )
-        ]),
-      ),
-    );
+          centerTitle: true,
+          flexibleSpace: Container(
+              decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(28),
+                bottomRight: Radius.circular(28)),
+            color: kPrimaryColor,
+          )),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(25),
+          child: SizedBox(
+            child: list(),
+          ),
+        ));
   }
+
+  Widget list() => ListView.builder(
+      itemCount: _childrenList2.length,
+      shrinkWrap: true,
+      itemBuilder: (context, index) {
+        //if (index == 0)
+        //return Null;
+        // else
+        return NotlistBox(_childrenList2[index] as childrenList);
+      });
 
   void didChangeDependencies() {
     super.didChangeDependencies();
