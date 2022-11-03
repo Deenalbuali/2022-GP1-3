@@ -90,7 +90,7 @@ class _reportInfoState extends State<reportInfo> {
                   end: Alignment.topCenter,
                 ))),
       ),
-      body: SafeArea(
+      body: SingleChildScrollView(
         child: Column(
           children: [
             Stack(
@@ -175,7 +175,6 @@ class _reportInfoState extends State<reportInfo> {
                                 Container(
                                     padding:
                                         EdgeInsets.only(right: 5, bottom: 5),
-                                    height: height * 0.15,
                                     width: width * 0.15,
                                     child: Column(
                                       crossAxisAlignment:
