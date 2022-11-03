@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:elfaa/alert_dialog.dart';
-import 'package:elfaa/screens/Homepage/Home_page.dart';
+import 'package:elfaa/screens/Homepage/navPage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:elfaa/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -29,7 +29,22 @@ class editChild extends StatefulWidget {
 }
 
 class _editChildState extends State<editChild> {
-//profile image variables
+@override
+  void initState() {
+    print(" parent ID : $uid HEEEEEEEEEEEEEEEEEEEEREEEEEEEEEEEEE");
+    childBirthday = DateTime.parse((widget.childbirthday).toString());
+    year = childBirthday.year;
+    month = childBirthday.month;
+    day = childBirthday.day;
+    birthday.text = '$year-$month-$day';
+    childName.text = widget.childname;
+    childHeight.text = (widget.childHeight).toString();
+    childImage = widget.childImage;
+
+    super.initState();
+    getParent();
+  }
+  //profile image variables
   XFile? _img;
   final ImagePicker _picker = ImagePicker();
   String imgURL = '';
@@ -46,6 +61,11 @@ class _editChildState extends State<editChild> {
   TextEditingController birthday = TextEditingController();
   String selectedGender = 'أنثى';
   TextEditingController childHeight = TextEditingController();
+  late DateTime childBirthday;
+  String childImage ='';
+  int year = 0;
+  int month = 0;
+  int day = 0;
 
   //alert dialuge
   bool tappedYes = false;
@@ -61,25 +81,10 @@ class _editChildState extends State<editChild> {
     });
   }
 
-  @override
-  void initState() {
-    super.initState();
-    getParent();
-  }
+  
 
   @override
   Widget build(BuildContext context) {
-    print(" parent ID : $uid HEEEEEEEEEEEEEEEEEEEEREEEEEEEEEEEEE");
-    DateTime childBirthday = DateTime.parse((widget.childbirthday).toString());
-    int year = childBirthday.year;
-    int month = childBirthday.month;
-    int day = childBirthday.day;
-    birthday.text = '$year-$month-$day';
-
-    childName.text = widget.childname;
-    childHeight.text = (widget.childHeight).toString();
-    String childImage = widget.childImage;
-
     final double ScreenHeight = MediaQuery.of(context).size.height;
     final double ScreenWidth = MediaQuery.of(context).size.width;
 
@@ -259,13 +264,12 @@ class _editChildState extends State<editChild> {
                             isLoading = true;
                           });
                         }
-                        Future.delayed(Duration(seconds: 14), () {
+                        Future.delayed(Duration(seconds: 7), () {
                           final docChild = FirebaseFirestore.instance
                               .collection('users')
                               .doc(uid)
                               .collection('children')
                               .doc(widget.childID);
-
                           //update child info
                           docChild.update({
                             'image': imgURL.isEmpty ? childImage : imgURL,
@@ -274,7 +278,10 @@ class _editChildState extends State<editChild> {
                             'height': int.parse(childHeight.text),
                             'birthday': DateTime.parse(birthday.text)
                           });
-                          Navigator.pop(context);
+                          Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => NavPage()),
+                        );
                           setState(() {
                             isLoading = false;
                           });
@@ -327,7 +334,7 @@ class _editChildState extends State<editChild> {
                         docChild.delete();
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => HomePage()),
+                          MaterialPageRoute(builder: (context) => NavPage()),
                         );
                       } else {
                         setState(() => tappedYes = false);
