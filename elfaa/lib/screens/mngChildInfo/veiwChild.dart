@@ -184,6 +184,7 @@ class _viewChildState extends State<viewChild> {
   getAgeText() {
     //Convert timestamp type of data to DateTime
     DateTime childBirthday = DateTime.parse(widget.childbirthday);
+    print("birthday widget $childBirthday");
     //Calculate Age As years: 0, Months: 0, Days: 0
     DateDuration calcAge = AgeCalculator.age(childBirthday);
 
