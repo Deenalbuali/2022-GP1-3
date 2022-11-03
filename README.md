@@ -13,7 +13,7 @@
   
 <h2>✔️Requirements To Launch The Application</h2>
 <ul>
-<li>Android Studio with SDK</li>
+<li>Android Studio with SDK or Visual Studio Code</li>
 <li> Flutter framework </li>
 <li>Dart programming language </li>
 <li> mobile emulator or android mobile </li>
@@ -25,7 +25,7 @@
 <li>Click on the <strong> code</strong> button</li>
 <li>Download <strong>.zip</strong> file</li>
 <li> Unzip the file </li>
-<li> Open <strong> Android Studio</strong> </li>
+<li> Open <strong> Android Studio</strong> or <strong> Visual Studio Code</strong>  </li>
 <li>Click on <strong> File > Open > Location</strong> of the saved unzipped file then click on Ok</li>
 <li>Turn on an Android Emulator or connect an android mobile to the system </li>
 <li> Run the <strong>Elfaa </strong> application </li>
