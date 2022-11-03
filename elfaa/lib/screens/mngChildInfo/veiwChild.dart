@@ -97,24 +97,6 @@ class _viewChildState extends State<viewChild> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Column(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(boxShadow: [
-                              BoxShadow(
-                                color: Colors.white.withOpacity(0.5),
-                                spreadRadius: 1,
-                                blurRadius: 22,
-                                offset: Offset(5, 5),
-                              )
-                            ]),
-                            child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20.0),
-                                child: networkImg(
-                                    childImage, ScreenWidth, ScreenHeight)),
-                          ),
-                        ],
-                      ),
-                      Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Directionality(
@@ -133,6 +115,24 @@ class _viewChildState extends State<viewChild> {
                                 color: Colors.white,
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(boxShadow: [
+                              BoxShadow(
+                                color: Colors.white.withOpacity(0.5),
+                                spreadRadius: 1,
+                                blurRadius: 22,
+                                offset: Offset(5, 5),
+                              )
+                            ]),
+                            child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20.0),
+                                child: networkImg(
+                                    childImage, ScreenWidth, ScreenHeight)),
                           ),
                         ],
                       ),
