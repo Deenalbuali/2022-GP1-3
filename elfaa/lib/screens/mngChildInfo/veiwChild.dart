@@ -60,7 +60,14 @@ class _viewChildState extends State<viewChild> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => editChild(childID: widget.childID)),
+                    builder: (context) => editChild(
+                      childID: widget.childID,
+                      childImage: childImage,
+                      childname: childName,
+                      childbirthday: widget.childbirthday,
+                      childHeight: childHeight,
+                      childGender: childGender
+                    )),
               );
             })),
         centerTitle: true,

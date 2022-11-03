@@ -5,14 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:elfaa/alert_dialog.dart';
 import 'package:elfaa/screens/Homepage/Home_page.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:age_calculator/age_calculator.dart';
+//import 'package:age_calculator/age_calculator.dart';
 import 'package:elfaa/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 
 class editChild extends StatefulWidget {
-  const editChild({super.key, required this.childID});
+  const editChild({super.key, required this.childID, required this.childImage, required this.childname, required this.childbirthday, required this.childHeight, required this.childGender});
   final String childID;
+  final String childImage;
+  final String childname;
+  final String childbirthday;
+  final int childHeight;
+  final String childGender;
   @override
   State<editChild> createState() => _editChildState();
 }
