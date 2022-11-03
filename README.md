@@ -3,7 +3,14 @@
    <img src="https://raw.githubusercontent.com/rahaf-alzahrani/2022-GP1-3/main/elfaa/assets/images/logo1.png" alt="Elfaa logo" height="200" width="200">
 </p>
 
-<h2>💡About Elfaa - إلفاء <h2>
+<h2>💡About Elfaa - إلفاء </h2>
+<p><strong> Elfaa - إلفاء</strong> is an <strong>IoT mobile application</strong> It contributes to build a solution that works in smart cities to provide a safe environment in public or crowded places, It is targeting parents by using the application and linking the tracking device to their child carried by the child as an attractively designed accessory. The general public can easily contribute to helping a lost child by providing a means of communication with the child's parents.
+
+This solution provides the possibility for the parents to track the location of their child at any time within the specified range of the place, and to know whether it is within the allowed range or not, through an alert notification that he receives, and if he has lost it and found that his location is far from him, he can report to the security guards through the application to help him find him quickly; This solution also contributes to a part of the security guard's work in a public place and his involvement in the search for lost children in a way that ensures ease and facilitation.</p>
+
+<p> <strong>
+تطبيق إلفاء </strong>يستخدم <strong>تقنيات إنترنت الأشياء</strong> للمساهمة في بناء حل يعمل في المدن الذكية لتوفير بيئة آمنة في الأماكن العامة أو المزدحمة، يستهدف الأباء عن طريق استعمالهم للتطبيق وربط جهاز التتبع بطفلهم الذي يحمله الطفل كاكسسوار مصمم بشكل جذاب. ويمكن للناس العامّة المساهمة في مساعدة طفل ضائع بكل سهولة ويسر عن طريق توفير وسيلة تواصل مع أهل الطفل
+ يوفّر هذا الحل إمكانية للأم/ الأب أن يراقب موقع طفله في أي وقت ضمن النطاق المحدد للمكان، ومعرفة ما إذا كان ضمن النطاق المسموح أم لا عن طريق إشعار تنبيهي يصله، وإن كان قد أضاعه ووجد أن مكانه بعيدٌ عنه فيمكنه إبلاغ حراس الأمن عن طريق التطبيق لمساعدته في إيجاده سريعًا؛ كما أن هذا الحل يساهم في جزء من عمل حارس الأمن في مكان عام وإشراكه في البحث عن الأطفال الضائعين بما يضمن اليسر والتسهيل </p>
 
 <h2>:woman_technologist:Technology Used </h2>
 <ul>
@@ -19,7 +26,7 @@
 <li> mobile emulator or android mobile </li>
 </ul>
   
-<h2>:memo: Launch instructions</h2>
+<h2>:memo: Launch Instructions</h2>
 <ol>
 <li>Open <strong>2022-GP1-3</strong> repository on GitHub</li>
 <li>Click on the <strong> code</strong> button</li>
