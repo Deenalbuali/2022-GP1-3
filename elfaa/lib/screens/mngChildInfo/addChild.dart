@@ -116,37 +116,44 @@ class _addChildState extends State<addChild> {
                         return null;
                       },
                     )),
-                SizedBox(height: ScreenHeight * 0.025),Directionality(
-                      textDirection: TextDirection.rtl,
-                    child: DropdownButtonFormField(
-                      decoration: const InputDecoration(
-                            suffixIcon: Icon(Icons.escalator_warning,
-                                color: Color(0xFFFD8601)),
-                            labelText: "الجنس",
-                          ),
-                      onChanged: (val){
-                        setState(() {
-                          selectedGender = val.toString();
-                        });
-                      },
-                      value: selectedGender,
-                      items: const [
-                        DropdownMenuItem(child: Text("ذكر"), value: 'ذكر',),
-                        DropdownMenuItem(child: Text("أنثى"), value: "أنثى",)
-                      ],
-                      validator: (value) {
-                          if (value!.isEmpty ||
-                              controllerHeight.text.trim() == "") {
-                            return "الحقل مطلوب";
-                          }
-                          return null;
-                        },
+                SizedBox(height: ScreenHeight * 0.025),
+                Directionality(
+                  textDirection: TextDirection.rtl,
+                  child: DropdownButtonFormField(
+                    decoration: const InputDecoration(
+                      suffixIcon: Icon(Icons.escalator_warning,
+                          color: Color(0xFFFD8601)),
+                      labelText: "الجنس",
                     ),
+                    onChanged: (val) {
+                      setState(() {
+                        selectedGender = val.toString();
+                      });
+                    },
+                    value: selectedGender,
+                    items: const [
+                      DropdownMenuItem(
+                        child: Text("ذكر"),
+                        value: 'ذكر',
+                      ),
+                      DropdownMenuItem(
+                        child: Text("أنثى"),
+                        value: "أنثى",
+                      )
+                    ],
+                    validator: (value) {
+                      if (value!.isEmpty ||
+                          controllerHeight.text.trim() == "") {
+                        return "الحقل مطلوب";
+                      }
+                      return null;
+                    },
                   ),
-                  SizedBox(height: ScreenHeight*0.025),
-                  Directionality(
-                      textDirection: TextDirection.rtl,
-                      child: TextFormField(
+                ),
+                SizedBox(height: ScreenHeight * 0.025),
+                Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: TextFormField(
                         textAlign: TextAlign.right,
                         controller: controllerBirthday,
                         decoration: const InputDecoration(
@@ -236,9 +243,10 @@ class _addChildState extends State<addChild> {
                         if (value!.isEmpty ||
                             controllerHeight.text.trim() == "") {
                           return "الحقل مطلوب";
-                        }else if(int.parse(controllerHeight.text.trim()) >200 ||
-                        int.parse(controllerHeight.text.trim()) < 30){
-                           return "يرجى إدخال طول صحيح";
+                        } else if (int.parse(controllerHeight.text.trim()) >
+                                200 ||
+                            int.parse(controllerHeight.text.trim()) < 30) {
+                          return "يرجى إدخال طول صحيح";
                         }
                         return null;
                       },
