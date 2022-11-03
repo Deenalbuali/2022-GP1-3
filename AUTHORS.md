@@ -1,5 +1,4 @@
 # Authors
-<p>Elfaa Team</p>
 
 Avatar|Developers|
 :-:|---|
@@ -8,6 +7,4 @@ Avatar|Developers|
 <img class='float-left rounded-1' src='https://avatars.githubusercontent.com/u/?v=4' width='36' height='36' alt='@itsRenad'>|[@itsRenad](https://github.com/itsRenad)
 <img class='float-left rounded-1' src='https://avatars.githubusercontent.com/u/98930504?v=4' width='36' height='36' alt='@Layanor'>|[@Layanor](https://github.com/Layanor)
 
-<br>
-<p>Supervised by:</p>
-<p>Dr.Hebah Elgibreen</p>
+<p><strong>Supervised by:</strong> Dr.Hebah Elgibreen</p>
