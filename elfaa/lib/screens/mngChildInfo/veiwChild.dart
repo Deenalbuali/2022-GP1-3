@@ -28,7 +28,7 @@ class _viewChildState extends State<viewChild> {
     String childName = widget.childname;
     int childHeight = widget.childHeight;
     String childImage = widget.childImage;
-    String childGender = "";
+    String childGender = widget.childGender;
     String zoneName = 'منطقة الألعاب';
 
     //Responsiviness variables
@@ -146,7 +146,7 @@ class _viewChildState extends State<viewChild> {
                         textDirection: TextDirection.rtl,
                         child: getAgeText(),
                       ),
-                      SizedBox(width: ScreenWidth * 0.1),
+                      SizedBox(width: ScreenWidth * 0.13),
                       Directionality(
                         textDirection: TextDirection.rtl,
                         child: Text(

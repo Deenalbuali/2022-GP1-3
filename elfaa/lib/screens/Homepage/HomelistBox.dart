@@ -102,7 +102,7 @@ class HomelistBox extends StatelessWidget {
                       childname: "${_childlist.childName}",
                       childbirthday: "${_childlist.childbirthday}",
                       childHeight: _childlist.childHeight!,
-                      childGender: "${_childlist.childName}")),
+                      childGender: "${_childlist.childGender}")),
             );
           },
         ));
