@@ -51,6 +51,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> _ScaffoldKey = GlobalKey<ScaffoldState>();
+    final double height = MediaQuery.of(context).size.height;
+    final double width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Container(
         child: Column(children: <Widget>[
