@@ -6,72 +6,69 @@ import 'package:elfaa/screens/mngChildInfo/editChild.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class viewChild extends StatefulWidget {
-  String childname = "";
-  String childAgeYears = "";
-  String childAgeMonths = "";
-  String childHeight = "";
-  String childImage = '';
-  String childGender = "";
-  String zoneName = 'منطقة الألعاب';
-  String childID = "";
-  String childbirthday = "";
-  viewChild(
-      {super.key,
-      required this.childID,
-      required this.childImage,
-      required this.childname,
-      required this.childbirthday,
-      required this.childHeight,
-      required this.childGender});
-
+  const viewChild({super.key, required this.childID, required this.childImage, required this.childname, required this.childbirthday, required this.childHeight, required this.childGender});
+  final String childID;
+  final String childImage;
+  final String childname;
+  final String childbirthday;
+  final String childHeight;
+  final String childGender;
   @override
   State<viewChild> createState() => _viewChildState();
 }
 
 class _viewChildState extends State<viewChild> {
   //Child Info to be retreived from database
+  String childName = "";
+  String childAgeYears = "";
+  String childAgeMonths = "";
+  int childHeight = 0;
+  String childImage = '';
+  String childGender = "";
+  String zoneName = 'منطقة الألعاب';
 
-  // Future<void> getCurrentChild() async {
-  //   final FirebaseAuth _auth = FirebaseAuth.instance;
-  //   final User? user = await _auth.currentUser;
-  //   if (!mounted) return;
-  //   final uid = user!.uid;
-  //   await FirebaseFirestore.instance
-  //       .collection('users')
-  //       .doc(uid)
-  //       .collection('children')
-  //       .doc(widget.childID)
-  //       .get()
-  //       .then((DocumentSnapshot<Map<String, dynamic>> snapshot) {
-  //     if (!mounted) return;
-  //     //Convert timestamp type of data to DateTime
-  //     DateTime childBirthday =
-  //         DateTime.parse(snapshot['birthday'].toDate().toString());
-  //     //Calculate Age As years: 0, Months: 0, Days: 0
-  //     DateDuration calcAge = AgeCalculator.age(childBirthday);
-  //     setState(() {
-  //       if (!mounted) return;
-  //       childName = snapshot['name'];
-  //       //Age numbers extraction as three digits String "000" for later presentation
-  //       //Extract each of years and months
-  //       childAgeYears =
-  //           (calcAge.toString().replaceAll(new RegExp(r'[^0-9]'), ''))[0];
+  Future<void> getCurrentChild() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final User? user = await _auth.currentUser;
+    if (!mounted) return;
+    final uid = user!.uid;
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .collection('children')
+        .doc(widget.childID)
+        .get()
+        .then((DocumentSnapshot<Map<String, dynamic>> snapshot) {
+      if (!mounted) return;
+      //Convert timestamp type of data to DateTime
+      DateTime childBirthday =
+          DateTime.parse(snapshot['birthday'].toDate().toString());
+      //Calculate Age As years: 0, Months: 0, Days: 0
+      DateDuration calcAge = AgeCalculator.age(childBirthday);
+      setState(() {
+        if (!mounted) return;
+        childName = snapshot['name'];
+        //Age numbers extraction as three digits String "000" for later presentation
+        //Extract each of years and months
+        childAgeYears =
+            (calcAge.toString().replaceAll(new RegExp(r'[^0-9]'), ''))[0];
 
-  //       childAgeMonths =
-  //           (calcAge.toString().replaceAll(new RegExp(r'[^0-9]'), ''))[1];
-  //       print(childAgeYears);
-  //       print(childAgeMonths);
-  //       childHeight = snapshot['height'];
-  //       childImage = snapshot['image'];
-  //       childGender = snapshot['gender'];
-  //     });
-  //     if (!mounted) return;
-  //   });
-  //   if (!mounted) return;
-  // }
+        childAgeMonths =
+            (calcAge.toString().replaceAll(new RegExp(r'[^0-9]'), ''))[1];
+        print(childAgeYears);
+        print(childAgeMonths);
+        childHeight = snapshot['height'];
+        childImage = snapshot['image'];
+        childGender = snapshot['gender'];
+      });
+      if (!mounted) return;
+    });
+    if (!mounted) return;
+  }
 
   @override
   void initState() {
+    getCurrentChild();
     super.initState();
   }
 
@@ -153,8 +150,8 @@ class _viewChildState extends State<viewChild> {
                             ]),
                             child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20.0),
-                                child: networkImg(widget.childImage,
-                                    ScreenWidth, ScreenHeight)),
+                                child: networkImg(
+                                    childImage, ScreenWidth, ScreenHeight)),
                           ),
                         ],
                       ),
@@ -164,7 +161,7 @@ class _viewChildState extends State<viewChild> {
                           Directionality(
                             textDirection: TextDirection.rtl,
                             child: Text(
-                              widget.childname + " في",
+                              "$childName في",
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
@@ -172,7 +169,7 @@ class _viewChildState extends State<viewChild> {
                             ),
                           ),
                           Text(
-                            widget.zoneName,
+                            "$zoneName",
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
@@ -194,7 +191,7 @@ class _viewChildState extends State<viewChild> {
                       Directionality(
                         textDirection: TextDirection.rtl,
                         child: Text(
-                          widget.childGender,
+                          "$childGender",
                           textDirection: TextDirection.rtl,
                           style: TextStyle(
                               color: Colors.white,
@@ -206,7 +203,7 @@ class _viewChildState extends State<viewChild> {
                       Directionality(
                         textDirection: TextDirection.rtl,
                         child: Text(
-                          widget.childHeight + " سم",
+                          "$childHeight سم",
                           textDirection: TextDirection.rtl,
                           style: TextStyle(
                               color: Colors.white,
@@ -228,21 +225,21 @@ class _viewChildState extends State<viewChild> {
   getAgeText() {
     String str = '';
     try {
-      if (int.parse(widget.childAgeYears) > 10 ||
-          int.parse(widget.childAgeYears) == 1 ||
-          int.parse(widget.childAgeYears) == 2) {
-        str = widget.childAgeYears + " سنة";
-      } else if (int.parse(widget.childAgeYears) > 2 &&
-          int.parse(widget.childAgeYears) < 11) {
-        str = widget.childAgeYears + "سنوات";
-      } else if (int.parse(widget.childAgeYears) < 1) {
-        if (int.parse(widget.childAgeMonths) == 1 ||
-            int.parse(widget.childAgeMonths) == 11 ||
-            int.parse(widget.childAgeMonths) == 12 ||
-            int.parse(widget.childAgeMonths) == 0) {
-          str = widget.childAgeMonths + " شهر";
+      if (int.parse(childAgeYears) > 10 ||
+          int.parse(childAgeYears) == 1 ||
+          int.parse(childAgeYears) == 2) {
+        str = "$childAgeYears سنة";
+      } else if (int.parse(childAgeYears) > 2 &&
+          int.parse(childAgeYears) < 11) {
+        str = "$childAgeYears سنوات";
+      } else if (int.parse(childAgeYears) < 1) {
+        if (int.parse(childAgeMonths) == 1 ||
+            int.parse(childAgeMonths) == 11 ||
+            int.parse(childAgeMonths) == 12 ||
+            int.parse(childAgeMonths) == 0) {
+          str = "$childAgeMonths شهر";
         } else {
-          str = widget.childAgeMonths + " شهور";
+          str = "$childAgeMonths شهور";
         }
       }
     } catch (error) {
