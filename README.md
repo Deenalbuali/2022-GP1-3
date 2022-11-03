@@ -3,7 +3,7 @@
    <img src="https://raw.githubusercontent.com/rahaf-alzahrani/2022-GP1-3/main/elfaa/assets/images/logo1.png" alt="Elfaa logo" height="200" width="200">
 </p>
 
-<h2>About Elfaa - إلفاء <h2>
+<h2>💡About Elfaa - إلفاء <h2>
 
 <h2>:woman_technologist:Technology Used </h2>
 <ul>
@@ -11,12 +11,23 @@
   <li> Cloud firebase </li>
   </ul>
   
-<h2>Requirements To Launch The Application</h2>
+<h2>✔️Requirements To Launch The Application</h2>
 <ul>
 <li>Android Studio with SDK</li>
 <li> Flutter framework </li>
 <li>Dart programming language </li>
-<li> Phone emulator or an android phone </li>
+<li> mobile emulator or android mobile </li>
 </ul>
   
-<h2>Launch instructions</<h2>
+<h2>:memo: Launch instructions</h2>
+<ul>
+<li>Open <strong>2022-GP1-3</strong> repository on GitHub</li>
+<li>Click on the <strong> code</strong> button</li>
+<li>Download <strong>.zip</strong> file</li>
+<li> Unzip the file </li>
+<li> Open <strong> Android Studio</strong> </li>
+<li>Click on <strong> File > Open > Location</strong> of the saved unzipped file then click on Ok</li>
+<li>Turn on an Android Emulator or connect an android mobile to the system </li>
+<li> Run the <strong>Elfaa </strong> application </li>
+</ul>
+
