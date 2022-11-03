@@ -71,27 +71,8 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
 
-          _childrenList.length != 0
+          _childrenList.length == 0
               ? Padding(
-                  padding:
-                      const EdgeInsets.only(left: 25.0, right: 25, bottom: 10),
-                  child: Container(
-                    height: height * 0.2,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.grey,
-                              offset: Offset(1.0, 1.0),
-                              blurRadius: 4.0)
-                        ],
-                        borderRadius: BorderRadius.circular(30),
-                        image: DecorationImage(
-                            image: AssetImage("assets/images/MainMap.jpg"),
-                            fit: BoxFit.cover)),
-                  ),
-                )
-              : Padding(
                   padding:
                       const EdgeInsets.only(left: 25.0, right: 25, bottom: 10),
                   child: Container(
@@ -108,8 +89,46 @@ class _HomePageState extends State<HomePage> {
                             image: AssetImage("assets/images/empty.jpeg"),
                             fit: BoxFit.cover)),
                   ),
-                ),
-
+                )
+              : _childrenList.length == 1
+                  ? Padding(
+                      padding: const EdgeInsets.only(
+                          left: 25.0, right: 25, bottom: 10),
+                      child: Container(
+                        height: height * 0.2,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.grey,
+                                  offset: Offset(1.0, 1.0),
+                                  blurRadius: 4.0)
+                            ],
+                            borderRadius: BorderRadius.circular(30),
+                            image: DecorationImage(
+                                image: AssetImage("assets/images/oneChild.jpg"),
+                                fit: BoxFit.cover)),
+                      ),
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.only(
+                          left: 25.0, right: 25, bottom: 10),
+                      child: Container(
+                        height: height * 0.2,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.grey,
+                                  offset: Offset(1.0, 1.0),
+                                  blurRadius: 4.0)
+                            ],
+                            borderRadius: BorderRadius.circular(30),
+                            image: DecorationImage(
+                                image: AssetImage("assets/images/MainMap.jpg"),
+                                fit: BoxFit.cover)),
+                      ),
+                    ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
