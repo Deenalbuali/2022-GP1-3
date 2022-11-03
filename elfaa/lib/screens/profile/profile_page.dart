@@ -150,6 +150,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
   }
 
   Widget build(BuildContext context) {
+    final double ScreenHeight = MediaQuery.of(context).size.height;
+    final double ScreenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor: Color(0xFFfafafa),
       appBar: AppBar(
@@ -178,7 +181,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                SizedBox(height: 30),
+                SizedBox(height: ScreenHeight * 0.030),
                 _buildName(),
                 _buildEmail(),
                 _buildPhoneNumber(),
@@ -273,7 +276,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     },
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: ScreenHeight * 0.025),
                 Directionality(
                   textDirection: TextDirection.rtl,
                   child: ElevatedButton.icon(
@@ -324,7 +327,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     },
                   ),
                 ),
-                SizedBox(height: 110),
+                SizedBox(height: ScreenHeight * 0.150),
                 Directionality(
                   textDirection: TextDirection.rtl,
                   child: ElevatedButton.icon(
@@ -335,8 +338,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     style: ElevatedButton.styleFrom(
                       textStyle: TextStyle(fontSize: 22),
                       shadowColor: Color.fromARGB(255, 0, 0, 0),
-                      elevation: 1,
-                      backgroundColor: Colors.white,
+                      elevation: 0,
+                      backgroundColor: Color.fromARGB(255, 255, 238, 238),
                       shape: const StadiumBorder(),
                       maximumSize: const Size(180, 56),
                       minimumSize: const Size(180, 56),
