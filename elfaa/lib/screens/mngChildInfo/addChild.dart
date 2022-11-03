@@ -240,7 +240,7 @@ class _addChildState extends State<addChild> {
                         Fluttertoast.showToast(
                             msg: "يرجى اختيار صورة",
                             toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.CENTER,
+                            gravity: ToastGravity.BOTTOM,
                             timeInSecForIosWeb: 7,
                             backgroundColor: Color.fromARGB(255, 195, 74, 74),
                             fontSize: 16.0,
