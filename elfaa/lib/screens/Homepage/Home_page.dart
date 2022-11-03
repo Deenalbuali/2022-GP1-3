@@ -1,5 +1,5 @@
 import 'package:elfaa/screens/Homepage/HomelistBox.dart';
-import 'package:elfaa/screens/Homepage/qr.dart';
+//import 'package:elfaa/screens/Homepage/qr.dart';
 import 'package:elfaa/screens/mngChildInfo/addChild.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -52,14 +52,13 @@ class _HomePageState extends State<HomePage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Container(
         child: Column(children: <Widget>[
           _buildHeader(),
           Padding(
             padding: const EdgeInsets.only(left: 230.0),
             child: Text(
-              " " "تتبع أطفالك ",
+              "تتبع أطفالك ",
               style: TextStyle(
                   color: kPrimaryColor,
                   fontSize: 20.0,
