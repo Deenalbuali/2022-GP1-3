@@ -35,7 +35,19 @@ class HomelistBox extends StatelessWidget {
                 Container(
                     padding: EdgeInsets.only(left: 10),
                     child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => viewChild(
+                                  childID: "${_childlist.childID}",
+                                  childImage: "${_childlist.childImagePath}",
+                                  childname: "${_childlist.childName}",
+                                  childbirthday: "${_childlist.childName}",
+                                  childHeight: "${_childlist.childName}",
+                                  childGender: "${_childlist.childName}")),
+                        );
+                      },
                       icon: Icon(Icons.arrow_back_ios),
                       color: Colors.black,
                     )),
@@ -85,13 +97,12 @@ class HomelistBox extends StatelessWidget {
               context,
               MaterialPageRoute(
                   builder: (context) => viewChild(
-                        childID: "${_childlist.childID}",
-                        childImage: "${_childlist.childImagePath}",
-                        childname: "${_childlist.childName}",
-                        childbirthday: "${_childlist.childName}",
-                        childHeight:  "${_childlist.childName}" ,
-                        childGender:  "${_childlist.childName}"
-                      )),
+                      childID: "${_childlist.childID}",
+                      childImage: "${_childlist.childImagePath}",
+                      childname: "${_childlist.childName}",
+                      childbirthday: "${_childlist.childName}",
+                      childHeight: "${_childlist.childName}",
+                      childGender: "${_childlist.childName}")),
             );
           },
         ));
