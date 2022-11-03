@@ -20,7 +20,7 @@
 </ul>
   
 <h2>:memo: Launch instructions</h2>
-<ul>
+<ol>
 <li>Open <strong>2022-GP1-3</strong> repository on GitHub</li>
 <li>Click on the <strong> code</strong> button</li>
 <li>Download <strong>.zip</strong> file</li>
@@ -29,5 +29,5 @@
 <li>Click on <strong> File > Open > Location</strong> of the saved unzipped file then click on Ok</li>
 <li>Turn on an Android Emulator or connect an android mobile to the system </li>
 <li> Run the <strong>Elfaa </strong> application </li>
-</ul>
+</ol>
 
