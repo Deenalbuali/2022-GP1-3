@@ -23,6 +23,7 @@ class _SignInScreenState extends State<SignInScreen> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    final double ScreenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Color(0xFFfafafa),
       appBar: AppBar(
@@ -55,7 +56,7 @@ class _SignInScreenState extends State<SignInScreen> {
               child: Column(
                 children: <Widget>[
                   logoWidget("assets/images/logo1.png"),
-                  const SizedBox(height: 50),
+                  SizedBox(height: ScreenHeight * 0.070),
                   Directionality(
                       textDirection: TextDirection.rtl,
                       child: TextFormField(
@@ -80,7 +81,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           }
                         },
                       )),
-                  const SizedBox(height: 20),
+                  SizedBox(height: ScreenHeight * 0.025),
                   Directionality(
                       textDirection: TextDirection.rtl,
                       child: TextFormField(
@@ -121,7 +122,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           }
                         },
                       )),
-                  const SizedBox(height: 20),
+                  SizedBox(height: ScreenHeight * 0.025),
                   Align(
                     alignment: Alignment(-0.9, 0),
                     child: Container(
@@ -138,7 +139,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 40),
+                  SizedBox(height: ScreenHeight * 0.025),
                   ElevatedButton(
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
@@ -168,7 +169,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     child: Text("تسجيل الدخول",
                         style: TextStyle(color: Colors.white)),
                   ),
-                  const SizedBox(height: 10),
+                  SizedBox(height: ScreenHeight * 0.025),
                   signUpOption()
                 ],
               ),

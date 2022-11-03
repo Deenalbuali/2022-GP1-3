@@ -205,7 +205,7 @@ class _reportInfoState extends State<reportInfo> {
               height: 10,
             ),
             Padding(
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.only(right: 25),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [

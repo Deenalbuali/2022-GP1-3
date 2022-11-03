@@ -16,6 +16,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
   @override
   Widget build(BuildContext context) {
+    final double ScreenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
         backgroundColor: Color(0xFFfafafa),
         appBar: AppBar(
@@ -62,7 +63,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                 style: TextStyle(
                                     color: Color.fromARGB(255, 129, 129, 129),
                                     fontSize: 17)),
-                            const SizedBox(height: 50),
+                            SizedBox(height: ScreenHeight * 0.070),
                             Directionality(
                                 textDirection: TextDirection.rtl,
                                 child: TextFormField(
@@ -85,7 +86,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                     }
                                   },
                                 )),
-                            const SizedBox(height: 40),
+                            SizedBox(height: ScreenHeight * 0.040),
                             ElevatedButton(
                               onPressed: () async {
                                 FocusManager.instance.primaryFocus?.unfocus();
