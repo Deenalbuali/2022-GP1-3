@@ -194,33 +194,6 @@ class _addChildState extends State<addChild> {
                         })),
                 SizedBox(height: ScreenHeight * 0.025),
                 Directionality(
-                  textDirection: TextDirection.rtl,
-                  child: DropdownButtonFormField(
-                    decoration: const InputDecoration(
-                      suffixIcon: Icon(Icons.escalator_warning,
-                          color: Color(0xFFFD8601)),
-                      labelText: "الجنس",
-                    ),
-                    onChanged: (val) {
-                      setState(() {
-                        selectedGender = val.toString();
-                      });
-                    },
-                    value: selectedGender,
-                    items: const [
-                      DropdownMenuItem(
-                        child: Text("ذكر"),
-                        value: 'ذكر',
-                      ),
-                      DropdownMenuItem(
-                        child: Text("أنثى"),
-                        value: "أنثى",
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(height: ScreenHeight * 0.025),
-                Directionality(
                     textDirection: TextDirection.rtl,
                     child: TextFormField(
                       textAlign: TextAlign.right,
