@@ -1,9 +1,7 @@
 import 'package:age_calculator/age_calculator.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:elfaa/constants.dart';
 import 'package:elfaa/screens/mngChildInfo/editChild.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class viewChild extends StatefulWidget {
   const viewChild({super.key, required this.childID, required this.childImage, required this.childname, required this.childbirthday, required this.childHeight, required this.childGender});
@@ -11,71 +9,32 @@ class viewChild extends StatefulWidget {
   final String childImage;
   final String childname;
   final String childbirthday;
-  final String childHeight;
+  final int childHeight;
   final String childGender;
   @override
   State<viewChild> createState() => _viewChildState();
 }
 
 class _viewChildState extends State<viewChild> {
-  //Child Info to be retreived from database
-  String childName = "";
-  String childAgeYears = "";
-  String childAgeMonths = "";
-  int childHeight = 0;
-  String childImage = '';
-  String childGender = "";
-  String zoneName = 'منطقة الألعاب';
-
-  Future<void> getCurrentChild() async {
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    final User? user = await _auth.currentUser;
-    if (!mounted) return;
-    final uid = user!.uid;
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(uid)
-        .collection('children')
-        .doc(widget.childID)
-        .get()
-        .then((DocumentSnapshot<Map<String, dynamic>> snapshot) {
-      if (!mounted) return;
-      //Convert timestamp type of data to DateTime
-      DateTime childBirthday =
-          DateTime.parse(snapshot['birthday'].toDate().toString());
-      //Calculate Age As years: 0, Months: 0, Days: 0
-      DateDuration calcAge = AgeCalculator.age(childBirthday);
-      setState(() {
-        if (!mounted) return;
-        childName = snapshot['name'];
-        //Age numbers extraction as three digits String "000" for later presentation
-        //Extract each of years and months
-        childAgeYears =
-            (calcAge.toString().replaceAll(new RegExp(r'[^0-9]'), ''))[0];
-
-        childAgeMonths =
-            (calcAge.toString().replaceAll(new RegExp(r'[^0-9]'), ''))[1];
-        print(childAgeYears);
-        print(childAgeMonths);
-        childHeight = snapshot['height'];
-        childImage = snapshot['image'];
-        childGender = snapshot['gender'];
-      });
-      if (!mounted) return;
-    });
-    if (!mounted) return;
-  }
-
   @override
   void initState() {
-    getCurrentChild();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+
+    //Child Info
+    String childName = widget.childname;
+    int childHeight = widget.childHeight;
+    String childImage = widget.childImage;
+    String childGender = "";
+    String zoneName = 'منطقة الألعاب';
+
+    //Responsiviness variables
     final double ScreenHeight = MediaQuery.of(context).size.height;
     final double ScreenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -223,6 +182,13 @@ class _viewChildState extends State<viewChild> {
   }
 
   getAgeText() {
+    //Convert timestamp type of data to DateTime
+    DateTime childBirthday = DateTime.parse(widget.childbirthday);
+    //Calculate Age As years: 0, Months: 0, Days: 0
+    DateDuration calcAge = AgeCalculator.age(childBirthday);
+
+    String childAgeYears =(calcAge.toString().replaceAll(new RegExp(r'[^0-9]'), ''))[0];
+    String childAgeMonths = (calcAge.toString().replaceAll(new RegExp(r'[^0-9]'), ''))[1];
     String str = '';
     try {
       if (int.parse(childAgeYears) > 10 ||

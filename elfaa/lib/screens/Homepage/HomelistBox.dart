@@ -44,7 +44,7 @@ class HomelistBox extends StatelessWidget {
                                   childImage: "${_childlist.childImagePath}",
                                   childname: "${_childlist.childName}",
                                   childbirthday: "${_childlist.childName}",
-                                  childHeight: "${_childlist.childName}",
+                                  childHeight: _childlist.childHeight!,
                                   childGender: "${_childlist.childName}")),
                         );
                       },
@@ -101,7 +101,7 @@ class HomelistBox extends StatelessWidget {
                       childImage: "${_childlist.childImagePath}",
                       childname: "${_childlist.childName}",
                       childbirthday: "${_childlist.childName}",
-                      childHeight: "${_childlist.childName}",
+                      childHeight: _childlist.childHeight!,
                       childGender: "${_childlist.childName}")),
             );
           },
