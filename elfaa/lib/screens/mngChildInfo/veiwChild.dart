@@ -4,7 +4,14 @@ import 'package:elfaa/constants.dart';
 import 'package:elfaa/screens/mngChildInfo/editChild.dart';
 
 class viewChild extends StatefulWidget {
-  const viewChild({super.key, required this.childID, required this.childImage, required this.childname, required this.childbirthday, required this.childHeight, required this.childGender});
+  const viewChild(
+      {super.key,
+      required this.childID,
+      required this.childImage,
+      required this.childname,
+      required this.childbirthday,
+      required this.childHeight,
+      required this.childGender});
   final String childID;
   final String childImage;
   final String childname;
@@ -23,7 +30,6 @@ class _viewChildState extends State<viewChild> {
 
   @override
   Widget build(BuildContext context) {
-
     //Child Info
     String childName = widget.childname;
     int childHeight = widget.childHeight;
@@ -61,13 +67,12 @@ class _viewChildState extends State<viewChild> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => editChild(
-                      childID: widget.childID,
-                      childImage: childImage,
-                      childname: childName,
-                      childbirthday: widget.childbirthday,
-                      childHeight: childHeight,
-                      childGender: childGender
-                    )),
+                        childID: widget.childID,
+                        childImage: childImage,
+                        childname: childName,
+                        childbirthday: widget.childbirthday,
+                        childHeight: childHeight,
+                        childGender: childGender)),
               );
             })),
         centerTitle: true,
@@ -87,7 +92,7 @@ class _viewChildState extends State<viewChild> {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25),
                 image: DecorationImage(
-                    image: AssetImage("assets/images/MainMap.jpg"),
+                    image: AssetImage("assets/images/oneChild.jpg"),
                     fit: BoxFit.cover)),
           ),
           Container(
@@ -194,8 +199,10 @@ class _viewChildState extends State<viewChild> {
     //Calculate Age As years: 0, Months: 0, Days: 0
     DateDuration calcAge = AgeCalculator.age(childBirthday);
 
-    String childAgeYears =(calcAge.toString().replaceAll(new RegExp(r'[^0-9]'), ''))[0];
-    String childAgeMonths = (calcAge.toString().replaceAll(new RegExp(r'[^0-9]'), ''))[1];
+    String childAgeYears =
+        (calcAge.toString().replaceAll(new RegExp(r'[^0-9]'), ''))[0];
+    String childAgeMonths =
+        (calcAge.toString().replaceAll(new RegExp(r'[^0-9]'), ''))[1];
     String str = '';
     try {
       if (int.parse(childAgeYears) > 10 ||

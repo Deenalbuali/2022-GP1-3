@@ -101,7 +101,7 @@ class _reportInfoState extends State<reportInfo> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
                       image: DecorationImage(
-                          image: AssetImage("assets/images/MainMap.jpg"),
+                          image: AssetImage("assets/images/oneChild.jpg"),
                           fit: BoxFit.cover)),
                 ),
                 Positioned(
