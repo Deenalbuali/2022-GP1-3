@@ -169,6 +169,8 @@ class _SignupPageState extends State<SignupPage> {
                             hintText: "أدخل كلمة المرور",
                             helperText: " كلمة المرور يجب أن تحتوي على الأقل:"
                                 "\n"
+                                "* 8 خانات"
+                                "\n"
                                 "* حرف كبير باللغة الإنجليزية"
                                 "\n"
                                 "* حرف صغير باللغة الإنجليزية"

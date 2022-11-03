@@ -59,9 +59,9 @@ class _HomePageState extends State<HomePage> {
           Padding(
             padding: const EdgeInsets.only(left: 230.0),
             child: Text(
-              ": " "تتبع أطفالك ",
+              " " "تتبع أطفالك ",
               style: TextStyle(
-                  color: kOrangeColor,
+                  color: kPrimaryColor,
                   fontSize: 20.0,
                   fontWeight: FontWeight.w700),
             ),
@@ -149,10 +149,10 @@ class _HomePageState extends State<HomePage> {
                       ]),
                   child: IconButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => QRPage()),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(builder: (context) => QRPage()),
+                      // );
                     },
                     icon: Icon(Icons.qr_code),
                     color: Colors.white,
