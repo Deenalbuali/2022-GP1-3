@@ -86,6 +86,11 @@ class HomelistBox extends StatelessWidget {
               MaterialPageRoute(
                   builder: (context) => viewChild(
                         childID: "${_childlist.childID}",
+                        childImage: "${_childlist.childImagePath}",
+                        childname: "${_childlist.childName}",
+                        childbirthday: "${_childlist.childName}",
+                        childHeight:  "${_childlist.childName}" ,
+                        childGender:  "${_childlist.childName}"
                       )),
             );
           },
