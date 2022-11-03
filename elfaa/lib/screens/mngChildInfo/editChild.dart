@@ -31,7 +31,6 @@ class editChild extends StatefulWidget {
 class _editChildState extends State<editChild> {
 @override
   void initState() {
-    print(" parent ID : $uid HEEEEEEEEEEEEEEEEEEEEREEEEEEEEEEEEE");
     childBirthday = DateTime.parse((widget.childbirthday).toString());
     year = childBirthday.year;
     month = childBirthday.month;
