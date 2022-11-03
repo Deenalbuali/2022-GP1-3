@@ -5,13 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:elfaa/alert_dialog.dart';
 import 'package:elfaa/screens/Homepage/Home_page.dart';
 import 'package:image_picker/image_picker.dart';
-//import 'package:age_calculator/age_calculator.dart';
 import 'package:elfaa/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 
 class editChild extends StatefulWidget {
-  const editChild({super.key, required this.childID, required this.childImage, required this.childname, required this.childbirthday, required this.childHeight, required this.childGender});
+  const editChild(
+      {super.key,
+      required this.childID,
+      required this.childImage,
+      required this.childname,
+      required this.childbirthday,
+      required this.childHeight,
+      required this.childGender});
   final String childID;
   final String childImage;
   final String childname;
@@ -23,6 +29,7 @@ class editChild extends StatefulWidget {
 }
 
 class _editChildState extends State<editChild> {
+
 //profile image variables
   XFile? _img;
   final ImagePicker _picker = ImagePicker();
@@ -38,50 +45,41 @@ class _editChildState extends State<editChild> {
   //Child Info to be retreived from database
   TextEditingController childName = TextEditingController();
   TextEditingController birthday = TextEditingController();
-  late DateTime childBirthday;
-  TextEditingController childHeight = TextEditingController();
-  String childImage = '';
   String selectedGender = 'أنثى';
-  String uid = '';
+  TextEditingController childHeight = TextEditingController();
+  
+  //alert dialuge 
   bool tappedYes = false;
 
-  Future<void> getEDITABLEChild() async {
+  //get parent  ID
+  String uid = '';
+   Future<void> getCurrentUser() async {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     final User? user = await _auth.currentUser;
-    setState(() {
-      uid = user!.uid;
-    });
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(uid)
-        .collection('children')
-        .doc(widget.childID)
-        .get()
-        .then((DocumentSnapshot<Map<String, dynamic>> snapshot) {
-      //Convert timestamp type of data to DateTime
-      childBirthday = DateTime.parse(snapshot['birthday'].toDate().toString());
-      int year = childBirthday.year;
-      int month = childBirthday.month;
-      int day = childBirthday.day;
-      childName.text = snapshot['name'];
-      //Age numbers extraction as three digits String "000" for later presentation
-      //Extract each of years and months
-      childHeight.text = (snapshot['height']).toString();
-      childImage = snapshot['image'];
-      birthday.text = '$year-$month-$day';
-    });
+    if (!mounted) return;
+    uid = user!.uid;
   }
 
   @override
   void initState() {
-    getEDITABLEChild();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    DateTime childBirthday = DateTime.parse((widget.childbirthday).toString());
+    int year = childBirthday.year;
+    int month = childBirthday.month;
+    int day = childBirthday.day;
+    birthday.text = '$year-$month-$day';
+
+    childName.text = widget.childname;
+    childHeight.text = (widget.childHeight).toString();
+    String childImage = widget.childImage;
+
     final double ScreenHeight = MediaQuery.of(context).size.height;
     final double ScreenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         actions: <Widget>[
@@ -353,7 +351,7 @@ class _editChildState extends State<editChild> {
           CircleAvatar(
               radius: 80,
               backgroundImage: _img == null
-                  ? NetworkImage(childImage)
+                  ? NetworkImage(widget.childImage)
                   : FileImage(File(_img!.path)) as ImageProvider),
           Positioned(
               bottom: 15,
