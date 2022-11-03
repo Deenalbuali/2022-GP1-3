@@ -29,7 +29,6 @@ class editChild extends StatefulWidget {
 }
 
 class _editChildState extends State<editChild> {
-
 //profile image variables
   XFile? _img;
   final ImagePicker _picker = ImagePicker();
@@ -47,26 +46,30 @@ class _editChildState extends State<editChild> {
   TextEditingController birthday = TextEditingController();
   String selectedGender = 'أنثى';
   TextEditingController childHeight = TextEditingController();
-  
-  //alert dialuge 
+
+  //alert dialuge
   bool tappedYes = false;
 
   //get parent  ID
   String uid = '';
-   Future<void> getCurrentUser() async {
+  Future<void> getParent() async {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     final User? user = await _auth.currentUser;
-    if (!mounted) return;
-    uid = user!.uid;
+
+    setState(() {
+      uid = user!.uid;
+    });
   }
 
   @override
   void initState() {
     super.initState();
+    getParent();
   }
 
   @override
   Widget build(BuildContext context) {
+    print(" parent ID : $uid HEEEEEEEEEEEEEEEEEEEEREEEEEEEEEEEEE");
     DateTime childBirthday = DateTime.parse((widget.childbirthday).toString());
     int year = childBirthday.year;
     int month = childBirthday.month;
