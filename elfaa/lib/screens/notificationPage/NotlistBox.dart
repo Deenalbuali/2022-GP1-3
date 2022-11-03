@@ -29,7 +29,6 @@ class NotlistBox extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 15, left: 15, right: 15, top: 7),
       child: Container(
         height: height * 0.1,
-        width: 10,
         decoration: BoxDecoration(boxShadow: [
           BoxShadow(
             color: Colors.grey,
@@ -81,10 +80,7 @@ class NotlistBox extends StatelessWidget {
                   children: [
                     Container(
                       padding: EdgeInsets.only(
-                          right: width * 0.05,
-                          left: 0.1,
-                          top: width * 0.05,
-                          bottom: 0.1),
+                          right: 1, left: 0.1, top: width * 0.05, bottom: 0.1),
                       child: Text(
                         "${_childlist2.childName}",
                         style: TextStyle(
@@ -96,7 +92,7 @@ class NotlistBox extends StatelessWidget {
                   ],
                 ),
                 Container(
-                  padding: EdgeInsets.all(1),
+                  padding: EdgeInsets.all(5),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10.0),
                     child: Image.network(
