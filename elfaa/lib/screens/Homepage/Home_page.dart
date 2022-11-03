@@ -257,26 +257,31 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(top: 40, left: 250),
-            child: Column(
-              //crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  "! مرحبًا" " ",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.w700),
+            // margin: const EdgeInsets.only(top: 40, left: 250),
+            child: Stack(
+              alignment: Alignment.topCenter,
+              children: [
+                Column(
+                  //crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      "! مرحبًا" " ",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w700),
+                    ),
+                    SizedBox(height: 1),
+                    Text(
+                      username,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 25.0,
+                          fontWeight: FontWeight.w700),
+                    ),
+                    SizedBox(height: 10.0),
+                  ],
                 ),
-                SizedBox(height: 1),
-                Text(
-                  username,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25.0,
-                      fontWeight: FontWeight.w700),
-                ),
-                SizedBox(height: 10.0),
               ],
             ),
           ),
