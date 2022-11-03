@@ -56,24 +56,27 @@ class _HomePageState extends State<HomePage> {
     final double width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Container(
-        child: Column(children: <Widget>[
+        child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: <
+            Widget>[
           _buildHeader(),
+
           Padding(
-            padding: const EdgeInsets.only(left: 230.0),
+            padding: const EdgeInsets.only(right: 25.0, top: 5),
             child: Text(
               "تتبع أطفالك ",
               style: TextStyle(
-                  color: kPrimaryColor,
-                  fontSize: 20.0,
+                  color: kOrangeColor,
+                  fontSize: 18.0,
                   fontWeight: FontWeight.w700),
             ),
           ),
+
           _childrenList.length != 0
               ? Padding(
                   padding:
-                      const EdgeInsets.only(left: 25.0, right: 25, bottom: 25),
+                      const EdgeInsets.only(left: 25.0, right: 25, bottom: 10),
                   child: Container(
-                    height: 200,
+                    height: height * 0.2,
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                         boxShadow: [
@@ -90,10 +93,9 @@ class _HomePageState extends State<HomePage> {
                 )
               : Padding(
                   padding:
-                      const EdgeInsets.only(left: 25.0, right: 25, bottom: 25),
+                      const EdgeInsets.only(left: 25.0, right: 25, bottom: 10),
                   child: Container(
-                    height: 200,
-                    //width: MediaQuery.of(context).size.width,
+                    height: height * 0.2,
                     decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
@@ -109,13 +111,12 @@ class _HomePageState extends State<HomePage> {
                 ),
 
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(
-                width: 5,
-              ),
-              Align(
-                alignment: Alignment(-0.1, -1),
+              Padding(
+                padding: const EdgeInsets.only(left: 25.0),
                 child: Container(
+                    height: height * 0.06,
                     decoration: BoxDecoration(
                         color: kOrangeColor,
                         shape: BoxShape.circle,
@@ -136,29 +137,30 @@ class _HomePageState extends State<HomePage> {
                       color: Colors.white,
                     )),
               ),
-              SizedBox(
-                width: 250,
+              Padding(
+                padding: const EdgeInsets.only(right: 25.0),
+                child: Container(
+                    height: height * 0.06,
+                    decoration: BoxDecoration(
+                        color: Colors.grey,
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.grey,
+                              offset: Offset(1.0, 1.0),
+                              blurRadius: 4.0)
+                        ]),
+                    child: IconButton(
+                      onPressed: () {
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(builder: (context) => QRPage()),
+                        // );
+                      },
+                      icon: Icon(Icons.qr_code, size: 20),
+                      color: Colors.white,
+                    )),
               ),
-              Container(
-                  decoration: BoxDecoration(
-                      color: Colors.grey,
-                      shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.grey,
-                            offset: Offset(1.0, 1.0),
-                            blurRadius: 4.0)
-                      ]),
-                  child: IconButton(
-                    onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(builder: (context) => QRPage()),
-                      // );
-                    },
-                    icon: Icon(Icons.qr_code),
-                    color: Colors.white,
-                  )),
             ],
           ),
           // SizedBox(
@@ -219,14 +221,17 @@ class _HomePageState extends State<HomePage> {
   }
 
   Container _buildHeader2() {
+    final GlobalKey<ScaffoldState> _ScaffoldKey = GlobalKey<ScaffoldState>();
+    final double height = MediaQuery.of(context).size.height;
+    final double width = MediaQuery.of(context).size.width;
     return Container(
-      height: 180,
+      height: height * 0.4,
       width: double.infinity,
       child: Stack(
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.only(right: 25.0, left: 25),
-            child: list(),
+            padding: const EdgeInsets.only(left: 10, right: 10, top: 0.1),
+            child: SizedBox(child: list()),
           )
         ],
       ),
@@ -234,17 +239,20 @@ class _HomePageState extends State<HomePage> {
   }
 
   Container _buildHeader() {
+    final GlobalKey<ScaffoldState> _ScaffoldKey = GlobalKey<ScaffoldState>();
+    final double height = MediaQuery.of(context).size.height;
+    final double width = MediaQuery.of(context).size.width;
     return Container(
-      height: 180,
+      height: height * 0.22,
       width: double.infinity,
       child: Stack(
         children: <Widget>[
           Positioned(
             bottom: 0,
-            right: -80,
-            top: -190,
+            top: height * -0.20,
+            right: width * -0.2,
             child: Container(
-              width: 310,
+              width: width * 0.8,
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   gradient: LinearGradient(colors: [color1, color2]),
@@ -256,35 +264,30 @@ class _HomePageState extends State<HomePage> {
                   ]),
             ),
           ),
-          Container(
-            // margin: const EdgeInsets.only(top: 40, left: 250),
-            child: Stack(
-              alignment: Alignment.topCenter,
-              children: [
-                Column(
-                  //crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      "! مرحبًا" " ",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.w700),
-                    ),
-                    SizedBox(height: 1),
-                    Text(
-                      username,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 25.0,
-                          fontWeight: FontWeight.w700),
-                    ),
-                    SizedBox(height: 10.0),
-                  ],
-                ),
-              ],
+          Positioned(
+            top: height * 0.06,
+            right: width * 0.1,
+            bottom: 0,
+            child: Text(
+              "! مرحبًا" " ",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.w700),
             ),
           ),
+          Positioned(
+            top: height * 0.1,
+            right: width * 0.08,
+            child: Text(
+              username,
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.w700),
+            ),
+          ),
+          //margin: const EdgeInsets.only(top: 40, left: 250),
         ],
       ),
     );

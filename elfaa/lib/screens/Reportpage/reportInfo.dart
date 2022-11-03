@@ -59,226 +59,239 @@ class _reportInfoState extends State<reportInfo> {
   int myvalue = 1558432747;
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        backgroundColor: const Color(0xFFf5f5f5),
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          toolbarHeight: 90,
-          leading: BackButton(color: Colors.white),
-          title: Text(
-            "تفاصيل البلاغ",
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
-          ),
-          centerTitle: true,
-          flexibleSpace: Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(28),
-                      bottomRight: Radius.circular(28)),
-                  gradient: LinearGradient(
-                    colors: [
-                      Color(0xFF429EB2),
-                      Color.fromARGB(255, 131, 165, 173)
-                    ],
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter,
-                  ))),
+  Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> _ScaffoldKey = GlobalKey<ScaffoldState>();
+    final double height = MediaQuery.of(context).size.height;
+    final double width = MediaQuery.of(context).size.width;
+    return Scaffold(
+      backgroundColor: const Color(0xFFf5f5f5),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        toolbarHeight: 90,
+        leading: BackButton(color: Colors.white),
+        title: Text(
+          "تفاصيل البلاغ",
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
         ),
-        body: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.all(10),
-            child: Column(
+        centerTitle: true,
+        flexibleSpace: Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(28),
+                    bottomRight: Radius.circular(28)),
+                gradient: LinearGradient(
+                  colors: [
+                    Color(0xFF429EB2),
+                    Color.fromARGB(255, 131, 165, 173)
+                  ],
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                ))),
+      ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Stack(
               children: [
-                Stack(
-                  children: [
-                    Container(
-                      height: 400,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25),
-                          image: DecorationImage(
-                              image: AssetImage("assets/images/MainMap.jpg"),
-                              fit: BoxFit.cover)),
-                    ),
-                    Positioned(
-                      top: 320,
-                      child: BlurryContainer(
-                        padding: EdgeInsets.all(20),
-                        height: 140,
-                        width: 377,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(30),
-                            topRight: Radius.circular(30),
-                            bottomLeft: Radius.circular(25)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Container(
+                  height: height * 0.54,
+                  width: width,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                      image: DecorationImage(
+                          image: AssetImage("assets/images/MainMap.jpg"),
+                          fit: BoxFit.cover)),
+                ),
+                Positioned(
+                  top: height * 0.402,
+                  child: BlurryContainer(
+                    padding: EdgeInsets.all(20),
+                    height: height * 2,
+                    width: width,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30),
+                        bottomLeft: Radius.circular(25)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
                           children: [
-                            Column(
+                            SizedBox(
+                              height: height * 0.02,
+                            ),
+                            Container(
+                              height: height * 0.05,
+                              width: height * 0.17,
+                              child: Center(
+                                  child: Text(
+                                "..." "جاري البحث",
+                                style: TextStyle(
+                                    color: Color(0xff919296),
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold),
+                              )),
+                              decoration: BoxDecoration(
+                                  color: Colors.yellow,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey,
+                                      blurRadius: 10,
+                                      spreadRadius: 1,
+                                    )
+                                  ],
+                                  borderRadius: BorderRadius.circular(8)),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 SizedBox(
-                                  height: 4,
+                                  height: height * 0.02,
                                 ),
                                 Container(
-                                  height: 37,
-                                  width: 120,
-                                  child: Center(
-                                      child: Text(
-                                    "..." "جاري البحث",
+                                  padding: EdgeInsets.only(
+                                      right: width * 0.05,
+                                      left: 0.1,
+                                      top: width * 0.06,
+                                      bottom: 0.01),
+                                  child: Text(
+                                    widget.childName + "   ",
                                     style: TextStyle(
-                                        color: Color(0xff919296),
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold),
-                                  )),
-                                  decoration: BoxDecoration(
-                                      color: Colors.yellow,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey,
-                                          blurRadius: 10,
-                                          spreadRadius: 1,
-                                        )
-                                      ],
-                                      borderRadius: BorderRadius.circular(8)),
-                                ),
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 0),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        widget.childName + "   ",
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      SizedBox(
-                                        height: 1,
-                                      ),
-                                      Container(
-                                          height: 60,
-                                          width: 42,
-                                          child: Column(
-                                            children: [
-                                              ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(10.0),
-                                                child: Image.network(
-                                                  widget.childImagePath,
-                                                  fit: BoxFit.scaleDown,
-                                                ),
-                                              )
-                                            ],
-                                          )),
-                                    ],
+                                      color: Color.fromARGB(255, 41, 41, 32),
+                                      fontSize: 20,
+                                    ),
                                   ),
                                 ),
+                                SizedBox(
+                                  height: height * 0.02,
+                                ),
+                                Container(
+                                    padding:
+                                        EdgeInsets.only(right: 5, bottom: 5),
+                                    height: height * 0.15,
+                                    width: width * 0.15,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                          child: Image.network(
+                                            widget.childImagePath,
+                                            fit: BoxFit.scaleDown,
+                                          ),
+                                        ),
+                                      ],
+                                    )),
                               ],
                             ),
                           ],
                         ),
-                      ),
+                      ],
                     ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        ": " "وقت وتاريخ البلاغ",
-                        style: TextStyle(
-                          color: Color(0xff919296),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
-                        ),
-                      ),
-                      Text(
-                        df.format(new DateTime.fromMillisecondsSinceEpoch(
-                            myvalue * 1000)),
-                        style: TextStyle(
-                          color: Color(0xff919296),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Text(
-                        ": " "رقم التواصل ",
-                        style: TextStyle(
-                          color: Color(0xff919296),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
-                        ),
-                      ),
-                      Text(
-                        "0584736352",
-                        style: TextStyle(
-                          color: Color(0xff919296),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            height: 50,
-                            width: 150,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    Color(0xFF9C0000), // background
-                                // foreground
-                              ),
-                              child: Text(
-                                'إلغاء البلاغ',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15,
-                                ),
-                              ),
-                              onPressed: () async {
-                                final action =
-                                    await AlertDialogs.yesCancelDialog(
-                                        context,
-                                        'إلغاء البلاغ',
-                                        'هل أنت متأكد من إلغاء البلاغ؟');
-                                if (!mounted) return;
-                                if (action == DialogsAction.yes) {
-                                  setState(() => tappedYes = true);
-                                  if (!mounted) return;
-
-                                  Navigator.pop(context);
-                                } else {
-                                  setState(() => tappedYes = false);
-                                  if (!mounted) return;
-                                }
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
                   ),
                 ),
               ],
             ),
-          ),
+            SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    ": " "وقت وتاريخ البلاغ",
+                    style: TextStyle(
+                      color: Color(0xff919296),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
+                  ),
+                  Text(
+                    df.format(new DateTime.fromMillisecondsSinceEpoch(
+                        myvalue * 1000)),
+                    style: TextStyle(
+                      color: Color(0xff919296),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Text(
+                    ": " "رقم التواصل ",
+                    style: TextStyle(
+                      color: Color(0xff919296),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
+                  ),
+                  Text(
+                    "0584736352",
+                    style: TextStyle(
+                      color: Color(0xff919296),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: 50,
+                        width: 150,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xFF9C0000), // background
+                            // foreground
+                          ),
+                          child: Text(
+                            'إلغاء البلاغ',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
+                          ),
+                          onPressed: () async {
+                            final action = await AlertDialogs.yesCancelDialog(
+                                context,
+                                'إلغاء البلاغ',
+                                'هل أنت متأكد من إلغاء البلاغ؟');
+                            if (!mounted) return;
+                            if (action == DialogsAction.yes) {
+                              setState(() => tappedYes = true);
+                              if (!mounted) return;
+
+                              Navigator.pop(context);
+                            } else {
+                              setState(() => tappedYes = false);
+                              if (!mounted) return;
+                            }
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
-      );
+      ),
+    );
+  }
 }

@@ -57,7 +57,7 @@ class _ReportPageState extends State<ReportPage> {
           )),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(25),
+          padding: const EdgeInsets.only(left: 10, right: 10, top: 4),
           child: SizedBox(
             child: list(),
           ),
