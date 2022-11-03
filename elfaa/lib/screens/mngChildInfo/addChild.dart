@@ -1,5 +1,6 @@
 // ignore_for_file: file_names, camel_case_types
 import 'dart:io';
+import 'package:elfaa/screens/Homepage/navPage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -264,7 +265,11 @@ class _addChildState extends State<addChild> {
                               birthday:
                                   DateTime.parse(controllerBirthday.text));
                           addChild(child);
-                          Navigator.pop(context);
+                          // Navigator.pop(context);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => NavPage()),
+                          );
                           setState(() {
                             isLoading = false;
                           });
