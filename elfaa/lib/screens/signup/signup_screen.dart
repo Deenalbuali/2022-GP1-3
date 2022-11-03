@@ -24,6 +24,8 @@ class _SignupPageState extends State<SignupPage> {
   FocusNode focus = FocusNode();
   @override
   Widget build(BuildContext context) {
+    final double ScreenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: Color(0xFFfafafa),
       appBar: AppBar(
@@ -56,7 +58,7 @@ class _SignupPageState extends State<SignupPage> {
               child: Column(
                 children: <Widget>[
                   logoWidget("assets/images/logo1.png"),
-                  const SizedBox(height: 40),
+                  SizedBox(height: ScreenHeight * 0.060),
                   Directionality(
                       textDirection: TextDirection.rtl,
                       child: TextFormField(
@@ -83,7 +85,7 @@ class _SignupPageState extends State<SignupPage> {
                           }
                         },
                       )),
-                  const SizedBox(height: 20),
+                  SizedBox(height: ScreenHeight * 0.025),
                   Directionality(
                       textDirection: TextDirection.rtl,
                       child: TextFormField(
@@ -107,7 +109,7 @@ class _SignupPageState extends State<SignupPage> {
                           }
                         },
                       )),
-                  const SizedBox(height: 20),
+                  SizedBox(height: ScreenHeight * 0.025),
                   Directionality(
                       textDirection: TextDirection.rtl,
                       child: TextFormField(
@@ -136,7 +138,7 @@ class _SignupPageState extends State<SignupPage> {
                           }
                         },
                       )),
-                  const SizedBox(height: 20),
+                  SizedBox(height: ScreenHeight * 0.025),
                   Directionality(
                       textDirection: TextDirection.rtl,
                       child: TextFormField(
@@ -190,7 +192,7 @@ class _SignupPageState extends State<SignupPage> {
                           }
                         },
                       )),
-                  const SizedBox(height: 30),
+                  SizedBox(height: ScreenHeight * 0.025),
                   ElevatedButton(
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
@@ -199,8 +201,7 @@ class _SignupPageState extends State<SignupPage> {
                           await FirebaseAuth.instance
                               .createUserWithEmailAndPassword(
                                   email: email.text, password: pass.text);
-                          /*  .then((value) {
-                        });*/
+
                           final user = FirebaseAuth.instance.currentUser!.uid;
                           final userRef = FirebaseFirestore.instance
                               .collection("users")
