@@ -45,7 +45,7 @@ class NotlistBox extends StatelessWidget {
               padding: const EdgeInsets.only(left: 0),
               child: Column(children: [
                 Container(
-                  padding: EdgeInsets.only(left: 20, top: 10, bottom: 15),
+                  padding: EdgeInsets.only(top: 10, bottom: 15),
                   child: Text(".." "تم تحديث الحالة إلى" " :" "جاري البحث عنه",
                       style: TextStyle(
                         fontSize: 12,
