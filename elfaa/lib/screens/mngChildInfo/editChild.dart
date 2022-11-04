@@ -260,6 +260,12 @@ class _editChildState extends State<editChild> {
                 SizedBox(height: ScreenHeight * 0.02),
                 ElevatedButton(
                     onPressed: () async {
+                      final action = await AlertDialogs.yesCancelDialog(
+                          context, ' بيانات الطفل ', 'هل أنت متأكد من تعديل بيانات الطفل؟');
+                      if (!mounted) return;
+                      if (action == DialogsAction.yes) {
+                        setState(() => tappedYes = true);
+                        if (!mounted) return;
                       if (_formKey.currentState!.validate()) {
                         if (imgURL.isEmpty) {
                           setState(() {
@@ -288,6 +294,10 @@ class _editChildState extends State<editChild> {
                             isLoading = false;
                           });
                         });
+                      }
+                      } else {
+                        setState(() => tappedYes = false);
+                        if (!mounted) return;
                       }
                     },
                     style: ButtonStyle(
