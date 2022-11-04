@@ -263,7 +263,7 @@ class _addChildState extends State<addChild> {
                                 });
                             if (_formKey.currentState!.validate()) {
                               
-                              Future.delayed(Duration(seconds: 7), () {
+                              Future.delayed(Duration(seconds: 8), () {
                                 final child = Child(
                                     image: imgURL,
                                     name: controllerName.text,

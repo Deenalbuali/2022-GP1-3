@@ -82,7 +82,7 @@ class NotlistBox extends StatelessWidget {
                       padding: EdgeInsets.only(
                           right: 1, left: 0.1, top: width * 0.05, bottom: 0.1),
                       child: Text(
-                        "${_childlist2.childName}    ",
+                        "${_childlist2.childName} ",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
