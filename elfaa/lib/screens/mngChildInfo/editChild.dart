@@ -319,20 +319,20 @@ class _editChildState extends State<editChild> {
                   child: ElevatedButton.icon(
                     icon: Icon(
                       Icons.delete,
-                      color: Colors.white,
+                      color: Color(0xFF9C0000),
                     ),
                     style: ElevatedButton.styleFrom(
                       textStyle: TextStyle(fontSize: 22),
                       shadowColor: Color.fromARGB(255, 0, 0, 0),
                       elevation: 1,
-                      backgroundColor: Color(0xFF9C0000),
+                      backgroundColor: Color(0xFFFFEEEE),
                       shape: const StadiumBorder(),
                       maximumSize: const Size(180, 56),
                       minimumSize: const Size(180, 56),
                     ),
                     label: Text(
                       '  حذف الطفل  ',
-                      style: TextStyle(color: Colors.white, fontSize: 20),
+                      style: TextStyle(color: Color(0xFF9C0000), fontSize: 20),
                     ),
                     onPressed: () async {
                       final action = await AlertDialogs.yesCancelDialog(
