@@ -1,10 +1,7 @@
-import 'package:elfaa/screens/mngChildInfo/addChild.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:elfaa/screens/Homepage/childrenList.dart';
 import 'package:elfaa/screens/notificationPage/NotlistBox.dart';
 import 'package:flutter/material.dart';
 import 'package:elfaa/constants.dart';
-import 'package:elfaa/screens/Homepage/HomelistBox.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
@@ -38,30 +35,41 @@ class _NotePageState extends State<NotePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          toolbarHeight: 90,
-          title: Text(
-            "التنبيهات",
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
-          ),
-          centerTitle: true,
-          flexibleSpace: Container(
-              decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(28),
-                bottomRight: Radius.circular(28)),
-            color: kPrimaryColor,
-          )),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        toolbarHeight: 90,
+        title: Text(
+          "التنبيهات",
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
         ),
-        body: Padding(
-          padding: const EdgeInsets.only(left: 10, right: 10, top: 4),
-          child: SizedBox(
-            child: list(),
-          ),
-        ));
+        centerTitle: true,
+        flexibleSpace: Container(
+            decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(28),
+              bottomRight: Radius.circular(28)),
+          color: kPrimaryColor,
+        )),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.only(left: 10, right: 10, top: 4),
+        child: SizedBox(
+            child: _childrenList2.length == 0
+                ? Padding(
+                    padding: const EdgeInsets.all(25),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                        image: AssetImage("assets/images/noNotifications.png"),
+                      )),
+                    ),
+                  )
+                : list()),
+      ),
+    );
   }
 
   Widget list() => ListView.builder(
