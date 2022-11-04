@@ -1,16 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:ffi';
-import 'dart:io';
 import 'package:elfaa/alert_dialog.dart';
-import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:elfaa/screens/Reportpage/ReportPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:elfaa/constants.dart';
 
 //import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:firebase_core/firebase_core.dart';
@@ -66,11 +63,19 @@ class _reportInfoState extends State<reportInfo> {
     return Scaffold(
       backgroundColor: const Color(0xFFf5f5f5),
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.arrow_forward_ios,
+              color: Colors.white,
+            ),
+            onPressed: () => Navigator.of(context).pop(),
+          )
+        ],
+        automaticallyImplyLeading: false,
         elevation: 0,
         toolbarHeight: 90,
-        leading: BackButton(color: Colors.white),
         title: Text(
           "تفاصيل البلاغ",
           style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
@@ -78,17 +83,11 @@ class _reportInfoState extends State<reportInfo> {
         centerTitle: true,
         flexibleSpace: Container(
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(28),
-                    bottomRight: Radius.circular(28)),
-                gradient: LinearGradient(
-                  colors: [
-                    Color(0xFF429EB2),
-                    Color.fromARGB(255, 131, 165, 173)
-                  ],
-                  begin: Alignment.bottomCenter,
-                  end: Alignment.topCenter,
-                ))),
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(28),
+              bottomRight: Radius.circular(28)),
+          color: kPrimaryColor,
+        )),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -210,7 +209,7 @@ class _reportInfoState extends State<reportInfo> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    ": " "وقت وتاريخ البلاغ",
+                    ":" "وقت وتاريخ البلاغ",
                     style: TextStyle(
                       color: Color(0xff919296),
                       fontWeight: FontWeight.bold,
@@ -230,7 +229,7 @@ class _reportInfoState extends State<reportInfo> {
                     height: 15,
                   ),
                   Text(
-                    ": " "رقم التواصل ",
+                    ":" "رقم التواصل مع مسؤول حارس الأمن",
                     style: TextStyle(
                       color: Color(0xff919296),
                       fontWeight: FontWeight.bold,
@@ -256,7 +255,7 @@ class _reportInfoState extends State<reportInfo> {
                         width: 150,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFF9C0000), // background
+                            backgroundColor: Color(0xFFFFEEEE), // background
                             // foreground
                           ),
                           child: Text(
@@ -264,6 +263,7 @@ class _reportInfoState extends State<reportInfo> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 15,
+                              color: Color(0xFF9C0000),
                             ),
                           ),
                           onPressed: () async {
