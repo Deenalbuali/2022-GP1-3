@@ -89,7 +89,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 return 'الحقل مطلوب';
               }
               if (!RegExp(
-                      r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+                      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                   .hasMatch(value)) {
                 return 'أدخل بريد إلكتروني صالح';
               }
