@@ -1,9 +1,6 @@
 import 'package:elfaa/screens/Homepage/Home_page.dart';
 import 'package:elfaa/screens/Reportpage/ReportPage.dart';
-import 'package:elfaa/screens/login/login_screen.dart';
-import 'package:elfaa/screens/mngChildInfo/addChild.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:elfaa/screens/Homepage/childrenList.dart';
 import 'package:elfaa/screens/notificationPage/Notepage.dart';
 import 'package:flutter/material.dart';
 import 'package:elfaa/screens/profile/profile_page.dart';
