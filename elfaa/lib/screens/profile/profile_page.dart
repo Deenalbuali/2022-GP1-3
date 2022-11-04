@@ -339,7 +339,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       textStyle: TextStyle(fontSize: 22),
                       shadowColor: Color.fromARGB(255, 0, 0, 0),
                       elevation: 0,
-                      backgroundColor: Color.fromARGB(255, 255, 238, 238),
+                      backgroundColor: Color(0xFFFFEEEE),
                       shape: const StadiumBorder(),
                       maximumSize: const Size(180, 56),
                       minimumSize: const Size(180, 56),
