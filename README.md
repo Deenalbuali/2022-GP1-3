@@ -37,4 +37,15 @@ This solution provides the possibility for the parents to track the location of 
 <li>Turn on an Android Emulator or connect an android mobile to the system </li>
 <li> Run the <strong>Elfaa </strong> application </li>
 </ol>
+<h2>🎯 Current Supported Features </h2>
+<h3>Parents Can:</h3>
+<ul>
+<li>Add/Delete Child</li>
+<li> Edit Child's Information </li>
+<li>Display Children list </li>
+<li> Change/Reset Password </li>
+<li>Edit Personal Profile</li>
+<li> Display Notifications </li>
+</ul>
 
+<h2> APK </h2>
