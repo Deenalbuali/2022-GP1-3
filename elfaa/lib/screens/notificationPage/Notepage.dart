@@ -53,9 +53,7 @@ class _NotePageState extends State<NotePage> {
           color: kPrimaryColor,
         )),
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 10, right: 10, top: 4),
-        child: SizedBox(
+      body:  SizedBox(
             child: _childrenList2.length == 0
                 ? Padding(
                     padding: const EdgeInsets.all(25),
@@ -68,7 +66,7 @@ class _NotePageState extends State<NotePage> {
                     ),
                   )
                 : list()),
-      ),
+      
     );
   }
 
