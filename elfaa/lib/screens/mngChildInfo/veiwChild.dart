@@ -102,7 +102,7 @@ class _viewChildState extends State<viewChild> {
               color: kPrimaryColor,
             ),
             child: Padding(
-              padding: const EdgeInsets.only(top: 15, bottom:10),
+              padding: const EdgeInsets.only(top: 15, bottom:5),
               child: Column(
                 children: [
                   Row(
