@@ -51,7 +51,7 @@ class _NavPageState extends State<NavPage> {
     ];
     return Scaffold(
       extendBody: true,
-      backgroundColor: Color.fromARGB(255, 235, 234, 234),
+      backgroundColor: Color(0xFFEBEAEA),
       body: screens[index],
       bottomNavigationBar: Theme(
           data: Theme.of(context).copyWith(
