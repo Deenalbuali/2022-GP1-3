@@ -96,7 +96,10 @@ class HomelistBox extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10.0),
                             child: Image.network(
                               "${_childlist.childImagePath}",
-                              fit: BoxFit.scaleDown,
+                              fit: BoxFit.cover,
+                              width: width * 0.23,
+                              height: height * 0.15,
+                              
                             ),
                           ),
                         ),
