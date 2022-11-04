@@ -59,8 +59,18 @@ class _ReportPageState extends State<ReportPage> {
         body: Padding(
           padding: const EdgeInsets.only(left: 10, right: 10, top: 4),
           child: SizedBox(
-            child: list(),
-          ),
+              child: _childrenList3.length == 0
+                  ? Padding(
+                      padding: const EdgeInsets.all(25),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                          image: AssetImage("assets/images/noReports.png"),
+                        )),
+                      ),
+                    )
+                  : list()),
         ));
   }
 
