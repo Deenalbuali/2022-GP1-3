@@ -82,7 +82,7 @@ class NotlistBox extends StatelessWidget {
                       padding: EdgeInsets.only(
                           right: 1, left: 0.1, top: width * 0.05, bottom: 0.1),
                       child: Text(
-                        "${_childlist2.childName}",
+                        "${_childlist2.childName}    ",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
@@ -97,7 +97,9 @@ class NotlistBox extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10.0),
                     child: Image.network(
                       "${_childlist2.childImagePath}",
-                      fit: BoxFit.scaleDown,
+                      width: width * 0.20,
+                      height: width * 0.15,
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),

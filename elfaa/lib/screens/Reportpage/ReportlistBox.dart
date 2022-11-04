@@ -34,30 +34,33 @@ class ReportlistBox extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-                decoration: BoxDecoration(
-                    color: Colors.orange,
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.orange,
-                          offset: Offset(1.0, 1.0),
-                          blurRadius: 4.0)
-                    ]),
-                child: IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => reportInfo(
-                                childName: "${_childlist3.childName}",
-                                childImagePath: "${_childlist3.childImagePath}",
-                              )),
-                    );
-                  },
-                  icon: Icon(Icons.content_paste),
-                  color: Colors.white,
-                )),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.orange,
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.orange,
+                            offset: Offset(1.0, 1.0),
+                            blurRadius: 4.0)
+                      ]),
+                  child: IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => reportInfo(
+                                  childName: "${_childlist3.childName}",
+                                  childImagePath: "${_childlist3.childImagePath}",
+                                )),
+                      );
+                    },
+                    icon: Icon(Icons.content_paste),
+                    color: Colors.white,
+                  )),
+            ),
             Row(
               children: [
                 Column(
@@ -81,11 +84,16 @@ class ReportlistBox extends StatelessWidget {
                     ),
                   ],
                 ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10.0),
-                  child: Image.network(
-                    "${_childlist3.childImagePath}",
-                    fit: BoxFit.scaleDown,
+                Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10.0),
+                    child: Image.network(
+                      "${_childlist3.childImagePath}",
+                      width: width * 0.20,
+                      height: height * 0.15,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ],
