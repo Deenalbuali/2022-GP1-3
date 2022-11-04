@@ -234,9 +234,13 @@ class _addChildState extends State<addChild> {
                 SizedBox(
                   width: ScreenWidth,
                   child: ElevatedButton(
-                      onPressed: null,
+                      onPressed: () {},
                       style: ElevatedButton.styleFrom(
-                          textStyle: const TextStyle(fontSize: 22)),
+                          backgroundColor: Colors.grey,
+                          textStyle: const TextStyle(
+                            fontSize: 22,
+                            color: Color.fromARGB(255, 255, 255, 255),
+                          )),
                       child: const Text('ربط جهاز التتبع')),
                 ),
                 SizedBox(height: ScreenHeight * 0.025),
@@ -258,11 +262,10 @@ class _addChildState extends State<addChild> {
                               return;
                             }
                             setState(() {
-                                  isLoading = true;
-                                  isProcessing = true;
-                                });
+                              isLoading = true;
+                              isProcessing = true;
+                            });
                             if (_formKey.currentState!.validate()) {
-                              
                               Future.delayed(Duration(seconds: 8), () {
                                 final child = Child(
                                     image: imgURL,
@@ -279,11 +282,10 @@ class _addChildState extends State<addChild> {
                                       builder: (context) => NavPage()),
                                 );
                                 setState(() {
-                                isLoading = false;
-                                isProcessing = false;
+                                  isLoading = false;
+                                  isProcessing = false;
+                                });
                               });
-                              });
-                              
                             }
                           },
                     style: ButtonStyle(
@@ -347,17 +349,15 @@ class _addChildState extends State<addChild> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               TextButton.icon(
-                  icon: const Icon(Icons.camera), 
-                   style: TextButton.styleFrom(
-                    foregroundColor: kPrimaryColor),
+                  icon: const Icon(Icons.camera),
+                  style: TextButton.styleFrom(foregroundColor: kPrimaryColor),
                   onPressed: () {
                     takePhoto(ImageSource.camera);
                   },
                   label: const Text("Camera")),
               TextButton.icon(
                   icon: const Icon(Icons.image),
-                   style: TextButton.styleFrom(
-                    foregroundColor: kPrimaryColor),
+                  style: TextButton.styleFrom(foregroundColor: kPrimaryColor),
                   onPressed: () {
                     takePhoto(ImageSource.gallery);
                   },
@@ -387,7 +387,7 @@ class _addChildState extends State<addChild> {
       //store the file
       await refImg.putFile(File(_img!.path));
       //succedss: get the url
-      imgURL = await refImg.getDownloadURL(); 
+      imgURL = await refImg.getDownloadURL();
     } catch (e) {
       //error report
     }
