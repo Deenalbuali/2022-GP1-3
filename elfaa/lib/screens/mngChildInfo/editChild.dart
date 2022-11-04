@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:elfaa/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart' hide TextDirection;
+import 'package:flutter/services.dart';
 
 class editChild extends StatefulWidget {
   const editChild(
@@ -29,7 +30,7 @@ class editChild extends StatefulWidget {
 }
 
 class _editChildState extends State<editChild> {
-@override
+  @override
   void initState() {
     childBirthday = DateTime.parse((widget.childbirthday).toString());
     year = childBirthday.year;
@@ -43,6 +44,7 @@ class _editChildState extends State<editChild> {
     super.initState();
     getParent();
   }
+
   //profile image variables
   XFile? _img;
   final ImagePicker _picker = ImagePicker();
@@ -61,7 +63,7 @@ class _editChildState extends State<editChild> {
   String selectedGender = 'أنثى';
   TextEditingController childHeight = TextEditingController();
   late DateTime childBirthday;
-  String childImage ='';
+  String childImage = '';
   int year = 0;
   int month = 0;
   int day = 0;
@@ -79,8 +81,6 @@ class _editChildState extends State<editChild> {
       uid = user!.uid;
     });
   }
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -232,6 +232,9 @@ class _editChildState extends State<editChild> {
                       textAlign: TextAlign.right,
                       controller: childHeight,
                       keyboardType: TextInputType.number,
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
                       decoration: const InputDecoration(
                         suffixIcon: Icon(Icons.accessibility_new,
                             color: Color(0xFFFD8601)),
@@ -278,9 +281,9 @@ class _editChildState extends State<editChild> {
                             'birthday': DateTime.parse(birthday.text)
                           });
                           Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => NavPage()),
-                        );
+                            context,
+                            MaterialPageRoute(builder: (context) => NavPage()),
+                          );
                           setState(() {
                             isLoading = false;
                           });

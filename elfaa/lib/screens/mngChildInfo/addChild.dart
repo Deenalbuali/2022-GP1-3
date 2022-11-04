@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter/services.dart';
 // ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart' hide TextDirection;
 import 'package:elfaa/constants.dart';
@@ -206,6 +207,9 @@ class _addChildState extends State<addChild> {
                     child: TextFormField(
                       textAlign: TextAlign.right,
                       controller: controllerHeight,
+                      inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.digitsOnly
+                      ],
                       keyboardType: TextInputType.number,
                       decoration: const InputDecoration(
                         suffixIcon: Icon(Icons.accessibility_new,
