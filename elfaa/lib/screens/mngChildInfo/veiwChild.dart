@@ -87,7 +87,7 @@ class _viewChildState extends State<viewChild> {
       body: Column(
         children: [
           Container(
-            height: ScreenHeight * 0.6,
+            height: ScreenHeight * 0.53,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25),
@@ -102,7 +102,7 @@ class _viewChildState extends State<viewChild> {
               color: kPrimaryColor,
             ),
             child: Padding(
-              padding: const EdgeInsets.only(top: 15, bottom: 6.206),
+              padding: const EdgeInsets.only(top: 15, bottom:8),
               child: Column(
                 children: [
                   Row(
@@ -190,7 +190,7 @@ class _viewChildState extends State<viewChild> {
                     child: ElevatedButton.icon(
                       icon: Icon(
                         Icons.campaign,
-                        color: Color(0xFF292929),
+                        color: Color.fromARGB(255, 255, 255, 255),
                       ),
                       style: ElevatedButton.styleFrom(
                         textStyle: TextStyle(fontSize: 22),
@@ -204,7 +204,7 @@ class _viewChildState extends State<viewChild> {
                       label: Text(
                         ' إنشاء بلاغ   ',
                         style:
-                            TextStyle(color: Color(0xFF292929), fontSize: 20),
+                            TextStyle(color: Color.fromARGB(255, 255, 255, 255), fontSize: 20),
                       ),
                       onPressed: () {},
                     ),
