@@ -182,7 +182,32 @@ class _viewChildState extends State<viewChild> {
                               fontWeight: FontWeight.bold),
                         ),
                       ),
+                      SizedBox(width: ScreenWidth * 0.1),
                     ],
+                  ),
+                  Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: ElevatedButton.icon(
+                      icon: Icon(
+                        Icons.campaign,
+                        color: Color(0xFF292929),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        textStyle: TextStyle(fontSize: 22),
+                        shadowColor: Color.fromARGB(255, 0, 0, 0),
+                        elevation: 0,
+                        backgroundColor: Colors.grey,
+                        shape: const StadiumBorder(),
+                        maximumSize: const Size(180, 56),
+                        minimumSize: const Size(180, 56),
+                      ),
+                      label: Text(
+                        ' إنشاء بلاغ   ',
+                        style:
+                            TextStyle(color: Color(0xFF292929), fontSize: 20),
+                      ),
+                      onPressed: () {},
+                    ),
                   ),
                 ],
               ),
