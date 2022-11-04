@@ -55,7 +55,7 @@ class _editChildState extends State<editChild> {
 
   //Loading for uploading
   bool isLoading = false;
-  bool isLoadingdelet = false;
+  bool isProcessing = false;
 
   //Child Info to be retreived from database
   TextEditingController childName = TextEditingController();
@@ -259,7 +259,9 @@ class _editChildState extends State<editChild> {
                 ),
                 SizedBox(height: ScreenHeight * 0.02),
                 ElevatedButton(
-                    onPressed: () async {
+                    onPressed: isProcessing
+                        ? null
+                        :  () async {
                       final action = await AlertDialogs.yesCancelDialog(
                           context, ' بيانات الطفل ', 'هل أنت متأكد من تعديل بيانات الطفل؟');
                       if (!mounted) return;
@@ -270,6 +272,7 @@ class _editChildState extends State<editChild> {
                         if (imgURL.isEmpty) {
                           setState(() {
                             isLoading = true;
+                            isProcessing = true;
                           });
                         }
                         Future.delayed(Duration(seconds: 7), () {
@@ -292,6 +295,7 @@ class _editChildState extends State<editChild> {
                           );
                           setState(() {
                             isLoading = false;
+                            isProcessing = false;
                           });
                         });
                       }

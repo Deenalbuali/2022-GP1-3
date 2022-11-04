@@ -49,6 +49,7 @@ class _addChildState extends State<addChild> {
 
   //Loading for uploading
   bool isLoading = false;
+  bool isProcessing = false;
 
   @override
   void initState() {
@@ -208,7 +209,7 @@ class _addChildState extends State<addChild> {
                       textAlign: TextAlign.right,
                       controller: controllerHeight,
                       inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.digitsOnly
+                        FilteringTextInputFormatter.digitsOnly
                       ],
                       keyboardType: TextInputType.number,
                       decoration: const InputDecoration(
@@ -240,46 +241,51 @@ class _addChildState extends State<addChild> {
                 ),
                 SizedBox(height: ScreenHeight * 0.025),
                 ElevatedButton(
-                    onPressed: () async {
-                      if (_img == null) {
-                        Fluttertoast.showToast(
-                            msg: "يرجى اختيار صورة",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.BOTTOM,
-                            timeInSecForIosWeb: 7,
-                            backgroundColor: Color.fromARGB(255, 195, 74, 74),
-                            fontSize: 16.0,
-                            textColor: Colors.white);
+                    onPressed: isProcessing
+                        ? null
+                        : () async {
+                            if (_img == null) {
+                              Fluttertoast.showToast(
+                                  msg: "يرجى اختيار صورة",
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.BOTTOM,
+                                  timeInSecForIosWeb: 7,
+                                  backgroundColor:
+                                      Color.fromARGB(255, 195, 74, 74),
+                                  fontSize: 16.0,
+                                  textColor: Colors.white);
 
-                        return;
-                      }
-
-                      if (_formKey.currentState!.validate()) {
-                        if (imgURL.isEmpty) {
-                          setState(() {
-                            isLoading = true;
-                          });
-                        }
-                        Future.delayed(Duration(seconds: 10), () {
-                          final child = Child(
-                              image: imgURL,
-                              name: controllerName.text,
-                              gender: selectedGender,
-                              height: int.parse(controllerHeight.text),
-                              birthday:
-                                  DateTime.parse(controllerBirthday.text));
-                          addChild(child);
-                          // Navigator.pop(context);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => NavPage()),
-                          );
-                          setState(() {
-                            isLoading = false;
-                          });
-                        });
-                      }
-                    },
+                              return;
+                            }
+                            setState(() {
+                                  isLoading = true;
+                                  isProcessing = true;
+                                });
+                            if (_formKey.currentState!.validate()) {
+                              
+                              Future.delayed(Duration(seconds: 7), () {
+                                final child = Child(
+                                    image: imgURL,
+                                    name: controllerName.text,
+                                    gender: selectedGender,
+                                    height: int.parse(controllerHeight.text),
+                                    birthday: DateTime.parse(
+                                        controllerBirthday.text));
+                                addChild(child);
+                                // Navigator.pop(context);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => NavPage()),
+                                );
+                                setState(() {
+                                isLoading = false;
+                                isProcessing = false;
+                              });
+                              });
+                              
+                            }
+                          },
                     style: ButtonStyle(
                       backgroundColor:
                           MaterialStateProperty.all(const Color(0xFF429EB2)),
@@ -377,7 +383,7 @@ class _addChildState extends State<addChild> {
       //store the file
       await refImg.putFile(File(_img!.path));
       //succedss: get the url
-      imgURL = await refImg.getDownloadURL();
+      imgURL = await refImg.getDownloadURL(); 
     } catch (e) {
       //error report
     }

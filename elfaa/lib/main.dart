@@ -1,3 +1,4 @@
+import 'package:elfaa/screens/Homepage/navPage.dart';
 import 'package:elfaa/screens/welcome/welcome.dart';
 import 'package:elfaa/screens/mngChildInfo/veiwChild.dart';
 import 'package:elfaa/screens/splash_screen.dart';
@@ -70,7 +71,7 @@ class MyApp extends StatelessWidget {
           hintStyle: TextStyle(color: Colors.grey),
         ),
       ),
-      home: SplashScreen(),
+      home: NavPage(),
     );
   }
 }
