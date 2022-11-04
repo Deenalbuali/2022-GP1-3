@@ -97,7 +97,7 @@ class HomelistBox extends StatelessWidget {
                             child: Image.network(
                               "${_childlist.childImagePath}",
                               fit: BoxFit.cover,
-                              width: width * 0.23,
+                              width: width * 0.20,
                               height: height * 0.15,
                               
                             ),
