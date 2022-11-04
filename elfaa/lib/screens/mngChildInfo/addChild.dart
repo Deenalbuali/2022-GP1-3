@@ -324,7 +324,7 @@ class _addChildState extends State<addChild> {
                         builder: ((builder) => bottomImgPicker()));
                   },
                   child: const Icon(Icons.camera_alt,
-                      color: Color.fromARGB(255, 22, 147, 193), size: 28)))
+                      color: kPrimaryColor, size: 28)))
         ],
       ),
     );
@@ -339,21 +339,25 @@ class _addChildState extends State<addChild> {
       child: Column(
         children: <Widget>[
           const Text(
-            "chooose image",
+            "أضف صورة",
             style: TextStyle(fontSize: 20),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 15),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               TextButton.icon(
-                  icon: const Icon(Icons.camera),
+                  icon: const Icon(Icons.camera), 
+                   style: TextButton.styleFrom(
+                    foregroundColor: kPrimaryColor),
                   onPressed: () {
                     takePhoto(ImageSource.camera);
                   },
                   label: const Text("Camera")),
               TextButton.icon(
                   icon: const Icon(Icons.image),
+                   style: TextButton.styleFrom(
+                    foregroundColor: kPrimaryColor),
                   onPressed: () {
                     takePhoto(ImageSource.gallery);
                   },
