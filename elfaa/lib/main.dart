@@ -1,6 +1,3 @@
-import 'package:elfaa/screens/Homepage/navPage.dart';
-import 'package:elfaa/screens/welcome/welcome.dart';
-import 'package:elfaa/screens/mngChildInfo/veiwChild.dart';
 import 'package:elfaa/screens/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/gestures.dart';
