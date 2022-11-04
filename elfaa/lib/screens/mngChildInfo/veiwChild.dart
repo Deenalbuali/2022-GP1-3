@@ -102,7 +102,7 @@ class _viewChildState extends State<viewChild> {
               color: kPrimaryColor,
             ),
             child: Padding(
-              padding: const EdgeInsets.only(top: 15, bottom:8),
+              padding: const EdgeInsets.only(top: 15, bottom:10),
               child: Column(
                 children: [
                   Row(
@@ -203,8 +203,9 @@ class _viewChildState extends State<viewChild> {
                       ),
                       label: Text(
                         ' إنشاء بلاغ   ',
-                        style:
-                            TextStyle(color: Color.fromARGB(255, 255, 255, 255), fontSize: 20),
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            fontSize: 20),
                       ),
                       onPressed: () {},
                     ),
@@ -278,11 +279,17 @@ networkImg(String childImage, double ScreenWidth, double ScreenHeight) {
         );
       },
       errorBuilder: (BuildContext context, Object error, StackTrace? st) {
-        return Center(
-          child: Text(
-            "جاري التحميل",
-            style: TextStyle(
-                color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+        return Container(
+          width: ScreenWidth * 0.33,
+          height: ScreenHeight * 0.15,
+          child: Center(
+            child: Text(
+              "حدث خطأ",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
+            ),
           ),
         );
       },

@@ -99,7 +99,6 @@ class HomelistBox extends StatelessWidget {
                               fit: BoxFit.cover,
                               width: width * 0.20,
                               height: height * 0.15,
-                              
                             ),
                           ),
                         ),
