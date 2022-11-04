@@ -1,8 +1,5 @@
 import 'package:elfaa/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:elfaa/alert_dialog.dart';
 
 class QRPage extends StatefulWidget {
   @override

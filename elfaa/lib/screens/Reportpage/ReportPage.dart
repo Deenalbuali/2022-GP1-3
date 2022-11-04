@@ -1,17 +1,7 @@
 import 'package:elfaa/screens/Reportpage/ReportlistBox.dart';
-
-import 'package:elfaa/screens/mngChildInfo/addChild.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:elfaa/screens/Homepage/childrenList.dart';
 import 'package:flutter/material.dart';
 import 'package:elfaa/constants.dart';
-import 'package:elfaa/screens/mngChildInfo/addChild.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:elfaa/screens/Homepage/childrenList.dart';
-import 'package:elfaa/screens/notificationPage/NotlistBox.dart';
-import 'package:flutter/material.dart';
-import 'package:elfaa/constants.dart';
-import 'package:elfaa/screens/Homepage/HomelistBox.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -29,11 +19,9 @@ class _ReportPageState extends State<ReportPage> {
   }
 
   //const NotePage({super.key});
-  final Color color1 = Color(0xFF429EB2);
-
-  final Color color2 = Color(0xFF429EB2);
-
-  final Color color3 = Color(0xFF429EB2);
+  final Color color1 = kPrimaryColor;
+  final Color color2 = kPrimaryColor;
+  final Color color3 = kPrimaryColor;
 
   @override
   Widget build(BuildContext context) {
@@ -56,22 +44,21 @@ class _ReportPageState extends State<ReportPage> {
             color: kPrimaryColor,
           )),
         ),
-        body: Padding(
-          padding: const EdgeInsets.only(left: 10, right: 10, top: 4),
-          child: SizedBox(
-              child: _childrenList3.length == 0
-                  ? Padding(
-                      padding: const EdgeInsets.all(25),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                          image: AssetImage("assets/images/noReports.png"),
-                        )),
-                      ),
-                    )
-                  : list()),
-        ));
+        body: SizedBox(
+                    child: _childrenList3.length == 0
+                        ? Padding(
+                            padding: const EdgeInsets.all(25),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                image:
+                                    AssetImage("assets/images/noReports.png"),
+                              )),
+                            ),
+                          )
+                        : list()),
+              );
   }
 
   Widget list() => ListView.builder(

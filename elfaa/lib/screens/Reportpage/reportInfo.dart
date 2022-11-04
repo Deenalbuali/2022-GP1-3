@@ -2,7 +2,6 @@
 import 'package:elfaa/alert_dialog.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:elfaa/screens/Reportpage/ReportPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
