@@ -38,12 +38,12 @@ This solution provides the possibility for the parents to track the location of 
 <li> Run the <strong>Elfaa </strong> application </li>
 </ol>
 <h2>🎯 Current Supported Features </h2>
-<h4>Parent can:</h4>
+<h4>Parents are able to:</h4>
 <ul>
 <li> Register/log-in</li>
 <li>Add/Delete Child</li>
 <li> Edit Child's Information </li>
-<li>Display Children list </li>
+<li>Display Children List </li>
 <li> Change/Reset Password </li>
 <li>Edit Personal Profile</li>
 <li> Display Notifications </li>
