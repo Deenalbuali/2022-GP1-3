@@ -52,7 +52,7 @@ class _NotlistBoxState extends State<NotlistBox> {
                           " مر " +
                           "${widget._childrenList.childName}" +
                           " من " +
-                          "${widget._childrenList.childName}",
+                          "${_childrenNote}",
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
@@ -137,7 +137,7 @@ class _NotlistBoxState extends State<NotlistBox> {
       if (!mounted) return;
       if (data.docs.length != 0) {
         _childrenNote =
-            List.from(data.docs.map((doc) => childrenList.fromSnapshot(doc)));
+            List.from(data.docs.map((doc) => noteList.fromSnapshot(doc)));
       }
     });
   }
