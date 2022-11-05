@@ -49,7 +49,7 @@ This solution provides the possibility for the parents to track the location of 
 <li> Display Notifications </li>
 </ul>
 
-<h2> APK </h2>
+<h2>📲 APK </h2>
 <ul>
 <li> Install APK files on your Android smartphone or tablet directly from your browser</li> 
 <li> Open your browser</li> 
