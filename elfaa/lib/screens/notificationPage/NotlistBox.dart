@@ -6,16 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 import 'package:intl/intl.dart';
 
-DateTime now = DateTime.now();
-String formattedTime = DateFormat.jm().format(now);
-final DateTime now2 = DateTime.now();
-final DateFormat formatter = DateFormat('yyyy-MM-dd');
-final String formatted = formatter.format(now2);
 List<Object> _childrenNote = [];
 
 class NotlistBox extends StatefulWidget {
-  final childrenList _noteList;
-  NotlistBox(this._noteList);
+  final childrenList _childrenList;
+  NotlistBox(this._childrenList);
 
   @override
   State<NotlistBox> createState() => _NotlistBoxState();
@@ -24,6 +19,11 @@ class NotlistBox extends StatefulWidget {
 class _NotlistBoxState extends State<NotlistBox> {
   @override
   Widget build(BuildContext context) {
+    DateTime now = DateTime.now();
+    String formattedTime = DateFormat.jm().format(now);
+    final DateTime now2 = DateTime.now();
+    final DateFormat formatter = DateFormat('yyyy-MM-dd');
+    final String formatted = formatter.format(now2);
     final GlobalKey<ScaffoldState> _ScaffoldKey = GlobalKey<ScaffoldState>();
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
@@ -48,9 +48,9 @@ class _NotlistBoxState extends State<NotlistBox> {
                 Container(
                   padding: EdgeInsets.only(top: 10, bottom: 15),
                   child: Text(
-                      "! " "مر 'الطفل' من " + "${widget._noteList.childID} ",
+                      "! " "من " "${widget._childrenList.childName} " " مر ",
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 12,
                         fontWeight: FontWeight.bold,
                         color: Color(0xFF9C0000),
                       )),
@@ -86,7 +86,7 @@ class _NotlistBoxState extends State<NotlistBox> {
                       padding: EdgeInsets.only(
                           right: 1, left: 0.1, top: width * 0.05, bottom: 0.1),
                       child: Text(
-                        "${widget._noteList.childName} ",
+                        "${widget._childrenList.childName} ",
                         style: TextStyle(
                             fontSize: 20,
                             color: Color.fromARGB(255, 41, 41, 32)),
@@ -99,7 +99,7 @@ class _NotlistBoxState extends State<NotlistBox> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10.0),
                     child: Image.network(
-                      "${widget._noteList.childImagePath}",
+                      "${widget._childrenList.childImagePath}",
                       width: width * 0.20,
                       height: width * 0.15,
                       fit: BoxFit.cover,
@@ -124,7 +124,7 @@ class _NotlistBoxState extends State<NotlistBox> {
         .collection('users')
         .doc(userid)
         .collection('children')
-        .doc("${widget._noteList.childID} ")
+        .doc("${widget._childrenList.childID} ")
         .collection('notifications')
         .orderBy('time', descending: true)
         .get();
