@@ -45,34 +45,37 @@ class _ReportPageState extends State<ReportPage> {
           )),
         ),
         body: Stack(children: <Widget>[
-         Padding(
-           padding: const EdgeInsets.all(25),
-           child: Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: ElevatedButton.icon(
-                      icon: Icon(
-                        Icons.campaign,
-                        color: Color.fromARGB(255, 255, 255, 255),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        textStyle: TextStyle(fontSize: 22),
-                        shadowColor: Color.fromARGB(255, 0, 0, 0),
-                        elevation: 0,
-                        backgroundColor: Colors.grey,
-                        shape: const StadiumBorder(),
-                        maximumSize: const Size(180, 56),
-                        minimumSize: const Size(180, 56),
-                      ),
-                      label: Text(
-                        ' إنشاء بلاغ   ',
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 255, 255, 255),
-                            fontSize: 20),
-                      ),
-                      onPressed: () {},
-                    ),
+          Align(
+            alignment: Alignment.topCenter,
+            child: Padding(
+              padding: const EdgeInsets.all(30),
+              child: Directionality(
+                textDirection: TextDirection.rtl,
+                child: ElevatedButton.icon(
+                  icon: Icon(
+                    Icons.campaign,
+                    color: Color.fromARGB(255, 255, 255, 255),
                   ),
-         ),
+                  style: ElevatedButton.styleFrom(
+                    textStyle: TextStyle(fontSize: 22),
+                    shadowColor: Color.fromARGB(255, 0, 0, 0),
+                    elevation: 0,
+                    backgroundColor: Colors.grey,
+                    shape: const StadiumBorder(),
+                    maximumSize: const Size(180, 56),
+                    minimumSize: const Size(180, 56),
+                  ),
+                  label: Text(
+                    ' إنشاء بلاغ   ',
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        fontSize: 20),
+                  ),
+                  onPressed: () {},
+                ),
+              ),
+            ),
+          ),
           SizedBox(
               child: _childrenList3.length == 0
                   ? Padding(

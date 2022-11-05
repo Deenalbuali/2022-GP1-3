@@ -11,7 +11,7 @@ class ReportlistBox extends StatelessWidget {
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
     return Padding(
-      padding: const EdgeInsets.only(bottom: 15, left: 15, right: 15, top: 7),
+      padding: const EdgeInsets.only(bottom: 15, left: 15, right: 15, top: 130),
       child: Container(
         decoration: BoxDecoration(boxShadow: [
           BoxShadow(
@@ -44,7 +44,8 @@ class ReportlistBox extends StatelessWidget {
                         MaterialPageRoute(
                             builder: (context) => reportInfo(
                                   childName: "${_childlist3.childName}",
-                                  childImagePath: "${_childlist3.childImagePath}",
+                                  childImagePath:
+                                      "${_childlist3.childImagePath}",
                                 )),
                       );
                     },
@@ -95,6 +96,7 @@ class ReportlistBox extends StatelessWidget {
     );
   }
 }
+
 //const childrenList({
   //  Key? key,
     //required this.childImagePath,
