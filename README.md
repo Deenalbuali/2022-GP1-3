@@ -51,7 +51,7 @@ This solution provides the possibility for the parents to track the location of 
 
 <h2>📲 APK </h2>
 <ul>
-<li> Install APK files on your Android smartphone or tablet directly from your browser</li> 
+<li> Install ELFAA APK files on your Android smartphone or tablet directly from your browser</li> 
 <li> Open your browser</li> 
 <li> Find the APK file you want to download</li> 
 <li> Tap it – you should then be able to see it downloading on the top bar of your device</li>
