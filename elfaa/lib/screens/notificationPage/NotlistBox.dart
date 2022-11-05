@@ -38,10 +38,11 @@ class NotlistBox extends StatelessWidget {
               child: Column(children: [
                 Container(
                   padding: EdgeInsets.only(top: 10, bottom: 15),
-                  child: Text("! " "مر الطفل من " + "${_noteList.zone_name} ",
+                  child: Text("! " "مر 'الطفل' من " + "${_noteList.zone_name} ",
                       style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF9C0000),
                       )),
                 ),
                 Row(
@@ -77,7 +78,6 @@ class NotlistBox extends StatelessWidget {
                       child: Text(
                         "${_noteList.childName} ",
                         style: TextStyle(
-                            fontWeight: FontWeight.bold,
                             fontSize: 20,
                             color: Color.fromARGB(255, 41, 41, 32)),
                       ),

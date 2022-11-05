@@ -210,7 +210,7 @@ class _reportInfoState extends State<reportInfo> {
                   Text(
                     ":" "وقت وتاريخ البلاغ",
                     style: TextStyle(
-                      color: Color(0xff919296),
+                      color: Color(0xff292929),
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
                     ),
@@ -230,7 +230,7 @@ class _reportInfoState extends State<reportInfo> {
                   Text(
                     ":" "رقم التواصل مع مسؤول حارس الأمن",
                     style: TextStyle(
-                      color: Color(0xff919296),
+                      color: Color(0xff292929),
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
                     ),
