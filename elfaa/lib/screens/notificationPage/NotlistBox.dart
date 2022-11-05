@@ -1,4 +1,5 @@
 import 'package:elfaa/screens/Homepage/childrenList.dart';
+import 'package:elfaa/screens/notificationPage/noteList.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 import 'package:intl/intl.dart';
@@ -10,8 +11,8 @@ final DateFormat formatter = DateFormat('yyyy-MM-dd');
 final String formatted = formatter.format(now2);
 
 class NotlistBox extends StatelessWidget {
-  final childrenList _childlist2;
-  NotlistBox(this._childlist2);
+  final noteList _noteList;
+  NotlistBox(this._noteList);
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> _ScaffoldKey = GlobalKey<ScaffoldState>();
@@ -37,7 +38,7 @@ class NotlistBox extends StatelessWidget {
               child: Column(children: [
                 Container(
                   padding: EdgeInsets.only(top: 10, bottom: 15),
-                  child: Text(".." "تم تحديث الحالة إلى" " :" "جاري البحث عنه",
+                  child: Text("! " "مر الطفل من " + "${_noteList.zone_name} ",
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.grey,
@@ -74,7 +75,7 @@ class NotlistBox extends StatelessWidget {
                       padding: EdgeInsets.only(
                           right: 1, left: 0.1, top: width * 0.05, bottom: 0.1),
                       child: Text(
-                        "${_childlist2.childName} ",
+                        "${_noteList.childName} ",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
@@ -88,7 +89,7 @@ class NotlistBox extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10.0),
                     child: Image.network(
-                      "${_childlist2.childImagePath}",
+                      "${_noteList.childImagePath}",
                       width: width * 0.20,
                       height: width * 0.15,
                       fit: BoxFit.cover,

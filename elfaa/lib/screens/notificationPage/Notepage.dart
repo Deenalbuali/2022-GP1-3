@@ -1,5 +1,6 @@
 import 'package:elfaa/screens/Homepage/childrenList.dart';
 import 'package:elfaa/screens/notificationPage/NotlistBox.dart';
+import 'package:elfaa/screens/notificationPage/noteList.dart';
 import 'package:flutter/material.dart';
 import 'package:elfaa/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,7 +10,7 @@ import 'package:intl/intl.dart';
 final DateTime now = DateTime.now();
 final DateFormat formatter = DateFormat('yyyy-MM-dd');
 final String formatted = formatter.format(now);
-List<Object> _childrenList2 = [];
+List<Object> _noteList = [];
 
 class NotePage extends StatefulWidget {
   @override
@@ -53,31 +54,30 @@ class _NotePageState extends State<NotePage> {
           color: kPrimaryColor,
         )),
       ),
-      body:  SizedBox(
-            child: _childrenList2.length == 0
-                ? Padding(
-                    padding: const EdgeInsets.all(25),
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                        image: AssetImage("assets/images/noNotifications.png"),
-                      )),
-                    ),
-                  )
-                : list()),
-      
+      body: SizedBox(
+          child: _noteList.length == 0
+              ? Padding(
+                  padding: const EdgeInsets.all(25),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                      image: AssetImage("assets/images/noNotifications.png"),
+                    )),
+                  ),
+                )
+              : list()),
     );
   }
 
   Widget list() => ListView.builder(
-      itemCount: _childrenList2.length,
+      itemCount: _noteList.length,
       shrinkWrap: true,
       itemBuilder: (context, index) {
         //if (index == 0)
         //return Null;
         // else
-        return NotlistBox(_childrenList2[index] as childrenList);
+        return NotlistBox(_noteList[index] as noteList);
       });
 
   void didChangeDependencies() {
@@ -99,14 +99,14 @@ class _NotePageState extends State<NotePage> {
         .collection('users')
         .doc(userid)
         .collection('children')
-        .orderBy('birthday', descending: true)
+        .doc()
+        .collection('notifications')
         .get();
     if (!mounted) return;
 
     setState(() {
       if (!mounted) return;
-      _childrenList2 =
-          List.from(data.docs.map((doc) => childrenList.fromSnapshot(doc)));
+      _noteList = List.from(data.docs.map((doc) => noteList.fromSnapshot(doc)));
     });
   }
 }
