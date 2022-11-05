@@ -104,7 +104,7 @@ class _viewChildState extends State<viewChild> {
                 color: kPrimaryColor,
               ),
               child: Padding(
-                padding: const EdgeInsets.only(top: 15, bottom: 5),
+                padding: const EdgeInsets.only(top: 15, bottom: 50),
                 child: Column(
                   children: [
                     Row(
@@ -187,6 +187,7 @@ class _viewChildState extends State<viewChild> {
                         SizedBox(width: ScreenWidth * 0.1),
                       ],
                     ),
+                    SizedBox(height: ScreenHeight * 0.03),
                     Directionality(
                       textDirection: TextDirection.rtl,
                       child: ElevatedButton.icon(

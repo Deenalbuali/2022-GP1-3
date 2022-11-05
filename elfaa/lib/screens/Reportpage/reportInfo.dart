@@ -254,6 +254,7 @@ class _reportInfoState extends State<reportInfo> {
                         width: 150,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
+                            elevation: 0,
                             backgroundColor: Color(0xFFFFEEEE), // background
                             // foreground
                           ),
