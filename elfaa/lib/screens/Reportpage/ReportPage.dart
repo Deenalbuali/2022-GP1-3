@@ -118,7 +118,7 @@ class _ReportPageState extends State<ReportPage> {
       child: Stack(
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.only(right: 25, left: 25, top: 10),
+            padding: const EdgeInsets.only(right: 10, left: 10, top: 10),
             child: SizedBox(child: list()),
           )
         ],

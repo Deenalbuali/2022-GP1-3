@@ -28,7 +28,7 @@ class _NotlistBoxState extends State<NotlistBox> {
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
     return Padding(
-      padding: const EdgeInsets.only(bottom: 15, left: 15, right: 15, top: 7),
+      padding: const EdgeInsets.only(bottom: 15, left: 25, right: 25, top: 7),
       child: Container(
         height: height * 0.1,
         decoration: BoxDecoration(boxShadow: [
