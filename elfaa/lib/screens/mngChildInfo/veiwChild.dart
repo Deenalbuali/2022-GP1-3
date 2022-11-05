@@ -84,137 +84,140 @@ class _viewChildState extends State<viewChild> {
           color: kPrimaryColor,
         )),
       ),
-      body: Column(
-        children: [
-          Container(
-            height: ScreenHeight * 0.53,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
-                image: DecorationImage(
-                    image: AssetImage("assets/images/oneChild.jpg"),
-                    fit: BoxFit.cover)),
-          ),
-          Container(
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(28), topRight: Radius.circular(28)),
-              color: kPrimaryColor,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              height: ScreenHeight * 0.53,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(25),
+                  image: DecorationImage(
+                      image: AssetImage("assets/images/oneChild.jpg"),
+                      fit: BoxFit.cover)),
             ),
-            child: Padding(
-              padding: const EdgeInsets.only(top: 15, bottom:5),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Directionality(
-                            textDirection: TextDirection.rtl,
-                            child: Text(
-                              "$childName في",
+            Container(
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(28),
+                    topRight: Radius.circular(28)),
+                color: kPrimaryColor,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 15, bottom: 5),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Directionality(
+                              textDirection: TextDirection.rtl,
+                              child: Text(
+                                "$childName في",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            Text(
+                              "$zoneName",
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold),
                             ),
-                          ),
-                          Text(
-                            "$zoneName",
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(boxShadow: [
+                                BoxShadow(
+                                  color: Colors.white.withOpacity(0.5),
+                                  spreadRadius: 1,
+                                  blurRadius: 22,
+                                  offset: Offset(5, 5),
+                                )
+                              ]),
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  child: networkImg(
+                                      childImage, ScreenWidth, ScreenHeight)),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: ScreenHeight * 0.01),
+                    Row(
+                      children: [
+                        SizedBox(width: ScreenWidth * 0.25),
+                        Directionality(
+                          textDirection: TextDirection.rtl,
+                          child: getAgeText(),
+                        ),
+                        SizedBox(width: ScreenWidth * 0.13),
+                        Directionality(
+                          textDirection: TextDirection.rtl,
+                          child: Text(
+                            "$childGender",
+                            textDirection: TextDirection.rtl,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold),
                           ),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(boxShadow: [
-                              BoxShadow(
-                                color: Colors.white.withOpacity(0.5),
-                                spreadRadius: 1,
-                                blurRadius: 22,
-                                offset: Offset(5, 5),
-                              )
-                            ]),
-                            child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20.0),
-                                child: networkImg(
-                                    childImage, ScreenWidth, ScreenHeight)),
+                        ),
+                        SizedBox(width: ScreenWidth * 0.1),
+                        Directionality(
+                          textDirection: TextDirection.rtl,
+                          child: Text(
+                            "$childHeight سم",
+                            textDirection: TextDirection.rtl,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
                           ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: ScreenHeight * 0.01),
-                  Row(
-                    children: [
-                      SizedBox(width: ScreenWidth * 0.25),
-                      Directionality(
-                        textDirection: TextDirection.rtl,
-                        child: getAgeText(),
-                      ),
-                      SizedBox(width: ScreenWidth * 0.13),
-                      Directionality(
-                        textDirection: TextDirection.rtl,
-                        child: Text(
-                          "$childGender",
-                          textDirection: TextDirection.rtl,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
                         ),
-                      ),
-                      SizedBox(width: ScreenWidth * 0.1),
-                      Directionality(
-                        textDirection: TextDirection.rtl,
-                        child: Text(
-                          "$childHeight سم",
-                          textDirection: TextDirection.rtl,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      SizedBox(width: ScreenWidth * 0.1),
-                    ],
-                  ),
-                  Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: ElevatedButton.icon(
-                      icon: Icon(
-                        Icons.campaign,
-                        color: Color.fromARGB(255, 255, 255, 255),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        textStyle: TextStyle(fontSize: 22),
-                        shadowColor: Color.fromARGB(255, 0, 0, 0),
-                        elevation: 0,
-                        backgroundColor: Colors.grey,
-                        shape: const StadiumBorder(),
-                        maximumSize: const Size(180, 56),
-                        minimumSize: const Size(180, 56),
-                      ),
-                      label: Text(
-                        ' إنشاء بلاغ   ',
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 255, 255, 255),
-                            fontSize: 20),
-                      ),
-                      onPressed: () {},
+                        SizedBox(width: ScreenWidth * 0.1),
+                      ],
                     ),
-                  ),
-                ],
+                    Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: ElevatedButton.icon(
+                        icon: Icon(
+                          Icons.campaign,
+                          color: Color.fromARGB(255, 255, 255, 255),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          textStyle: TextStyle(fontSize: 22),
+                          shadowColor: Color.fromARGB(255, 0, 0, 0),
+                          elevation: 0,
+                          backgroundColor: Colors.grey,
+                          shape: const StadiumBorder(),
+                          maximumSize: const Size(180, 56),
+                          minimumSize: const Size(180, 56),
+                        ),
+                        label: Text(
+                          ' إنشاء بلاغ   ',
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 255, 255, 255),
+                              fontSize: 20),
+                        ),
+                        onPressed: () {},
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
