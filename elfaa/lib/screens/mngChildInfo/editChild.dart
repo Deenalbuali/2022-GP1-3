@@ -252,58 +252,66 @@ class _editChildState extends State<editChild> {
                 SizedBox(
                   width: ScreenWidth,
                   child: ElevatedButton(
-                      onPressed: null,
+                      onPressed: (){},
                       style: ElevatedButton.styleFrom(
-                          textStyle: const TextStyle(fontSize: 22)),
+                          backgroundColor: Colors.grey,
+                          textStyle: const TextStyle(
+                            fontSize: 22,
+                            color: Color.fromARGB(255, 255, 255, 255),
+                          )),
                       child: const Text('تغيير جهاز التتبع')),
                 ),
                 SizedBox(height: ScreenHeight * 0.02),
                 ElevatedButton(
                     onPressed: isProcessing
                         ? null
-                        :  () async {
-                      final action = await AlertDialogs.yesCancelDialog(
-                          context, ' بيانات الطفل ', 'هل أنت متأكد من تعديل بيانات الطفل؟');
-                      if (!mounted) return;
-                      if (action == DialogsAction.yes) {
-                        setState(() => tappedYes = true);
-                        if (!mounted) return;
-                      if (_formKey.currentState!.validate()) {
-                        if (imgURL.isEmpty) {
-                          setState(() {
-                            isLoading = true;
-                            isProcessing = true;
-                          });
-                        }
-                        Future.delayed(Duration(seconds: 7), () {
-                          final docChild = FirebaseFirestore.instance
-                              .collection('users')
-                              .doc(uid)
-                              .collection('children')
-                              .doc(widget.childID);
-                          //update child info
-                          docChild.update({
-                            'image': imgURL.isEmpty ? childImage : imgURL,
-                            'name': childName.text,
-                            'gender': selectedGender,
-                            'height': int.parse(childHeight.text),
-                            'birthday': DateTime.parse(birthday.text)
-                          });
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => NavPage()),
-                          );
-                          setState(() {
-                            isLoading = false;
-                            isProcessing = false;
-                          });
-                        });
-                      }
-                      } else {
-                        setState(() => tappedYes = false);
-                        if (!mounted) return;
-                      }
-                    },
+                        : () async {
+                            final action = await AlertDialogs.yesCancelDialog(
+                                context,
+                                ' بيانات الطفل ',
+                                'هل أنت متأكد من تعديل بيانات الطفل؟');
+                            if (!mounted) return;
+                            if (action == DialogsAction.yes) {
+                              setState(() => tappedYes = true);
+                              if (!mounted) return;
+                              if (_formKey.currentState!.validate()) {
+                                if (imgURL.isEmpty) {
+                                  setState(() {
+                                    isLoading = true;
+                                    isProcessing = true;
+                                  });
+                                }
+                                Future.delayed(Duration(seconds: 7), () {
+                                  final docChild = FirebaseFirestore.instance
+                                      .collection('users')
+                                      .doc(uid)
+                                      .collection('children')
+                                      .doc(widget.childID);
+                                  //update child info
+                                  docChild.update({
+                                    'image':
+                                        imgURL.isEmpty ? childImage : imgURL,
+                                    'name': childName.text,
+                                    'gender': selectedGender,
+                                    'height': int.parse(childHeight.text),
+                                    'birthday': DateTime.parse(birthday.text)
+                                  });
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => NavPage()),
+                                  );
+                                  setState(() {
+                                    isLoading = false;
+                                    isProcessing = false;
+                                  });
+                                });
+                              }
+                            } else {
+                              setState(() => tappedYes = false);
+                              if (!mounted) return;
+                            }
+                          },
                     style: ButtonStyle(
                       backgroundColor:
                           MaterialStateProperty.all(const Color(0xFF429EB2)),
