@@ -233,7 +233,7 @@ class _HomePageState extends State<HomePage> {
                             fit: BoxFit.cover)),
                   ),
                 )
-              : RefreshIndicator(onRefresh: refresh, child: _buildHeader2()),
+              : RefreshIndicator(onRefresh: refresh, child: _buildList()),
         ]),
       ),
     );
@@ -241,11 +241,11 @@ class _HomePageState extends State<HomePage> {
 
   Future refresh() async {
     setState(() {
-      _buildHeader2();
+      _buildList();
     });
   }
 
-  Container _buildHeader2() {
+  Container _buildList() {
     final GlobalKey<ScaffoldState> _ScaffoldKey = GlobalKey<ScaffoldState>();
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
