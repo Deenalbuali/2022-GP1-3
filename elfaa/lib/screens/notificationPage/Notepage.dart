@@ -77,7 +77,7 @@ class _NotePageState extends State<NotePage> {
         //if (index == 0)
         //return Null;
         // else
-        return NotlistBox(_noteList[index] as noteList);
+        return NotlistBox(_noteList[index] as childrenList);
       });
 
   void didChangeDependencies() {
@@ -104,7 +104,8 @@ class _NotePageState extends State<NotePage> {
 
     setState(() {
       if (!mounted) return;
-      _noteList = List.from(data.docs.map((doc) => noteList.fromSnapshot(doc)));
+      _noteList =
+          List.from(data.docs.map((doc) => childrenList.fromSnapshot(doc)));
     });
   }
 }

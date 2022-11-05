@@ -124,7 +124,9 @@ class _NotlistBoxState extends State<NotlistBox> {
         .collection('users')
         .doc(userid)
         .collection('children')
-        .orderBy('birthday', descending: true)
+        .doc("${widget._noteList.childID} ")
+        .collection('notifications')
+        .orderBy('time', descending: true)
         .get();
     if (!mounted) return;
     setState(() {
