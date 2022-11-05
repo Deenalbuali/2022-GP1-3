@@ -48,7 +48,11 @@ class _NotlistBoxState extends State<NotlistBox> {
                 Container(
                   padding: EdgeInsets.only(top: 10, bottom: 15),
                   child: Text(
-                      "! " "من " "${widget._childrenList.childName} " " مر ",
+                      "! " +
+                          " مر " +
+                          "${widget._childrenList.childName}" +
+                          " من " +
+                          "${widget._childrenList.childName}",
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
