@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:elfaa/screens/Homepage/childrenList.dart';
 import 'package:elfaa/screens/notificationPage/noteList.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 import 'package:intl/intl.dart';
@@ -9,10 +11,17 @@ String formattedTime = DateFormat.jm().format(now);
 final DateTime now2 = DateTime.now();
 final DateFormat formatter = DateFormat('yyyy-MM-dd');
 final String formatted = formatter.format(now2);
+List<Object> _childrenNote = [];
 
-class NotlistBox extends StatelessWidget {
+class NotlistBox extends StatefulWidget {
   final noteList _noteList;
   NotlistBox(this._noteList);
+
+  @override
+  State<NotlistBox> createState() => _NotlistBoxState();
+}
+
+class _NotlistBoxState extends State<NotlistBox> {
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> _ScaffoldKey = GlobalKey<ScaffoldState>();
@@ -38,7 +47,8 @@ class NotlistBox extends StatelessWidget {
               child: Column(children: [
                 Container(
                   padding: EdgeInsets.only(top: 10, bottom: 15),
-                  child: Text("! " "مر 'الطفل' من " + "${_noteList.zone_name} ",
+                  child: Text(
+                      "! " "مر 'الطفل' من " + "${widget._noteList.zone_name} ",
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -76,7 +86,7 @@ class NotlistBox extends StatelessWidget {
                       padding: EdgeInsets.only(
                           right: 1, left: 0.1, top: width * 0.05, bottom: 0.1),
                       child: Text(
-                        "${_noteList.childName} ",
+                        "${widget._noteList.childName} ",
                         style: TextStyle(
                             fontSize: 20,
                             color: Color.fromARGB(255, 41, 41, 32)),
@@ -89,7 +99,7 @@ class NotlistBox extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10.0),
                     child: Image.network(
-                      "${_noteList.childImagePath}",
+                      "${widget._noteList.childImagePath}",
                       width: width * 0.20,
                       height: width * 0.15,
                       fit: BoxFit.cover,
@@ -102,6 +112,26 @@ class NotlistBox extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> getChildrenList() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final User? user = await _auth.currentUser;
+    if (!mounted) return;
+    final userid = user!.uid;
+
+    var data = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userid)
+        .collection('children')
+        .orderBy('birthday', descending: true)
+        .get();
+    if (!mounted) return;
+    setState(() {
+      if (!mounted) return;
+      _childrenNote =
+          List.from(data.docs.map((doc) => childrenList.fromSnapshot(doc)));
+    });
   }
 }
 //const childrenList({

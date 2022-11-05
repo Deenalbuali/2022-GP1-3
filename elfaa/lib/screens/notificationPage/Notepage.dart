@@ -99,8 +99,6 @@ class _NotePageState extends State<NotePage> {
         .collection('users')
         .doc(userid)
         .collection('children')
-        .doc()
-        .collection('notifications')
         .get();
     if (!mounted) return;
 

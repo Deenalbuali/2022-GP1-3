@@ -6,6 +6,7 @@ class noteList {
   String? zone_name;
   DateTime? time;
   GeoPoint? location;
+  String? childID;
   noteList();
   Map<String, dynamic> toJson() => {
         'image': childImagePath,
@@ -18,6 +19,7 @@ class noteList {
   noteList.fromSnapshot(snapshot)
       : zone_name = snapshot.data()['zone_name'],
         childName = snapshot.data()['name'],
+        childID = snapshot.id,
         childImagePath = snapshot.data()['image'],
         time = snapshot.data()['time'].toDate(),
         location = snapshot.data()['location'];
