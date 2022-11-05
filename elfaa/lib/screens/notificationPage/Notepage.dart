@@ -105,6 +105,7 @@ class _NotePageState extends State<NotePage> {
 
     setState(() {
       if (!mounted) return;
+      
       _noteList =
           List.from(data.docs.map((doc) => childrenList.fromSnapshot(doc)));
     });

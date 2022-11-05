@@ -14,7 +14,7 @@ final String formatted = formatter.format(now2);
 List<Object> _childrenNote = [];
 
 class NotlistBox extends StatefulWidget {
-  final noteList _noteList;
+  final childrenList _noteList;
   NotlistBox(this._noteList);
 
   @override
@@ -48,7 +48,7 @@ class _NotlistBoxState extends State<NotlistBox> {
                 Container(
                   padding: EdgeInsets.only(top: 10, bottom: 15),
                   child: Text(
-                      "! " "مر 'الطفل' من " + "${widget._noteList.zone_name} ",
+                      "! " "مر 'الطفل' من " + "${widget._noteList.childID} ",
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -131,8 +131,10 @@ class _NotlistBoxState extends State<NotlistBox> {
     if (!mounted) return;
     setState(() {
       if (!mounted) return;
-      _childrenNote =
-          List.from(data.docs.map((doc) => childrenList.fromSnapshot(doc)));
+      if (data.docs.length != 0) {
+        _childrenNote =
+            List.from(data.docs.map((doc) => childrenList.fromSnapshot(doc)));
+      }
     });
   }
 }
