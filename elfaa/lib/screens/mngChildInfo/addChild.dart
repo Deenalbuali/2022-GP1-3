@@ -354,14 +354,14 @@ class _addChildState extends State<addChild> {
                   onPressed: () {
                     takePhoto(ImageSource.camera);
                   },
-                  label: const Text("Camera")),
+                  label: const Text("الكاميرا")),
               TextButton.icon(
                   icon: const Icon(Icons.image),
                   style: TextButton.styleFrom(foregroundColor: kPrimaryColor),
                   onPressed: () {
                     takePhoto(ImageSource.gallery);
                   },
-                  label: const Text("Gallary"))
+                  label: const Text("ألبوم الصور"))
             ],
           )
         ],
