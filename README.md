@@ -50,3 +50,12 @@ This solution provides the possibility for the parents to track the location of 
 </ul>
 
 <h2> APK </h2>
+<ul>
+<li> Install APK files on your Android smartphone or tablet directly from your browser</li> 
+<li> Open your browser</li> 
+<li> Find the APK file you want to download</li> 
+<li> Tap it – you should then be able to see it downloading on the top bar of your device</li>
+<li> Open Downloads</li> 
+<li> Tap on the APK file and tap Yes when prompted</li> 
+<li> The app will begin installing on your device. </li> 
+</ul>
