@@ -78,7 +78,7 @@ class _addChildState extends State<addChild> {
         elevation: 0,
         toolbarHeight: 90,
         title: const Text(
-          "إضافة طفل جديد",
+          "إضافة طفل ",
           style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
         ),
         centerTitle: true,
@@ -234,7 +234,7 @@ class _addChildState extends State<addChild> {
                 SizedBox(
                   width: ScreenWidth,
                   child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: (){},
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.grey,
                           textStyle: const TextStyle(
