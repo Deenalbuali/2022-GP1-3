@@ -6,11 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:ui' as ui;
 
-List<Object> _childrenNote = [];
-
 class NotlistBox extends StatefulWidget {
   final childrenList _childrenList;
-  NotlistBox(this._childrenList);
+  final noteList _childrenNote;
+  NotlistBox(this._childrenList, this._childrenNote);
 
   @override
   State<NotlistBox> createState() => _NotlistBoxState();
@@ -27,119 +26,125 @@ class _NotlistBoxState extends State<NotlistBox> {
     final GlobalKey<ScaffoldState> _ScaffoldKey = GlobalKey<ScaffoldState>();
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
+    //var i = _childrenNote[0] as noteList;
+    // try {
+    //   for (var i = 0; i < {widget._childrenNote}.length; i++) {
+    //     if (widget._childrenNote.childID![i] ==
+    //         widget._childrenList.childID![i])
+    //       return so(height, now, formatted, width,
+    //           widget._childrenList.childName![i]);
+    //   }
+    // } catch (e) {
+
+      
+    // }
     return Padding(
       padding: const EdgeInsets.only(bottom: 15, left: 25, right: 25, top: 7),
-      child: Container(
-        height: height * 0.1,
-        decoration: BoxDecoration(boxShadow: [
-          BoxShadow(
-            color: Colors.grey,
-            blurRadius: 10,
-            spreadRadius: 1,
-          )
-        ], color: Colors.white, borderRadius: BorderRadius.circular(12)),
-        padding: EdgeInsets.all(5),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 0),
-              child: Column(children: [
-                Directionality(
-                  textDirection: ui.TextDirection.rtl,
-                  child: Container(
-                    padding: EdgeInsets.only(top: 10, bottom: 15),
-                    child: Text(
-                            " مر " +
-                            "${widget._childrenList.childName}" +
-                            " من " +
-                            "${_childrenNote}",
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF9C0000),
-                        )),
-                  ),
-                ),
-                Row(
-                  children: [
-                    Text(DateFormat.jm().format(now),
-                        style: TextStyle(
-                          color: Color(0xff919296),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12,
-                        ),
-                        textAlign: TextAlign.left),
-                    Text(" | " + formatted,
-                        style: TextStyle(
-                          color: Color(0xff919296),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12,
-                        ),
-                        textAlign: TextAlign.left),
-                  ],
-                ),
-              ]),
-            ),
-            Row(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      child: newMethod(height, now, formatted, width),
+    );
+  }
 
-                  children: [
-                    Container(
-                      padding: EdgeInsets.only(
-                          right: 1, left: 0.1, top: width * 0.05, bottom: 0.1),
-                      child: Text(
-                        "${widget._childrenList.childName} ",
-                        style: TextStyle(
-                            fontSize: 20,
-                            color: Color.fromARGB(255, 41, 41, 32)),
+  Container newMethod(double height, DateTime now, String formatted, double width) {
+    return Container(
+      height: height * 0.1,
+      decoration: BoxDecoration(boxShadow: [
+        BoxShadow(
+          color: Colors.grey,
+          blurRadius: 10,
+          spreadRadius: 1,
+        )
+      ], color: Colors.white, borderRadius: BorderRadius.circular(12)),
+      padding: EdgeInsets.all(5),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 0),
+            child: Column(children: [
+              Directionality(
+                textDirection: ui.TextDirection.rtl,
+                child: Container(
+                  padding: EdgeInsets.only(top: 10, bottom: 15),
+                  child: Text(((widget._childrenNote.childID![i] ==
+           widget._childrenList.childID![i])
+                      " مر " +
+                          "${widget._childrenList.childName}" +
+                          " من "
+                              "${widget._childrenNote.zone_name}",
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF9C0000),
+                      )),
+                ),
+              ),
+              Row(
+                children: [
+                  Text(DateFormat.jm().format(now),
+                      style: TextStyle(
+                        color: Color(0xff919296),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
                       ),
+                      textAlign: TextAlign.left),
+                  Text(" | " + formatted,
+                      style: TextStyle(
+                        color: Color(0xff919296),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                      ),
+                      textAlign: TextAlign.left),
+                ],
+              ),
+            ]),
+          ),
+          Row(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(
+                        right: 1, left: 0.1, top: width * 0.05, bottom: 0.1),
+                    child: Text(
+                      "${widget._childrenList.childName} ",
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Color.fromARGB(255, 41, 41, 32)),
                     ),
-                  ],
-                ),
-                Container(
-                  padding: EdgeInsets.all(5),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10.0),
-                    child: networkImg("${widget._childrenList.childImagePath}",
-                        width, height),
                   ),
+                ],
+              ),
+              Container(
+                padding: EdgeInsets.all(5),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10.0),
+                  child: networkImg("${widget._childrenList.childImagePath}",
+                      width, height),
                 ),
-              ],
-            ),
-          ],
-        ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
 
-  Future<void> getChildrenList() async {
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    final User? user = await _auth.currentUser;
-    if (!mounted) return;
-    final userid = user!.uid;
-
-    var data = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(userid)
-        .collection('children')
-        .doc("${widget._childrenList.childID} ")
-        .collection('notifications')
-        .orderBy('time', descending: true)
-        .get();
-    if (!mounted) return;
-    setState(() {
-      if (!mounted) return;
-      if (data.docs.length != 0) {
-        _childrenNote =
-            List.from(data.docs.map((doc) => noteList.fromSnapshot(doc)));
-      }
-    });
-  }
+  // Widget list() => ListView.builder(
+  //     itemCount: _childrenNote.length,
+  //     shrinkWrap: true,
+  //     itemBuilder: (context, index) {
+  //       //if (index == 0)
+  //       //return Null;
+  //       // else
+  //       return NotlistBox(_childrenNote[index] as childrenList);
+  //     });
 }
+// Widget _findchild() {
+
+// }
 
 networkImg(String childImage, double ScreenWidth, double ScreenHeight) {
   try {

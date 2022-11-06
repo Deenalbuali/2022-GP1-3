@@ -12,6 +12,7 @@ final DateTime now = DateTime.now();
 final DateFormat formatter = DateFormat('yyyy-MM-dd');
 final String formatted = formatter.format(now);
 List<Object> _noteList = [];
+List<Object> _childrenNote = [];
 
 class NotePage extends StatefulWidget {
   @override
@@ -72,18 +73,20 @@ class _NotePageState extends State<NotePage> {
   }
 
   Widget list() => ListView.builder(
-      itemCount: _noteList.length,
+      itemCount: _childrenNote.length,
       shrinkWrap: true,
       itemBuilder: (context, index) {
         //if (index == 0)
         //return Null;
         // else
-        return NotlistBox(_noteList[index] as childrenList);
+        return NotlistBox(
+            _noteList[index] as childrenList, _childrenNote[index] as noteList);
       });
 
   void didChangeDependencies() {
     super.didChangeDependencies();
     getChildrenList();
+    getChildrenList2();
   }
 
   void initState() {
@@ -100,6 +103,7 @@ class _NotePageState extends State<NotePage> {
         .collection('users')
         .doc(userid)
         .collection('children')
+        .orderBy('birthday', descending: true)
         .get();
     if (!mounted) return;
 
@@ -108,6 +112,28 @@ class _NotePageState extends State<NotePage> {
 
       _noteList =
           List.from(data.docs.map((doc) => childrenList.fromSnapshot(doc)));
+    });
+  }
+
+  Future<void> getChildrenList2() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final User? user = await _auth.currentUser;
+    if (!mounted) return;
+    final userid = user!.uid;
+
+    var data = await FirebaseFirestore.instance
+        .collection('notifications')
+        //.orderBy('time', descending: true)
+        //.where('child_ID', isEqualTo: "${widget._noteList.childID}")
+        .get();
+
+    if (!mounted) return;
+    setState(() {
+      if (!mounted) return;
+      // if (data.docs.length != 0) {
+      _childrenNote =
+          List.from(data.docs.map((doc) => noteList.fromSnapshot(doc)));
+      // }
     });
   }
 }
