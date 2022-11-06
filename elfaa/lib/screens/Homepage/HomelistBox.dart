@@ -2,7 +2,6 @@ import 'package:elfaa/screens/Homepage/childrenList.dart';
 import 'package:elfaa/screens/mngChildInfo/veiwChild.dart';
 import 'package:flutter/material.dart';
 
-
 class HomelistBox extends StatelessWidget {
   final childrenList _childlist;
   HomelistBox(this._childlist);
@@ -86,12 +85,8 @@ class HomelistBox extends StatelessWidget {
                           padding: EdgeInsets.all(1),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(10.0),
-                            child: Image.network(
-                              "${_childlist.childImagePath}",
-                              fit: BoxFit.cover,
-                              width: width * 0.20,
-                              height: height * 0.15,
-                            ),
+                            child: networkImg(
+                                "${_childlist.childImagePath}", width, height),
                           ),
                         ),
                       ],
@@ -116,6 +111,49 @@ class HomelistBox extends StatelessWidget {
           },
         ));
   }
+}
+
+networkImg(String childImage, double ScreenWidth, double ScreenHeight) {
+  try {
+    return Image.network(
+      childImage,
+      width: ScreenWidth * 0.15,
+      height: ScreenHeight * 0.33,
+      fit: BoxFit.cover,
+      frameBuilder:
+          (BuildContext context, Widget child, int? frame, bool isAsyncLoaded) {
+        return Container(
+          child: child,
+        );
+      },
+      loadingBuilder: (BuildContext context, Widget child,
+          ImageChunkEvent? loadingProgress) {
+        if (loadingProgress == null) return child;
+        return Center(
+          child: Text(
+            "جاري التحميل",
+            style: TextStyle(
+                color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+        );
+      },
+      errorBuilder: (BuildContext context, Object error, StackTrace? st) {
+        return Container(
+          width: ScreenWidth * 0.15,
+          height: ScreenHeight * 0.33,
+          child: Center(
+            child: Text(
+              "! حدث خطأ",
+              style: TextStyle(
+                fontSize: 12,
+                color: Color.fromARGB(255, 41, 41, 32),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  } catch (error) {}
 }
 //const childrenList({
   //  Key? key,

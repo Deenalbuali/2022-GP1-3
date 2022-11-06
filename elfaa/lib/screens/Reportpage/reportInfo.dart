@@ -112,88 +112,76 @@ class _reportInfoState extends State<reportInfo> {
                         topLeft: Radius.circular(30),
                         topRight: Radius.circular(30),
                         bottomLeft: Radius.circular(25)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          children: [
-                            SizedBox(
-                              height: height * 0.02,
-                            ),
-                            Container(
-                              height: height * 0.05,
-                              width: height * 0.17,
-                              child: Center(
-                                  child: Text(
-                                "..." "جاري البحث",
-                                style: TextStyle(
-                                    color: Color(0xff919296),
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold),
-                              )),
-                              decoration: BoxDecoration(
-                                  color: Colors.yellow,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey,
-                                      blurRadius: 10,
-                                      spreadRadius: 1,
-                                    )
-                                  ],
-                                  borderRadius: BorderRadius.circular(8)),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  height: height * 0.02,
-                                ),
-                                Container(
-                                  padding: EdgeInsets.only(
-                                      right: width * 0.05,
-                                      left: 0.1,
-                                      top: width * 0.06,
-                                      bottom: 0.01),
-                                  child: Text(
-                                    widget.childName + "   ",
-                                    style: TextStyle(
-                                      color: Color.fromARGB(255, 41, 41, 32),
-                                      fontSize: 20,
+                    child: Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            children: [
+                              SizedBox(
+                                height: height * 0.02,
+                              ),
+                              Container(
+                                height: height * 0.05,
+                                width: height * 0.17,
+                                child: Center(
+                                    child: Text(
+                                  "..." "جاري البحث",
+                                  style: TextStyle(
+                                      color: Color(0xff919296),
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold),
+                                )),
+                                decoration: BoxDecoration(
+                                    color: Colors.yellow,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey,
+                                        blurRadius: 10,
+                                        spreadRadius: 1,
+                                      )
+                                    ],
+                                    borderRadius: BorderRadius.circular(8)),
+                              ),
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: height * 0.02,
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                        right: width * 0.03,
+                                        left: 0.1,
+                                        top: width * 0.06,
+                                        bottom: 0.01),
+                                    child: Text(
+                                      widget.childName,
+                                      style: TextStyle(
+                                        color: Color.fromARGB(255, 41, 41, 32),
+                                        fontSize: 20,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                SizedBox(
-                                  height: height * 0.02,
-                                ),
-                                Container(
-                                    padding: EdgeInsets.only(
-                                        right: 5, bottom: 5, top: 5),
-                                    // height: height * 0.001,
-                                    width: width * 0.15,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                          child: Image.network(
-                                            widget.childImagePath,
-                                            fit: BoxFit.scaleDown,
-                                          ),
-                                        ),
-                                      ],
-                                    )),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
+                                  Container(
+                                    padding: EdgeInsets.all(5),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      child: networkImg(
+                                          widget.childImagePath, width, height),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -294,4 +282,47 @@ class _reportInfoState extends State<reportInfo> {
       ),
     );
   }
+}
+
+networkImg(String childImage, double ScreenWidth, double ScreenHeight) {
+  try {
+    return Image.network(
+      childImage,
+      width: ScreenWidth * 0.2,
+      height: ScreenHeight * 0.09,
+      fit: BoxFit.cover,
+      frameBuilder:
+          (BuildContext context, Widget child, int? frame, bool isAsyncLoaded) {
+        return Container(
+          child: child,
+        );
+      },
+      loadingBuilder: (BuildContext context, Widget child,
+          ImageChunkEvent? loadingProgress) {
+        if (loadingProgress == null) return child;
+        return Center(
+          child: Text(
+            "جاري التحميل",
+            style: TextStyle(
+                color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+        );
+      },
+      errorBuilder: (BuildContext context, Object error, StackTrace? st) {
+        return Container(
+          width: ScreenWidth * 0.15,
+          height: ScreenHeight * 0.33,
+          child: Center(
+            child: Text(
+              "! حدث خطأ",
+              style: TextStyle(
+                fontSize: 12,
+                color: Color.fromARGB(255, 41, 41, 32),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  } catch (error) {}
 }
