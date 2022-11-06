@@ -183,20 +183,25 @@ class _SignupPageState extends State<SignupPage> {
                           }
                         },
                       )),
-                  Text(
-                    " كلمة المرور يجب أن تحتوي على الأقل:"
-                    "\n"
-                    "* 8 خانات"
-                    "\n"
-                    "* حرف كبير باللغة الإنجليزية"
-                    "\n"
-                    "* حرف صغير باللغة الإنجليزية"
-                    "\n"
-                    "* رقم ",
+                  Row(
                     textDirection: TextDirection.rtl,
-                    style: TextStyle(
-                      color: Color(0xFF818181),
-                    ),
+                    children: <Widget>[
+                      Text(
+                        textDirection: TextDirection.rtl,
+                        " كلمة المرور يجب أن تحتوي على الأقل:"
+                        "\n"
+                        "* 8 خانات"
+                        "\n"
+                        "* حرف كبير باللغة الإنجليزية"
+                        "\n"
+                        "* حرف صغير باللغة الإنجليزية"
+                        "\n"
+                        "* رقم ",
+                        style: TextStyle(
+                          color: Color(0xFF818181),
+                        ),
+                      ),
+                    ],
                   ),
                   SizedBox(height: ScreenHeight * 0.025),
                   ElevatedButton(
