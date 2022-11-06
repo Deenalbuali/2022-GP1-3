@@ -3,8 +3,8 @@ import 'package:elfaa/screens/Homepage/childrenList.dart';
 import 'package:elfaa/screens/notificationPage/noteList.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart' hide TextDirection;
 import 'package:intl/intl.dart';
+import 'dart:ui' as ui;
 
 List<Object> _childrenNote = [];
 
@@ -45,19 +45,21 @@ class _NotlistBoxState extends State<NotlistBox> {
             Padding(
               padding: const EdgeInsets.only(left: 0),
               child: Column(children: [
-                Container(
-                  padding: EdgeInsets.only(top: 10, bottom: 15),
-                  child: Text(
-                      "! " +
-                          " مر " +
-                          "${widget._childrenList.childName}" +
-                          " من " +
-                          "${_childrenNote}",
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF9C0000),
-                      )),
+                Directionality(
+                  textDirection: ui.TextDirection.rtl,
+                  child: Container(
+                    padding: EdgeInsets.only(top: 10, bottom: 15),
+                    child: Text(
+                            " مر " +
+                            "${widget._childrenList.childName}" +
+                            " من " +
+                            "${_childrenNote}",
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF9C0000),
+                        )),
+                  ),
                 ),
                 Row(
                   children: [
