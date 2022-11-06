@@ -35,7 +35,7 @@ class _viewChildState extends State<viewChild> {
     int childHeight = widget.childHeight;
     String childImage = widget.childImage;
     String childGender = widget.childGender;
-    String zoneName = 'منطقة الألعاب';
+    String zoneName = 'الألعاب';
 
     //Responsiviness variables
     final double ScreenHeight = MediaQuery.of(context).size.height;
@@ -116,7 +116,7 @@ class _viewChildState extends State<viewChild> {
                             Directionality(
                               textDirection: TextDirection.rtl,
                               child: Text(
-                                "$childName في",
+                                " في منطقة",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 20,
@@ -230,15 +230,12 @@ class _viewChildState extends State<viewChild> {
     DateDuration calcAge = AgeCalculator.age(childBirthday);
 
     int childAgeYears = calcAge.years;
-    int childAgeMonths =calcAge.months;
+    int childAgeMonths = calcAge.months;
     String str = '';
     try {
-      if (childAgeYears > 10 ||
-          childAgeYears == 1 ||
-          childAgeYears == 2) {
+      if (childAgeYears > 10 || childAgeYears == 1 || childAgeYears == 2) {
         str = "$childAgeYears سنة";
-      } else if (childAgeYears > 2 &&
-          childAgeYears < 11){
+      } else if (childAgeYears > 2 && childAgeYears < 11) {
         str = "$childAgeYears سنوات";
       } else if (childAgeYears < 1) {
         if (childAgeMonths == 1 ||
@@ -277,12 +274,11 @@ networkImg(String childImage, double ScreenWidth, double ScreenHeight) {
           ImageChunkEvent? loadingProgress) {
         if (loadingProgress == null) return child;
         return Center(
-          child: Text("جاري التحميل",
-          style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold),),
-          
+          child: Text(
+            "جاري التحميل",
+            style: TextStyle(
+                color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+          ),
         );
       },
       errorBuilder: (BuildContext context, Object error, StackTrace? st) {
