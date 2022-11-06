@@ -156,12 +156,12 @@ class _reportInfoState extends State<reportInfo> {
                                   ),
                                   Container(
                                     padding: EdgeInsets.only(
-                                        right: width * 0.05,
+                                        right: width * 0.03,
                                         left: 0.1,
                                         top: width * 0.06,
                                         bottom: 0.01),
                                     child: Text(
-                                      widget.childName + "   ",
+                                      widget.childName,
                                       style: TextStyle(
                                         color: Color.fromARGB(255, 41, 41, 32),
                                         fontSize: 20,
