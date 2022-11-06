@@ -102,12 +102,8 @@ class _NotlistBoxState extends State<NotlistBox> {
                   padding: EdgeInsets.all(5),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10.0),
-                    child: Image.network(
-                      "${widget._childrenList.childImagePath}",
-                      width: width * 0.20,
-                      height: width * 0.15,
-                      fit: BoxFit.cover,
-                    ),
+                    child: networkImg("${widget._childrenList.childImagePath}",
+                        width, height),
                   ),
                 ),
               ],
@@ -141,6 +137,49 @@ class _NotlistBoxState extends State<NotlistBox> {
       }
     });
   }
+}
+
+networkImg(String childImage, double ScreenWidth, double ScreenHeight) {
+  try {
+    return Image.network(
+      childImage,
+      width: ScreenWidth * 0.15,
+      height: ScreenHeight * 0.33,
+      fit: BoxFit.cover,
+      frameBuilder:
+          (BuildContext context, Widget child, int? frame, bool isAsyncLoaded) {
+        return Container(
+          child: child,
+        );
+      },
+      loadingBuilder: (BuildContext context, Widget child,
+          ImageChunkEvent? loadingProgress) {
+        if (loadingProgress == null) return child;
+        return Center(
+          child: Text(
+            "جاري التحميل",
+            style: TextStyle(
+                color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+        );
+      },
+      errorBuilder: (BuildContext context, Object error, StackTrace? st) {
+        return Container(
+          width: ScreenWidth * 0.15,
+          height: ScreenHeight * 0.33,
+          child: Center(
+            child: Text(
+              "! حدث خطأ",
+              style: TextStyle(
+                fontSize: 12,
+                color: Color.fromARGB(255, 41, 41, 32),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  } catch (error) {}
 }
 //const childrenList({
   //  Key? key,
