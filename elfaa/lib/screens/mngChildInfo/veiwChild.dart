@@ -35,7 +35,7 @@ class _viewChildState extends State<viewChild> {
     int childHeight = widget.childHeight;
     String childImage = widget.childImage;
     String childGender = widget.childGender;
-    String zoneName = 'منطقة الألعاب';
+    String zoneName = 'الألعاب';
 
     //Responsiviness variables
     final double ScreenHeight = MediaQuery.of(context).size.height;
@@ -116,7 +116,7 @@ class _viewChildState extends State<viewChild> {
                             Directionality(
                               textDirection: TextDirection.rtl,
                               child: Text(
-                                "في",
+                                " في منطقة",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 20,

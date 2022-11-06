@@ -28,6 +28,7 @@ class _NotlistBoxState extends State<NotlistBox> {
     final double width = MediaQuery.of(context).size.width;
     //var i = _childrenNote[0] as noteList;
     try {
+      print({widget._childrenNote}.length);
       for (var i = 0; i < {widget._childrenNote}.length; i++) {
         for (var j = 0; j < {widget._childrenList}.length; i++) {
           if (widget._childrenNote.childID![i] ==
