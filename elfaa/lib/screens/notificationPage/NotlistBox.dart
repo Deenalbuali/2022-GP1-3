@@ -27,24 +27,25 @@ class _NotlistBoxState extends State<NotlistBox> {
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
     //var i = _childrenNote[0] as noteList;
-    // try {
-    //   for (var i = 0; i < {widget._childrenNote}.length; i++) {
-    //     if (widget._childrenNote.childID![i] ==
-    //         widget._childrenList.childID![i])
-    //       return so(height, now, formatted, width,
-    //           widget._childrenList.childName![i]);
-    //   }
-    // } catch (e) {
-
-      
-    // }
+    try {
+      for (var i = 0; i < {widget._childrenNote}.length; i++) {
+        for (var j = 0; j < {widget._childrenList}.length; i++) {
+          if (widget._childrenNote.childID![i] ==
+              widget._childrenList.childID![j])
+            return newMethod(height, now, formatted, width,
+                widget._childrenNote.zone_name![i]);
+        }
+      }
+    } catch (e) {}
     return Padding(
       padding: const EdgeInsets.only(bottom: 15, left: 25, right: 25, top: 7),
-      child: newMethod(height, now, formatted, width),
+      child:
+          networkImg("${widget._childrenList.childImagePath}", width, height),
     );
   }
 
-  Container newMethod(double height, DateTime now, String formatted, double width) {
+  Container newMethod(double height, DateTime now, String formatted,
+      double width, String zone_name) {
     return Container(
       height: height * 0.1,
       decoration: BoxDecoration(boxShadow: [
@@ -65,8 +66,7 @@ class _NotlistBoxState extends State<NotlistBox> {
                 textDirection: ui.TextDirection.rtl,
                 child: Container(
                   padding: EdgeInsets.only(top: 10, bottom: 15),
-                  child: Text(((widget._childrenNote.childID![i] ==
-           widget._childrenList.childID![i])
+                  child: Text(
                       " مر " +
                           "${widget._childrenList.childName}" +
                           " من "
@@ -111,8 +111,7 @@ class _NotlistBoxState extends State<NotlistBox> {
                     child: Text(
                       "${widget._childrenList.childName} ",
                       style: TextStyle(
-                          fontSize: 20,
-                          color: Color.fromARGB(255, 41, 41, 32)),
+                          fontSize: 20, color: Color.fromARGB(255, 41, 41, 32)),
                     ),
                   ),
                 ],
@@ -121,8 +120,8 @@ class _NotlistBoxState extends State<NotlistBox> {
                 padding: EdgeInsets.all(5),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
-                  child: networkImg("${widget._childrenList.childImagePath}",
-                      width, height),
+                  child: networkImg(
+                      "${widget._childrenList.childImagePath}", width, height),
                 ),
               ),
             ],
