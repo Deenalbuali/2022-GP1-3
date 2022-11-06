@@ -9,7 +9,7 @@
 It allows the parents to track the location of their child at any time, and to know whether he passed by the pre-defined unallowed range, through an alert notification that he receives, and if he has lost it and found that his location is far from him, he can report to the security guards through the application to help him find him quickly; This solution also contributes to a part of the security guard's work in a public place and his involvement in the search for lost children in a way that ensures ease and facilitation.</p>
 
 <p> <strong>
-تطبيق إلفاء </strong>يستخدم <strong>تقنيات إنترنت الأشياء</strong> للمساهمة في بناء حل يعمل في المدن الذكية لتوفير بيئة آمنة في الأماكن العامة أو المزدحمة، يستهدف الأباء و الأمهات عن طريق استعمالهم للتطبيق وربط جهاز التتبع بطفلهم الذي يحمله الطفل كاكسسوار مصمم بشكل جذاب. ويمكن للناس العامّة المساهمة في مساعدة طفل ضائع بكل سهولة ويسر عن طريق توفير وسيلة تواصل مع أهل الطفل
+تطبيق إلفاء </strong>يستخدم <strong>تقنيات إنترنت الأشياء</strong> للمساهمة في بناء حل يعمل في المدن الذكية لتوفير بيئة آمنة في الأماكن العامة أو المزدحمة، يستهدف الأباء و الأمهات عن طريق استعمالهم للتطبيق وربط جهاز التتبع بطفلهم الذي يحمله الطفل كاكسسوار مصمم بشكل جذاب. ويمكن للناس العامّة المساهمة في مساعدة طفل ضائع بكل سهولة ويسر عن طريق توفير وسيلة تواصل مع أهل الطفل،
  يوفّر هذا الحل إمكانية للأم/ الأب أن يراقب موقع طفله في أي وقت ضمن النطاق المعرّف مسبقَا، ومعرفة ما إذا كان ضمن النطاق المسموح أم لا عن طريق إشعار تنبيهي يصله، وإن كان قد أضاعه ووجد أن مكانه بعيدٌ عنه فيمكنه إبلاغ حراس الأمن عن طريق التطبيق لمساعدته في إيجاده سريعًا؛ كما أن هذا الحل يساهم في جزء من عمل حارس الأمن في مكان عام وإشراكه في البحث عن الأطفال الضائعين بما يضمن اليسر والتسهيل </p>
 
 <h2>:woman_technologist:Technology Used </h2>
