@@ -31,7 +31,7 @@ class _viewChildState extends State<viewChild> {
   @override
   Widget build(BuildContext context) {
     //Child Info
-    String childName = widget.childname;
+    final String childName = widget.childname;
     int childHeight = widget.childHeight;
     String childImage = widget.childImage;
     String childGender = widget.childGender;
@@ -56,8 +56,8 @@ class _viewChildState extends State<viewChild> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         toolbarHeight: 90,
-        title: const Text(
-          "صفحة الطفل",
+        title: Text(
+          childName,
           style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
         ),
         leading: IconButton(
