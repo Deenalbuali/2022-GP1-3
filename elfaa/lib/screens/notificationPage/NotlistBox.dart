@@ -1,25 +1,34 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:elfaa/screens/Homepage/childrenList.dart';
 import 'package:elfaa/screens/notificationPage/noteList.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 import 'package:intl/intl.dart';
 
-DateTime now = DateTime.now();
-String formattedTime = DateFormat.jm().format(now);
-final DateTime now2 = DateTime.now();
-final DateFormat formatter = DateFormat('yyyy-MM-dd');
-final String formatted = formatter.format(now2);
+List<Object> _childrenNote = [];
 
-class NotlistBox extends StatelessWidget {
-  final noteList _noteList;
-  NotlistBox(this._noteList);
+class NotlistBox extends StatefulWidget {
+  final childrenList _childrenList;
+  NotlistBox(this._childrenList);
+
+  @override
+  State<NotlistBox> createState() => _NotlistBoxState();
+}
+
+class _NotlistBoxState extends State<NotlistBox> {
   @override
   Widget build(BuildContext context) {
+    DateTime now = DateTime.now();
+    String formattedTime = DateFormat.jm().format(now);
+    final DateTime now2 = DateTime.now();
+    final DateFormat formatter = DateFormat('yyyy-MM-dd');
+    final String formatted = formatter.format(now2);
     final GlobalKey<ScaffoldState> _ScaffoldKey = GlobalKey<ScaffoldState>();
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
     return Padding(
-      padding: const EdgeInsets.only(bottom: 15, left: 15, right: 15, top: 7),
+      padding: const EdgeInsets.only(bottom: 15, left: 25, right: 25, top: 7),
       child: Container(
         height: height * 0.1,
         decoration: BoxDecoration(boxShadow: [
@@ -38,9 +47,14 @@ class NotlistBox extends StatelessWidget {
               child: Column(children: [
                 Container(
                   padding: EdgeInsets.only(top: 10, bottom: 15),
-                  child: Text("! " "مر 'الطفل' من " + "${_noteList.zone_name} ",
+                  child: Text(
+                      "! " +
+                          " مر " +
+                          "${widget._childrenList.childName}" +
+                          " من " +
+                          "${_childrenNote}",
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 12,
                         fontWeight: FontWeight.bold,
                         color: Color(0xFF9C0000),
                       )),
@@ -76,7 +90,7 @@ class NotlistBox extends StatelessWidget {
                       padding: EdgeInsets.only(
                           right: 1, left: 0.1, top: width * 0.05, bottom: 0.1),
                       child: Text(
-                        "${_noteList.childName} ",
+                        "${widget._childrenList.childName} ",
                         style: TextStyle(
                             fontSize: 20,
                             color: Color.fromARGB(255, 41, 41, 32)),
@@ -88,12 +102,8 @@ class NotlistBox extends StatelessWidget {
                   padding: EdgeInsets.all(5),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10.0),
-                    child: Image.network(
-                      "${_noteList.childImagePath}",
-                      width: width * 0.20,
-                      height: width * 0.15,
-                      fit: BoxFit.cover,
-                    ),
+                    child: networkImg("${widget._childrenList.childImagePath}",
+                        width, height),
                   ),
                 ),
               ],
@@ -103,6 +113,73 @@ class NotlistBox extends StatelessWidget {
       ),
     );
   }
+
+  Future<void> getChildrenList() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final User? user = await _auth.currentUser;
+    if (!mounted) return;
+    final userid = user!.uid;
+
+    var data = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userid)
+        .collection('children')
+        .doc("${widget._childrenList.childID} ")
+        .collection('notifications')
+        .orderBy('time', descending: true)
+        .get();
+    if (!mounted) return;
+    setState(() {
+      if (!mounted) return;
+      if (data.docs.length != 0) {
+        _childrenNote =
+            List.from(data.docs.map((doc) => noteList.fromSnapshot(doc)));
+      }
+    });
+  }
+}
+
+networkImg(String childImage, double ScreenWidth, double ScreenHeight) {
+  try {
+    return Image.network(
+      childImage,
+      width: ScreenWidth * 0.15,
+      height: ScreenHeight * 0.33,
+      fit: BoxFit.cover,
+      frameBuilder:
+          (BuildContext context, Widget child, int? frame, bool isAsyncLoaded) {
+        return Container(
+          child: child,
+        );
+      },
+      loadingBuilder: (BuildContext context, Widget child,
+          ImageChunkEvent? loadingProgress) {
+        if (loadingProgress == null) return child;
+        return Center(
+          child: Text(
+            "جاري التحميل",
+            style: TextStyle(
+                color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+        );
+      },
+      errorBuilder: (BuildContext context, Object error, StackTrace? st) {
+        return Container(
+          width: ScreenWidth * 0.15,
+          height: ScreenHeight * 0.33,
+          child: Center(
+            child: Text(
+              "! حدث خطأ",
+              style: TextStyle(
+                fontSize: 12,
+                color: Color.fromARGB(255, 41, 41, 32),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  } catch (error) {}
 }
 //const childrenList({
   //  Key? key,

@@ -291,7 +291,7 @@ class _HomePageState extends State<HomePage> {
           ),
           Positioned(
             top: height * 0.06,
-            right: width * 0.1,
+            right: width * 0.08,
             bottom: 0,
             child: Text(
               "! مرحبًا" " ",
@@ -303,7 +303,7 @@ class _HomePageState extends State<HomePage> {
           ),
           Positioned(
             top: height * 0.1,
-            right: width * 0.08,
+            right: width * 0.09,
             child: Text(
               username,
               style: TextStyle(
@@ -362,5 +362,6 @@ class _HomePageState extends State<HomePage> {
     super.dispose();
   }
 }
+
 
 //class ListPageState extends State<ListPage> {}

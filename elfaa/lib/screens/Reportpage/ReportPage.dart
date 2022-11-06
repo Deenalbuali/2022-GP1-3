@@ -25,60 +25,65 @@ class _ReportPageState extends State<ReportPage> {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> _ScaffoldKey = GlobalKey<ScaffoldState>();
+    final double height = MediaQuery.of(context).size.height;
+    final double width = MediaQuery.of(context).size.width;
     return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          toolbarHeight: 90,
-          title: Text(
-            "البلاغات",
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
-          ),
-          centerTitle: true,
-          flexibleSpace: Container(
-              decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(28),
-                bottomRight: Radius.circular(28)),
-            color: kPrimaryColor,
-          )),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        toolbarHeight: 90,
+        title: Text(
+          "البلاغات",
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
         ),
-        body: Stack(children: <Widget>[
-          Align(
-            alignment: Alignment.topCenter,
-            child: Padding(
-              padding: const EdgeInsets.all(30),
-              child: Directionality(
-                textDirection: TextDirection.rtl,
-                child: ElevatedButton.icon(
-                  icon: Icon(
-                    Icons.campaign,
-                    color: Color.fromARGB(255, 255, 255, 255),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    textStyle: TextStyle(fontSize: 22),
-                    shadowColor: Color.fromARGB(255, 0, 0, 0),
-                    elevation: 0,
-                    backgroundColor: Colors.grey,
-                    shape: const StadiumBorder(),
-                    maximumSize: const Size(180, 56),
-                    minimumSize: const Size(180, 56),
-                  ),
-                  label: Text(
-                    ' إنشاء بلاغ   ',
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 255, 255, 255),
-                        fontSize: 20),
-                  ),
-                  onPressed: () {},
+        centerTitle: true,
+        flexibleSpace: Container(
+            decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(28),
+              bottomRight: Radius.circular(28)),
+          color: kPrimaryColor,
+        )),
+      ),
+      body: Column(children: [
+        Align(
+          alignment: Alignment.topCenter,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 30),
+            child: Directionality(
+              textDirection: TextDirection.rtl,
+              child: ElevatedButton.icon(
+                icon: Icon(
+                  Icons.campaign,
+                  color: Color.fromARGB(255, 255, 255, 255),
                 ),
+                style: ElevatedButton.styleFrom(
+                  textStyle: TextStyle(fontSize: 22),
+                  shadowColor: Color.fromARGB(255, 0, 0, 0),
+                  elevation: 0,
+                  backgroundColor: Colors.grey,
+                  shape: const StadiumBorder(),
+                  maximumSize: const Size(180, 56),
+                  minimumSize: const Size(180, 56),
+                ),
+                label: Text(
+                  ' إنشاء بلاغ   ',
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 255, 255, 255), fontSize: 20),
+                ),
+                onPressed: () {},
               ),
             ),
           ),
-          SizedBox(
-              child: _childrenList3.length == 0
-                  ? Padding(
+        ),
+        SizedBox(
+            child: _childrenList3.length == 0
+                ? Container(
+                    height: height * 0.65,
+                    width: double.infinity,
+                    child: Padding(
                       padding: const EdgeInsets.all(25),
                       child: Container(
                         width: MediaQuery.of(context).size.width,
@@ -87,9 +92,11 @@ class _ReportPageState extends State<ReportPage> {
                           image: AssetImage("assets/images/noReports.png"),
                         )),
                       ),
-                    )
-                  : list()),
-        ]));
+                    ),
+                  )
+                : _buildList()),
+      ]),
+    );
   }
 
   Widget list() => ListView.builder(
@@ -106,6 +113,24 @@ class _ReportPageState extends State<ReportPage> {
 
   void initState() {
     super.initState();
+  }
+
+  Container _buildList() {
+    final GlobalKey<ScaffoldState> _ScaffoldKey = GlobalKey<ScaffoldState>();
+    final double height = MediaQuery.of(context).size.height;
+    final double width = MediaQuery.of(context).size.width;
+    return Container(
+      height: height * 0.65,
+      width: double.infinity,
+      child: Stack(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(right: 10, left: 10, top: 10),
+            child: SizedBox(child: list()),
+          )
+        ],
+      ),
+    );
   }
 
   Future<void> getChildrenList() async {

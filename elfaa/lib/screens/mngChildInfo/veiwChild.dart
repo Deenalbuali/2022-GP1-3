@@ -31,7 +31,7 @@ class _viewChildState extends State<viewChild> {
   @override
   Widget build(BuildContext context) {
     //Child Info
-    String childName = widget.childname;
+    final String childName = widget.childname;
     int childHeight = widget.childHeight;
     String childImage = widget.childImage;
     String childGender = widget.childGender;
@@ -56,8 +56,8 @@ class _viewChildState extends State<viewChild> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         toolbarHeight: 90,
-        title: const Text(
-          "صفحة الطفل",
+        title: Text(
+          childName,
           style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
         ),
         leading: IconButton(
@@ -229,24 +229,22 @@ class _viewChildState extends State<viewChild> {
     //Calculate Age As years: 0, Months: 0, Days: 0
     DateDuration calcAge = AgeCalculator.age(childBirthday);
 
-    String childAgeYears =
-        (calcAge.toString().replaceAll(new RegExp(r'[^0-9]'), ''))[0];
-    String childAgeMonths =
-        (calcAge.toString().replaceAll(new RegExp(r'[^0-9]'), ''))[1];
+    int childAgeYears = calcAge.years;
+    int childAgeMonths =calcAge.months;
     String str = '';
     try {
-      if (int.parse(childAgeYears) > 10 ||
-          int.parse(childAgeYears) == 1 ||
-          int.parse(childAgeYears) == 2) {
+      if (childAgeYears > 10 ||
+          childAgeYears == 1 ||
+          childAgeYears == 2) {
         str = "$childAgeYears سنة";
-      } else if (int.parse(childAgeYears) > 2 &&
-          int.parse(childAgeYears) < 11) {
+      } else if (childAgeYears > 2 &&
+          childAgeYears < 11){
         str = "$childAgeYears سنوات";
-      } else if (int.parse(childAgeYears) < 1) {
-        if (int.parse(childAgeMonths) == 1 ||
-            int.parse(childAgeMonths) == 11 ||
-            int.parse(childAgeMonths) == 12 ||
-            int.parse(childAgeMonths) == 0) {
+      } else if (childAgeYears < 1) {
+        if (childAgeMonths == 1 ||
+            childAgeMonths == 11 ||
+            childAgeMonths == 12 ||
+            childAgeMonths == 0) {
           str = "$childAgeMonths شهر";
         } else {
           str = "$childAgeMonths شهور";
@@ -279,7 +277,12 @@ networkImg(String childImage, double ScreenWidth, double ScreenHeight) {
           ImageChunkEvent? loadingProgress) {
         if (loadingProgress == null) return child;
         return Center(
-          child: Text("جاري التحميل"),
+          child: Text("جاري التحميل",
+          style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),),
+          
         );
       },
       errorBuilder: (BuildContext context, Object error, StackTrace? st) {
