@@ -168,16 +168,7 @@ class _SignupPageState extends State<SignupPage> {
                                 : Icon(Icons.lock_outline,
                                     color: Color(0xFFFD8601)),
                             labelText: "كلمة المرور",
-                            hintText: "أدخل كلمة المرور",
-                            helperText: " كلمة المرور يجب أن تحتوي على الأقل:"
-                                "\n"
-                                "* 8 خانات"
-                                "\n"
-                                "* حرف كبير باللغة الإنجليزية"
-                                "\n"
-                                "* حرف صغير باللغة الإنجليزية"
-                                "\n"
-                                "* رقم "),
+                            hintText: "أدخل كلمة المرور"),
                         onFieldSubmitted: (_) =>
                             FocusScope.of(context).unfocus(),
                         validator: (value) {
@@ -186,12 +177,25 @@ class _SignupPageState extends State<SignupPage> {
                           if (value!.isEmpty || pass.text.trim() == "") {
                             return "الحقل مطلوب";
                           } else if (!regex.hasMatch(value)) {
-                            return "أدخل كلمة مرور صالحة";
+                            return " أدخل كلمة مرور صالحة ضمن الشروط";
                           } else if (value.length < 8) {
                             return "أدخل كلمة مرور مكوّنة من 8 خانات على الأقل";
                           }
                         },
                       )),
+                  Text(
+                    textDirection: TextDirection.rtl,
+                    " كلمة المرور يجب أن تحتوي على الأقل:"
+                    "\n"
+                    "* 8 خانات"
+                    "\n"
+                    "* حرف كبير باللغة الإنجليزية"
+                    "\n"
+                    "* حرف صغير باللغة الإنجليزية"
+                    "\n"
+                    "* رقم ",
+                    style: TextStyle(color: Color.fromARGB(241, 100, 100, 100)),
+                  ),
                   SizedBox(height: ScreenHeight * 0.025),
                   ElevatedButton(
                     onPressed: () async {
