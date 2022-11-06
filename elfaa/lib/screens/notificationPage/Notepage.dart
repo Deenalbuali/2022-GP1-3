@@ -1,3 +1,4 @@
+import 'package:elfaa/screens/Homepage/HomelistBox.dart';
 import 'package:elfaa/screens/Homepage/childrenList.dart';
 import 'package:elfaa/screens/notificationPage/NotlistBox.dart';
 import 'package:elfaa/screens/notificationPage/noteList.dart';
@@ -77,7 +78,7 @@ class _NotePageState extends State<NotePage> {
         //if (index == 0)
         //return Null;
         // else
-        return NotlistBox(_noteList[index] as noteList);
+        return NotlistBox(_noteList[index] as childrenList);
       });
 
   void didChangeDependencies() {
@@ -99,14 +100,14 @@ class _NotePageState extends State<NotePage> {
         .collection('users')
         .doc(userid)
         .collection('children')
-        .doc()
-        .collection('notifications')
         .get();
     if (!mounted) return;
 
     setState(() {
       if (!mounted) return;
-      _noteList = List.from(data.docs.map((doc) => noteList.fromSnapshot(doc)));
+
+      _noteList =
+          List.from(data.docs.map((doc) => childrenList.fromSnapshot(doc)));
     });
   }
 }

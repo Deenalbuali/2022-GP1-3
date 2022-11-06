@@ -113,7 +113,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           backgroundColor: Colors.lightGreen,
           fontSize: 16.0,
           textColor: Colors.white);
-    } catch (e, stack) {
+    } catch (e) {
       Fluttertoast.showToast(
           msg: " البريد الإلكتروني غير موجود ",
           toastLength: Toast.LENGTH_SHORT,

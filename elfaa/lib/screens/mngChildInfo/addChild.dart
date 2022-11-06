@@ -111,6 +111,9 @@ class _addChildState extends State<addChild> {
                         labelText: "اسم الطفل",
                         hintText: "مثال: أسماء",
                       ),
+                      textInputAction: TextInputAction.next,
+                      onEditingComplete: () =>
+                          FocusScope.of(context).nextFocus(),
                       validator: (value) {
                         if (value!.isEmpty ||
                             controllerName.text.trim() == "") {
@@ -120,6 +123,38 @@ class _addChildState extends State<addChild> {
                       },
                     )),
                 SizedBox(height: ScreenHeight * 0.025),
+                Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: TextFormField(
+                      textAlign: TextAlign.right,
+                      controller: controllerHeight,
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                        suffixIcon: Icon(Icons.accessibility_new,
+                            color: Color(0xFFFD8601)),
+                        labelText: "الطول",
+                        hintText: "بالسنتيمترات",
+                      ),
+                      onFieldSubmitted: (_) => FocusScope.of(context).unfocus(),
+                      textInputAction: TextInputAction.next,
+                      onEditingComplete: () =>
+                          FocusScope.of(context).nextFocus(),
+                      validator: (value) {
+                        if (value!.isEmpty ||
+                            controllerHeight.text.trim() == "") {
+                          return "الحقل مطلوب";
+                        } else if (int.parse(controllerHeight.text.trim()) >
+                                200 ||
+                            int.parse(controllerHeight.text.trim()) < 30) {
+                          return "يرجى إدخال طول صحيح";
+                        }
+                        return null;
+                      },
+                    )),
+                   SizedBox(height: ScreenHeight * 0.025),
                 Directionality(
                   textDirection: TextDirection.rtl,
                   child: DropdownButtonFormField(
@@ -165,6 +200,9 @@ class _addChildState extends State<addChild> {
                           labelText: "تاريخ الميلاد",
                           hintText: "اختر من التقويم",
                         ),
+                        textInputAction: TextInputAction.next,
+                        onEditingComplete: () =>
+                            FocusScope.of(context).nextFocus(),
                         validator: (value) {
                           if (value!.isEmpty ||
                               controllerBirthday.text.trim() == "") {
@@ -203,38 +241,10 @@ class _addChildState extends State<addChild> {
                           }
                         })),
                 SizedBox(height: ScreenHeight * 0.025),
-                Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: TextFormField(
-                      textAlign: TextAlign.right,
-                      controller: controllerHeight,
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.digitsOnly
-                      ],
-                      keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(
-                        suffixIcon: Icon(Icons.accessibility_new,
-                            color: Color(0xFFFD8601)),
-                        labelText: "الطول",
-                        hintText: "بالسنتيمترات",
-                      ),
-                      validator: (value) {
-                        if (value!.isEmpty ||
-                            controllerHeight.text.trim() == "") {
-                          return "الحقل مطلوب";
-                        } else if (int.parse(controllerHeight.text.trim()) >
-                                200 ||
-                            int.parse(controllerHeight.text.trim()) < 30) {
-                          return "يرجى إدخال طول صحيح";
-                        }
-                        return null;
-                      },
-                    )),
-                SizedBox(height: ScreenHeight * 0.025),
                 SizedBox(
                   width: ScreenWidth,
                   child: ElevatedButton(
-                      onPressed: (){},
+                      onPressed: () {},
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.grey,
                           textStyle: const TextStyle(

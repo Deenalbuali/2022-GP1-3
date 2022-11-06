@@ -225,7 +225,7 @@ class _SignupPageState extends State<SignupPage> {
                               },
                             ),
                           );
-                        } catch (e, stack) {
+                        } catch (e) {
                           Fluttertoast.showToast(
                               msg: "البريد الإلكتروني مستخدم بالفعل",
                               toastLength: Toast.LENGTH_SHORT,

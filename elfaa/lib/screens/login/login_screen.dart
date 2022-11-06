@@ -156,7 +156,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               },
                             ),
                           );
-                        } catch (e, stack) {
+                        } catch (e) {
                           Fluttertoast.showToast(
                               msg: "البريد الإلكتروني أو كلمة المرور غير صحيحة",
                               toastLength: Toast.LENGTH_SHORT,
