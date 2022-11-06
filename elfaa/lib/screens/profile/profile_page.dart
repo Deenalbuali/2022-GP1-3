@@ -220,7 +220,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       ),
                     ),
                     label: Text(
-                      ' حفظ التغييرات   ',
+                      ' حفظ التعديلات   ',
                       style: TextStyle(color: kPrimaryColor, fontSize: 20),
                     ),
                     onPressed: () async {
@@ -241,7 +241,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         final User? user = await _auth.currentUser;
                         if (!mounted) return;
                         final uid = user!.uid;
-                        try {  
+                        try {
                           await FirebaseFirestore.instance
                               .collection('users')
                               .doc(uid)
