@@ -184,7 +184,6 @@ class _SignupPageState extends State<SignupPage> {
                         },
                       )),
                   Text(
-                    textDirection: TextDirection.rtl,
                     " كلمة المرور يجب أن تحتوي على الأقل:"
                     "\n"
                     "* 8 خانات"
@@ -194,7 +193,10 @@ class _SignupPageState extends State<SignupPage> {
                     "* حرف صغير باللغة الإنجليزية"
                     "\n"
                     "* رقم ",
-                    style: TextStyle(color: Color.fromARGB(241, 100, 100, 100)),
+                    textDirection: TextDirection.rtl,
+                    style: TextStyle(
+                      color: Color(0xFF818181),
+                    ),
                   ),
                   SizedBox(height: ScreenHeight * 0.025),
                   ElevatedButton(
