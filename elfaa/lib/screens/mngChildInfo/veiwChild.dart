@@ -230,7 +230,6 @@ class _viewChildState extends State<viewChild> {
     DateDuration calcAge = AgeCalculator.age(childBirthday);
 
     int childAgeYears = calcAge.years;
-        print(childAgeYears);
     int childAgeMonths =calcAge.months;
     String str = '';
     try {
@@ -278,7 +277,12 @@ networkImg(String childImage, double ScreenWidth, double ScreenHeight) {
           ImageChunkEvent? loadingProgress) {
         if (loadingProgress == null) return child;
         return Center(
-          child: Text("جاري التحميل"),
+          child: Text("جاري التحميل",
+          style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),),
+          
         );
       },
       errorBuilder: (BuildContext context, Object error, StackTrace? st) {

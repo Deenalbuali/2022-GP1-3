@@ -252,7 +252,7 @@ class _editChildState extends State<editChild> {
                 SizedBox(
                   width: ScreenWidth,
                   child: ElevatedButton(
-                      onPressed: (){},
+                      onPressed: () {},
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.grey,
                           textStyle: const TextStyle(
@@ -274,27 +274,33 @@ class _editChildState extends State<editChild> {
                             if (action == DialogsAction.yes) {
                               setState(() => tappedYes = true);
                               if (!mounted) return;
-                              //if yes 
+                              //if yes
                               if (_formKey.currentState!.validate()) {
-                                  setState(() {
-                                    isLoading = true;
-                                    isProcessing = true;
-                                  });
+                                setState(() {
+                                  isLoading = true;
+                                  isProcessing = true;
+                                });
                                 Future.delayed(Duration(seconds: 12), () {
-                                  final docChild = FirebaseFirestore.instance
-                                      .collection('users')
-                                      .doc(uid)
-                                      .collection('children')
-                                      .doc(widget.childID);
-                                  //update child info
-                                  docChild.update({
-                                    'image':
-                                        imgURL.isEmpty ? childImage : imgURL,
-                                    'name': childName.text,
-                                    'gender': selectedGender,
-                                    'height': int.parse(childHeight.text),
-                                    'birthday': DateTime.parse(birthday.text)
-                                  });
+                                  try {
+                                    final docChild = FirebaseFirestore.instance
+                                        .collection('users')
+                                        .doc(uid)
+                                        .collection('children')
+                                        .doc(widget.childID);
+                                    //update child info
+                                    docChild.update({
+                                      'image':
+                                          imgURL.isEmpty ? childImage : imgURL,
+                                      'name': childName.text,
+                                      'gender': selectedGender,
+                                      'height': int.parse(childHeight.text),
+                                      'birthday': DateTime.parse(birthday.text)
+                                    });
+                                  } on FirebaseException catch (e) {
+                                    // Caught an exception from Firebase.
+                                    print(
+                                        "Failed with error '${e.code}': ${e.message}");
+                                  }
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
