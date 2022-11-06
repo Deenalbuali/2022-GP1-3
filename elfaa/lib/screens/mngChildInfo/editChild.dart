@@ -274,14 +274,13 @@ class _editChildState extends State<editChild> {
                             if (action == DialogsAction.yes) {
                               setState(() => tappedYes = true);
                               if (!mounted) return;
+                              //if yes 
                               if (_formKey.currentState!.validate()) {
-                                if (imgURL.isEmpty) {
                                   setState(() {
                                     isLoading = true;
                                     isProcessing = true;
                                   });
-                                }
-                                Future.delayed(Duration(seconds: 7), () {
+                                Future.delayed(Duration(seconds: 12), () {
                                   final docChild = FirebaseFirestore.instance
                                       .collection('users')
                                       .doc(uid)
@@ -385,7 +384,7 @@ class _editChildState extends State<editChild> {
           CircleAvatar(
               radius: 80,
               backgroundImage: _img == null
-                  ? NetworkImage(widget.childImage)
+                  ? NetworkImage(childImage)
                   : FileImage(File(_img!.path)) as ImageProvider),
           Positioned(
               bottom: 15,
