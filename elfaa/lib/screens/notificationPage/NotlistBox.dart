@@ -9,6 +9,7 @@ import 'dart:ui' as ui;
 
 List<Object> _childNot = [];
 List notification = [];
+List _Note = [];
 
 class NotlistBox extends StatefulWidget {
   final childrenList _childrenList;
@@ -22,7 +23,9 @@ class NotlistBox extends StatefulWidget {
 class _NotlistBoxState extends State<NotlistBox> {
   @override
   Widget build(BuildContext context) {
-    List<noteList> ns = (widget._Note).map((dynamic item) => item as noteList).toList();
+    List<noteList> ns =
+        (widget._Note).map((dynamic item) => item as noteList).toList();
+
     if (notification.length == 1)
       return Text(notification.length.toString());
     else {
@@ -34,162 +37,104 @@ class _NotlistBoxState extends State<NotlistBox> {
       final GlobalKey<ScaffoldState> _ScaffoldKey = GlobalKey<ScaffoldState>();
       final double height = MediaQuery.of(context).size.height;
       final double width = MediaQuery.of(context).size.width;
-<<<<<<< Updated upstream
-      
-      for (int i = 0 ; i< ns.length ; i++){
-      return ListView.builder(
-      itemCount:notification.length ,
-      shrinkWrap: true,
-      itemBuilder: (context, index) {
-        if (notification[index] == ns[i].notID){
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 15, left: 25, right: 25, top: 7),
-          child: Container(
-            height: height * 0.1,
-            decoration: BoxDecoration(boxShadow: [
-              BoxShadow(
-                color: Colors.grey,
-                blurRadius: 10,
-                spreadRadius: 1,
-              )
-            ], color: Colors.white, borderRadius: BorderRadius.circular(12)),
-            padding: EdgeInsets.all(5),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 0),
-                  child: Column(children: [
-                    Directionality(
-                      textDirection: ui.TextDirection.rtl,
-                      child: Container(
-                        padding: EdgeInsets.only(top: 10, bottom: 15),
-                        child: Text(
-                            " مر " +
-                                "${widget._childrenList.childName}" +
-                                " من "
-                                    "${notification.length}",
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF9C0000),
-                            )),
-                      ),
-=======
 
-      return ListView.builder(
-          itemCount: notification.length,
-          shrinkWrap: true,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.only(
-                  bottom: 15, left: 25, right: 25, top: 7),
-              child: Container(
-                height: height * 0.1,
-                decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                          color: Color(0xff484848).withOpacity(.3),
-                          offset: Offset(0, 4),
-                          blurRadius: 8)
-                    ],
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12)),
-                padding: EdgeInsets.all(5),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 0),
-                      child: Column(children: [
-                        Directionality(
-                          textDirection: ui.TextDirection.rtl,
-                          child: Container(
-                            padding: EdgeInsets.only(top: 10, bottom: 15),
-                            child: Text(
-                                " مر " +
-                                    "${widget._childrenList.childName}" +
-                                    " من "
-                                        "${notification.length}",
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xFF9C0000),
-                                )),
-                          ),
-                        ),
-                        Row(
-                          children: [
-                            Text(DateFormat.jm().format(now),
-                                style: TextStyle(
-                                  color: Color(0xff919296),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 12,
-                                ),
-                                textAlign: TextAlign.left),
-                            Text(" | " + formatted,
-                                style: TextStyle(
-                                  color: Color(0xff919296),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 12,
-                                ),
-                                textAlign: TextAlign.left),
-                          ],
-                        ),
-                      ]),
->>>>>>> Stashed changes
-                    ),
-                    Row(
+      for (int i = 0; i < ns.length; i++) {
+        return ListView.builder(
+            itemCount: notification.length,
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              if (notification[index] == ns[i].notID) {
+                return Padding(
+                  padding: const EdgeInsets.only(
+                      bottom: 15, left: 25, right: 25, top: 7),
+                  child: Container(
+                    height: height * 0.1,
+                    decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey,
+                            blurRadius: 10,
+                            spreadRadius: 1,
+                          )
+                        ],
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12)),
+                    padding: EdgeInsets.all(5),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-
-                          children: [
-                            Container(
-                              padding: EdgeInsets.only(
-                                  right: 1,
-                                  left: 0.1,
-                                  top: width * 0.05,
-                                  bottom: 0.1),
-                              child: Text(
-                                "${widget._childrenList.childName} ",
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    color: Color.fromARGB(255, 41, 41, 32)),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 0),
+                          child: Column(
+                            children: [
+                              Directionality(
+                                textDirection: ui.TextDirection.rtl,
+                                child: Container(
+                                  padding: EdgeInsets.only(top: 10, bottom: 15),
+                                  child: Text(
+                                      " مر " +
+                                          "${widget._childrenList.childName}" +
+                                          " من "
+                                              "${notification.length}",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                        color: Color(0xFF9C0000),
+                                      )),
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        Container(
-                          padding: EdgeInsets.all(5),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10.0),
-                            child: networkImg(
-                                "${widget._childrenList.childImagePath}",
-                                width,
-                                height),
+                              Row(
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+                                    children: [
+                                      Container(
+                                        padding: EdgeInsets.only(
+                                            right: 1,
+                                            left: 0.1,
+                                            top: width * 0.05,
+                                            bottom: 0.1),
+                                        child: Text(
+                                          "${widget._childrenList.childName} ",
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              color: Color.fromARGB(
+                                                  255, 41, 41, 32)),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.all(5),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      child: networkImg(
+                                          "${widget._childrenList.childImagePath}",
+                                          width,
+                                          height),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
-                        ),
+                        )
                       ],
                     ),
-                  ],
-                ),
-<<<<<<< Updated upstream
-              ],
-            ),
-          ),
-        );}else
-        return Padding(padding:EdgeInsets.only(bottom: 15, left: 25, right: 25, top: 7));}
-       
-      );} return Padding(padding:EdgeInsets.only(bottom: 15, left: 25, right: 25, top: 7));
+                  ),
+                );
+              } else
+                return Padding(
+                    padding: EdgeInsets.only(
+                        bottom: 15, left: 25, right: 25, top: 7));
+            });
       }
-=======
-              ),
-            );
-          });
+      return Padding(
+          padding: EdgeInsets.only(bottom: 15, left: 25, right: 25, top: 7));
     }
->>>>>>> Stashed changes
   }
 
   @override
