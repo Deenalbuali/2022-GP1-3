@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 class childrenList {
   String? childImagePath;
   String? childName;
@@ -5,7 +7,7 @@ class childrenList {
   DateTime? childbirthday;
   int? childHeight;
   String? childGender;
-  String? notID;
+  List? nots;
   childrenList();
   Map<String, dynamic> toJson() => {
         'image': childImagePath,
@@ -13,7 +15,7 @@ class childrenList {
         'birthday': childbirthday,
         'height': childHeight,
         'gender': childGender,
-        'notID':notID
+        'notifications':nots
       };
 
   childrenList.fromSnapshot(snapshot)
@@ -23,5 +25,5 @@ class childrenList {
         childImagePath = snapshot.data()['image'],
         childbirthday = snapshot.data()['birthday'].toDate(),
         childGender = snapshot.data()['gender'],
-        notID = snapshot.data()['notID'];
+        nots = snapshot.data()['notifications'];
 }

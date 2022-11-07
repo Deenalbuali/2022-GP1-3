@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:elfaa/screens/Homepage/childrenList.dart';
 import 'package:elfaa/screens/notificationPage/noteList.dart';
@@ -7,6 +9,7 @@ import 'package:intl/intl.dart';
 import 'dart:ui' as ui;
 
 List<Object> _childNot = [];
+List notification = [];
 class NotlistBox extends StatefulWidget {
   final childrenList _childrenList;
   NotlistBox(this._childrenList);
@@ -18,6 +21,10 @@ class NotlistBox extends StatefulWidget {
 class _NotlistBoxState extends State<NotlistBox> {
   @override
   Widget build(BuildContext context) {
+    if (notification.length>1)
+    return Text("لأا يوووجد") ;
+    else{
+    Array not;
     DateTime now = DateTime.now();
     String formattedTime = DateFormat.jm().format(now);
     final DateTime now2 = DateTime.now();
@@ -52,7 +59,7 @@ class _NotlistBoxState extends State<NotlistBox> {
                       " مر " +
                           "${widget._childrenList.childName}" +
                           " من "
-                              "ll",
+                              "${notification}",
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
@@ -111,33 +118,42 @@ class _NotlistBoxState extends State<NotlistBox> {
         ],
       ),
     ),
-    );
+    );}
 
   }
    void didChangeDependencies() {
     super.didChangeDependencies();
-    getChildnot();
+    loadNot ();
+    //getChildnot();
   }
 
-  
-  Future<void> getChildnot() async {
-    if (!mounted) return;
-    var data = await FirebaseFirestore.instance
-        .collection('notificationForChild')
-        .doc(widget._childrenList.notID)
-        .collection('notifications')
-        .get();
-
-    if (!mounted) return;
-
+void loadNot (){
+  if(!({widget._childrenList.nots}.isEmpty)){
+  for (var n in {widget._childrenList.nots} ){
     setState(() {
-      if (!mounted) return;
-
-      _childNot =
-          List.from(data.docs.map((doc) => noteList.fromSnapshot(doc)));
-
+      notification.add(n);
     });
-  }
+  }}
+}
+  
+  // Future<void> getChildnot() async {
+  //   if (!mounted) return;
+  //   var data = await FirebaseFirestore.instance
+  //       .collection('notificationForChild')
+  //       .doc(widget._childrenList.notID)
+  //       .collection('notifications')
+  //       .get();
+
+  //   if (!mounted) return;
+
+  //   setState(() {
+  //     if (!mounted) return;
+
+  //     _childNot =
+  //         List.from(data.docs.map((doc) => noteList.fromSnapshot(doc)));
+
+  //   });
+  // }
 }
 
 networkImg(String childImage, double ScreenWidth, double ScreenHeight) {

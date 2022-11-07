@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da842f9e-9724-40f9-9104-e45df2fc73d3" name="Changes" comment="" />
+    <list default="true" id="da842f9e-9724-40f9-9104-e45df2fc73d3" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/elfaa/lib/screens/Homepage/childrenList.dart" beforeDir="false" afterPath="$PROJECT_DIR$/elfaa/lib/screens/Homepage/childrenList.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elfaa/lib/screens/notificationPage/Notepage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/elfaa/lib/screens/notificationPage/Notepage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elfaa/lib/screens/notificationPage/NotlistBox.dart" beforeDir="false" afterPath="$PROJECT_DIR$/elfaa/lib/screens/notificationPage/NotlistBox.dart" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
