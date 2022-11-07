@@ -22,7 +22,7 @@ class NotlistBox extends StatefulWidget {
 class _NotlistBoxState extends State<NotlistBox> {
   @override
   Widget build(BuildContext context) {
-    List<noteList> ns = (widget._Note).map((dynamic item) => item as noteList).toList();
+    List<noteList>? ns = (widget._Note as List<dynamic>)?.map((dynamic item) => item as noteList)?.toList();
     if (notification.length == 1)
       return Text(notification.length.toString());
     else {
@@ -76,46 +76,6 @@ class _NotlistBoxState extends State<NotlistBox> {
                             )),
                       ),
 =======
-
-      for (int i = 0 ; i< ns.length ; i++){
-      return ListView.builder(
-      itemCount:notification.length ,
-      shrinkWrap: true,
-      itemBuilder: (context, index) {
-        if (notification[index] == ns[i].notID){
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 15, left: 25, right: 25, top: 7),
-          child: Container(
-            height: height * 0.1,
-            decoration: BoxDecoration(boxShadow: [
-              BoxShadow(
-                color: Colors.grey,
-                blurRadius: 10,
-                spreadRadius: 1,
-              )
-            ], color: Colors.white, borderRadius: BorderRadius.circular(12)),
-            padding: EdgeInsets.all(5),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 0),
-                  child: Column(children: [
-                    Directionality(
-                      textDirection: ui.TextDirection.rtl,
-                      child: Container(
-                        padding: EdgeInsets.only(top: 10, bottom: 15),
-                        child: Text(
-                            " مر " +
-                                "${widget._childrenList.childName}" +
-                                " من "
-                                    "${notification.length}",
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF9C0000),
-                            )),
-                      ),
 
       return ListView.builder(
           itemCount: notification.length,
