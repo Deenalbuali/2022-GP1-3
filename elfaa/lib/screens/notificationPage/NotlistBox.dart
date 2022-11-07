@@ -26,9 +26,6 @@ class _NotlistBoxState extends State<NotlistBox> {
     List<noteList>? _notifications =
         (widget._Note).map((dynamic item) => item as noteList).toList();
 
-    if (notification.length == 1)
-      return Text(notification.length.toString());
-    else {
       DateTime now = DateTime.now();
       String formattedTime = DateFormat.jm().format(now);
       final DateTime now2 = DateTime.now();
@@ -37,16 +34,7 @@ class _NotlistBoxState extends State<NotlistBox> {
       final GlobalKey<ScaffoldState> _ScaffoldKey = GlobalKey<ScaffoldState>();
       final double height = MediaQuery.of(context).size.height;
       final double width = MediaQuery.of(context).size.width;
-
-      return ListView.builder(
-          itemCount: notification.length,
-          shrinkWrap: true,
-          itemBuilder: (context, index) {
-            for (int i = 0; i < _notifications.length - 1; i++) {
-              i++;
-              //if (notification[index] == _notifications[i].notID) {
-              return Center(
-                child: Padding(
+      return Padding(
                   padding: const EdgeInsets.only(
                       bottom: 15, left: 25, right: 25, top: 7),
                   child: Container(
@@ -75,7 +63,7 @@ class _NotlistBoxState extends State<NotlistBox> {
                                     " مر " +
                                         "${widget._childrenList.childName}" +
                                         " من "
-                                            "${_notifications[i].zone_name}",
+                                            "بوابة 1 ",
                                     style: TextStyle(
                                       fontSize: 12,
                                       fontWeight: FontWeight.bold,
@@ -140,44 +128,14 @@ class _NotlistBoxState extends State<NotlistBox> {
                       ],
                     ),
                   ),
-                ),
-              );
-              //}
-            }
-            return Padding(
-              padding: const EdgeInsets.only(
-                  bottom: 15, left: 25, right: 25, top: 7),
-            );
-          });
-    }
+                );
   }
 
   @override
   void initState() {
     super.initState();
-    loadNot();
   }
 
-  void loadNot() async {
-    notification = [];
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    final User? user = await _auth.currentUser;
-    if (!mounted) return;
-    final userid = user!.uid;
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(userid)
-        .collection('children')
-        .doc("${widget._childrenList.childID}")
-        .get()
-        .then((snapshot) {
-      for (var n in snapshot.data()?['notifications']) {
-        setState(() {
-          notification.add(n);
-        });
-      }
-    });
-  }
 
   // Future<void> getChildnot() async {
   //   if (!mounted) return;
