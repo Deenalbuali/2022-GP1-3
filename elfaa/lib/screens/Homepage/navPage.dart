@@ -4,6 +4,8 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:elfaa/screens/notificationPage/Notepage.dart';
 import 'package:flutter/material.dart';
 import 'package:elfaa/screens/profile/profile_page.dart';
+import 'package:elfaa/constants.dart';
+
 
 class NavPage extends StatefulWidget {
   const NavPage({super.key});
@@ -27,22 +29,22 @@ class _NavPageState extends State<NavPage> {
     final items = <Widget>[
       Icon(
         Icons.person,
-        color: Colors.orange,
+        color: kOrangeColor,
         size: 30,
       ),
       Icon(
         Icons.campaign,
-        color: Colors.orange,
+        color: kOrangeColor,
         size: 30,
       ),
       Icon(
         Icons.notifications,
-        color: Colors.orange,
+        color: kOrangeColor,
         size: 30,
       ),
       Icon(
         Icons.home,
-        color: Colors.orange,
+        color: kOrangeColor,
         size: 30,
       ),
     ];
