@@ -22,9 +22,11 @@ class NotlistBox extends StatefulWidget {
 class _NotlistBoxState extends State<NotlistBox> {
   @override
   Widget build(BuildContext context) {
-    List<noteList>? ns = (widget._Note as List<dynamic>)
-        ?.map((dynamic item) => item as noteList)
-        ?.toList();
+    //cast to notelist
+    List<noteList>? ns = (widget._Note)
+        .map((dynamic item) => item as noteList)
+        .toList();
+    
     if (notification.length == 1)
       return Text(notification.length.toString());
     else {
@@ -37,12 +39,10 @@ class _NotlistBoxState extends State<NotlistBox> {
       final double height = MediaQuery.of(context).size.height;
       final double width = MediaQuery.of(context).size.width;
 
-      for (int i = 0; i < ns!.length; i++) {
         return ListView.builder(
             itemCount: notification.length,
             shrinkWrap: true,
             itemBuilder: (context, index) {
-              if (notification[index] == ns[i].notID) {
                 return Padding(
                   padding: const EdgeInsets.only(
                       bottom: 15, left: 25, right: 25, top: 7),
@@ -72,7 +72,7 @@ class _NotlistBoxState extends State<NotlistBox> {
                                     " مر " +
                                         "${widget._childrenList.childName}" +
                                         " من "
-                                            "${notification.length}",
+                                            "${ns[2].zone_name}",
                                     style: TextStyle(
                                       fontSize: 12,
                                       fontWeight: FontWeight.bold,
@@ -138,17 +138,9 @@ class _NotlistBoxState extends State<NotlistBox> {
                     ),
                   ),
                 );
-              } else
-                return Padding(
-                    padding: EdgeInsets.only(
-                        bottom: 15, left: 25, right: 25, top: 7));
             });
-      }
-      return Padding(
-          padding: EdgeInsets.only(bottom: 15, left: 25, right: 25, top: 7));
     }
   }
-
   @override
   void initState() {
     super.initState();
@@ -174,6 +166,7 @@ class _NotlistBoxState extends State<NotlistBox> {
         });
       }
     });
+
   }
 
   // Future<void> getChildnot() async {

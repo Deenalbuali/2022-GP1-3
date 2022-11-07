@@ -12,7 +12,7 @@ final DateTime now = DateTime.now();
 final DateFormat formatter = DateFormat('yyyy-MM-dd');
 final String formatted = formatter.format(now);
 List<Object> _childrenList = [];
-List<Object> _childrenNote = [];
+List<Object> _notList = [];
 
 class NotePage extends StatefulWidget {
   @override
@@ -81,9 +81,8 @@ class _NotePageState extends State<NotePage> {
           //if (index == 0)
           //return Null;
           // else
-
           return NotlistBox(
-              _childrenList[index] as childrenList, _childrenNote);
+              _childrenList[index] as childrenList, _notList);
         });
   }
 
@@ -135,7 +134,7 @@ class _NotePageState extends State<NotePage> {
     setState(() {
       if (!mounted) return;
       // if (data.docs.length != 0) {
-      _childrenNote =
+      _notList =
           List.from(data.docs.map((doc) => noteList.fromSnapshot(doc)));
       // }
     });
