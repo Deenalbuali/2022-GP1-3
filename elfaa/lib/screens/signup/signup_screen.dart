@@ -179,7 +179,7 @@ class _SignupPageState extends State<SignupPage> {
                           } else if (!regex.hasMatch(value)) {
                             return " أدخل كلمة مرور صالحة ضمن الشروط";
                           } else if (value.length < 8) {
-                            return "أدخل كلمة مرور مكوّنة من 8 خانات على الأقل";
+                            return " أدخل كلمة مرور صالحة ضمن الشروط";
                           }
                         },
                       )),

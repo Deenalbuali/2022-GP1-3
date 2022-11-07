@@ -147,6 +147,62 @@ class _editChildState extends State<editChild> {
                 Directionality(
                     textDirection: TextDirection.rtl,
                     child: TextFormField(
+                      textAlign: TextAlign.right,
+                      controller: childHeight,
+                      keyboardType: TextInputType.number,
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
+                      decoration: const InputDecoration(
+                        suffixIcon: Icon(Icons.accessibility_new,
+                            color: Color(0xFFFD8601)),
+                        labelText: "الطول",
+                        hintText: "بالسنتيمترات",
+                      ),
+                      validator: (value) {
+                        if (value!.isEmpty || childHeight.text.trim() == "") {
+                          return "الحقل مطلوب";
+                        }
+                        return null;
+                      },
+                    )),
+                SizedBox(height: ScreenHeight * 0.02),
+                Directionality(
+                  textDirection: TextDirection.rtl,
+                  child: DropdownButtonFormField(
+                    decoration: const InputDecoration(
+                      suffixIcon: Icon(Icons.escalator_warning,
+                          color: Color(0xFFFD8601)),
+                      labelText: "الجنس",
+                    ),
+                    onChanged: (val) {
+                      setState(() {
+                        selectedGender = val.toString();
+                      });
+                    },
+                    value: selectedGender,
+                    items: const [
+                      DropdownMenuItem(
+                        child: Text("ذكر"),
+                        value: 'ذكر',
+                      ),
+                      DropdownMenuItem(
+                        child: Text("أنثى"),
+                        value: "أنثى",
+                      )
+                    ],
+                    validator: (value) {
+                      if (value!.isEmpty || childHeight.text.trim() == "") {
+                        return "الحقل مطلوب";
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                SizedBox(height: ScreenHeight * 0.02),
+                Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: TextFormField(
                         textAlign: TextAlign.right,
                         controller: birthday,
                         decoration: const InputDecoration(
@@ -193,61 +249,6 @@ class _editChildState extends State<editChild> {
                           }
                         })),
                 SizedBox(height: ScreenHeight * 0.02),
-                Directionality(
-                  textDirection: TextDirection.rtl,
-                  child: DropdownButtonFormField(
-                    decoration: const InputDecoration(
-                      suffixIcon: Icon(Icons.escalator_warning,
-                          color: Color(0xFFFD8601)),
-                      labelText: "الجنس",
-                    ),
-                    onChanged: (val) {
-                      setState(() {
-                        selectedGender = val.toString();
-                      });
-                    },
-                    value: selectedGender,
-                    items: const [
-                      DropdownMenuItem(
-                        child: Text("ذكر"),
-                        value: 'ذكر',
-                      ),
-                      DropdownMenuItem(
-                        child: Text("أنثى"),
-                        value: "أنثى",
-                      )
-                    ],
-                    validator: (value) {
-                      if (value!.isEmpty || childHeight.text.trim() == "") {
-                        return "الحقل مطلوب";
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-                SizedBox(height: ScreenHeight * 0.02),
-                Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: TextFormField(
-                      textAlign: TextAlign.right,
-                      controller: childHeight,
-                      keyboardType: TextInputType.number,
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.digitsOnly
-                      ],
-                      decoration: const InputDecoration(
-                        suffixIcon: Icon(Icons.accessibility_new,
-                            color: Color(0xFFFD8601)),
-                        labelText: "الطول",
-                        hintText: "بالسنتيمترات",
-                      ),
-                      validator: (value) {
-                        if (value!.isEmpty || childHeight.text.trim() == "") {
-                          return "الحقل مطلوب";
-                        }
-                        return null;
-                      },
-                    )),
                 SizedBox(height: ScreenHeight * 0.02),
                 SizedBox(
                   width: ScreenWidth,
