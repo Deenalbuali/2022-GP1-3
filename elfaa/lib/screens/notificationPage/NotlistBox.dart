@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:ui' as ui;
 
+List<Object> _childNot = [];
 class NotlistBox extends StatefulWidget {
   final childrenList _childrenList;
-  final noteList _childrenNote;
-  NotlistBox(this._childrenList, this._childrenNote);
+  NotlistBox(this._childrenList);
 
   @override
   State<NotlistBox> createState() => _NotlistBoxState();
@@ -26,28 +26,9 @@ class _NotlistBoxState extends State<NotlistBox> {
     final GlobalKey<ScaffoldState> _ScaffoldKey = GlobalKey<ScaffoldState>();
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
-    //var i = _childrenNote[0] as noteList;
-    try {
-      print({widget._childrenNote}.length);
-      for (var i = 0; i < {widget._childrenNote}.length; i++) {
-        for (var j = 0; j < {widget._childrenList}.length; i++) {
-          if (widget._childrenNote.childID![i] ==
-              widget._childrenList.childID![j])
-            return newMethod(height, now, formatted, width,
-                widget._childrenNote.zone_name![i]);
-        }
-      }
-    } catch (e) {}
     return Padding(
       padding: const EdgeInsets.only(bottom: 15, left: 25, right: 25, top: 7),
-      child:
-          networkImg("${widget._childrenList.childImagePath}", width, height),
-    );
-  }
-
-  Container newMethod(double height, DateTime now, String formatted,
-      double width, String zone_name) {
-    return Container(
+      child: Container(
       height: height * 0.1,
       decoration: BoxDecoration(boxShadow: [
         BoxShadow(
@@ -71,7 +52,7 @@ class _NotlistBoxState extends State<NotlistBox> {
                       " مر " +
                           "${widget._childrenList.childName}" +
                           " من "
-                              "${widget._childrenNote.zone_name}",
+                              "ll",
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
@@ -129,22 +110,35 @@ class _NotlistBoxState extends State<NotlistBox> {
           ),
         ],
       ),
+    ),
     );
+
+  }
+   void didChangeDependencies() {
+    super.didChangeDependencies();
+    getChildnot();
   }
 
-  // Widget list() => ListView.builder(
-  //     itemCount: _childrenNote.length,
-  //     shrinkWrap: true,
-  //     itemBuilder: (context, index) {
-  //       //if (index == 0)
-  //       //return Null;
-  //       // else
-  //       return NotlistBox(_childrenNote[index] as childrenList);
-  //     });
-}
-// Widget _findchild() {
+  
+  Future<void> getChildnot() async {
+    if (!mounted) return;
+    var data = await FirebaseFirestore.instance
+        .collection('notificationForChild')
+        .doc(widget._childrenList.notID)
+        .collection('notifications')
+        .get();
 
-// }
+    if (!mounted) return;
+
+    setState(() {
+      if (!mounted) return;
+
+      _childNot =
+          List.from(data.docs.map((doc) => noteList.fromSnapshot(doc)));
+
+    });
+  }
+}
 
 networkImg(String childImage, double ScreenWidth, double ScreenHeight) {
   try {
@@ -188,9 +182,3 @@ networkImg(String childImage, double ScreenWidth, double ScreenHeight) {
     );
   } catch (error) {}
 }
-//const childrenList({
-  //  Key? key,
-    //required this.childImagePath,
-   // required this.childName,
-   // required this.zoneName,
- // }) : super(key: key);

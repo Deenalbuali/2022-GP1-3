@@ -11,8 +11,8 @@ import 'package:intl/intl.dart';
 final DateTime now = DateTime.now();
 final DateFormat formatter = DateFormat('yyyy-MM-dd');
 final String formatted = formatter.format(now);
-List<Object> _noteList = [];
-List<Object> _childrenNote = [];
+List<Object> _childrenList = [];
+List<Object> _childNot = [];
 
 class NotePage extends StatefulWidget {
   @override
@@ -57,7 +57,7 @@ class _NotePageState extends State<NotePage> {
         )),
       ),
       body: SizedBox(
-          child: _noteList.length == 0
+          child: _childrenList.length == 0
               ? Padding(
                   padding: const EdgeInsets.all(25),
                   child: Container(
@@ -72,21 +72,22 @@ class _NotePageState extends State<NotePage> {
     );
   }
 
-  Widget list() => ListView.builder(
-      itemCount: _childrenNote.length,
+  Widget list() {
+    return ListView.builder(
+      itemCount:_childrenList.length ,
       shrinkWrap: true,
       itemBuilder: (context, index) {
         //if (index == 0)
         //return Null;
         // else
         return NotlistBox(
-            _noteList[index] as childrenList, _childrenNote[index] as noteList);
+            _childrenList[index] as childrenList);
       });
+  }
 
   void didChangeDependencies() {
     super.didChangeDependencies();
     getChildrenList();
-    getChildrenList2();
   }
 
   void initState() {
@@ -110,30 +111,8 @@ class _NotePageState extends State<NotePage> {
     setState(() {
       if (!mounted) return;
 
-      _noteList =
+      _childrenList =
           List.from(data.docs.map((doc) => childrenList.fromSnapshot(doc)));
-    });
-  }
-
-  Future<void> getChildrenList2() async {
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    final User? user = await _auth.currentUser;
-    if (!mounted) return;
-    final userid = user!.uid;
-
-    var data = await FirebaseFirestore.instance
-        .collection('notifications')
-        //.orderBy('time', descending: true)
-        //.where('child_ID', isEqualTo: "${widget._noteList.childID}")
-        .get();
-
-    if (!mounted) return;
-    setState(() {
-      if (!mounted) return;
-      // if (data.docs.length != 0) {
-      _childrenNote =
-          List.from(data.docs.map((doc) => noteList.fromSnapshot(doc)));
-      // }
     });
   }
 }
