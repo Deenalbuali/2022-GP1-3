@@ -12,7 +12,11 @@ final DateTime now = DateTime.now();
 final DateFormat formatter = DateFormat('yyyy-MM-dd');
 final String formatted = formatter.format(now);
 List<Object> _childrenList = [];
+<<<<<<< Updated upstream
 List<Object> _childNot = [];
+=======
+List<Object> _childrenNote = [];
+>>>>>>> Stashed changes
 
 class NotePage extends StatefulWidget {
   @override
@@ -81,7 +85,11 @@ class _NotePageState extends State<NotePage> {
         //return Null;
         // else
         return NotlistBox(
+<<<<<<< Updated upstream
             _childrenList[index] as childrenList);
+=======
+            _childrenList as childrenList, _childrenNote[index] as noteList);
+>>>>>>> Stashed changes
       });
   }
 
@@ -115,4 +123,29 @@ class _NotePageState extends State<NotePage> {
           List.from(data.docs.map((doc) => childrenList.fromSnapshot(doc)));
     });
   }
+<<<<<<< Updated upstream
+=======
+
+  Future<void> getChildrenList2() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final User? user = await _auth.currentUser;
+    if (!mounted) return;
+    final userid = user!.uid;
+
+    var data = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userid)
+        .collection('notificationForChild')
+        .get();
+
+    if (!mounted) return;
+    setState(() {
+      if (!mounted) return;
+      // if (data.docs.length != 0) {
+      _childrenNote =
+          List.from(data.docs.map((doc) => noteList.fromSnapshot(doc)));
+      // }
+    });
+  }
+>>>>>>> Stashed changes
 }
