@@ -22,7 +22,7 @@ class NotlistBox extends StatefulWidget {
 class _NotlistBoxState extends State<NotlistBox> {
   @override
   Widget build(BuildContext context) {
-    List<noteList>? ns = (widget._Note as List<dynamic>)?.map((dynamic item) => item as noteList)?.toList();
+    List<noteList> ns = (widget._Note).map((dynamic item) => item as noteList).toList();
     if (notification.length == 1)
       return Text(notification.length.toString());
     else {
@@ -35,7 +35,7 @@ class _NotlistBoxState extends State<NotlistBox> {
       final double height = MediaQuery.of(context).size.height;
       final double width = MediaQuery.of(context).size.width;
       
-      for (int i = 0 ; i< ns!.length ; i++){
+      for (int i = 0 ; i< ns.length ; i++){
       return ListView.builder(
       itemCount:notification.length ,
       shrinkWrap: true,
