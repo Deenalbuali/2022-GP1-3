@@ -81,7 +81,7 @@ class _NotePageState extends State<NotePage> {
         //return Null;
         // else
         return NotlistBox(
-            _childrenList[index] as childrenList);
+            _childrenList[index] as childrenList,_childrenNote);
       });
   }
 

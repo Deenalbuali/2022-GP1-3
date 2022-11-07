@@ -12,7 +12,8 @@ List notification=[];
 
 class NotlistBox extends StatefulWidget {
   final childrenList _childrenList;
-  NotlistBox(this._childrenList);
+  List _Note;
+  NotlistBox(this._childrenList, this._Note);
 
   @override
   State<NotlistBox> createState() => _NotlistBoxState();
@@ -21,10 +22,10 @@ class NotlistBox extends StatefulWidget {
 class _NotlistBoxState extends State<NotlistBox> {
   @override
   Widget build(BuildContext context) {
+    List<noteList>? ns = (widget._Note as List<dynamic>)?.map((dynamic item) => item as noteList)?.toList();
     if (notification.length == 1)
       return Text(notification.length.toString());
     else {
-      Array not;
       DateTime now = DateTime.now();
       String formattedTime = DateFormat.jm().format(now);
       final DateTime now2 = DateTime.now();
@@ -33,11 +34,13 @@ class _NotlistBoxState extends State<NotlistBox> {
       final GlobalKey<ScaffoldState> _ScaffoldKey = GlobalKey<ScaffoldState>();
       final double height = MediaQuery.of(context).size.height;
       final double width = MediaQuery.of(context).size.width;
-   
+      
+      for (int i = 0 ; i< ns!.length ; i++){
       return ListView.builder(
       itemCount:notification.length ,
       shrinkWrap: true,
       itemBuilder: (context, index) {
+        if (notification[index] == ns[i].notID){
         return Padding(
           padding: const EdgeInsets.only(bottom: 15, left: 25, right: 25, top: 7),
           child: Container(
@@ -129,8 +132,11 @@ class _NotlistBoxState extends State<NotlistBox> {
               ],
             ),
           ),
-        );}
-      );}
+        );}else
+        return Padding(padding:EdgeInsets.only(bottom: 15, left: 25, right: 25, top: 7));}
+       
+      );} return Padding(padding:EdgeInsets.only(bottom: 15, left: 25, right: 25, top: 7));
+      }
   }
 
   @override
