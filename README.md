@@ -12,34 +12,6 @@ It allows the parents to track the location of their child at any time, and to k
 تطبيق إلفاء </strong>يستخدم <strong>تقنيات إنترنت الأشياء</strong> للمساهمة في بناء حل يعمل في المدن الذكية لتوفير بيئة آمنة في الأماكن العامة أو المزدحمة، يستهدف الأباء و الأمهات عن طريق استعمالهم للتطبيق وربط جهاز التتبع بطفلهم الذي يحمله الطفل كاكسسوار مصمم بشكل جذاب. ويمكن للناس العامّة المساهمة في مساعدة طفل ضائع بكل سهولة ويسر عن طريق توفير وسيلة تواصل مع أهل الطفل،
  يوفّر هذا الحل إمكانية للأم/ الأب أن يراقب موقع طفله في أي وقت ضمن النطاق المعرّف مسبقَا، ومعرفة ما إذا كان ضمن النطاق المسموح أم لا عن طريق إشعار تنبيهي يصله، وإن كان قد أضاعه ووجد أن مكانه بعيدٌ عنه فيمكنه إبلاغ حراس الأمن عن طريق التطبيق لمساعدته في إيجاده سريعًا؛ كما أن هذا الحل يساهم في جزء من عمل حارس الأمن في مكان عام وإشراكه في البحث عن الأطفال الضائعين بما يضمن اليسر والتسهيل </p>
 
-<h2>:woman_technologist:Technology Used </h2>
-<p>
-  <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=flutter,dart&theme=light" />
-  </a>
-    <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=firebase&theme=light" />
-  </a>
-</p>  
-<h2>✔️Requirements To Launch The Application</h2>
-<ul>
-<li>Android Studio with SDK or Visual Studio Code</li>
-<li> Flutter framework </li>
-<li>Dart programming language </li>
-<li> mobile emulator or android mobile </li>
-</ul>
-  
-<h2>:memo: Launch Instructions</h2>
-<ol>
-<li>Open <strong>2022-GP1-3</strong> repository on GitHub</li>
-<li>Click on the <strong> code</strong> button</li>
-<li>Download <strong>.zip</strong> file</li>
-<li> Unzip the file </li>
-<li> Open <strong> Android Studio</strong> or <strong> Visual Studio Code</strong>  </li>
-<li>Click on <strong> File > Open > Location</strong> of the saved unzipped file then click on Ok</li>
-<li>Turn on an Android Emulator or connect an android mobile to the system </li>
-<li> Run the <strong>Elfaa </strong> application </li>
-</ol>
 <h2>🎯 Current Supported Features </h2>
 <h4>Parents are able to:</h4>
 <ul>
@@ -52,13 +24,43 @@ It allows the parents to track the location of their child at any time, and to k
 <li> Display Notifications </li>
 </ul>
 
-<h2>📲 APK </h2>
+<h2>:woman_technologist:Technology Used </h2>
+<p>
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=flutter,dart&theme=light" />
+  </a>
+    <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=firebase&theme=light" />
+  </a>
+</p>  
+<h2>✔️Requirements To Launch The Application</h2>
 <ul>
-<li> Install the <strong>Elfaa</strong> APK files on your Android smartphone or tablet directly from your browser</li> 
+<li> Android Studio with SDK or Visual Studio Code</li>
+<li> Flutter framework </li>
+<li> Dart programming language </li>
+<li> mobile emulator or android mobile </li>
+</ul>
+  
+<h2>:memo: Launch Instructions</h2>
+<h3>💻 Launching from Visual studio/Android studio</h3>
+<ol>
+<li> Open <strong>2022-GP1-3</strong> repository on GitHub</li>
+<li> Click on the <strong> code</strong> button</li>
+<li> Download <strong>.zip</strong> file</li>
+<li> Unzip the file </li>
+<li> Open <strong> Android Studio</strong> or <strong> Visual Studio Code</strong>  </li>
+<li> Click on <strong> File > Open > Location</strong> of the saved unzipped file then click on Ok</li>
+<li> Turn on an Android Emulator or connect an android mobile to your computer using USB </li>
+<li> Run the <strong>Elfaa </strong> application </li>
+</ol>
+<h3>📲 Launching from APK file</h3>
+<ul>
+<h4>Install the APK file on your Android smartphone directly from your browser</h4>
 <li> Open your browser</li> 
-<li> Find the APK file you want to download</li> 
+<li> Open <strong>2022-GP1-3</strong> repository on GitHub</li>
+<li> Find the APK file you want to download in <strong>Elfaa APK</strong> folder</li> 
 <li> Tap it – you should then be able to see it downloading on the top bar of your device</li>
 <li> Open Downloads</li> 
 <li> Tap on the APK file and tap Yes when prompted</li> 
-<li> The app will begin installing on your device. </li> 
+<li> The app will begin installing on your device, then you can open it </li> 
 </ul>
