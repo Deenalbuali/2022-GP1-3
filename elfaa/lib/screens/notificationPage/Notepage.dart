@@ -81,8 +81,7 @@ class _NotePageState extends State<NotePage> {
           //if (index == 0)
           //return Null;
           // else
-          return NotlistBox(
-              _childrenList[index] as childrenList, _notList);
+          return NotlistBox(_childrenList[index] as childrenList, _notList);
         });
   }
 
@@ -134,8 +133,7 @@ class _NotePageState extends State<NotePage> {
     setState(() {
       if (!mounted) return;
       // if (data.docs.length != 0) {
-      _notList =
-          List.from(data.docs.map((doc) => noteList.fromSnapshot(doc)));
+      _notList = List.from(data.docs.map((doc) => noteList.fromSnapshot(doc)));
       // }
     });
   }

@@ -23,10 +23,9 @@ class _NotlistBoxState extends State<NotlistBox> {
   @override
   Widget build(BuildContext context) {
     //cast to notelist
-    List<noteList>? ns = (widget._Note)
-        .map((dynamic item) => item as noteList)
-        .toList();
-    
+    List<noteList>? _notifications =
+        (widget._Note).map((dynamic item) => item as noteList).toList();
+
     if (notification.length == 1)
       return Text(notification.length.toString());
     else {
@@ -39,11 +38,15 @@ class _NotlistBoxState extends State<NotlistBox> {
       final double height = MediaQuery.of(context).size.height;
       final double width = MediaQuery.of(context).size.width;
 
-        return ListView.builder(
-            itemCount: notification.length,
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-                return Padding(
+      return ListView.builder(
+          itemCount: notification.length,
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            for (int i = 0; i < _notifications.length - 1; i++) {
+              i++;
+              //if (notification[index] == _notifications[i].notID) {
+              return Center(
+                child: Padding(
                   padding: const EdgeInsets.only(
                       bottom: 15, left: 25, right: 25, top: 7),
                   child: Container(
@@ -72,7 +75,7 @@ class _NotlistBoxState extends State<NotlistBox> {
                                     " مر " +
                                         "${widget._childrenList.childName}" +
                                         " من "
-                                            "${ns[2].zone_name}",
+                                            "${_notifications[i].zone_name}",
                                     style: TextStyle(
                                       fontSize: 12,
                                       fontWeight: FontWeight.bold,
@@ -137,10 +140,18 @@ class _NotlistBoxState extends State<NotlistBox> {
                       ],
                     ),
                   ),
-                );
-            });
+                ),
+              );
+              //}
+            }
+            return Padding(
+              padding: const EdgeInsets.only(
+                  bottom: 15, left: 25, right: 25, top: 7),
+            );
+          });
     }
   }
+
   @override
   void initState() {
     super.initState();
@@ -166,7 +177,6 @@ class _NotlistBoxState extends State<NotlistBox> {
         });
       }
     });
-
   }
 
   // Future<void> getChildnot() async {
