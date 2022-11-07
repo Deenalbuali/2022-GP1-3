@@ -34,6 +34,48 @@ class _NotlistBoxState extends State<NotlistBox> {
       final GlobalKey<ScaffoldState> _ScaffoldKey = GlobalKey<ScaffoldState>();
       final double height = MediaQuery.of(context).size.height;
       final double width = MediaQuery.of(context).size.width;
+<<<<<<< Updated upstream
+      
+      for (int i = 0 ; i< ns!.length ; i++){
+      return ListView.builder(
+      itemCount:notification.length ,
+      shrinkWrap: true,
+      itemBuilder: (context, index) {
+        if (notification[index] == ns[i].notID){
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 15, left: 25, right: 25, top: 7),
+          child: Container(
+            height: height * 0.1,
+            decoration: BoxDecoration(boxShadow: [
+              BoxShadow(
+                color: Colors.grey,
+                blurRadius: 10,
+                spreadRadius: 1,
+              )
+            ], color: Colors.white, borderRadius: BorderRadius.circular(12)),
+            padding: EdgeInsets.all(5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 0),
+                  child: Column(children: [
+                    Directionality(
+                      textDirection: ui.TextDirection.rtl,
+                      child: Container(
+                        padding: EdgeInsets.only(top: 10, bottom: 15),
+                        child: Text(
+                            " مر " +
+                                "${widget._childrenList.childName}" +
+                                " من "
+                                    "${notification.length}",
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF9C0000),
+                            )),
+                      ),
+=======
 
       for (int i = 0 ; i< ns.length ; i++){
       return ListView.builder(
@@ -135,6 +177,7 @@ class _NotlistBoxState extends State<NotlistBox> {
                           ],
                         ),
                       ]),
+>>>>>>> Stashed changes
                     ),
                     Row(
                       children: [
@@ -172,10 +215,21 @@ class _NotlistBoxState extends State<NotlistBox> {
                     ),
                   ],
                 ),
+<<<<<<< Updated upstream
+              ],
+            ),
+          ),
+        );}else
+        return Padding(padding:EdgeInsets.only(bottom: 15, left: 25, right: 25, top: 7));}
+       
+      );} return Padding(padding:EdgeInsets.only(bottom: 15, left: 25, right: 25, top: 7));
+      }
+=======
               ),
             );
           });
     }
+>>>>>>> Stashed changes
   }
 
   @override
