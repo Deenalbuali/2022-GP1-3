@@ -13,11 +13,14 @@ It allows the parents to track the location of their child at any time, and to k
  يوفّر هذا الحل إمكانية للأم/ الأب أن يراقب موقع طفله في أي وقت ضمن النطاق المعرّف مسبقَا، ومعرفة ما إذا كان ضمن النطاق المسموح أم لا عن طريق إشعار تنبيهي يصله، وإن كان قد أضاعه ووجد أن مكانه بعيدٌ عنه فيمكنه إبلاغ حراس الأمن عن طريق التطبيق لمساعدته في إيجاده سريعًا؛ كما أن هذا الحل يساهم في جزء من عمل حارس الأمن في مكان عام وإشراكه في البحث عن الأطفال الضائعين بما يضمن اليسر والتسهيل </p>
 
 <h2>:woman_technologist:Technology Used </h2>
-<ul>
-  <li> Flutter framework (Dart programming language)</li>
-  <li> Cloud firebase </li>
-  </ul>
-  
+<p>
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=flutter,dart&theme=light" />
+  </a>
+    <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=firebase&theme=light" />
+  </a>
+</p>  
 <h2>✔️Requirements To Launch The Application</h2>
 <ul>
 <li>Android Studio with SDK or Visual Studio Code</li>
