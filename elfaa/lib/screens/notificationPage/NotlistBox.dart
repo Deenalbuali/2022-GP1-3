@@ -10,6 +10,7 @@ import 'dart:ui' as ui;
 
 List<Object> _childNot = [];
 List notification = [];
+
 class NotlistBox extends StatefulWidget {
   final childrenList _childrenList;
   NotlistBox(this._childrenList);
@@ -21,121 +22,140 @@ class NotlistBox extends StatefulWidget {
 class _NotlistBoxState extends State<NotlistBox> {
   @override
   Widget build(BuildContext context) {
-    if (notification.length>1)
-    return Text("لأا يوووجد") ;
-    else{
-    Array not;
-    DateTime now = DateTime.now();
-    String formattedTime = DateFormat.jm().format(now);
-    final DateTime now2 = DateTime.now();
-    final DateFormat formatter = DateFormat('yyyy-MM-dd');
-    final String formatted = formatter.format(now2);
-    final GlobalKey<ScaffoldState> _ScaffoldKey = GlobalKey<ScaffoldState>();
-    final double height = MediaQuery.of(context).size.height;
-    final double width = MediaQuery.of(context).size.width;
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 15, left: 25, right: 25, top: 7),
-      child: Container(
-      height: height * 0.1,
-      decoration: BoxDecoration(boxShadow: [
-        BoxShadow(
-          color: Colors.grey,
-          blurRadius: 10,
-          spreadRadius: 1,
-        )
-      ], color: Colors.white, borderRadius: BorderRadius.circular(12)),
-      padding: EdgeInsets.all(5),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 0),
-            child: Column(children: [
-              Directionality(
-                textDirection: ui.TextDirection.rtl,
-                child: Container(
-                  padding: EdgeInsets.only(top: 10, bottom: 15),
-                  child: Text(
-                      " مر " +
-                          "${widget._childrenList.childName}" +
-                          " من "
-                              "${notification}",
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF9C0000),
-                      )),
-                ),
+    if (notification.length == 1)
+      return Text(notification.length.toString());
+    else {
+      Array not;
+      DateTime now = DateTime.now();
+      String formattedTime = DateFormat.jm().format(now);
+      final DateTime now2 = DateTime.now();
+      final DateFormat formatter = DateFormat('yyyy-MM-dd');
+      final String formatted = formatter.format(now2);
+      final GlobalKey<ScaffoldState> _ScaffoldKey = GlobalKey<ScaffoldState>();
+      final double height = MediaQuery.of(context).size.height;
+      final double width = MediaQuery.of(context).size.width;
+      if (notification.length > 1){
+      for(int i =0; i<notification.length; i++){
+      return Padding(
+        padding: const EdgeInsets.only(bottom: 15, left: 25, right: 25, top: 7),
+        child: Container(
+          height: height * 0.1,
+          decoration: BoxDecoration(boxShadow: [
+            BoxShadow(
+              color: Colors.grey,
+              blurRadius: 10,
+              spreadRadius: 1,
+            )
+          ], color: Colors.white, borderRadius: BorderRadius.circular(12)),
+          padding: EdgeInsets.all(5),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 0),
+                child: Column(children: [
+                  Directionality(
+                    textDirection: ui.TextDirection.rtl,
+                    child: Container(
+                      padding: EdgeInsets.only(top: 10, bottom: 15),
+                      child: Text(
+                          " مر " +
+                              "${widget._childrenList.childName}" +
+                              " من "
+                                  "${notification.length}",
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF9C0000),
+                          )),
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Text(DateFormat.jm().format(now),
+                          style: TextStyle(
+                            color: Color(0xff919296),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12,
+                          ),
+                          textAlign: TextAlign.left),
+                      Text(" | " + formatted,
+                          style: TextStyle(
+                            color: Color(0xff919296),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12,
+                          ),
+                          textAlign: TextAlign.left),
+                    ],
+                  ),
+                ]),
               ),
               Row(
                 children: [
-                  Text(DateFormat.jm().format(now),
-                      style: TextStyle(
-                        color: Color(0xff919296),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12,
-                      ),
-                      textAlign: TextAlign.left),
-                  Text(" | " + formatted,
-                      style: TextStyle(
-                        color: Color(0xff919296),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12,
-                      ),
-                      textAlign: TextAlign.left),
-                ],
-              ),
-            ]),
-          ),
-          Row(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 
-                children: [
+                    children: [
+                      Container(
+                        padding: EdgeInsets.only(
+                            right: 1,
+                            left: 0.1,
+                            top: width * 0.05,
+                            bottom: 0.1),
+                        child: Text(
+                          "${widget._childrenList.childName} ",
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Color.fromARGB(255, 41, 41, 32)),
+                        ),
+                      ),
+                    ],
+                  ),
                   Container(
-                    padding: EdgeInsets.only(
-                        right: 1, left: 0.1, top: width * 0.05, bottom: 0.1),
-                    child: Text(
-                      "${widget._childrenList.childName} ",
-                      style: TextStyle(
-                          fontSize: 20, color: Color.fromARGB(255, 41, 41, 32)),
+                    padding: EdgeInsets.all(5),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10.0),
+                      child: networkImg(
+                          "${widget._childrenList.childImagePath}",
+                          width,
+                          height),
                     ),
                   ),
                 ],
               ),
-              Container(
-                padding: EdgeInsets.all(5),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10.0),
-                  child: networkImg(
-                      "${widget._childrenList.childImagePath}", width, height),
-                ),
-              ),
             ],
           ),
-        ],
-      ),
-    ),
-    );}
-
+        ),
+      );}
+      }else 
+      return Text("ll");
+    } return Text("l88");
   }
-   void didChangeDependencies() {
+
+  void didChangeDependencies() {
     super.didChangeDependencies();
-    loadNot ();
-    //getChildnot();
+    loadNot();
   }
 
-void loadNot (){
-  if(!({widget._childrenList.nots}.isEmpty)){
-  for (var n in {widget._childrenList.nots} ){
-    setState(() {
-      notification.add(n);
+  void loadNot() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final User? user = await _auth.currentUser;
+    if (!mounted) return;
+    final userid = user!.uid;
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userid)
+        .collection('children')
+        .doc("${widget._childrenList.childID}")
+        .get()
+        .then((snapshot) {
+      for (var n in snapshot.data()?['notifications']) {
+          notification.add(n);
+      }
     });
-  }}
-}
-  
+  }
+
   // Future<void> getChildnot() async {
   //   if (!mounted) return;
   //   var data = await FirebaseFirestore.instance
