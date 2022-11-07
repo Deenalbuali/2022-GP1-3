@@ -80,9 +80,9 @@ class _HomePageState extends State<HomePage> {
                     decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
-                              color: Colors.grey,
-                              offset: Offset(1.0, 1.0),
-                              blurRadius: 4.0)
+                              color: Color(0xff484848).withOpacity(.3),
+                              offset: Offset(0, 4),
+                              blurRadius: 8)
                         ],
                         borderRadius: BorderRadius.circular(30),
                         image: DecorationImage(
@@ -100,9 +100,9 @@ class _HomePageState extends State<HomePage> {
                         decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
-                                  color: Colors.grey,
-                                  offset: Offset(1.0, 1.0),
-                                  blurRadius: 4.0)
+                                  color: Color(0xff484848).withOpacity(.3),
+                                  offset: Offset(0, 4),
+                                  blurRadius: 8)
                             ],
                             borderRadius: BorderRadius.circular(30),
                             image: DecorationImage(
@@ -119,9 +119,9 @@ class _HomePageState extends State<HomePage> {
                         decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
-                                  color: Colors.grey,
-                                  offset: Offset(1.0, 1.0),
-                                  blurRadius: 4.0)
+                                  color: Color(0xff484848).withOpacity(.3),
+                                  offset: Offset(0, 4),
+                                  blurRadius: 8)
                             ],
                             borderRadius: BorderRadius.circular(30),
                             image: DecorationImage(
@@ -141,9 +141,9 @@ class _HomePageState extends State<HomePage> {
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
-                              color: kOrangeColor,
-                              offset: Offset(1.0, 1.0),
-                              blurRadius: 4.0)
+                              color: kOrangeColor.withOpacity(.3),
+                              offset: Offset(0, 4),
+                              blurRadius: 8)
                         ]),
                     child: IconButton(
                       onPressed: () {
@@ -165,9 +165,9 @@ class _HomePageState extends State<HomePage> {
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
-                              color: Colors.grey,
-                              offset: Offset(1.0, 1.0),
-                              blurRadius: 4.0)
+                              color: Color(0xff484848).withOpacity(.3),
+                              offset: Offset(0, 4),
+                              blurRadius: 8)
                         ]),
                     child: IconButton(
                       onPressed: () {

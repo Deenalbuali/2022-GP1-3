@@ -1,6 +1,8 @@
 import 'package:elfaa/screens/Homepage/childrenList.dart';
 import 'package:elfaa/screens/Reportpage/reportInfo.dart';
 import 'package:flutter/material.dart';
+import 'package:elfaa/constants.dart';
+
 
 class ReportlistBox extends StatelessWidget {
   final childrenList _childlist3;
@@ -15,10 +17,9 @@ class ReportlistBox extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(boxShadow: [
           BoxShadow(
-            color: Colors.grey,
-            blurRadius: 10,
-            spreadRadius: 1,
-          )
+              color: Color(0xff484848).withOpacity(.3),
+              offset: Offset(0, 4),
+              blurRadius: 8)
         ], color: Colors.white, borderRadius: BorderRadius.circular(12)),
         height: height * 0.1,
         padding: EdgeInsets.all(5),
@@ -29,13 +30,13 @@ class ReportlistBox extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Container(
                   decoration: BoxDecoration(
-                      color: Colors.orange,
+                      color: kOrangeColor,
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
-                            color: Colors.orange,
-                            offset: Offset(1.0, 1.0),
-                            blurRadius: 4.0)
+                            color: kOrangeColor.withOpacity(.3),
+                            offset: Offset(0,4),
+                            blurRadius: 8)
                       ]),
                   child: IconButton(
                     onPressed: () {

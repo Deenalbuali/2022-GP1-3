@@ -132,7 +132,7 @@ class _editChildState extends State<editChild> {
                       controller: childName,
                       decoration: const InputDecoration(
                         suffixIcon:
-                            Icon(Icons.child_care, color: Color(0xFFFD8601)),
+                            Icon(Icons.child_care, color: kOrangeColor),
                         labelText: "اسم الطفل",
                         hintText: "مثال: أسماء",
                       ),
@@ -155,7 +155,7 @@ class _editChildState extends State<editChild> {
                       ],
                       decoration: const InputDecoration(
                         suffixIcon: Icon(Icons.accessibility_new,
-                            color: Color(0xFFFD8601)),
+                            color: kOrangeColor),
                         labelText: "الطول",
                         hintText: "بالسنتيمترات",
                       ),
@@ -172,7 +172,7 @@ class _editChildState extends State<editChild> {
                   child: DropdownButtonFormField(
                     decoration: const InputDecoration(
                       suffixIcon: Icon(Icons.escalator_warning,
-                          color: Color(0xFFFD8601)),
+                          color: kOrangeColor),
                       labelText: "الجنس",
                     ),
                     onChanged: (val) {
@@ -207,7 +207,7 @@ class _editChildState extends State<editChild> {
                         controller: birthday,
                         decoration: const InputDecoration(
                           suffixIcon: Icon(Icons.calendar_today,
-                              color: Color(0xFFFD8601)),
+                              color: kOrangeColor),
                           labelText: "تاريخ الميلاد",
                           hintText: "اختر من التقويم",
                         ),
@@ -228,9 +228,9 @@ class _editChildState extends State<editChild> {
                             builder: (context, child) {
                               return Theme(
                                 data: ThemeData.light().copyWith(
-                                  primaryColor: const Color(0xFF429EB2),
+                                  primaryColor: kPrimaryColor,
                                   colorScheme: const ColorScheme.light(
-                                      primary: Color(0xFF429EB2)),
+                                      primary: kPrimaryColor),
                                   buttonTheme: const ButtonThemeData(
                                       textTheme: ButtonTextTheme.primary),
                                 ),
@@ -338,7 +338,7 @@ class _editChildState extends State<editChild> {
                     style: ElevatedButton.styleFrom(
                       textStyle: TextStyle(fontSize: 22),
                       shadowColor: Color.fromARGB(255, 0, 0, 0),
-                      elevation: 1,
+                      elevation: 0,
                       backgroundColor: Color(0xFFFFEEEE),
                       shape: const StadiumBorder(),
                       maximumSize: const Size(180, 56),

@@ -16,10 +16,9 @@ class HomelistBox extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(boxShadow: [
               BoxShadow(
-                color: Colors.grey,
-                blurRadius: 10,
-                spreadRadius: 1,
-              )
+                  color: Color(0xff484848).withOpacity(.3),
+                  offset: Offset(0, 4),
+                  blurRadius: 8)
             ], color: Colors.white, borderRadius: BorderRadius.circular(12)),
             height: height * 0.1,
             // width: width * 0.00001,
