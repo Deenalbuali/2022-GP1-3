@@ -63,9 +63,10 @@ class _NotePageState extends State<NotePage> {
                   child: Container(
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
-                        image: DecorationImage(
-                      image: AssetImage("assets/images/noNotifications.png"),
-                    )),
+                      image: DecorationImage(
+                        image: AssetImage("assets/images/noNotifications.png"),
+                      ),
+                    ),
                   ),
                 )
               : list()),
@@ -74,20 +75,22 @@ class _NotePageState extends State<NotePage> {
 
   Widget list() {
     return ListView.builder(
-      itemCount:_childrenList.length ,
-      shrinkWrap: true,
-      itemBuilder: (context, index) {
-        //if (index == 0)
-        //return Null;
-        // else
-        return NotlistBox(
-            _childrenList[index] as childrenList,_childrenNote);
-      });
+        itemCount: _childrenList.length,
+        shrinkWrap: true,
+        itemBuilder: (context, index) {
+          //if (index == 0)
+          //return Null;
+          // else
+
+          return NotlistBox(
+              _childrenList[index] as childrenList, _childrenNote);
+        });
   }
 
   void didChangeDependencies() {
     super.didChangeDependencies();
     getChildrenList();
+    getChildrenList2();
   }
 
   void initState() {

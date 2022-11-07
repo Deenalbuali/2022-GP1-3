@@ -9,7 +9,7 @@ import 'dart:ui' as ui;
 
 List<Object> _childNot = [];
 List notification = [];
-List _Note = [];
+// List _Note = [];
 
 class NotlistBox extends StatefulWidget {
   final childrenList _childrenList;
@@ -23,9 +23,6 @@ class NotlistBox extends StatefulWidget {
 class _NotlistBoxState extends State<NotlistBox> {
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
-    List<noteList>? ns = (widget._Note as List<dynamic>)?.map((dynamic item) => item as noteList)?.toList();
-=======
     List<noteList> ns =
         (widget._Note).map((dynamic item) => item as noteList).toList();
 
