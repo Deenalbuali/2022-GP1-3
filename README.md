@@ -15,7 +15,7 @@ It allows the parents to track the location of their child at any time, and to k
 <h2>🎯 Current Supported Features </h2>
 <h4>Parents are able to:</h4>
 <ul>
-<li> Register/log-in</li>
+<li> Register/log in/log out</li>
 <li>Add/Delete Child</li>
 <li> Edit Child's Information </li>
 <li>Display Children List </li>
